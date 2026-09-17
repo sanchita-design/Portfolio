@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/styles.css">
+<script src="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<script>
+(function(){
+  function hook(slot){
+    if (slot.__autoFitHooked) return;
+    slot.__autoFitHooked = true;
+    var tries = 0;
+    function tryImg(){
+      var root = slot.shadowRoot;
+      var img = root && root.querySelector('img');
+      if (!img) { if (tries++ < 40) requestAnimationFrame(tryImg); return; }
+      function apply(){
+        if (img.naturalWidth && img.naturalHeight) {
+          slot.style.aspectRatio = img.naturalWidth + '/' + img.naturalHeight;
+        }
+      }
+      if (img.complete && img.naturalWidth) apply();
+      img.addEventListener('load', apply);
+    }
+    tryImg();
+  }
+  document.querySelectorAll('image-slot').forEach(hook);
+  new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      m.addedNodes.forEach(function(n){
+        if (n.nodeType === 1) {
+          if (n.tagName === 'IMAGE-SLOT') hook(n);
+          n.querySelectorAll && n.querySelectorAll('image-slot').forEach(hook);
+        }
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+body{margin:0;background:var(--white)}
+a{color:var(--accent)}
+a:hover{color:var(--accent-hover)}
+body, body *{font-weight:400}
+html{scroll-behavior:smooth}
+.cs-table{width:100%;border-collapse:collapse}
+.cs-table th, .cs-table td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--ink-1-a12);font-size:16px;line-height:1.5;vertical-align:top}
+.cs-table th{font-weight:500;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:0.06em}
+.rail-link{display:block;padding:8px 0;font-size:14px;color:var(--text-muted);text-decoration:none;border-left:2px solid transparent;padding-left:16px;transition:color 120ms cubic-bezier(0.4,0,0.2,1),border-color 120ms cubic-bezier(0.4,0,0.2,1)}
+.rail-link:hover{color:var(--accent)}
+</style>
+</helmet>
+
+<div style="background:var(--white);font-family:var(--font-sans);color:var(--text-body)">
+
+<div style="max-width:1240px;margin:0 auto;padding:0 72px;box-sizing:border-box">
+<header style="display:flex;align-items:center;justify-content:space-between;padding:40px 0;flex-wrap:wrap;gap:16px">
+<div style="font-family:var(--font-sans);font-size:22px;font-weight:400;color:var(--text-heading)">Sanchita</div>
+<nav style="display:flex;gap:32px">
+<x-import component-from-global-scope="PortfolioDesignSystem_19f0ec.NavLink" hint-size="auto,20px">Work</x-import>
+<x-import component-from-global-scope="PortfolioDesignSystem_19f0ec.NavLink" hint-size="auto,20px">About</x-import>
+<x-import component-from-global-scope="PortfolioDesignSystem_19f0ec.NavLink" hint-size="auto,20px">Resume</x-import>
+<x-import component-from-global-scope="PortfolioDesignSystem_19f0ec.NavLink" hint-size="auto,20px">Blog</x-import>
+</nav>
+</header>
+</div>
+
+<div style="max-width:1240px;margin:0 auto;padding:0 72px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+<a href="Sanchita Portfolio.dc.html" style="font-family:var(--font-sans);font-size:14px;color:var(--text-muted);text-decoration:none">← All work</a>
+<div style="display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px">
+
+<nav style="position:sticky;top:32px;align-self:start;display:flex;flex-direction:column;height:fit-content;border-left:1px solid var(--ink-1-a12)" onClick="{{ onRailClick }}">
+<a class="rail-link" href="#overview" style="{{ overviewStyle }}">Overview</a>
+<a class="rail-link" href="#problem" style="{{ problemStyle }}">The problem</a>
+<a class="rail-link" href="#first-version" style="{{ firstVersionStyle }}">The first version</a>
+<a class="rail-link" href="#solution" style="{{ solutionStyle }}">The solution</a>
+<a class="rail-link" href="#outcome" style="{{ outcomeStyle }}">Outcome</a>
+<a class="rail-link" href="#directional-landscape" style="{{ directionalLandscapeStyle }}">The directional landscape</a>
+<a class="rail-link" href="#context" style="{{ contextStyle }}">Giving the agent context</a>
+<a class="rail-link" href="#interview-experience" style="{{ interviewExperienceStyle }}">The interview experience</a>
+<a class="rail-link" href="#evidence" style="{{ evidenceStyle }}">How conversation drive progress</a>
+<a class="rail-link" href="#patterns" style="{{ patternsStyle }}">From signals to patterns</a>
+<a class="rail-link" href="#human-in-the-loop" style="{{ humanInTheLoopStyle }}">Human in the loop</a>
+<a class="rail-link" href="#agent-workflow" style="{{ agentWorkflowStyle }}">The agent workflow</a>
+<a class="rail-link" href="#visual-direction" style="{{ visualDirectionStyle }}">The visual direction</a>
+<a class="rail-link" href="#reflection" style="{{ reflectionStyle }}">Reflection</a>
+</nav>
+
+<main style="min-width:0;padding:0 0 200px;display:flex;flex-direction:column;gap:96px">
+
+<section id="overview" style="display:flex;flex-direction:column;gap:24px">
+<div style="font-family:var(--font-sans);font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">0 → 1 · AI enabled SaaS · Voice agent</div>
+<h1 style="font-family:'Merriweather',serif;font-weight:300;font-size:clamp(2rem,3vw,2.75rem);line-height:1.15;letter-spacing:-0.02em;margin:0;color:#3A3A3A">From conversations to structured evidence for founders</h1>
+<div style="position:relative;width:100%"><video id="cs1-video" style="width:100%;aspect-ratio:16/10;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ cs1VideoSrc }}"></video>
+<sc-if value="{{ cs1Empty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Case study image/video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ cs1Pick }}"></input>
+</label>
+</sc-if>
+</div>
+</section>
+
+<section id="problem" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">The problem</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">The journey from idea to MVP puts a lot of focus on discovery. If founders focus on the wrong thing, they will end up building the wrong product, and founders were hearing encouragement, not evidence.</p>
+<p style="font-size:16px;line-height:1.6;margin:0;color:var(--accent);font-weight:500">Biased information = biased decision</p>
+<image-slot id="cs-problem" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+</section>
+
+<section id="first-version" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">The first version</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">The first version I made was a static interview guide for founders which they can use during the interview. It initially helped founders prepare a structured set of interview questions. It improved preparation, but the guide could not adapt once the conversation started.</p>
+<blockquote style="margin:0;padding:16px 24px;border-left:3px solid var(--accent)">
+<p style="font-size:16px;line-height:1.6;margin:0;color:var(--accent)">The real challenge was adapting the interview in the moment.</p>
+</blockquote>
+</section>
+
+<section id="solution" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">The solution</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">An interview agent that adapts to the conversation. FoundersBrew uses the founder's context and research objectives to guide the interview, then adapts its follow-up questions based on what the participant says.</p>
+<div style="display:flex;flex-direction:column;margin-top:32px">
+
+<div style="display:grid;grid-template-columns:24px 180px minmax(0,1fr);gap:32px">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div style="width:16px;height:16px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+<div style="width:1px;flex:1;background:var(--ink-1-a12)"></div>
+</div>
+<div>
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:0;color:#3A3A3A">Founder context</h3>
+<p style="font-size:16px;line-height:1.7;margin:8px 0 0;color:var(--text-body)">Founder answers a few questions.</p>
+</div>
+<div style="position:relative;width:100%"><video id="cs-video-founder-context" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ founderContextVideoSrc }}"></video>
+<sc-if value="{{ founderContextEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ founderContextPick }}"></input>
+</label>
+</sc-if>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:24px 180px minmax(0,1fr);height:48px">
+<div style="width:1px;height:100%;margin:0 auto;background:var(--ink-1-a12)"></div>
+<div></div><div></div>
+</div>
+
+<div style="display:grid;grid-template-columns:24px 180px minmax(0,1fr);gap:32px">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div style="width:16px;height:16px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+<div style="width:1px;flex:1;background:var(--ink-1-a12)"></div>
+</div>
+<div>
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:0;color:#3A3A3A">Adaptive interview</h3>
+<p style="font-size:16px;line-height:1.7;margin:8px 0 0;color:var(--text-body)">The agent asks, listens, probes and clarifies.</p>
+</div>
+<div style="position:relative;width:100%"><video id="cs-video-adaptive-interview" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ adaptiveInterviewVideoSrc }}"></video>
+<sc-if value="{{ adaptiveInterviewEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ adaptiveInterviewPick }}"></input>
+</label>
+</sc-if>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:24px 180px minmax(0,1fr);height:48px">
+<div style="width:1px;height:100%;margin:0 auto;background:var(--ink-1-a12)"></div>
+<div></div><div></div>
+</div>
+
+<div style="display:grid;grid-template-columns:24px 180px minmax(0,1fr);gap:32px">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div style="width:16px;height:16px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+</div>
+<div>
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:0;color:#3A3A3A">Evidence</h3>
+<p style="font-size:16px;line-height:1.7;margin:8px 0 0;color:var(--text-body)">Signals and patterns.</p>
+</div>
+<div style="position:relative;width:100%"><video id="cs-video-evidence-signals" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ evidenceSignalsVideoSrc }}"></video>
+<sc-if value="{{ evidenceSignalsEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ evidenceSignalsPick }}"></input>
+</label>
+</sc-if>
+</div>
+</div>
+
+</div>
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:32px 0 0;color:#3A3A3A">But will people talk to an agent?</h3>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">When the agent first came up my first instinct was to question if people will talk to the agent and the findings specifically in the North American region show that research teams running short, adaptive AI interviews report completion rates between 54% and 72%, compared with about 33% across survey channels, which was encouraging combined with signals from our competitors.</p>
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:32px 0 0;color:#3A3A3A">How founders answers the question</h3>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">I first designed the interaction like a chat experience, similar to the current AI tools and created a quick prototype to test with some of the founders, but when they interacted with it we found that instead of benefitting from a similar experience the users mental model was challenged. So when designing the experience I used a progressive questionnaire.</p>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:16px">
+<image-slot id="cs-chat-vs-questionnaire-img" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+<div style="position:relative;width:100%"><video id="cs-video-chat-vs-questionnaire" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ chatVsQuestionnaireVideoSrc }}"></video>
+<sc-if value="{{ chatVsQuestionnaireEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ chatVsQuestionnairePick }}"></input>
+</label>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section id="outcome" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">Outcome</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">From a question guide to an evidence system.</p>
+</section>
+
+<section id="directional-landscape" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">The directional landscape</h2>
+<image-slot id="cs-directional-landscape" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+</section>
+
+<section id="context" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">Giving the agent context</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">The agent needs to understand what the founder is trying to learn before it can run a useful interview.</p>
+<image-slot id="cs-context" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+</section>
+
+<section id="interview-experience" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">The interview experience</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">When I was designing the interview experience, I first wrote down how the experience feels like when I conduct a one-to-one user interview, and prioritised what should go in phase one and what can wait, based on what people expect from an agent.</p>
+<image-slot id="cs-interview-experience" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:0;color:#3A3A3A">Asks for a real event</h3>
+<div style="position:relative;width:100%"><video id="cs-video-real-event" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ realEventVideoSrc }}"></video>
+<sc-if value="{{ realEventEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ realEventPick }}"></input>
+</label>
+</sc-if>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:0;color:#3A3A3A">Investigates current behaviour</h3>
+<div style="position:relative;width:100%"><video id="cs-video-current-behaviour" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ currentBehaviourVideoSrc }}"></video>
+<sc-if value="{{ currentBehaviourEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ currentBehaviourPick }}"></input>
+</label>
+</sc-if>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
+<h3 style="font-family:var(--font-sans);font-weight:500;font-size:1.1rem;margin:0;color:#3A3A3A">Mapping the users journey with HAX</h3>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">While defining the interview experience I referred to the HAX guideline from Microsoft to define how the system should behave. This adaption is at a very beginning stage and will grow as the FoundersBrew agent becomes more capable.</p>
+<image-slot id="cs-hax-journey" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+</div>
+</section>
+
+<section id="evidence" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">How conversation drive progress</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">The system tells the founder what their next best step is, based on the conversation and the signals and patterns derived from it.</p>
+<div style="position:relative;width:100%"><video id="cs-video-next-step" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ nextStepVideoSrc }}"></video>
+<sc-if value="{{ nextStepEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ nextStepPick }}"></input>
+</label>
+</sc-if>
+</div>
+</section>
+
+<section id="patterns" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">From signals to patterns</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">I spoke to founders working with FoundersBrew offline and understood that this system should be extremely simple for founders. They are not researchers, they only needed to know which of their assumptions were validated, what was challenged, and what behaviour was still left to test. They can then decide what to do next.</p>
+<div style="position:relative;width:100%"><video id="cs-video-patterns" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ patternsVideoSrc }}"></video>
+<sc-if value="{{ patternsEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ patternsPick }}"></input>
+</label>
+</sc-if>
+</div>
+</section>
+
+<section id="human-in-the-loop" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">Human in the loop</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">The system gives the next best action but the human decides what to focus on within the next best action.</p>
+<div style="position:relative;width:100%"><video id="cs-video-human-in-the-loop" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:var(--ink-1-a08,rgba(58,58,58,0.08));display:block;object-fit:contain" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" src="{{ humanInTheLoopVideoSrc }}"></video>
+<sc-if value="{{ humanInTheLoopEmpty }}" hint-placeholder-val="{{ true }}">
+<label style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--border-subtle);border-radius:8px;cursor:pointer;font-family:var(--font-sans);font-size:13px;color:var(--text-muted);text-align:center">
+<span>Video</span>
+<span style="text-decoration:underline;color:var(--accent)">browse files</span>
+<input type="file" accept="video/*" style="display:none" onChange="{{ humanInTheLoopPick }}"></input>
+</label>
+</sc-if>
+</div>
+</section>
+
+<section id="agent-workflow" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">The agent workflow</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">In this work this is the piece that took me beyond UX to really think about how the agent architecture should look like. How would the classification happen, what parameters to check the bias and what deterministic logic to write.</p>
+<image-slot id="cs-agent-workflow" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+</section>
+
+<section id="visual-direction" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">The visual direction</h2>
+<image-slot id="cs-visual-direction" shape="rounded" radius="8" fit="contain" placeholder="Image" style="width:100%;aspect-ratio:16/9"></image-slot>
+</section>
+
+<section id="reflection" style="display:flex;flex-direction:column;gap:20px">
+<h2 style="font-family:var(--font-sans);font-weight:500;font-size:1.5rem;margin:0;color:#3A3A3A">Reflection</h2>
+<p style="font-size:16px;line-height:1.7;margin:0;color:var(--text-body)">Clarity comes through actions. There were a lot of unknowns, but a step by step structured approach becomes important to overcome ambiguity.</p>
+</section>
+
+</main>
+</div>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 'overview', videos: { cs1: null, founderContext: null, adaptiveInterview: null, evidenceSignals: null, realEvent: null, currentBehaviour: null, nextStep: null, patterns: null, humanInTheLoop: null, chatVsQuestionnaire: null } };
+  ids = ['overview', 'problem', 'first-version', 'solution', 'outcome', 'directional-landscape', 'context', 'interview-experience', 'evidence', 'patterns', 'human-in-the-loop', 'agent-workflow', 'visual-direction', 'reflection'];
+  pickVideo(id) {
+    return (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      this.setState((s) => ({ videos: { ...s.videos, [id]: url } }));
+    };
+  }
+  componentDidMount() {
+    this.onScroll = () => {
+      let current = this.ids[0];
+      for (const id of this.ids) {
+        const el = document.getElementById(id);
+        const rect = el && el.getBoundingClientRect();
+        if (rect && rect.height > 0 && rect.top <= 120) current = id;
+      }
+      if (current !== this.state.active) this.setState({ active: current });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    requestAnimationFrame(() => requestAnimationFrame(this.onScroll));
+    const tryIcons = () => {
+      if (window.lucide) window.lucide.createIcons();
+      else setTimeout(tryIcons, 100);
+    };
+    tryIcons();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+  onRailClick(e) {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    this.setState({ active: id });
+  }
+  renderVals() {
+    const linkStyle = (id) => ({
+      borderLeftColor: this.state.active === id ? 'var(--accent)' : 'transparent',
+      color: this.state.active === id ? 'var(--accent)' : 'var(--text-muted)',
+    });
+    const camel = (id) => id.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+    const s = {};
+    this.ids.forEach((id) => {
+      s[camel(id) + 'Style'] = linkStyle(id);
+    });
+    s.cs1VideoSrc = this.state.videos.cs1;
+    s.cs1Empty = !this.state.videos.cs1;
+    s.cs1Pick = this.pickVideo('cs1');
+    s.founderContextVideoSrc = this.state.videos.founderContext;
+    s.founderContextEmpty = !this.state.videos.founderContext;
+    s.founderContextPick = this.pickVideo('founderContext');
+    s.adaptiveInterviewVideoSrc = this.state.videos.adaptiveInterview;
+    s.adaptiveInterviewEmpty = !this.state.videos.adaptiveInterview;
+    s.adaptiveInterviewPick = this.pickVideo('adaptiveInterview');
+    s.evidenceSignalsVideoSrc = this.state.videos.evidenceSignals;
+    s.evidenceSignalsEmpty = !this.state.videos.evidenceSignals;
+    s.evidenceSignalsPick = this.pickVideo('evidenceSignals');
+    s.nextStepVideoSrc = this.state.videos.nextStep;
+    s.nextStepEmpty = !this.state.videos.nextStep;
+    s.nextStepPick = this.pickVideo('nextStep');
+    s.patternsVideoSrc = this.state.videos.patterns;
+    s.patternsEmpty = !this.state.videos.patterns;
+    s.patternsPick = this.pickVideo('patterns');
+    s.humanInTheLoopVideoSrc = this.state.videos.humanInTheLoop;
+    s.humanInTheLoopEmpty = !this.state.videos.humanInTheLoop;
+    s.humanInTheLoopPick = this.pickVideo('humanInTheLoop');
+    s.chatVsQuestionnaireVideoSrc = this.state.videos.chatVsQuestionnaire;
+    s.chatVsQuestionnaireEmpty = !this.state.videos.chatVsQuestionnaire;
+    s.chatVsQuestionnairePick = this.pickVideo('chatVsQuestionnaire');
+    s.realEventVideoSrc = this.state.videos.realEvent;
+    s.realEventEmpty = !this.state.videos.realEvent;
+    s.realEventPick = this.pickVideo('realEvent');
+    s.currentBehaviourVideoSrc = this.state.videos.currentBehaviour;
+    s.currentBehaviourEmpty = !this.state.videos.currentBehaviour;
+    s.currentBehaviourPick = this.pickVideo('currentBehaviour');
+    s.onRailClick = this.onRailClick.bind(this);
+    return s;
+  }
+}
+</script>
+</body>
+</html>

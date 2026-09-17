@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FoundersBrew — Case study | Sanchita</title>
+<meta name="description" content="From conversations to structured evidence for founders — how FoundersBrew's adaptive interview agent turns founder conversations into evidence founders can act on." />
+
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--white);
+    font-family: var(--font-sans);
+    color: var(--text-body);
+  }
+  body, body * { font-weight: 400; }
+  html { scroll-behavior: smooth; }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-hover); }
+
+  .wrap {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--side-margin-desktop);
+  }
+
+  /* header */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .brand {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-heading);
+  }
+  .primary-nav {
+    display: flex;
+    gap: 32px;
+  }
+  .primary-nav a {
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-body);
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+  .primary-nav a:hover { color: var(--accent); }
+
+  .back-link {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: var(--space-4);
+  }
+  .back-link:hover { color: var(--accent); }
+
+  /* layout */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 64px;
+  }
+
+  .rail {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    border-left: 1px solid var(--ink-1-a12);
+  }
+  .rail-link {
+    display: block;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 16px;
+    margin-left: -1px;
+    transition: color var(--duration-fast) var(--ease-standard),
+                border-color var(--duration-fast) var(--ease-standard);
+  }
+  .rail-link:hover { color: var(--accent); }
+  .rail-link.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  main {
+    min-width: 0;
+    padding: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+  }
+
+  section { display: flex; flex-direction: column; gap: 20px; }
+  section#overview { gap: 24px; }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--ink-1);
+  }
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--ink-1);
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--ink-1);
+  }
+  p {
+    font-size: 16px;
+    line-height: var(--leading-relaxed);
+    margin: 0;
+    color: var(--text-body);
+  }
+  .lede { line-height: 1.7; }
+  .callout { color: var(--accent); font-weight: 500; }
+
+  blockquote {
+    margin: 0;
+    padding: 16px 24px;
+    border-left: 3px solid var(--accent);
+  }
+  blockquote p { color: var(--accent); }
+
+  /* media placeholders — swap the inner <img>/<video> in when real assets are ready */
+  .media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: var(--radius-md);
+    background: var(--ink-1-a08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .media::before {
+    content: attr(data-label);
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 0 16px;
+  }
+  .media img, .media video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+  }
+  .media.hero { aspect-ratio: 16/10; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  /* solution timeline */
+  .timeline { display: flex; flex-direction: column; margin-top: 32px; }
+  .timeline-step {
+    display: grid;
+    grid-template-columns: 24px 180px minmax(0, 1fr);
+    gap: 32px;
+  }
+  .timeline-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .timeline-line {
+    width: 1px;
+    flex: 1;
+    background: var(--ink-1-a12);
+  }
+  .timeline-spacer {
+    display: grid;
+    grid-template-columns: 24px 180px minmax(0, 1fr);
+    height: 48px;
+  }
+  .timeline-spacer .timeline-line { width: 1px; height: 100%; margin: 0 auto; }
+  .timeline-step h3 { margin: 0; }
+  .timeline-step p { margin: 8px 0 0; }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 0 var(--side-margin-tablet); }
+    .content-grid { grid-template-columns: 1fr; }
+    .rail {
+      position: static;
+      flex-direction: row;
+      overflow-x: auto;
+      border-left: none;
+      border-bottom: 1px solid var(--ink-1-a12);
+      gap: 4px;
+    }
+    .rail-link {
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+    .rail-link.active { border-left-color: transparent; border-bottom-color: var(--accent); }
+    .two-col { grid-template-columns: 1fr; }
+    .timeline-step, .timeline-spacer { grid-template-columns: 24px minmax(0, 1fr); }
+    .timeline-step > div:nth-child(2) { display: none; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 var(--side-margin-mobile); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="brand">Sanchita</div>
+    <nav class="primary-nav">
+      <a href="index.html">Work</a>
+      <a href="#">About</a>
+      <a href="#">Resume</a>
+      <a href="#">Blog</a>
+    </nav>
+  </header>
+</div>
+
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; All work</a>
+
+  <div class="content-grid">
+    <nav class="rail" aria-label="Case study sections">
+      <a class="rail-link" href="#overview">Overview</a>
+      <a class="rail-link" href="#problem">The problem</a>
+      <a class="rail-link" href="#first-version">The first version</a>
+      <a class="rail-link" href="#solution">The solution</a>
+      <a class="rail-link" href="#outcome">Outcome</a>
+      <a class="rail-link" href="#directional-landscape">The directional landscape</a>
+      <a class="rail-link" href="#context">Giving the agent context</a>
+      <a class="rail-link" href="#interview-experience">The interview experience</a>
+      <a class="rail-link" href="#evidence">How conversation drive progress</a>
+      <a class="rail-link" href="#patterns">From signals to patterns</a>
+      <a class="rail-link" href="#human-in-the-loop">Human in the loop</a>
+      <a class="rail-link" href="#agent-workflow">The agent workflow</a>
+      <a class="rail-link" href="#visual-direction">The visual direction</a>
+      <a class="rail-link" href="#reflection">Reflection</a>
+    </nav>
+
+    <main>
+
+      <section id="overview">
+        <div class="eyebrow">0 &rarr; 1 &middot; AI enabled SaaS &middot; Voice agent</div>
+        <h1>From conversations to structured evidence for founders</h1>
+        <div class="media hero" data-label="Case study image/video"></div>
+      </section>
+
+      <section id="problem">
+        <h2>The problem</h2>
+        <p class="lede">The journey from idea to MVP puts a lot of focus on discovery. If founders focus on the wrong thing, they will end up building the wrong product, and founders were hearing encouragement, not evidence.</p>
+        <p class="callout">Biased information = biased decision</p>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="first-version">
+        <h2>The first version</h2>
+        <p class="lede">The first version I made was a static interview guide for founders which they can use during the interview. It initially helped founders prepare a structured set of interview questions. It improved preparation, but the guide could not adapt once the conversation started.</p>
+        <blockquote>
+          <p>The real challenge was adapting the interview in the moment.</p>
+        </blockquote>
+      </section>
+
+      <section id="solution">
+        <h2>The solution</h2>
+        <p class="lede">An interview agent that adapts to the conversation. FoundersBrew uses the founder's context and research objectives to guide the interview, then adapts its follow-up questions based on what the participant says.</p>
+
+        <div class="timeline">
+          <div class="timeline-step">
+            <div class="timeline-dot-col">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line"></div>
+            </div>
+            <div>
+              <h3>Founder context</h3>
+              <p>Founder answers a few questions.</p>
+            </div>
+            <div class="media" data-label="Video"></div>
+          </div>
+
+          <div class="timeline-spacer">
+            <div class="timeline-line"></div><div></div><div></div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-dot-col">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line"></div>
+            </div>
+            <div>
+              <h3>Adaptive interview</h3>
+              <p>The agent asks, listens, probes and clarifies.</p>
+            </div>
+            <div class="media" data-label="Video"></div>
+          </div>
+
+          <div class="timeline-spacer">
+            <div class="timeline-line"></div><div></div><div></div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-dot-col">
+              <div class="timeline-dot"></div>
+            </div>
+            <div>
+              <h3>Evidence</h3>
+              <p>Signals and patterns.</p>
+            </div>
+            <div class="media" data-label="Video"></div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:32px">But will people talk to an agent?</h3>
+        <p class="lede">When the agent first came up my first instinct was to question if people will talk to the agent and the findings specifically in the North American region show that research teams running short, adaptive AI interviews report completion rates between 54% and 72%, compared with about 33% across survey channels, which was encouraging combined with signals from our competitors.</p>
+
+        <h3 style="margin-top:32px">How founders answers the question</h3>
+        <p class="lede">I first designed the interaction like a chat experience, similar to the current AI tools and created a quick prototype to test with some of the founders, but when they interacted with it we found that instead of benefitting from a similar experience the users mental model was challenged. So when designing the experience I used a progressive questionnaire.</p>
+        <div class="two-col" style="margin-top:16px">
+          <div class="media" data-label="Image"></div>
+          <div class="media" data-label="Video"></div>
+        </div>
+      </section>
+
+      <section id="outcome">
+        <h2>Outcome</h2>
+        <p class="lede">From a question guide to an evidence system.</p>
+      </section>
+
+      <section id="directional-landscape">
+        <h2>The directional landscape</h2>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="context">
+        <h2>Giving the agent context</h2>
+        <p class="lede">The agent needs to understand what the founder is trying to learn before it can run a useful interview.</p>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="interview-experience">
+        <h2>The interview experience</h2>
+        <p class="lede">When I was designing the interview experience, I first wrote down how the experience feels like when I conduct a one-to-one user interview, and prioritised what should go in phase one and what can wait, based on what people expect from an agent.</p>
+        <div class="media" data-label="Image"></div>
+
+        <div class="two-col" style="margin-top:32px">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <h3>Asks for a real event</h3>
+            <div class="media" data-label="Video"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <h3>Investigates current behaviour</h3>
+            <div class="media" data-label="Video"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
+          <h3>Mapping the users journey with HAX</h3>
+          <p class="lede">While defining the interview experience I referred to the HAX guideline from Microsoft to define how the system should behave. This adaption is at a very beginning stage and will grow as the FoundersBrew agent becomes more capable.</p>
+          <div class="media" data-label="Image"></div>
+        </div>
+      </section>
+
+      <section id="evidence">
+        <h2>How conversation drive progress</h2>
+        <p class="lede">The system tells the founder what their next best step is, based on the conversation and the signals and patterns derived from it.</p>
+        <div class="media" data-label="Video"></div>
+      </section>
+
+      <section id="patterns">
+        <h2>From signals to patterns</h2>
+        <p class="lede">I spoke to founders working with FoundersBrew offline and understood that this system should be extremely simple for founders. They are not researchers, they only needed to know which of their assumptions were validated, what was challenged, and what behaviour was still left to test. They can then decide what to do next.</p>
+        <div class="media" data-label="Video"></div>
+      </section>
+
+      <section id="human-in-the-loop">
+        <h2>Human in the loop</h2>
+        <p class="lede">The system gives the next best action but the human decides what to focus on within the next best action.</p>
+        <div class="media" data-label="Video"></div>
+      </section>
+
+      <section id="agent-workflow">
+        <h2>The agent workflow</h2>
+        <p class="lede">In this work this is the piece that took me beyond UX to really think about how the agent architecture should look like. How would the classification happen, what parameters to check the bias and what deterministic logic to write.</p>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="visual-direction">
+        <h2>The visual direction</h2>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="reflection">
+        <h2>Reflection</h2>
+        <p class="lede">Clarity comes through actions. There were a lot of unknowns, but a step by step structured approach becomes important to overcome ambiguity.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ids = ['overview', 'problem', 'first-version', 'solution', 'outcome',
+    'directional-landscape', 'context', 'interview-experience', 'evidence',
+    'patterns', 'human-in-the-loop', 'agent-workflow', 'visual-direction', 'reflection'];
+  var links = {};
+  ids.forEach(function (id) {
+    links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
+  });
+  var active = null;
+  function setActive(id) {
+    if (id === active) return;
+    if (active && links[active]) links[active].classList.remove('active');
+    if (links[id]) links[id].classList.add('active');
+    active = id;
+  }
+  function onScroll() {
+    var current = ids[0];
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      var rect = el && el.getBoundingClientRect();
+      if (rect && rect.height > 0 && rect.top <= 120) current = ids[i];
+    }
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = ids[ids.length - 1];
+    setActive(current);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  requestAnimationFrame(function () { requestAnimationFrame(onScroll); });
+})();
+</script>
+
+</body>
+</html>
