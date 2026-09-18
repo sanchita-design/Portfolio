@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "foundersbrew-case-study.html"
+        ],
+        "createdAt": "2026-09-17T22:53:04.254Z",
+        "reason": "only uppercase text is the .eyebrow label (short label line, not a long passage) — matches the rule's own stated exception"
+      }
+    ]
+  }
+}

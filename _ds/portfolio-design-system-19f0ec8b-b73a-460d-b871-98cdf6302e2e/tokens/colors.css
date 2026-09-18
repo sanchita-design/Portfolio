@@ -3,6 +3,7 @@
 --ink-1-a12:rgba(58,58,58,0.12);
 --ink-1-a08:rgba(58,58,58,0.08);
 --ink-1-a60:rgba(58,58,58,0.6);
+--ink-1-a72:rgba(58,58,58,0.72);
 --accent:#4968DC;
 --accent-hover:#3B54B8;
 --accent-press:#31459A;
@@ -11,7 +12,7 @@
 --white:#FFFFFF;
 --cream:#FFFCF4;
 --text-body:var(--ink-1);
---text-muted:var(--ink-1-a60);
+--text-muted:var(--ink-1-a72);
 --text-heading:var(--ink-1);
 --text-on-accent:var(--white);
 --link-color:var(--accent);

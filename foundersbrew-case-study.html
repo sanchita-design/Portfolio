@@ -37,19 +37,19 @@
     justify-content: space-between;
     padding: 40px 0;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: var(--space-3);
   }
   .brand {
-    font-size: 22px;
+    font-size: var(--text-h4);
     font-weight: 400;
     color: var(--text-heading);
   }
   .primary-nav {
     display: flex;
-    gap: 32px;
+    gap: var(--space-5);
   }
   .primary-nav a {
-    font-size: 15px;
+    font-size: var(--text-base);
     font-weight: 500;
     text-decoration: none;
     color: var(--text-body);
@@ -59,7 +59,7 @@
 
   .back-link {
     display: inline-block;
-    font-size: 14px;
+    font-size: var(--text-caption);
     color: var(--text-muted);
     text-decoration: none;
     margin-bottom: var(--space-4);
@@ -70,12 +70,12 @@
   .content-grid {
     display: grid;
     grid-template-columns: 200px minmax(0, 1fr);
-    gap: 64px;
+    gap: var(--space-7);
   }
 
   .rail {
     position: sticky;
-    top: 32px;
+    top: var(--space-5);
     align-self: start;
     display: flex;
     flex-direction: column;
@@ -84,12 +84,12 @@
   }
   .rail-link {
     display: block;
-    padding: 8px 0;
-    font-size: 14px;
+    padding: var(--space-2) 0;
+    font-size: var(--text-caption);
     color: var(--text-muted);
     text-decoration: none;
     border-left: 2px solid transparent;
-    padding-left: 16px;
+    padding-left: var(--space-3);
     margin-left: -1px;
     transition: color var(--duration-fast) var(--ease-standard),
                 border-color var(--duration-fast) var(--ease-standard);
@@ -105,14 +105,14 @@
     padding: 0 0 200px;
     display: flex;
     flex-direction: column;
-    gap: 96px;
+    gap: var(--space-8);
   }
 
   section { display: flex; flex-direction: column; gap: 20px; }
-  section#overview { gap: 24px; }
+  section#overview { gap: var(--space-4); }
 
   .eyebrow {
-    font-size: 12px;
+    font-size: var(--text-label);
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -140,7 +140,7 @@
     color: var(--ink-1);
   }
   p {
-    font-size: 16px;
+    font-size: var(--text-base);
     line-height: var(--leading-relaxed);
     margin: 0;
     color: var(--text-body);
@@ -150,7 +150,7 @@
 
   blockquote {
     margin: 0;
-    padding: 16px 24px;
+    padding: var(--space-3) var(--space-4);
     border-left: 3px solid var(--accent);
   }
   blockquote p { color: var(--accent); }
@@ -169,10 +169,10 @@
   }
   .media::before {
     content: attr(data-label);
-    font-size: 13px;
+    font-size: var(--text-label);
     color: var(--text-muted);
     text-align: center;
-    padding: 0 16px;
+    padding: 0 var(--space-3);
   }
   .media img, .media video {
     position: absolute;
@@ -187,15 +187,15 @@
   .two-col {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
+    gap: var(--space-5);
   }
 
   /* solution timeline */
-  .timeline { display: flex; flex-direction: column; margin-top: 32px; }
+  .timeline { display: flex; flex-direction: column; margin-top: var(--space-5); }
   .timeline-step {
     display: grid;
     grid-template-columns: 24px 180px minmax(0, 1fr);
-    gap: 32px;
+    gap: var(--space-5);
   }
   .timeline-dot-col {
     display: flex;
@@ -217,11 +217,11 @@
   .timeline-spacer {
     display: grid;
     grid-template-columns: 24px 180px minmax(0, 1fr);
-    height: 48px;
+    height: var(--space-6);
   }
   .timeline-spacer .timeline-line { width: 1px; height: 100%; margin: 0 auto; }
   .timeline-step h3 { margin: 0; }
-  .timeline-step p { margin: 8px 0 0; }
+  .timeline-step p { margin: var(--space-2) 0 0; }
 
   @media (max-width: 900px) {
     .wrap { padding: 0 var(--side-margin-tablet); }
@@ -232,12 +232,12 @@
       overflow-x: auto;
       border-left: none;
       border-bottom: 1px solid var(--ink-1-a12);
-      gap: 4px;
+      gap: var(--space-1);
     }
     .rail-link {
       border-left: none;
       border-bottom: 2px solid transparent;
-      padding: 8px 12px;
+      padding: var(--space-2) 12px;
       white-space: nowrap;
     }
     .rail-link.active { border-left-color: transparent; border-bottom-color: var(--accent); }
@@ -357,12 +357,12 @@
           </div>
         </div>
 
-        <h3 style="margin-top:32px">But will people talk to an agent?</h3>
+        <h3 style="margin-top:var(--space-5)">But will people talk to an agent?</h3>
         <p class="lede">When the agent first came up my first instinct was to question if people will talk to the agent and the findings specifically in the North American region show that research teams running short, adaptive AI interviews report completion rates between 54% and 72%, compared with about 33% across survey channels, which was encouraging combined with signals from our competitors.</p>
 
-        <h3 style="margin-top:32px">How founders answers the question</h3>
+        <h3 style="margin-top:var(--space-5)">How founders answers the question</h3>
         <p class="lede">I first designed the interaction like a chat experience, similar to the current AI tools and created a quick prototype to test with some of the founders, but when they interacted with it we found that instead of benefitting from a similar experience the users mental model was challenged. So when designing the experience I used a progressive questionnaire.</p>
-        <div class="two-col" style="margin-top:16px">
+        <div class="two-col" style="margin-top:var(--space-3)">
           <div class="media" data-label="Image"></div>
           <div class="media" data-label="Video"></div>
         </div>
@@ -389,7 +389,7 @@
         <p class="lede">When I was designing the interview experience, I first wrote down how the experience feels like when I conduct a one-to-one user interview, and prioritised what should go in phase one and what can wait, based on what people expect from an agent.</p>
         <div class="media" data-label="Image"></div>
 
-        <div class="two-col" style="margin-top:32px">
+        <div class="two-col" style="margin-top:var(--space-5)">
           <div style="display:flex;flex-direction:column;gap:12px">
             <h3>Asks for a real event</h3>
             <div class="media" data-label="Video"></div>
@@ -400,7 +400,7 @@
           </div>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:var(--space-5)">
           <h3>Mapping the users journey with HAX</h3>
           <p class="lede">While defining the interview experience I referred to the HAX guideline from Microsoft to define how the system should behave. This adaption is at a very beginning stage and will grow as the FoundersBrew agent becomes more capable.</p>
           <div class="media" data-label="Image"></div>
