@@ -1,0 +1,57 @@
+/* Shared across every page: reset, body defaults, links, page shell, fixed header/nav. */
+
+:root { --header-height: 107px; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  background: var(--white);
+  padding-top: var(--header-height);
+}
+body, body * { font-weight: 400; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 16px); }
+a { color: var(--accent); }
+a:hover { color: var(--accent-hover); }
+
+.wrap {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--side-margin-desktop);
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 0;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.brand { font-size: var(--text-h4); font-weight: 400; color: var(--text-heading); }
+.primary-nav { display: flex; gap: var(--space-5); }
+.primary-nav a {
+  font-size: var(--text-base);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-body);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.primary-nav a:hover { color: var(--accent); }
+.primary-nav a.current { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .wrap { padding: 0 var(--side-margin-tablet); }
+}
+@media (max-width: 560px) {
+  .wrap { padding: 0 var(--side-margin-mobile); }
+}

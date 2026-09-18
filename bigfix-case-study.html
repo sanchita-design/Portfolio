@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BigFix — Case study | Sanchita</title>
+<meta name="description" content="Category-based ticketing system to an intent-led journey — how BigFix helped employees describe an issue in plain language, receive relevant guidance, and reach the right support path with greater confidence." />
+
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <div class="brand">Sanchita</div>
+    <nav class="primary-nav">
+      <a href="index.html">Work</a>
+      <a href="#">About</a>
+      <a href="#">Resume</a>
+      <a href="#">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; All work</a>
+
+  <div class="content-grid">
+    <nav class="rail" aria-label="Case study sections">
+      <a class="rail-link" href="#overview">Overview</a>
+      <a class="rail-link" href="#problem">The problem</a>
+      <a class="rail-link" href="#approach">The approach</a>
+      <a class="rail-link" href="#outcome">Outcome</a>
+      <a class="rail-link" href="#reflection">Reflection</a>
+    </nav>
+
+    <main>
+
+      <section id="overview">
+        <div class="eyebrow">Enterprise product &middot; AI enabled workflow</div>
+        <h1>Category-based ticketing system to an intent-led journey</h1>
+        <p class="lede">How BigFix helped employees describe an issue in plain language, receive relevant guidance, and reach the right support path with greater confidence.</p>
+        <div class="media hero" data-label="Case study image/video"></div>
+      </section>
+
+      <section id="problem">
+        <h2>The problem</h2>
+        <p class="placeholder-copy">[Describe the problem — what wasn't working with the category-based ticketing flow, and what was it costing employees or the business?]</p>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="approach">
+        <h2>The approach</h2>
+        <p class="placeholder-copy">[Describe how the intent-led journey was designed — key decisions, who you talked to, what you tried, what changed along the way.]</p>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="outcome">
+        <h2>Outcome</h2>
+        <p class="placeholder-copy">[Describe the result — what changed for employees, and any evidence of impact.]</p>
+        <div class="media" data-label="Image"></div>
+      </section>
+
+      <section id="reflection">
+        <h2>Reflection</h2>
+        <p class="placeholder-copy">[What did you learn from this project that you'd carry into the next one?]</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ids = ['overview', 'problem', 'approach', 'outcome', 'reflection'];
+  var links = {};
+  ids.forEach(function (id) {
+    links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
+  });
+  var active = null;
+  var headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 106;
+  var activeThreshold = headerHeight + 20;
+  function setActive(id) {
+    if (id === active) return;
+    if (active && links[active]) links[active].classList.remove('active');
+    if (links[id]) links[id].classList.add('active');
+    active = id;
+  }
+  function onScroll() {
+    var current = ids[0];
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      var rect = el && el.getBoundingClientRect();
+      if (rect && rect.height > 0 && rect.top <= activeThreshold) current = ids[i];
+    }
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = ids[ids.length - 1];
+    setActive(current);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  requestAnimationFrame(function () { requestAnimationFrame(onScroll); });
+})();
+</script>
+
+</body>
+</html>

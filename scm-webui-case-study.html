@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SCM WebUI Redesign — Case study | Sanchita</title>
+<meta name="description" content="Streamlining Security Compliance: The SCM WebUI Redesign — how the product preserved the control security experts required while significantly enhancing operational efficiency and system clarity." />
+
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <div class="brand">Sanchita</div>
+    <nav class="primary-nav">
+      <a href="index.html">Work</a>
+      <a href="#">About</a>
+      <a href="#">Resume</a>
+      <a href="#">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; All work</a>
+
+  <div class="content-grid">
+    <nav class="rail" aria-label="Case study sections">
+      <a class="rail-link" href="#overview">Overview</a>
+      <a class="rail-link" href="#problem">The problem</a>
+      <a class="rail-link" href="#solution">The solution</a>
+      <a class="rail-link" href="#outcome">Outcome</a>
+      <a class="rail-link" href="#business-context">Business context</a>
+      <a class="rail-link" href="#scm-workflow">The broader workflow</a>
+      <a class="rail-link" href="#users">User context</a>
+      <a class="rail-link" href="#diagnosis">What was going wrong?</a>
+      <a class="rail-link" href="#understanding">Understanding the workflow</a>
+      <a class="rail-link" href="#approaches">Exploring approaches</a>
+      <a class="rail-link" href="#principles">Principles</a>
+      <a class="rail-link" href="#key-redesign">The key redesign</a>
+      <a class="rail-link" href="#core-flow">The core flow</a>
+      <a class="rail-link" href="#edge-cases">Beyond the happy path</a>
+      <a class="rail-link" href="#constraints">Technical constraints</a>
+      <a class="rail-link" href="#final">The final experience</a>
+      <a class="rail-link" href="#reflection">Reflection</a>
+    </nav>
+
+    <main>
+
+      <section id="overview">
+        <div class="eyebrow">Enterprise product &middot; Cybersecurity &middot; Legacy to modernisation</div>
+        <h1>Streamlining Security Compliance: The SCM WebUI Redesign</h1>
+        <p class="lede">BigFix is a B2B enterprise endpoint management platform. Within it, Security Compliance Manager helps organisations define, deploy, monitor and maintain cybersecurity compliance across environments that can contain hundreds of thousands of endpoints.</p>
+        <p class="lede">I worked on the broader modernisation of Security Compliance Manager across several interconnected administrator workflows. This case study focuses on creating and configuring a custom checklist&mdash;one representative part of that larger transformation&mdash;to show how we approached complexity, legacy constraints and expert-user needs.</p>
+
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Product Designer</span></div>
+          <div class="meta-item"><span class="meta-label">Product</span><span class="meta-value">BigFix</span></div>
+          <div class="meta-item"><span class="meta-label">Module</span><span class="meta-value">Security Compliance Manager</span></div>
+          <div class="meta-item"><span class="meta-label">Domain</span><span class="meta-value">Cybersecurity / Enterprise Endpoint Security</span></div>
+          <div class="meta-item"><span class="meta-label">Product area</span><span class="meta-value">Security Compliance Management</span></div>
+          <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">UX, UI, interaction design, workflow design</span></div>
+        </div>
+
+        <div class="media hero" data-label="Hero image of the strongest final Security Compliance Manager screens"></div>
+      </section>
+
+      <section id="problem">
+        <h2>The problem</h2>
+        <p class="lede">Security Compliance Manager supported a set of complex, interconnected cybersecurity workflows.</p>
+        <p class="lede">Administrators could create and deploy custom checklists, maintain and synchronise them as external standards changed, manage target-device lists, and identify non-compliant devices for remediation.</p>
+        <p class="lede">As the product evolved, these workflows accumulated significant complexity.</p>
+        <p class="lede">Administrators had to navigate large tables of checks, understand overlapping requirements and dependencies, interpret different configuration states, and make decisions that could ultimately affect very large endpoint environments.</p>
+        <p class="lede">The interface often reflected how the underlying system worked rather than the decision the administrator was trying to make.</p>
+        <p class="callout">At enterprise scale, that complexity created both cognitive load and operational friction.</p>
+      </section>
+
+      <section id="solution">
+        <h2>The solution</h2>
+        <p class="lede">I redesigned the experience around three ideas: clearer decisions, progressive guidance and more explicit system feedback.</p>
+        <p class="lede">Rather than exposing every rule at once, the interface surfaces the information administrators need at the point where it becomes relevant.</p>
+        <p class="lede">The goal was not to remove the technical depth of a cybersecurity product. It was to make that complexity easier to understand and manage.</p>
+      </section>
+
+      <section id="outcome">
+        <h2>Outcome</h2>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat-number">66%</span>
+            <span class="stat-label">reduction in checklist creation time</span>
+            <span class="stat-detail">From 35 minutes to under 12 minutes</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">~34%</span>
+            <span class="stat-label">drop in support tickets</span>
+            <span class="stat-detail">Within the first quarter post-release</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">2 modules</span>
+            <span class="stat-label">adopted the redesign pattern</span>
+            <span class="stat-detail">Patch and Software Distribution</span>
+          </div>
+        </div>
+        <div class="media" data-label="Short product video showing an administrator selecting checks, encountering a dependency, resolving it and seeing the checklist update"></div>
+      </section>
+
+      <section id="business-context">
+        <h2>Business context</h2>
+        <p class="lede">BigFix is designed for organisations managing large fleets of endpoints.</p>
+        <p class="lede">Within Security Compliance Manager, administrators translate internal security policies and external cybersecurity benchmarks into configurations that can be deployed and monitored across endpoint groups.</p>
+        <p class="lede">A checklist is not simply a collection of independent items. Checks can overlap, depend on one another, be customised and evolve as the standards they originate from change.</p>
+        <p class="lede">The challenge was therefore bigger than simplifying one screen:</p>
+        <blockquote style="margin:0;padding:var(--space-3) var(--space-4);border-left:3px solid var(--accent);">
+          <p style="color:var(--accent);">How could we make complex cybersecurity compliance behaviour understandable enough for administrators to make confident decisions at enterprise scale?</p>
+        </blockquote>
+        <div class="media" data-label="Product-context diagram showing Security Compliance Manager, checklists, checks, dependencies and deployment across large endpoint environments"></div>
+      </section>
+
+      <section id="scm-workflow">
+        <h2>The broader SCM workflow</h2>
+        <p class="lede">Security Compliance Manager was not a single-flow redesign. The modernisation covered a connected journey across checklist creation, deployment, maintenance, device targeting and compliance remediation.</p>
+        <p class="lede">At a product level, the administrator journey can be understood as:</p>
+        <div class="journey">
+          <span class="journey-step">Security policy / benchmark</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Create and configure checklist</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Choose target devices</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Deploy</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Monitor compliance</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Remediate</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Maintain and synchronise</span>
+        </div>
+        <p class="lede">This case study focuses on <strong>Create and Configure Checklist</strong>, because it captures many of the core design challenges present across the wider modernisation: dense information, dependencies, legacy constraints and expert-user workflows.</p>
+        <div class="media" data-label="High-level SCM workflow showing the full end-to-end journey, with Create and Configure Checklist highlighted as the focus of this case study"></div>
+      </section>
+
+      <section id="users">
+        <h2>Understanding the user context</h2>
+        <p class="lede">The primary user is a BigFix Administrator / Corporate IT Infrastructure and Operations administrator responsible for keeping endpoints compliant with company policies and external benchmarks.</p>
+        <p class="lede">They work closely with Corporate IT Security teams, who define the security policies. Their role is to translate those requirements into configurations that can be deployed, monitored and maintained across endpoint environments.</p>
+        <p class="lede">Their work is continuous rather than one-time. As organisational requirements and external standards evolve, administrators need to keep custom checklists aligned with those changes.</p>
+        <div class="media" data-label="User-context diagram showing Corporate IT Security defining policy, BigFix administrators translating it into checklist configuration, deploying to endpoint groups and maintaining compliance"></div>
+
+        <h3 style="margin-top:var(--space-5)">A typical workflow</h3>
+        <div class="step-list">
+          <div class="step">
+            <span class="step-num">01</span>
+            <div><h3>Create a custom checklist</h3><p>Build a checklist for a particular group of endpoints.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <div><h3>Add additional checks</h3><p>Add checks when existing content does not fully cover the organisation's requirements.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <div><h3>Customise checks</h3><p>Modify individual check content or parameter values to align with internal security policies.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-num">04</span>
+            <div><h3>Deploy to endpoints</h3><p>Apply the checklist to the relevant target devices or groups.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-num">05</span>
+            <div><h3>Maintain and synchronise</h3><p>Review updates from external checklists, compare differences, update the custom checklist and redeploy where necessary.</p></div>
+          </div>
+        </div>
+        <div class="media" data-label="Five-step administrator workflow showing Create &rarr; Add &rarr; Customise &rarr; Deploy &rarr; Maintain and synchronise"></div>
+
+        <p class="lede" style="margin-top:var(--space-4)">These administrators are domain experts, but their job is to manage cybersecurity policy and compliance&mdash;not to decode the internal architecture of the product.</p>
+        <p class="callout">The experience therefore needed to preserve technical depth while reducing unnecessary friction around relationships, dependencies and changes.</p>
+      </section>
+
+      <section id="diagnosis">
+        <h2>What was going wrong?</h2>
+        <p class="lede">I first looked at where the existing checklist workflow required administrators to interpret the system themselves.</p>
+        <p class="lede">Several recurring problems emerged.</p>
+        <p class="lede">The interface used terminology that reflected the system rather than the administrator's task.</p>
+        <p class="lede">Actions did not always make their consequences obvious.</p>
+        <p class="lede">Feedback could describe what had happened without making the next step clear.</p>
+        <p class="lede">And when overlapping checks or dependencies appeared, their relationships could become difficult to understand.</p>
+        <div class="media" data-label="Existing Security Compliance Manager interface annotated with the main pain points"></div>
+        <p class="callout">Administrators were being asked to understand too much of the system model before they could make a decision.</p>
+      </section>
+
+      <section id="understanding">
+        <h2>Understanding the workflow</h2>
+        <p class="lede">Before designing individual screens, I worked with product, engineering and domain experts to understand how the checklist workflow behaved behind the interface.</p>
+        <p class="lede">This mattered because a seemingly simple action could trigger several rules in the background.</p>
+        <p class="lede">Adding a check, for example, could reveal an existing relationship, introduce a dependency or require another decision before the checklist could be updated.</p>
+        <p class="lede">Mapping the workflow helped us separate <strong>what the system needed to know</strong> from <strong>what the administrator needed to know</strong>.</p>
+        <div class="media" data-label="Simplified workflow showing Create checklist &rarr; Select checks &rarr; Detect overlap or dependency &rarr; Resolve &rarr; Review &rarr; Confirm"></div>
+        <p class="lede">That distinction became the foundation for the redesign.</p>
+      </section>
+
+      <section id="approaches">
+        <h2>Exploring three approaches</h2>
+        <p class="lede">Before moving into detailed UI, I explored three ways the experience could handle this complexity.</p>
+        <div class="media" data-label="Three concept explorations"></div>
+        <div class="card-grid">
+          <div class="option-card">
+            <span class="option-num">01</span>
+            <h3>Show more information upfront</h3>
+            <p>One approach was to expose more of the system logic before an administrator made a decision. This increased transparency, but it also increased cognitive load and presented information that was not always relevant to the immediate task.</p>
+          </div>
+          <div class="option-card">
+            <span class="option-num">02</span>
+            <h3>Guide administrators progressively</h3>
+            <p>The second approach revealed additional information when it became relevant. Administrators could begin with the immediate task, while dependencies or conflicts appeared in context as they progressed. This kept the main workflow simpler without hiding important information.</p>
+          </div>
+          <div class="option-card">
+            <span class="option-num">03</span>
+            <h3>Automate more decisions</h3>
+            <p>A third approach was to allow the system to resolve more situations automatically. This could reduce effort, but some decisions could not be safely automated and others were constrained by the existing architecture.</p>
+          </div>
+        </div>
+        <h3 style="margin-top:var(--space-5)">Choosing a direction</h3>
+        <p class="lede">We moved forward with progressive guidance. It provided a balance between clarity, transparency and what the existing system could reliably support.</p>
+      </section>
+
+      <section id="principles">
+        <h2>Principles that shaped the solution</h2>
+        <p class="lede">Three principles guided the redesign.</p>
+        <div class="card-grid">
+          <div class="option-card">
+            <h3>Guide, don't expose</h3>
+            <p>Show administrators the decision they need to make rather than forcing them to interpret internal system logic first.</p>
+          </div>
+          <div class="option-card">
+            <h3>Reveal complexity progressively</h3>
+            <p>Not every rule needs to be visible at the same time. Additional information should appear when it becomes relevant.</p>
+          </div>
+          <div class="option-card">
+            <h3>Make consequences explicit</h3>
+            <p>Actions, warnings and validation should clearly communicate what will happen next.</p>
+          </div>
+        </div>
+        <div class="media" data-label="Product examples demonstrating guidance, progressive disclosure and explicit feedback"></div>
+      </section>
+
+      <section id="key-redesign">
+        <h2>The key redesign</h2>
+        <p class="lede">One of the biggest changes was restructuring the hierarchy of the experience.</p>
+        <p class="lede">Previously, system information, warnings and actions could compete for attention.</p>
+        <p class="lede">The redesign placed the administrator's current decision at the centre of the interface, with supporting information appearing around it when needed.</p>
+        <div class="media" data-label="Before-and-after comparison of the original and redesigned checklist experience"></div>
+
+        <h3 style="margin-top:var(--space-3)">The redesign focused on four improvements:</h3>
+        <div class="plain-list">
+          <p class="item"><strong>Clearer hierarchy</strong> &mdash; The most important decision or action is easier to identify.</p>
+          <p class="item"><strong>User-facing terminology</strong> &mdash; Language reflects what administrators are trying to accomplish rather than internal system behaviour.</p>
+          <p class="item"><strong>Contextual guidance</strong> &mdash; Dependencies and related information appear when they matter.</p>
+          <p class="item"><strong>More explicit feedback</strong> &mdash; The interface explains both what happened and what the administrator can do next.</p>
+        </div>
+      </section>
+
+      <section id="core-flow">
+        <h2>Designing the core flow</h2>
+        <p class="lede">The redesigned checklist workflow breaks a complex task into a sequence of smaller decisions.</p>
+        <div class="media" data-label="Four-screen sequence showing Select &rarr; Understand &rarr; Resolve &rarr; Review"></div>
+
+        <div class="step-list">
+          <div class="step">
+            <span class="step-num">01</span>
+            <div><h3>Select</h3><p>The administrator begins by selecting the checks they want to include.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <div><h3>Understand</h3><p>If a selection introduces an overlap or dependency, the system explains the relationship in context.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <div><h3>Resolve</h3><p>The administrator is given a clear action rather than being expected to interpret the system state themselves.</p></div>
+          </div>
+          <div class="step">
+            <span class="step-num">04</span>
+            <div><h3>Review</h3><p>Changes remain visible before confirmation so the administrator can understand what will be applied.</p></div>
+          </div>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">This reduced the amount of information that needed to be processed at any one moment while preserving the depth required for a cybersecurity compliance workflow.</p>
+      </section>
+
+      <section id="edge-cases">
+        <h2>Designing beyond the happy path</h2>
+        <p class="lede">Much of the real complexity appeared outside the ideal flow.</p>
+        <p class="lede">The experience therefore also needed to remain understandable when administrators encountered duplicate checks, dependencies or validation issues.</p>
+        <div class="media" data-label="Product states showing duplicate checks, dependencies and warning or validation states"></div>
+
+        <div class="card-grid">
+          <div class="option-card">
+            <h3>Duplicate checks</h3>
+            <p>The interface explains that the check already exists and clarifies what that means for the current action.</p>
+          </div>
+          <div class="option-card">
+            <h3>Dependencies</h3>
+            <p>Related requirements are surfaced when they become relevant without exposing every relationship upfront.</p>
+          </div>
+          <div class="option-card">
+            <h3>Validation and warnings</h3>
+            <p>Messages focus on the consequence of the action and the next decision the administrator needs to make.</p>
+          </div>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">Designing these states early helped ensure the experience remained coherent when real-world complexity appeared.</p>
+      </section>
+
+      <section id="constraints">
+        <h2>Designing within technical constraints</h2>
+        <p class="lede">One direction we explored was simplifying check selection by allowing administrators to select checks based on criteria and security level, rather than working through a dense table.</p>
+        <p class="lede">This could have reduced cognitive load and made it faster to identify the right checks for a checklist.</p>
+        <div class="media" data-label="Concept showing simplified check selection using criteria and security-level filters"></div>
+        <p class="lede">The challenge was that checks came from different security guidelines, and those guidelines did not all follow the same conventions.</p>
+        <p class="lede">Supporting this approach properly would have required refactoring and standardising checks across those guidelines first.</p>
+        <p class="lede">BigFix could support that kind of change, but the amount of underlying restructuring required meant it was not feasible within the scope and timeline of this project.</p>
+        <p class="callout">Rather than designing an experience the existing system could not reliably support, I focused on improving the current selection model through clearer hierarchy, guidance and feedback.</p>
+      </section>
+
+      <section id="final">
+        <h2>The final experience</h2>
+        <p class="lede">The final checklist experience shifted the workflow away from exposing system logic and toward helping administrators make a series of clear, informed decisions.</p>
+        <div class="media hero" data-label="Full-width final Security Compliance Manager checklist interface"></div>
+        <div class="two-col">
+          <div class="media" data-label="Complementary final checklist screens"></div>
+          <div class="media" data-label="Close-up of a dependency, confirmation, feedback or review interaction"></div>
+        </div>
+        <p class="lede">The result is an experience that preserves the depth required for enterprise cybersecurity while making that complexity easier to navigate.</p>
+      </section>
+
+      <section id="reflection">
+        <h2>What I took away</h2>
+        <div class="takeaway">
+          <h3>Complexity doesn't always need to be removed</h3>
+          <p class="lede">In a cybersecurity product, some complexity is necessary. The design challenge is deciding when administrators need to see it, how much they need to understand and how the product can help them act on it.</p>
+        </div>
+        <div class="takeaway">
+          <h3>Small design decisions compound</h3>
+          <p class="lede">Terminology, hierarchy, feedback and interaction states can appear minor in isolation. Across a product used to manage cybersecurity compliance at the scale of hundreds of thousands of endpoints, those decisions collectively determine how understandable and dependable the experience feels.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ids = ['overview', 'problem', 'solution', 'outcome', 'business-context',
+    'scm-workflow', 'users', 'diagnosis', 'understanding', 'approaches',
+    'principles', 'key-redesign', 'core-flow', 'edge-cases', 'constraints',
+    'final', 'reflection'];
+  var links = {};
+  ids.forEach(function (id) {
+    links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
+  });
+  var active = null;
+  var headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 106;
+  var activeThreshold = headerHeight + 20;
+  function setActive(id) {
+    if (id === active) return;
+    if (active && links[active]) links[active].classList.remove('active');
+    if (links[id]) links[id].classList.add('active');
+    active = id;
+  }
+  function onScroll() {
+    var current = ids[0];
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      var rect = el && el.getBoundingClientRect();
+      if (rect && rect.height > 0 && rect.top <= activeThreshold) current = ids[i];
+    }
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = ids[ids.length - 1];
+    setActive(current);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  requestAnimationFrame(function () { requestAnimationFrame(onScroll); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BigFix SaaS Onboarding — Case study | Sanchita</title>
+<meta name="description" content="Defining and Designing the Onboarding Experience for BigFix SaaS — creating the first guided setup experience for a new SaaS product within an established enterprise." />
+
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <div class="brand">Sanchita</div>
+    <nav class="primary-nav">
+      <a href="index.html">Work</a>
+      <a href="#">About</a>
+      <a href="#">Resume</a>
+      <a href="#">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; All work</a>
+
+  <div class="content-grid">
+    <nav class="rail" aria-label="Case study sections">
+      <a class="rail-link" href="#overview">Overview</a>
+      <a class="rail-link" href="#problem">The problem</a>
+      <a class="rail-link" href="#solution">The solution</a>
+      <a class="rail-link" href="#outcome">The outcome</a>
+      <a class="rail-link" href="#business-context">Business context</a>
+      <a class="rail-link" href="#ux-vs-onboarding">Why onboarding still mattered</a>
+      <a class="rail-link" href="#first-value">Defining first value</a>
+      <a class="rail-link" href="#journey-map">Mapping the journey</a>
+      <a class="rail-link" href="#framework">First Things First</a>
+      <a class="rail-link" href="#core-journey">Designing the core journey</a>
+      <a class="rail-link" href="#guidance-system">Reusable guidance pattern</a>
+      <a class="rail-link" href="#experience-levels">Supporting experience levels</a>
+      <a class="rail-link" href="#iteration">Iteration and validation</a>
+      <a class="rail-link" href="#final-experience">The final experience</a>
+      <a class="rail-link" href="#measuring-success">Measuring success</a>
+      <a class="rail-link" href="#impact">Impact</a>
+      <a class="rail-link" href="#learnings">What I learned</a>
+    </nav>
+
+    <main>
+
+      <section id="overview">
+        <div class="eyebrow">Enterprise SaaS &middot; 0 &rarr; 1 &middot; Onboarding</div>
+        <h1>Defining and Designing the Onboarding Experience for BigFix SaaS</h1>
+        <p class="lede">Creating the first guided setup experience for a new SaaS product within an established enterprise.</p>
+
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">UX design and product strategy</span></div>
+          <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Onboarding strategy, activation journey, guided tours, wireframes, and prototyping</span></div>
+          <div class="meta-item"><span class="meta-label">Outcome</span><span class="meta-value">The first unified onboarding model for BigFix SaaS</span></div>
+        </div>
+
+        <div class="media hero" data-label="A montage of the dashboard, First Things First checklist, Add Device flow, contextual guidance, and success state"></div>
+      </section>
+
+      <section id="problem">
+        <h2>The problem</h2>
+        <p class="lede">BigFix SaaS gave new administrators a clear place to add their first device. The challenge began after that initial action.</p>
+        <p class="lede">Users needed to discover how to move from adding a device to finding a relevant Fixlet, deploying it, monitoring the result, and understanding the different product applications involved.</p>
+        <p class="callout">The individual capabilities were available, but the journey connecting them was not yet clear.</p>
+      </section>
+
+      <section id="solution">
+        <h2>The solution</h2>
+        <p class="lede">I designed First Things First, a guided activation journey built around real product tasks.</p>
+        <p class="lede">The experience combined:</p>
+        <ul class="list">
+          <li>A persistent onboarding checklist</li>
+          <li>Contextual guidance inside the product</li>
+          <li>Visible progress across applications</li>
+          <li>Clear success states and next actions</li>
+          <li>Links to deeper help when required</li>
+          <li>The ability to skip guidance</li>
+        </ul>
+        <div class="media hero" data-label="Workflow video"></div>
+      </section>
+
+      <section id="outcome">
+        <h2>The outcome</h2>
+        <p class="lede">The project established the first onboarding model for BigFix SaaS.</p>
+        <div class="card-grid">
+          <div class="option-card">
+            <h3>One activation journey</h3>
+            <p>The team gained a shared definition of how a new customer reached first value.</p>
+          </div>
+          <div class="option-card">
+            <h3>Reusable guidance system</h3>
+            <p>A consistent interaction pattern could support multiple BigFix SaaS applications.</p>
+          </div>
+          <div class="option-card">
+            <h3>Scalable foundation</h3>
+            <p>The model could expand to new tasks, roles, and product capabilities.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="business-context">
+        <h2>Business context</h2>
+        <p class="lede">BigFix helps enterprise teams manage and secure endpoint environments.</p>
+        <p class="lede">BigFix SaaS brought these capabilities into a cloud-delivered product. Although the SaaS model simplified access, administrators still needed to understand how several product applications and technical workflows worked together.</p>
+        <p class="lede">The main applications included:</p>
+        <ul class="list">
+          <li>Deployment Manager</li>
+          <li>Device Explorer</li>
+          <li>Fixlet Explorer</li>
+        </ul>
+        <p class="lede">The interface for each application could be usable on its own while the overall product journey remained difficult to discover.</p>
+        <div class="media" data-label="BigFix SaaS connected to its three primary applications"></div>
+      </section>
+
+      <section id="ux-vs-onboarding">
+        <h2>Does a well-designed product need onboarding?</h2>
+        <p class="lede">Does good UX reduce the need for onboarding?</p>
+        <p class="lede">A common assumption in product teams, and one that rarely holds true in B2B SaaS. Our product was clean, logically structured, and tested for usability. Yet users still struggled to discover high-impact features that differentiated the product.</p>
+        <p class="lede">Intuitive interfaces do not automatically communicate where to start, what matters most right now, or how success should look in the first session. Good onboarding accelerates confidence, direction, and value realisation.</p>
+        <div class="two-col">
+          <div class="option-card">
+            <h3>Good UX</h3>
+            <p>Helps users operate the interface.</p>
+          </div>
+          <div class="option-card">
+            <h3>Good onboarding</h3>
+            <p>Helps users understand what to do next and why it matters.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="first-value">
+        <h2>Defining first value</h2>
+        <p class="lede">Before designing the onboarding interface, I defined what a new administrator should accomplish during the first experience.</p>
+        <p class="callout">Add a device, deploy a Fixlet, and confirm that it worked.</p>
+        <p class="lede">This outcome became a five-step activation journey.</p>
+        <div class="journey">
+          <span class="journey-step">1 Add a device</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">2 Deploy a Fixlet</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">3 View the deployment</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">4 Explore Fixlets</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">5 Explore devices</span>
+        </div>
+      </section>
+
+      <section id="journey-map">
+        <h2>Mapping the journey</h2>
+        <p class="lede">Activation required users to move through several parts of BigFix SaaS.</p>
+        <p class="lede">I mapped how the dashboard, application switcher, product applications, system feedback, and help resources needed to work together.</p>
+        <div class="journey">
+          <span class="journey-step">Dashboard</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Add Device</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Fixlet Explorer</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Deployment Manager</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Device Explorer</span>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">This showed where guidance should appear and how progress should continue as users moved between applications.</p>
+      </section>
+
+      <section id="framework">
+        <h2>The First Things First framework</h2>
+        <p class="lede">The central element of the experience was a persistent onboarding checklist called First Things First. It organized onboarding into five milestones:</p>
+        <div class="step-list">
+          <div class="step"><span class="step-num">01</span><div><h3>Adding a device</h3></div></div>
+          <div class="step"><span class="step-num">02</span><div><h3>Deploying a Fixlet</h3></div></div>
+          <div class="step"><span class="step-num">03</span><div><h3>Viewing a deployment</h3></div></div>
+          <div class="step"><span class="step-num">04</span><div><h3>Exploring Fixlet Explorer</h3></div></div>
+          <div class="step"><span class="step-num">05</span><div><h3>Exploring Device Explorer</h3></div></div>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">The checklist remained available throughout the product. It showed completed, active, and upcoming milestones while providing direct access to the Help Center and an option to skip the tour.</p>
+        <div class="media hero" data-label="The checklist in four different states"></div>
+        <div class="card-grid">
+          <div class="option-card"><h3>Not started</h3><p>Introduces the complete journey.</p></div>
+          <div class="option-card"><h3>In progress</h3><p>Keeps the current milestone visible.</p></div>
+          <div class="option-card"><h3>Partially completed</h3><p>Confirms progress and identifies the next task.</p></div>
+          <div class="option-card"><h3>Completed</h3><p>Transitions the user into independent product use.</p></div>
+        </div>
+      </section>
+
+      <section id="core-journey">
+        <h2>Designing the core journey</h2>
+        <p class="lede">With the framework in place, each milestone became its own real product task &mdash; starting with the very first action every new administrator needed to complete.</p>
+
+        <h3 style="margin-top:var(--space-6)">1. Adding the first device</h3>
+        <p class="lede">Most BigFix capabilities depended on having at least one device available. The dashboard therefore presented Add Device as the primary first action.</p>
+        <div class="journey">
+          <span class="journey-step">Dashboard</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Add Device panel</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Select installer</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Download instructions</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Device added</span>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">The experience guided users through selecting the correct installer and completing the technical setup.</p>
+        <p class="lede">Links to a video and user guide provided deeper help without overloading the interface.</p>
+        <p class="callout"><strong>Design decision:</strong> Connect the technical installation process to a visible onboarding milestone.</p>
+
+        <h3 style="margin-top:var(--space-6)">2. Confirming success</h3>
+        <p class="lede">Downloading the installer did not mean the task was finished. BigFix SaaS needed to confirm that the device had successfully joined the organization.</p>
+        <p class="lede">The success state:</p>
+        <ul class="list">
+          <li>Confirmed that the device was available</li>
+          <li>Updated the checklist</li>
+          <li>Preserved the user&rsquo;s progress</li>
+          <li>Introduced the next task</li>
+        </ul>
+        <div class="media" data-label="Device-added confirmation beside the updated checklist"></div>
+
+        <h3 style="margin-top:var(--space-6)">3. Introducing the applications</h3>
+        <p class="lede">After adding a device, users needed to discover where to continue. The application switcher introduced:</p>
+        <ul class="list">
+          <li>Fixlet Explorer</li>
+          <li>Deployment Manager</li>
+          <li>Device Explorer</li>
+        </ul>
+        <p class="lede">Each application was explained when it became relevant instead of being presented all at once.</p>
+        <div class="media" data-label="Application switcher open with contextual guidance and the checklist visible"></div>
+
+        <h3 style="margin-top:var(--space-6)">4. Deploying the first Fixlet</h3>
+        <p class="lede">The next milestone introduced users to one of the product&rsquo;s core workflows. The user entered Fixlet Explorer, selected a Fixlet, reviewed the relevant devices, and initiated a deployment.</p>
+        <div class="journey">
+          <span class="journey-step">Open Fixlet Explorer</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Select a Fixlet</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Review devices</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Deploy</span>
+        </div>
+        <p class="callout" style="margin-top:var(--space-3)"><strong>Design decision:</strong> Teach the workflow through a real product task rather than a passive feature tour.</p>
+
+        <h3 style="margin-top:var(--space-6)">5. Understanding Fixlet Explorer</h3>
+        <p class="lede">Contextual guidance introduced the interface progressively. The tour highlighted:</p>
+        <ul class="list">
+          <li>The Fixlet table</li>
+          <li>Relevant-device counts</li>
+          <li>Filters</li>
+          <li>Fixlet details</li>
+          <li>Deployment actions</li>
+        </ul>
+        <div class="media" data-label="A large Fixlet Explorer screen with five numbered annotations"></div>
+        <p class="lede">Advanced capabilities were left for later discovery so the first session remained focused.</p>
+
+        <h3 style="margin-top:var(--space-6)">6. Using filters</h3>
+        <p class="lede">The tour demonstrated how to:</p>
+        <ul class="list">
+          <li>Open the filter panel</li>
+          <li>Select a category</li>
+          <li>Choose a value</li>
+          <li>Apply the filter</li>
+          <li>Change or remove the selection</li>
+        </ul>
+        <div class="journey">
+          <span class="journey-step">Filter closed</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Category selected</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Value selected</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Filter applied</span>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">Guidance appeared beside the active control, allowing users to learn within the real interface.</p>
+
+        <h3 style="margin-top:var(--space-6)">7. Viewing Fixlet details</h3>
+        <p class="lede">Selecting a Fixlet opened a detailed view containing activity, relevant devices, properties, and deployment information.</p>
+        <div class="media" data-label="Fixlet detail screen with three annotations: activity feed, relevant devices, properties"></div>
+        <p class="lede">Only the information required for the first deployment was introduced.</p>
+
+        <h3 style="margin-top:var(--space-6)">8. Monitoring the deployment</h3>
+        <p class="lede">After deploying the Fixlet, onboarding directed users to Deployment Manager. The experience introduced:</p>
+        <ul class="list">
+          <li>The deployment list</li>
+          <li>Status indicators</li>
+          <li>Deployment details</li>
+          <li>Relevant devices</li>
+          <li>Success and failure states</li>
+        </ul>
+        <div class="media" data-label="Deployment Manager with the status and activity areas highlighted"></div>
+        <p class="lede">This closed the feedback loop by showing users where to confirm that their first deployment had worked.</p>
+      </section>
+
+      <section id="guidance-system">
+        <h2>Creating a reusable guidance pattern</h2>
+        <p class="lede">The onboarding experience crossed multiple applications, so it needed a consistent interaction model. I designed a reusable hotspot component containing:</p>
+        <ul class="list">
+          <li>An anchor connected to the interface</li>
+          <li>A short contextual instruction</li>
+          <li>Back and Next navigation</li>
+          <li>A final Got It action</li>
+          <li>Links to deeper help when needed</li>
+        </ul>
+        <div class="media" data-label="Enlarged anatomy of the hotspot component"></div>
+        <p class="lede">The same pattern could explain navigation, filters, tables, detail pages, and system states without creating a different component for every screen.</p>
+      </section>
+
+      <section id="experience-levels">
+        <h2>Supporting different experience levels</h2>
+        <p class="lede">Not every BigFix SaaS customer was new to BigFix.</p>
+        <p class="lede">Some administrators already understood the product and only needed help locating capabilities in the SaaS interface.</p>
+        <div class="two-col">
+          <div class="option-card">
+            <h3>New to BigFix</h3>
+            <p>Follow the complete guided journey.</p>
+          </div>
+          <div class="option-card">
+            <h3>Experienced administrator</h3>
+            <p>Open individual milestones, dismiss instructions, or skip the tour.</p>
+          </div>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">The experience provided direction without forcing every user through the same path.</p>
+      </section>
+
+      <section id="iteration">
+        <h2>Iteration and validation</h2>
+        <p class="lede">Early wireframes focused on the structure of the journey. I used them to evaluate:</p>
+        <ul class="list">
+          <li>Whether the milestone sequence made sense</li>
+          <li>Whether the checklist remained useful across applications</li>
+          <li>How much information should appear at once</li>
+          <li>Whether hotspots obscured important content</li>
+          <li>Whether success states advanced the journey clearly</li>
+          <li>Whether users could leave and return without losing context</li>
+        </ul>
+        <div class="media" data-label="Original wireframes arranged beside the refined screens"></div>
+
+        <div class="takeaway">
+          <h3>Shorter guidance</h3>
+          <p class="lede">Instructions were reduced to what users needed for the current action.</p>
+        </div>
+        <div class="takeaway">
+          <h3>Clearer anchoring</h3>
+          <p class="lede">Hotspots were positioned closer to the controls they explained.</p>
+        </div>
+        <div class="takeaway">
+          <h3>Persistent progress</h3>
+          <p class="lede">The checklist remained accessible between applications.</p>
+        </div>
+        <div class="takeaway">
+          <h3>Contextual help</h3>
+          <p class="lede">Videos, documentation, and the Help Center appeared only when relevant.</p>
+        </div>
+        <div class="media" data-label="Three iteration comparisons with one-line captions"></div>
+      </section>
+
+      <section id="final-experience">
+        <h2>The final experience</h2>
+
+        <h3>Start with a clear action</h3>
+        <div class="media hero" data-label="Dashboard with Add Device highlighted"></div>
+        <p class="lede">The dashboard provided an obvious first action.</p>
+
+        <h3 style="margin-top:var(--space-5)">Keep the journey visible</h3>
+        <div class="media hero" data-label="First Things First checklist"></div>
+        <p class="lede">Users could see completed, active, and upcoming milestones.</p>
+
+        <h3 style="margin-top:var(--space-5)">Explain features in context</h3>
+        <div class="media hero" data-label="Fixlet Explorer hotspot"></div>
+        <p class="lede">Guidance appeared beside the feature it explained.</p>
+
+        <h3 style="margin-top:var(--space-5)">Confirm meaningful progress</h3>
+        <div class="media hero" data-label="Device-added success state"></div>
+        <p class="lede">A technical system event became a visible moment of progress.</p>
+
+        <h3 style="margin-top:var(--space-5)">Connect the applications</h3>
+        <div class="media hero" data-label="Application switcher and Deployment Manager"></div>
+        <p class="lede">Onboarding guided users from one product area to the next.</p>
+
+        <h3 style="margin-top:var(--space-5)">Provide deeper help</h3>
+        <div class="media hero" data-label="Hotspot containing video and documentation links"></div>
+        <p class="lede">Additional support was available without interrupting the main workflow.</p>
+      </section>
+
+      <section id="measuring-success">
+        <h2>Measuring success</h2>
+        <p class="lede">Because this was a zero-to-one initiative, measurement needed to be included in the product direction.</p>
+        <div class="media" data-label="The five milestones with one or two measures beneath each"></div>
+        <p class="lede">Potential measures included:</p>
+        <ul class="list">
+          <li>Users who added their first device</li>
+          <li>Completion of each milestone</li>
+          <li>Time to first device</li>
+          <li>Time to first deployment</li>
+          <li>Drop-off by milestone</li>
+          <li>Failed or repeated attempts</li>
+          <li>Use of supporting resources</li>
+          <li>Setup-related support demand</li>
+        </ul>
+        <p class="lede">These measures would help distinguish interface problems from technical setup issues.</p>
+      </section>
+
+      <section id="impact">
+        <h2>Impact</h2>
+        <p class="lede">The project transformed a series of product capabilities into the first structured onboarding model for BigFix SaaS.</p>
+        <div class="two-col">
+          <div class="option-card"><h3>Defined activation</h3><p>Established the actions that represented first value.</p></div>
+          <div class="option-card"><h3>Connected applications</h3><p>Created continuity across the BigFix SaaS ecosystem.</p></div>
+          <div class="option-card"><h3>Standardized guidance</h3><p>Introduced a reusable pattern for contextual product education.</p></div>
+          <div class="option-card"><h3>Created a foundation</h3><p>Provided a model that could expand to new tasks, roles, and capabilities.</p></div>
+        </div>
+      </section>
+
+      <section id="learnings">
+        <h2>What I learned</h2>
+        <p class="lede">Onboarding was not a layer added after the product had been designed. Defining it exposed how the product&rsquo;s applications, system states, and first-value journey needed to work together.</p>
+        <p class="callout">The strongest contribution was not a set of tooltips. It was a shared model for activating new BigFix SaaS customers.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ids = ['overview', 'problem', 'solution', 'outcome', 'business-context',
+    'ux-vs-onboarding', 'first-value', 'journey-map', 'framework', 'core-journey',
+    'guidance-system', 'experience-levels', 'iteration', 'final-experience',
+    'measuring-success', 'impact', 'learnings'];
+  var links = {};
+  ids.forEach(function (id) {
+    links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
+  });
+  var active = null;
+  var headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 106;
+  var activeThreshold = headerHeight + 20;
+  function setActive(id) {
+    if (id === active) return;
+    if (active && links[active]) links[active].classList.remove('active');
+    if (links[id]) links[id].classList.add('active');
+    active = id;
+  }
+  function onScroll() {
+    var current = ids[0];
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      var rect = el && el.getBoundingClientRect();
+      if (rect && rect.height > 0 && rect.top <= activeThreshold) current = ids[i];
+    }
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = ids[ids.length - 1];
+    setActive(current);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  requestAnimationFrame(function () { requestAnimationFrame(onScroll); });
+})();
+</script>
+
+</body>
+</html>

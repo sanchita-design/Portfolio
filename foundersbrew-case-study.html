@@ -10,185 +10,16 @@
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/case-study.css">
 
 <style>
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--white);
-    font-family: var(--font-sans);
-    color: var(--text-body);
-  }
-  body, body * { font-weight: 400; }
-  html { scroll-behavior: smooth; }
-  a { color: var(--accent); }
-  a:hover { color: var(--accent-hover); }
-
-  .wrap {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--side-margin-desktop);
-  }
-
-  /* header */
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px 0;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
-  .brand {
-    font-size: var(--text-h4);
-    font-weight: 400;
-    color: var(--text-heading);
-  }
-  .primary-nav {
-    display: flex;
-    gap: var(--space-5);
-  }
-  .primary-nav a {
-    font-size: var(--text-base);
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--text-body);
-    transition: color var(--duration-fast) var(--ease-standard);
-  }
-  .primary-nav a:hover { color: var(--accent); }
-
-  .back-link {
-    display: inline-block;
-    font-size: var(--text-caption);
-    color: var(--text-muted);
-    text-decoration: none;
-    margin-bottom: var(--space-4);
-  }
-  .back-link:hover { color: var(--accent); }
-
-  /* layout */
-  .content-grid {
-    display: grid;
-    grid-template-columns: 200px minmax(0, 1fr);
-    gap: var(--space-7);
-  }
-
-  .rail {
-    position: sticky;
-    top: var(--space-5);
-    align-self: start;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    border-left: 1px solid var(--ink-1-a12);
-  }
-  .rail-link {
-    display: block;
-    padding: var(--space-2) 0;
-    font-size: var(--text-caption);
-    color: var(--text-muted);
-    text-decoration: none;
-    border-left: 2px solid transparent;
-    padding-left: var(--space-3);
-    margin-left: -1px;
-    transition: color var(--duration-fast) var(--ease-standard),
-                border-color var(--duration-fast) var(--ease-standard);
-  }
-  .rail-link:hover { color: var(--accent); }
-  .rail-link.active {
-    color: var(--accent);
-    border-left-color: var(--accent);
-  }
-
-  main {
-    min-width: 0;
-    padding: 0 0 200px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
-  }
-
-  section { display: flex; flex-direction: column; gap: 20px; }
-  section#overview { gap: var(--space-4); }
-
-  .eyebrow {
-    font-size: var(--text-label);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  h1 {
-    font-family: var(--font-serif);
-    font-weight: 300;
-    font-size: clamp(2rem, 3vw, 2.75rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin: 0;
-    color: var(--ink-1);
-  }
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 0;
-    color: var(--ink-1);
-  }
-  h3 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin: 0;
-    color: var(--ink-1);
-  }
-  p {
-    font-size: var(--text-base);
-    line-height: var(--leading-relaxed);
-    margin: 0;
-    color: var(--text-body);
-  }
-  .lede { line-height: 1.7; }
-  .callout { color: var(--accent); font-weight: 500; }
-
   blockquote {
     margin: 0;
     padding: var(--space-3) var(--space-4);
     border-left: 3px solid var(--accent);
   }
   blockquote p { color: var(--accent); }
-
-  /* media placeholders — swap the inner <img>/<video> in when real assets are ready */
-  .media {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    border-radius: var(--radius-md);
-    background: var(--ink-1-a08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .media::before {
-    content: attr(data-label);
-    font-size: var(--text-label);
-    color: var(--text-muted);
-    text-align: center;
-    padding: 0 var(--space-3);
-  }
-  .media img, .media video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: none;
-  }
-  .media.hero { aspect-ratio: 16/10; }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-5);
-  }
 
   /* solution timeline */
   .timeline { display: flex; flex-direction: column; margin-top: var(--space-5); }
@@ -224,36 +55,15 @@
   .timeline-step p { margin: var(--space-2) 0 0; }
 
   @media (max-width: 900px) {
-    .wrap { padding: 0 var(--side-margin-tablet); }
-    .content-grid { grid-template-columns: 1fr; }
-    .rail {
-      position: static;
-      flex-direction: row;
-      overflow-x: auto;
-      border-left: none;
-      border-bottom: 1px solid var(--ink-1-a12);
-      gap: var(--space-1);
-    }
-    .rail-link {
-      border-left: none;
-      border-bottom: 2px solid transparent;
-      padding: var(--space-2) 12px;
-      white-space: nowrap;
-    }
-    .rail-link.active { border-left-color: transparent; border-bottom-color: var(--accent); }
-    .two-col { grid-template-columns: 1fr; }
     .timeline-step, .timeline-spacer { grid-template-columns: 24px minmax(0, 1fr); }
     .timeline-step > div:nth-child(2) { display: none; }
-  }
-  @media (max-width: 560px) {
-    .wrap { padding: 0 var(--side-margin-mobile); }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header>
+<header class="site-header">
+  <div class="wrap header-bar">
     <div class="brand">Sanchita</div>
     <nav class="primary-nav">
       <a href="index.html">Work</a>
@@ -261,8 +71,8 @@
       <a href="#">Resume</a>
       <a href="#">Blog</a>
     </nav>
-  </header>
-</div>
+  </div>
+</header>
 
 <div class="wrap">
   <a class="back-link" href="index.html">&larr; All work</a>
@@ -455,6 +265,8 @@
     links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
   });
   var active = null;
+  var headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 106;
+  var activeThreshold = headerHeight + 20;
   function setActive(id) {
     if (id === active) return;
     if (active && links[active]) links[active].classList.remove('active');
@@ -466,7 +278,7 @@
     for (var i = 0; i < ids.length; i++) {
       var el = document.getElementById(ids[i]);
       var rect = el && el.getBoundingClientRect();
-      if (rect && rect.height > 0 && rect.top <= 120) current = ids[i];
+      if (rect && rect.height > 0 && rect.top <= activeThreshold) current = ids[i];
     }
     var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
     if (atBottom) current = ids[ids.length - 1];

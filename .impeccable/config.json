@@ -11,6 +11,42 @@
         ],
         "createdAt": "2026-09-17T22:53:04.254Z",
         "reason": "only uppercase text is the .eyebrow label (short label line, not a long passage) — matches the rule's own stated exception"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "bigfix-case-study.html"
+        ],
+        "createdAt": "2026-09-18T08:36:30.034Z",
+        "reason": "only uppercase text is the .eyebrow label (short label line, not a long passage) — matches the rule's own stated exception, same as foundersbrew-case-study.html"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "scm-webui-case-study.html"
+        ],
+        "createdAt": "2026-09-18T08:36:30.060Z",
+        "reason": "only uppercase text is the .eyebrow label (short label line, not a long passage) — matches the rule's own stated exception, same as foundersbrew-case-study.html"
+      },
+      {
+        "rule": "numbered-section-labels",
+        "value": "*",
+        "files": [
+          "scm-webui-case-study.html"
+        ],
+        "createdAt": "2026-09-18T10:07:58.188Z",
+        "reason": "Numbers label ordered items within a list (3 comparison approaches, 5 workflow steps, 4 flow steps) verbatim from the user's own case-study content, not the page's own section/chapter headings — not the chapter-numbering anti-pattern the rule targets."
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "bigfix-saas-onboarding-case-study.html"
+        ],
+        "createdAt": "2026-09-18T11:03:46.798Z",
+        "reason": "Flagged text is three short 1-2 word column headers (User goals / Business goals / Product goals, 10-14 chars each) using the existing .meta-label short-caption pattern already used unflagged elsewhere on this page (Role/Product/Scope/Outcome) — not a long uppercase passage of prose."
       }
     ]
   }
