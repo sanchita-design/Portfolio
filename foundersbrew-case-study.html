@@ -14,13 +14,6 @@
 <link rel="stylesheet" href="css/case-study.css">
 
 <style>
-  blockquote {
-    margin: 0;
-    padding: var(--space-3) var(--space-4);
-    border-left: 3px solid var(--accent);
-  }
-  blockquote p { color: var(--accent); }
-
   /* solution timeline */
   .timeline { display: flex; flex-direction: column; margin-top: var(--space-5); }
   .timeline-step {
@@ -100,6 +93,13 @@
       <section id="overview">
         <div class="eyebrow">0 &rarr; 1 &middot; AI enabled SaaS &middot; Voice agent</div>
         <h1>From conversations to structured evidence for founders</h1>
+
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Domain</span><span class="meta-value">AI-Enabled SaaS / Founder Research</span></div>
+          <div class="meta-item"><span class="meta-label">Product area</span><span class="meta-value">Adaptive User Interviews</span></div>
+          <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">UX, conversational design, agent workflow design</span></div>
+        </div>
+
         <div class="media hero" data-label="Case study image/video"></div>
       </section>
 
@@ -289,5 +289,6 @@
 })();
 </script>
 
+<script src="js/cursor-dot.js" defer></script>
 </body>
 </html>

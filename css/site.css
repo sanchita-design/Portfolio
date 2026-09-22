@@ -55,3 +55,25 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 560px) {
   .wrap { padding: 0 var(--side-margin-mobile); }
 }
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard), transform 0.08s linear;
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  .cursor-dot { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot { transition: opacity var(--duration-fast) var(--ease-standard); }
+}

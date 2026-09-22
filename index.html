@@ -15,66 +15,41 @@
 <style>
   .hero {
     position: relative;
-    padding: var(--space-8) var(--side-margin-desktop);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-7) var(--side-margin-desktop);
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: min(640px, 84vh);
-    overflow: hidden;
-    background-color: var(--ink-1);
-    background-image:
-      radial-gradient(65% 85% at 88% 18%, var(--accent) 0%, var(--accent-a16) 52%, rgba(73,104,220,0) 76%),
-      radial-gradient(55% 65% at 8% 100%, rgba(255,246,228,0.95) 0%, rgba(255,246,228,0) 68%),
-      radial-gradient(60% 70% at 6% 8%, var(--ink-1) 0%, rgba(58,58,58,0) 62%);
-    background-repeat: no-repeat;
-    background-size: 150% 150%, 140% 140%, 140% 140%;
-    background-position: 100% 0%, 0% 100%, 0% 0%;
-    animation: heroDrift 44s ease-in-out infinite alternate;
+    justify-content: flex-start;
+    min-height: min(440px, 56vh);
+    box-sizing: border-box;
   }
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    opacity: 0.14;
-    mix-blend-mode: overlay;
-    pointer-events: none;
-  }
-  @keyframes heroDrift {
-    0%   { background-position: 100% 0%, 0% 100%, 0% 0%; }
-    100% { background-position: 92% 8%, 8% 92%, 6% 6%; }
-  }
-  @media (prefers-reduced-motion: reduce) { .hero { animation: none; } }
 
-  .hero-card {
-    position: relative;
-    z-index: 1;
-    max-width: 620px;
+  .hero-text {
     width: 100%;
-    background: var(--surface-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6) var(--space-7);
-    box-shadow: 0 24px 48px -12px rgba(58,58,58,0.18), 0 2px 8px rgba(58,58,58,0.06);
   }
-  .hero-card p {
+  .hero-text p {
     margin: 0;
     color: var(--text-heading);
   }
-  .hero-card .lead {
-    font-size: var(--text-h4);
+  .hero-text .lead {
+    font-family: var(--font-serif);
+    font-size: 24px;
     line-height: var(--leading-normal);
   }
-  .hero-card .sub {
+  .hero-text .sub {
+    font-family: var(--font-sans);
     margin-top: var(--space-3);
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
     color: var(--text-muted);
   }
 
+  @media (max-width: 900px) {
+    .hero { padding: var(--space-6) var(--side-margin-tablet); min-height: min(400px, 56vh); }
+  }
   @media (max-width: 560px) {
     .hero { padding: var(--space-6) var(--side-margin-mobile); min-height: 0; }
-    .hero-card { padding: var(--space-5); }
   }
 
   h2.section-title {
@@ -242,9 +217,9 @@
 </header>
 
 <section class="hero">
-  <div class="hero-card">
+  <div class="hero-text">
     <p class="lead">Product designer &amp; strategist with an engineering background.</p>
-    <p class="sub">10+ years modernising legacy workflows into enterprise products people actually want to use.</p>
+    <p class="sub">10+ years of experience turning messy, ambiguous enterprise problems into design and research work that identifies what is broken before designing a fix.</p>
   </div>
 </section>
 
@@ -263,20 +238,6 @@
         </div>
         <h3>From conversations to structured evidence for founders</h3>
         <p>How foundersBrew User interview agent helps solo founders taking the right build decisions</p>
-        <span class="view-case-study">View case study
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </a>
-
-      <a class="project-card" href="bigfix-case-study.html">
-        <div class="project-media" data-label="Case study image/video">
-          <div class="project-tags">
-            <span class="tag">Enterprise product</span>
-            <span class="tag">AI enabled workflow</span>
-          </div>
-        </div>
-        <h3>Category-based ticketing system to an intent-led journey</h3>
-        <p>How BigFix helped employees describe an issue in plain language, receive relevant guidance, and reach the right support path with greater confidence.</p>
         <span class="view-case-study">View case study
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -307,6 +268,21 @@
         </div>
         <h3>Defining and Designing the Onboarding Experience for BigFix SaaS</h3>
         <p>Creating the first guided setup experience for a new SaaS product within an established enterprise.</p>
+        <span class="view-case-study">View case study
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a class="project-card" href="bigfix-workspace-plus-case-study.html">
+        <div class="project-media" data-label="Case study image/video">
+          <div class="project-tags">
+            <span class="tag">Enterprise SaaS</span>
+            <span class="tag">Employee Experience</span>
+            <span class="tag">Systems Design</span>
+          </div>
+        </div>
+        <h3>HCL BigFix Workspace+</h3>
+        <p>Turning a technical endpoint-management tool into an employee-facing workspace.</p>
         <span class="view-case-study">View case study
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
@@ -390,5 +366,6 @@
   </footer>
 </div>
 
+<script src="js/cursor-dot.js" defer></script>
 </body>
 </html>

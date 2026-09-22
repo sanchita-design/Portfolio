@@ -93,6 +93,13 @@ p {
 .callout { color: var(--accent); font-weight: 500; }
 .placeholder-copy { color: var(--text-muted); font-style: italic; }
 
+blockquote {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--accent);
+}
+blockquote p { color: var(--accent); }
+
 /* media placeholders — swap the inner <img>/<video> in when real assets are ready */
 .media {
   position: relative;

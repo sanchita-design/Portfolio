@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HCL BigFix Workspace+ — Case study | Sanchita</title>
+<meta name="description" content="HCL BigFix Workspace+ — turning a technical endpoint-management tool into an employee-facing workspace." />
+
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <div class="brand">Sanchita</div>
+    <nav class="primary-nav">
+      <a href="index.html">Work</a>
+      <a href="#">About</a>
+      <a href="#">Resume</a>
+      <a href="#">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; All work</a>
+
+  <div class="content-grid">
+    <nav class="rail" aria-label="Case study sections">
+      <a class="rail-link" href="#overview">Overview</a>
+      <a class="rail-link" href="#problem">The problem</a>
+      <a class="rail-link" href="#solution">The solution</a>
+      <a class="rail-link" href="#what-changed">What changed</a>
+      <a class="rail-link" href="#approach-intro">How did we get there?</a>
+      <a class="rail-link" href="#phase-01">Understanding the system</a>
+      <a class="rail-link" href="#phase-02">Where employees struggled</a>
+      <a class="rail-link" href="#phase-03">Simplifying self-service</a>
+      <a class="rail-link" href="#transition">The next problem</a>
+      <a class="rail-link" href="#phase-04">Designing around intent</a>
+      <a class="rail-link" href="#phase-05">The request flow</a>
+      <a class="rail-link" href="#phase-06">Bringing it together</a>
+      <a class="rail-link" href="#product-vision">What this established</a>
+      <a class="rail-link" href="#outcome">The outcome</a>
+      <a class="rail-link" href="#learnings">What I learned</a>
+    </nav>
+
+    <main>
+
+      <section id="overview">
+        <div class="eyebrow">Enterprise SaaS &middot; IT Self-Service &middot; Systems Design</div>
+        <h1>HCL BigFix Workspace+</h1>
+        <p class="lede">Turning a technical endpoint-management tool into an employee-facing workspace.</p>
+        <p class="lede">HCL BigFix helps organizations manage and secure employee devices at scale. Its Self Service Assistant, or SSA, gave employees a way to access software, complete device actions, and respond to compliance requirements.</p>
+        <p class="lede">But as BigFix expanded beyond endpoint protection, SSA had to evolve too.</p>
+        <p class="lede">The long-term vision was to make it part of Workspace+ &mdash; an employee-facing platform where people could access software, manage device needs, and get IT support without needing to understand the systems behind it.</p>
+        <p class="lede">My role was to improve the existing SSA experience while helping establish the foundations for that broader product direction.</p>
+
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Domain</span><span class="meta-value">Enterprise SaaS / IT Self-Service</span></div>
+          <div class="meta-item"><span class="meta-label">Product area</span><span class="meta-value">Employee Self-Service &amp; Support</span></div>
+          <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Product strategy, systems thinking, enterprise UX design</span></div>
+        </div>
+
+        <div class="media hero" data-label="Product transformation: Old SSA &rarr; Workspace+, 2-3 overlapping product screens"></div>
+        <div class="journey">
+          <span class="journey-step">Access software</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Take action</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Get help</span>
+        </div>
+      </section>
+
+      <section id="problem">
+        <h2>The problem</h2>
+        <p class="callout">Employees were using a system designed around IT infrastructure, not around them.</p>
+        <p class="lede">The existing SSA was primarily understood as a software catalogue and compliance tool.</p>
+        <p class="lede">It supported application downloads and IT-driven actions, but the experience had grown around backend systems rather than employee needs.</p>
+        <p class="lede">As a result, even relatively simple tasks required people to understand technical labels, categories, and interaction patterns before they could get something done.</p>
+        <p class="lede">Our early review of the product and user interactions exposed recurring issues around:</p>
+        <ul class="list">
+          <li>Unclear information hierarchy</li>
+          <li>Jargon-heavy language</li>
+          <li>Scattered actions</li>
+          <li>Inconsistent interaction patterns</li>
+          <li>Limited support for scanning and discovery</li>
+          <li>Workflows that reflected internal system logic rather than employee intent</li>
+        </ul>
+        <p class="callout">The issue wasn&rsquo;t a lack of functionality.</p>
+        <p class="callout">The product was asking employees to understand the system before the system could help them.</p>
+        <p class="lede">This was the gap we needed to close.</p>
+
+        <div class="media hero" data-label="Old SSA screenshot annotated with numbered callouts"></div>
+        <div class="step-list">
+          <div class="step"><span class="step-num">01</span><div><h3>Information competes for attention</h3></div></div>
+          <div class="step"><span class="step-num">02</span><div><h3>Technical terminology assumes prior knowledge</h3></div></div>
+          <div class="step"><span class="step-num">03</span><div><h3>Actions are disconnected from the item they affect</h3></div></div>
+          <div class="step"><span class="step-num">04</span><div><h3>Similar tasks use different interaction patterns</h3></div></div>
+          <div class="step"><span class="step-num">05</span><div><h3>Employees need to understand system structure to move forward</h3></div></div>
+        </div>
+      </section>
+
+      <section id="solution">
+        <h2>The solution</h2>
+        <p class="callout">One employee experience for finding software, taking action and getting help.</p>
+        <p class="lede">Instead of treating SSA as a catalogue, we began thinking about it as the front door to an employee&rsquo;s IT experience.</p>
+        <p class="lede">That meant designing for two connected situations.</p>
+        <div class="two-col">
+          <div class="option-card">
+            <h3>When employees know what they need</h3>
+            <p>Make it faster to discover software, understand available actions, and complete routine tasks.</p>
+          </div>
+          <div class="option-card">
+            <h3>When employees don&rsquo;t know what they need</h3>
+            <p>Help them describe what is happening and guide them toward a useful resolution without requiring them to understand internal categories or ticketing systems first.</p>
+          </div>
+        </div>
+        <p class="lede">Together, those ideas became the foundation for the broader Workspace+ experience.</p>
+
+        <span class="meta-label">I know what I need</span>
+        <div class="journey" style="margin-top:0">
+          <span class="journey-step">Search</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Browse</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Understand</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Act</span>
+        </div>
+        <span class="meta-label" style="margin-top:var(--space-3)">I need help</span>
+        <div class="journey" style="margin-top:0">
+          <span class="journey-step">Describe issue</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Understand context</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Recommend path</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Resolve or raise request</span>
+        </div>
+        <p class="callout" style="margin-top:var(--space-3)">Both paths converge into Workspace+.</p>
+      </section>
+
+      <section id="what-changed">
+        <h2>What changed</h2>
+        <div class="three-col">
+          <div>
+            <div style="font-family:var(--font-serif);font-size:2.75rem;font-weight:300;color:var(--accent)">~45%</div>
+            <div style="font-size:var(--text-base);font-weight:500;color:var(--ink-1)">Reduction in task completion time</div>
+            <p class="lede" style="margin-top:var(--space-2);color:var(--text-muted)">In usability sessions, new users took roughly 14&ndash;16 minutes on average to open a ticket before the redesign. After the redesign, that dropped to approximately 6&ndash;8 minutes. Based on task-based usability sessions with 9 participants.</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-serif);font-size:2.75rem;font-weight:300;color:var(--accent)">10&ndash;15%</div>
+            <div style="font-size:var(--text-base);font-weight:500;color:var(--ink-1)">Improvement in ticket classification</div>
+            <p class="lede" style="margin-top:var(--space-2);color:var(--text-muted)">The redesigned request flow helped classify tickets more accurately, contributing to faster triage and resolution during alpha and beta evaluation.</p>
+          </div>
+          <div>
+            <div style="font-family:var(--font-serif);font-size:2.75rem;font-weight:300;color:var(--accent)">SSA 2.0</div>
+            <div style="font-size:var(--text-base);font-weight:500;color:var(--ink-1)">Foundations for the next-generation experience</div>
+            <p class="lede" style="margin-top:var(--space-2);color:var(--text-muted)">The work established interaction patterns, information architecture, and product foundations that informed what was to follow for the broader employee experience.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="approach-intro">
+        <h2>How did we get there?</h2>
+        <p class="lede">The work started with a practical question:</p>
+        <p class="callout">How could we improve the experience employees had today without designing ourselves into a corner for the product we wanted tomorrow?</p>
+        <p class="lede">That meant working on two tracks at once: improving the immediate experience and defining the interaction foundations that could scale into Workspace+.</p>
+      </section>
+
+      <section id="phase-01">
+        <h2>01 &mdash; Understanding the system before redesigning the interface</h2>
+        <p class="lede"><em>The interface was only one layer of the problem.</em></p>
+        <p class="lede">Before changing screens, I needed to understand where SSA sat within the broader BigFix ecosystem.</p>
+        <p class="lede">I worked with stakeholders to understand how the product was perceived internally, what it currently enabled employees to do, and what Workspace+ was intended to become.</p>
+        <p class="callout">The gap was significant.</p>
+
+        <div class="two-col">
+          <div class="option-card">
+            <h3>SSA today</h3>
+            <ul class="list">
+              <li>A basic catalogue for software downloads</li>
+              <li>A compliance-oriented utility</li>
+              <li>A backend-driven admin experience</li>
+              <li>A product with no clear employee-facing position</li>
+            </ul>
+          </div>
+          <div class="option-card">
+            <h3>The intended future</h3>
+            <ul class="list">
+              <li>A core employee interface</li>
+              <li>A self-service hub with clearer language and guided actions</li>
+              <li>A system that could support a wider set of employee needs</li>
+              <li>An experience that could sit alongside products such as Jira, Zendesk, and ServiceNow while making use of BigFix&rsquo;s device-management strengths</li>
+            </ul>
+          </div>
+        </div>
+        <p class="lede">This gave us a long-term direction without forcing us to solve the entire product at once.</p>
+
+        <div class="two-col">
+          <div class="option-card">
+            <h3>SSA today</h3>
+            <ul class="list">
+              <li>Technical</li>
+              <li>Backend-driven</li>
+              <li>Catalogue-oriented</li>
+              <li>Fragmented actions</li>
+              <li>Employee adapts to system</li>
+            </ul>
+          </div>
+          <div class="option-card">
+            <h3>Workspace+</h3>
+            <ul class="list">
+              <li>Employee-facing</li>
+              <li>Guided</li>
+              <li>Task-oriented</li>
+              <li>Connected journeys</li>
+              <li>System adapts to employee</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin-top:var(--space-5)">Start small, but design toward the larger system</h3>
+        <p class="lede">The first step was not to redesign everything.</p>
+        <p class="lede">We deliberately focused on improving a high-frequency part of the existing product while using that work to establish reusable principles for the future experience.</p>
+        <p class="lede">The plan was:</p>
+        <div class="step-list">
+          <div class="step"><span class="step-num">01</span><div><h3>Develop context</h3><p>Understand the current product and the wider employee ecosystem.</p></div></div>
+          <div class="step"><span class="step-num">02</span><div><h3>Start small</h3><p>Identify the smallest useful problem we could solve well.</p></div></div>
+          <div class="step"><span class="step-num">03</span><div><h3>Set foundations</h3><p>Establish interaction patterns that could support more complex future workflows.</p></div></div>
+          <div class="step"><span class="step-num">04</span><div><h3>Expand</h3><p>Use those foundations to explore smarter, more contextual employee experiences.</p></div></div>
+        </div>
+        <p class="lede" style="margin-top:var(--space-3)">That allowed the project to balance short-term product needs with the longer-term Workspace+ direction.</p>
+
+        <div class="journey">
+          <span class="journey-step">Understand</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Simplify</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Establish</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Expand</span>
+        </div>
+        <div class="journey">
+          <span class="journey-step">Existing SSA</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Improved self-service</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Support workflows</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Workspace+</span>
+        </div>
+      </section>
+
+      <section id="phase-02">
+        <h2>02 &mdash; Understanding where employees were struggling</h2>
+        <p class="lede"><em>The product had functionality. What it lacked was clarity.</em></p>
+        <p class="lede">I began with existing SSA users who regularly used the application for software and common employee tasks.</p>
+        <p class="lede">The goal was to understand:</p>
+        <ul class="list">
+          <li>What they used SSA for</li>
+          <li>How they expected common tasks to work</li>
+          <li>Where they became confused</li>
+          <li>How they searched for things</li>
+          <li>How much of the product&rsquo;s language made sense to them</li>
+        </ul>
+        <p class="lede">Several recurring patterns appeared.</p>
+        <p class="lede">Users struggled to interpret information distributed across the interface.</p>
+        <p class="lede">Similar actions behaved differently depending on where they appeared.</p>
+        <p class="lede">Some essential actions were difficult to discover.</p>
+        <p class="lede">And much of the interface assumed employees were already familiar with technical terminology and internal system structure.</p>
+        <p class="callout">That turned simple actions into unnecessary cognitive work.</p>
+
+        <blockquote><p>&ldquo;I know what I want to do. I just don&rsquo;t always know where the product expects me to go.&rdquo;</p></blockquote>
+        <div class="card-grid">
+          <div class="option-card"><h3>Information scattered</h3><p>Important information lives across multiple areas.</p></div>
+          <div class="option-card"><h3>Actions hard to predict</h3><p>Similar actions appear and behave differently.</p></div>
+          <div class="option-card"><h3>Efficiency gaps</h3><p>Frequent actions require unnecessary steps.</p></div>
+          <div class="option-card"><h3>Visual hierarchy</h3><p>Users struggle to understand what deserves attention first.</p></div>
+        </div>
+
+        <h3 style="margin-top:var(--space-5)">Reframing the problem</h3>
+        <p class="lede">The research changed the focus of the redesign.</p>
+        <p class="lede">The question was no longer:</p>
+        <p class="callout">How do we modernize the SSA interface?</p>
+        <p class="lede">It became:</p>
+        <p class="callout">How might we help employees understand what they can do, find it quickly, and act without needing to understand the underlying system?</p>
+        <p class="lede">That led to four design priorities:</p>
+        <ul class="list">
+          <li>Reduce cognitive overhead</li>
+          <li>Improve visual hierarchy</li>
+          <li>Simplify navigation</li>
+          <li>Make actions easier to understand and predict</li>
+        </ul>
+      </section>
+
+      <section id="phase-03">
+        <h2>03 &mdash; Simplifying the everyday self-service experience</h2>
+        <p class="lede"><em>Before adding more capability, we needed to remove friction from what already existed.</em></p>
+        <p class="lede">The first redesign focused on the core SSA experience.</p>
+        <p class="lede">A number of interface problems initially looked unrelated, but they could be traced back to one larger issue:</p>
+        <p class="callout">the product exposed its internal structure more clearly than the employee&rsquo;s task.</p>
+        <p class="lede">So rather than solving each screen independently, I organized the redesign around a small set of interaction principles.</p>
+
+        <h3 style="margin-top:var(--space-5)">Put the action where the decision happens</h3>
+        <p class="lede">In the existing experience, actions could be separated from the content they affected.</p>
+        <p class="lede">That forced employees to first interpret an item, then search elsewhere for what they could do with it.</p>
+        <p class="lede">I changed the interaction model so primary actions sat next to the relevant object. The employee could understand:</p>
+        <ul class="list">
+          <li>What is this?</li>
+          <li>What state is it in?</li>
+          <li>What can I do next?</li>
+        </ul>
+        <p class="lede">without changing context.</p>
+        <div class="two-col">
+          <div class="option-card">
+            <h3>Before</h3>
+            <ul class="list"><li>Object here</li><li>Action elsewhere</li></ul>
+          </div>
+          <div class="option-card">
+            <h3>After</h3>
+            <ul class="list"><li>Object + status + primary action together</li></ul>
+          </div>
+        </div>
+        <p class="callout">Actions belong to the thing they affect.</p>
+
+        <h3 style="margin-top:var(--space-5)">Reduce the number of interaction models</h3>
+        <p class="lede">The product used multiple ways of presenting similar information.</p>
+        <p class="lede">For example, employees could encounter grid-based catalogues, list views, action requests, and other variations depending on where they were in the product. That increased learning cost.</p>
+        <p class="lede">I explored consolidating these into a smaller number of predictable patterns so employees did not need to relearn the interface from one task to another.</p>
+        <p class="lede">A unified list-based pattern gave us a better balance between density, hierarchy, and action visibility.</p>
+        <div class="journey">
+          <span class="journey-step">Existing grid</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Wireframe exploration</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Final list</span>
+        </div>
+        <ul class="list" style="margin-top:var(--space-3)">
+          <li>Better scanning</li>
+          <li>Status visible</li>
+          <li>Actions stay in context</li>
+        </ul>
+
+        <h3 style="margin-top:var(--space-5)">Search should work the way employees think</h3>
+        <p class="lede">The existing experience was heavily dependent on navigation and product categories.</p>
+        <p class="lede">But employees often begin with a word, task, or problem rather than knowledge of how the organization classifies it. Search therefore became a more important entry point.</p>
+        <p class="lede">I explored a global search model that could help employees find relevant content across SSA rather than forcing them to first choose the correct part of the system.</p>
+        <div class="two-col">
+          <div class="option-card"><h3>Employee thinks</h3><p>&ldquo;VPN&rdquo;</p></div>
+          <div class="option-card"><h3>System terminology</h3><p>&ldquo;Secure remote access&rdquo;</p></div>
+        </div>
+        <p class="callout">The interface should bridge the two.</p>
+        <div class="media" data-label="Final search UI"></div>
+
+        <h3 style="margin-top:var(--space-5)">Categories should guide, not constrain</h3>
+        <p class="lede">Categories were still useful for browsing, but they needed to behave as flexible navigation rather than rigid system architecture.</p>
+        <p class="lede">I reduced the visual weight of category icons, introduced clearer labeling, and treated categories as one way of getting to an item rather than the only way.</p>
+        <p class="lede">This made the catalogue easier to scan while preserving support for employees who preferred browsing over search.</p>
+        <div class="media hero" data-label="Final catalogue screen: clearer categories, search, status, item metadata, primary CTA, secondary actions"></div>
+
+        <h3 style="margin-top:var(--space-5)">Designing the micro-decisions</h3>
+        <p class="lede">Much of the improvement came from small interaction decisions rather than one dramatic feature. For example:</p>
+        <ul class="list">
+          <li>Selected items remain visually recognizable</li>
+          <li>Relevant status is visible without opening an item</li>
+          <li>Time-sensitive information avoids unnecessary mental calculation</li>
+          <li>Recommended content is clearly differentiated</li>
+          <li>Selected categories persist when useful</li>
+          <li>Contextual help appears close to where employees need it</li>
+        </ul>
+        <p class="lede">Individually, these choices are small.</p>
+        <p class="callout">Together, they reduce hesitation and make the interface easier to understand at a glance.</p>
+        <div class="media" data-label="Final UI screenshot with micro-decision annotations"></div>
+      </section>
+
+      <section id="transition">
+        <h2>Then we found the next problem</h2>
+        <p class="lede"><em>Self-service works well when employees know what they need.</em></p>
+        <p class="lede">A better catalogue made routine tasks faster and easier.</p>
+        <p class="lede">But while exploring the larger Workspace+ opportunity, another problem became clear.</p>
+        <p class="callout">Employees do not always know what they need.</p>
+        <p class="lede">They often start with:</p>
+        <blockquote><p>&ldquo;Something isn&rsquo;t working.&rdquo;</p></blockquote>
+        <p class="lede">Not:</p>
+        <blockquote><p>&ldquo;I need to open a ticket in category X, under service Y, with subtype Z.&rdquo;</p></blockquote>
+        <p class="lede">This changed the next phase of the work.</p>
+        <p class="lede">If Workspace+ was going to become a real employee-facing experience, it needed to help people even when they could not already classify their own problem.</p>
+      </section>
+
+      <section id="phase-04">
+        <h2>04 &mdash; Designing around employee intent, not ticket structure</h2>
+        <p class="lede"><em>Support systems often start with classification. Employees start with a problem.</em></p>
+        <p class="lede">To understand how employees asked for help, we reviewed service-request patterns and mapped the types of requests employees raised.</p>
+        <p class="lede">The current process was largely organized around the organization&rsquo;s internal systems.</p>
+        <p class="lede">Employees were often expected to select the right category, service, or ticket path before they had enough information to know what the issue actually was. That created a mismatch:</p>
+
+        <div class="two-col">
+          <div class="option-card">
+            <h3>The system thinks in</h3>
+            <ul class="list"><li>Services</li><li>Categories</li><li>Queues</li><li>Ticket types</li></ul>
+          </div>
+          <div class="option-card">
+            <h3>The employee thinks in</h3>
+            <ul class="list">
+              <li>&ldquo;My password stopped working.&rdquo;</li>
+              <li>&ldquo;My laptop is slow.&rdquo;</li>
+              <li>&ldquo;I need access.&rdquo;</li>
+              <li>&ldquo;I can&rsquo;t open this application.&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+        <p class="callout">Workspace+ translates one into the other.</p>
+        <p class="lede">The opportunity was to design the interface around the second model while still gathering the structure the organization needed behind the scenes.</p>
+
+        <h3 style="margin-top:var(--space-5)">The hypothesis</h3>
+        <p class="lede">We explored a simple hypothesis:</p>
+        <p class="callout">If employees could describe their issue in plain language, the system could progressively gather context and guide them toward the right resolution.</p>
+        <p class="lede">That might mean:</p>
+        <ul class="list">
+          <li>Solving the problem without a ticket</li>
+          <li>Suggesting a relevant action</li>
+          <li>Showing supporting information</li>
+          <li>Or collecting the right context before a request was submitted</li>
+        </ul>
+        <p class="lede">The experience would no longer begin with:</p>
+        <blockquote><p>&ldquo;Which category does this belong to?&rdquo;</p></blockquote>
+        <p class="lede">It would begin with:</p>
+        <blockquote><p>&ldquo;What are you trying to do?&rdquo;</p></blockquote>
+
+        <h3 style="margin-top:var(--space-5)">Defining the information architecture behind the experience</h3>
+        <p class="lede">A conversational entry point still needs structure underneath it.</p>
+        <p class="lede">I mapped common employee questions, information requirements, and potential resolution paths to understand which pieces of context were required at different points in the journey.</p>
+        <p class="lede">The goal was not to expose this complexity.</p>
+        <p class="callout">The goal was to understand it well enough that the interface could hide most of it.</p>
+        <p class="lede">The resulting architecture helped connect employee language to:</p>
+        <ul class="list">
+          <li>Relevant information</li>
+          <li>Troubleshooting steps</li>
+          <li>Device context</li>
+          <li>Support actions</li>
+          <li>And ticket creation when necessary</li>
+        </ul>
+
+        <div class="journey">
+          <span class="journey-step">&ldquo;My device password isn&rsquo;t working.&rdquo;</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Access issue</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Device + employee context</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Reset, check device, show troubleshooting</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">Still unresolved &rarr; create request</span>
+        </div>
+      </section>
+
+      <section id="phase-05">
+        <h2>05 &mdash; Designing the request flow</h2>
+        <p class="lede"><em>We tested different ways of moving from a vague problem to a useful request.</em></p>
+        <p class="lede">Early wireframes explored how much guidance the product should provide and when.</p>
+        <p class="lede">The challenge was finding a balance.</p>
+        <div class="two-col">
+          <div class="option-card"><p>Ask too little and the organization receives an incomplete request.</p></div>
+          <div class="option-card"><p>Ask too much and Workspace+ becomes another complicated ticket form.</p></div>
+        </div>
+        <p class="lede">Several iterations helped refine the model.</p>
+
+        <h3 style="margin-top:var(--space-5)">Version 1 &mdash; Start with categories</h3>
+        <p class="lede">The earliest concept relied more heavily on predefined categories and common requests.</p>
+        <p class="lede">This gave the employee structure, but it still assumed that they understood how their problem mapped to the organization&rsquo;s taxonomy.</p>
+        <p class="callout">That was too close to the existing model.</p>
+        <div class="media" data-label="V1 &mdash; Category-led. Still asks the employee to classify the problem too early."></div>
+
+        <h3 style="margin-top:var(--space-5)">Version 2 &mdash; Start with the employee&rsquo;s intent</h3>
+        <p class="lede">The next iteration moved the employee&rsquo;s own description earlier in the flow.</p>
+        <p class="lede">Instead of choosing from a system hierarchy first, they could begin by describing what they were trying to do or what had gone wrong. The system could then use that information to narrow the next step.</p>
+        <p class="callout">This felt closer to how people naturally ask for help.</p>
+        <div class="media" data-label="V2 &mdash; Intent-led. Start with what the employee knows."></div>
+
+        <h3 style="margin-top:var(--space-5)">Version 3 &mdash; Progressively gather only the context we still need</h3>
+        <p class="lede">The final direction combined open input with structured guidance.</p>
+        <p class="lede">Employees could describe the problem, see relevant options or suggestions, and provide additional context only when it was necessary.</p>
+        <p class="lede">If the issue could not be resolved through self-service, that context could move forward into the support request. The system still got the information it needed.</p>
+        <p class="callout">The employee did not have to provide it all upfront.</p>
+
+        <div class="journey">
+          <span class="journey-step">V1 &middot; Category first</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">V2 &middot; Intent first</span>
+          <span class="journey-arrow">&rarr;</span>
+          <span class="journey-step">V3 &middot; Intent + progressive context</span>
+        </div>
+
+        <h3 style="margin-top:var(--space-5)">Guidance should help, not trap the employee</h3>
+        <p class="lede">As we iterated on the request flow, feedback exposed another important constraint:</p>
+        <p class="callout">employees would not always follow the ideal path.</p>
+        <p class="lede">Someone might:</p>
+        <ul class="list">
+          <li>Enter a vague or incomplete query</li>
+          <li>Ignore a suggestion</li>
+          <li>Select the wrong category</li>
+          <li>Know exactly what they need and want to move quickly</li>
+          <li>Fail to find a useful recommendation</li>
+          <li>Want to raise a ticket regardless</li>
+        </ul>
+        <p class="lede">The design therefore needed escape routes.</p>
+        <p class="lede">The system could suggest and guide, but employees still needed a clear way to recover when the recommendation was wrong or incomplete.</p>
+        <p class="callout">That principle became important throughout the final experience.</p>
+
+        <div class="card-grid">
+          <div class="option-card"><h3>&ldquo;I don&rsquo;t know the right category&rdquo;</h3><p>Allow the system to infer and let the employee correct it.</p></div>
+          <div class="option-card"><h3>&ldquo;None of these suggestions help&rdquo;</h3><p>Keep a clear path to create a request.</p></div>
+          <div class="option-card"><h3>&ldquo;I know exactly what I need&rdquo;</h3><p>Provide a fast path.</p></div>
+          <div class="option-card"><h3>&ldquo;My request could fit multiple categories&rdquo;</h3><p>Use context progressively rather than forcing an early decision.</p></div>
+        </div>
+      </section>
+
+      <section id="phase-06">
+        <h2>06 &mdash; Bringing the experience together</h2>
+        <p class="lede"><em>The final design turns support into a guided conversation.</em></p>
+        <p class="lede">The final experience carried the same principles established in the catalogue redesign into support.</p>
+        <ul class="list">
+          <li>Start with familiar employee language.</li>
+          <li>Use information the system already has.</li>
+          <li>Ask for additional context progressively.</li>
+          <li>Recommend a resolution when one is available.</li>
+          <li>And make the transition to a human-supported request clear when it is not.</li>
+        </ul>
+
+        <h3 style="margin-top:var(--space-5)">Find common requests quickly</h3>
+        <p class="lede">The redesigned entry point surfaces frequently used actions and supports keyword search.</p>
+        <p class="lede">This gives experienced employees a fast path while still supporting people who need guidance.</p>
+        <div class="media hero" data-label="Start with what you know: keyword search, popular requests, recent activity, common actions"></div>
+
+        <h3 style="margin-top:var(--space-5)">Describe the issue in your own words</h3>
+        <p class="lede">Employees can begin with natural language rather than navigating a ticket taxonomy.</p>
+        <p class="lede">The system can use the request to surface relevant options and gather the next piece of context.</p>
+        <p class="lede">The interaction is intentionally progressive so employees do not face a long form before they know whether a ticket is even necessary.</p>
+        <div class="media hero" data-label="Progressive context-gathering screen"></div>
+        <p class="callout">Gather context progressively instead of asking everything upfront.</p>
+
+        <h3 style="margin-top:var(--space-5)">Keep context attached to the request</h3>
+        <p class="lede">If self-service is not enough, the information already collected should not disappear.</p>
+        <p class="lede">The request experience carries relevant details forward so the employee can review what will be submitted rather than starting over. This also gives support teams better context when the request reaches them.</p>
+        <div class="media hero" data-label="Request form / review state: known device context, employee input, system classification, additional details only when needed"></div>
+
+        <h3 style="margin-top:var(--space-5)">Make success unambiguous</h3>
+        <p class="lede">Submitting a request is not the end of the employee&rsquo;s experience.</p>
+        <p class="lede">The confirmation state explains that the request was successfully created and gives the employee clarity about what happens next.</p>
+        <p class="lede">That feedback matters especially in enterprise systems, where uncertainty can lead employees to repeat actions or raise duplicate requests.</p>
+        <div class="media hero" data-label="Success / confirmation state"></div>
+        <p class="callout">Clear confirmation reduces uncertainty after submission.</p>
+
+        <h3 style="margin-top:var(--space-5)">Designing for reality, not the perfect flow</h3>
+        <p class="lede">The final design also accounted for the moments where the system could not confidently help.</p>
+        <ul class="list">
+          <li>Recommendations could be wrong.</li>
+          <li>Information could be incomplete.</li>
+          <li>A user could reject a suggestion.</li>
+          <li>A support request could still be urgent.</li>
+        </ul>
+        <p class="lede">So instead of optimizing only the ideal journey, the interaction model preserved employee control throughout.</p>
+        <p class="callout">The system could guide the employee without becoming another gatekeeper.</p>
+      </section>
+
+      <section id="product-vision">
+        <h2>What this work established</h2>
+        <p class="lede"><em>We weren&rsquo;t just redesigning SSA.</em></p>
+        <p class="lede">The immediate work improved catalogue usability and support-request flows.</p>
+        <p class="lede">But more importantly, it established a different model for the product.</p>
+        <p class="lede">One where software, device actions, information, and support could begin to feel like parts of the same employee experience rather than separate IT systems.</p>
+        <p class="callout">That was the larger Workspace+ opportunity.</p>
+        <ul class="list">
+          <li>Software</li>
+          <li>Device actions</li>
+          <li>Compliance</li>
+          <li>Support</li>
+          <li>Future services</li>
+        </ul>
+        <p class="callout">&darr; Workspace+</p>
+        <p class="lede" style="color:var(--text-muted)">One employee-facing layer over multiple enterprise systems.</p>
+      </section>
+
+      <section id="outcome">
+        <h2>The outcome</h2>
+        <p class="lede">The redesign showed measurable improvement in the usability of key support tasks.</p>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat-number">~45%</span>
+            <span class="stat-label">faster task completion</span>
+            <span class="stat-detail">New users moved from roughly 14&ndash;16 minutes to approximately 6&ndash;8 minutes for the evaluated ticket-opening task.</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">10&ndash;15%</span>
+            <span class="stat-label">improvement in ticket classification</span>
+            <span class="stat-detail">More accurate classification improved how requests were routed during alpha and beta evaluation.</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">SSA 2.0</span>
+            <span class="stat-label">Foundation for the next-generation product</span>
+            <span class="stat-detail">The interaction patterns and information architecture established in this work helped lay the groundwork for the next-generation product direction.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="learnings">
+        <h2>What I learned</h2>
+        <div class="takeaway">
+          <h3>Efficiency is more than speed</h3>
+          <p class="lede">The reduction in task time did not come from one feature.</p>
+          <p class="lede">It came from many small design decisions working together: clearer navigation, stronger hierarchy, more predictable actions, reduced ambiguity, better feedback, and fewer unnecessary decisions.</p>
+        </div>
+        <div class="takeaway">
+          <h3>Short-term fixes need a long-term model</h3>
+          <p class="lede">The project required improving the experience employees had immediately while simultaneously designing toward Workspace+.</p>
+          <p class="lede">That meant resisting quick fixes that solved one screen but created another interaction pattern.</p>
+          <p class="lede">The more useful question became:</p>
+          <p class="callout">Can this decision solve today&rsquo;s problem and still belong in the product we want to build tomorrow?</p>
+          <p class="lede">That became one of the most important principles I took from the project.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ids = ['overview', 'problem', 'solution', 'what-changed', 'approach-intro',
+    'phase-01', 'phase-02', 'phase-03', 'transition', 'phase-04', 'phase-05',
+    'phase-06', 'product-vision', 'outcome', 'learnings'];
+  var links = {};
+  ids.forEach(function (id) {
+    links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
+  });
+  var active = null;
+  var headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 106;
+  var activeThreshold = headerHeight + 20;
+  function setActive(id) {
+    if (id === active) return;
+    if (active && links[active]) links[active].classList.remove('active');
+    if (links[id]) links[id].classList.add('active');
+    active = id;
+  }
+  function onScroll() {
+    var current = ids[0];
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      var rect = el && el.getBoundingClientRect();
+      if (rect && rect.height > 0 && rect.top <= activeThreshold) current = ids[i];
+    }
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = ids[ids.length - 1];
+    setActive(current);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  requestAnimationFrame(function () { requestAnimationFrame(onScroll); });
+})();
+</script>
+
+<script src="js/cursor-dot.js" defer></script>
+</body>
+</html>
