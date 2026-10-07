@@ -13,15 +13,52 @@
 <link rel="stylesheet" href="css/site.css">
 
 <style>
+  .hero-backdrop {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+    margin-top: calc(-1 * var(--header-height));
+    min-height: 48vh;
+  }
+  .hero-backdrop::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: calc(1 - var(--scroll-progress, 0));
+    background-image:
+      radial-gradient(45% 50% at 62% 28%, var(--glow-warm) 0%, rgba(245,168,99,0.65) 18%, rgba(245,168,99,0.32) 38%, rgba(245,168,99,0.1) 55%, rgba(245,168,99,0) 72%),
+      radial-gradient(52% 58% at 78% 42%, var(--glow-pink) 0%, rgba(232,138,168,0.45) 22%, rgba(232,138,168,0.15) 42%, rgba(232,138,168,0) 66%),
+      radial-gradient(75% 70% at 15% 20%, var(--accent-a16) 0%, rgba(73,104,220,0.08) 32%, rgba(73,104,220,0) 66%),
+      radial-gradient(95% 85% at 50% 8%, rgba(214,225,250,0.9) 0%, rgba(214,225,250,0.4) 30%, rgba(214,225,250,0) 74%);
+    background-repeat: no-repeat;
+    animation: glowDrift 42s ease-in-out infinite alternate;
+    will-change: transform;
+    pointer-events: none;
+  }
+  .hero-backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 42%, var(--white) 100%);
+    pointer-events: none;
+  }
+  @keyframes glowDrift {
+    0%   { transform: translate(0%, 0%) scale(1); }
+    100% { transform: translate(3%, 4%) scale(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-backdrop::before { animation: none; }
+  }
+
   .hero {
     position: relative;
+    z-index: 1;
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: var(--space-7) var(--side-margin-desktop);
+    padding: 140px var(--side-margin-desktop);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
-    min-height: min(440px, 56vh);
     box-sizing: border-box;
   }
 
@@ -34,7 +71,7 @@
   }
   .hero-text .lead {
     font-family: var(--font-serif);
-    font-size: 24px;
+    font-size: 32px;
     line-height: var(--leading-normal);
   }
   .hero-text .sub {
@@ -42,14 +79,16 @@
     margin-top: var(--space-3);
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
-    color: var(--text-muted);
+    color: var(--ink-1);
   }
 
   @media (max-width: 900px) {
-    .hero { padding: var(--space-6) var(--side-margin-tablet); min-height: min(400px, 56vh); }
+    .hero-backdrop { min-height: calc(min(400px, 56vh) + 80px + var(--header-height)); }
+    .hero { padding: 110px var(--side-margin-tablet) var(--space-6); min-height: min(400px, 56vh); }
   }
   @media (max-width: 560px) {
-    .hero { padding: var(--space-6) var(--side-margin-mobile); min-height: 0; }
+    .hero-backdrop { min-height: calc(min(400px, 56vh) + 60px + var(--header-height)); }
+    .hero { padding: 140px var(--side-margin-mobile) var(--space-6); min-height: 0; }
   }
 
   h2.section-title {
@@ -67,7 +106,19 @@
     gap: var(--space-7-5) var(--space-6);
     align-items: start;
   }
-  .project-card { display: flex; flex-direction: column; gap: var(--space-3); color: inherit; text-decoration: none; cursor: pointer; }
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+  .project-card:hover,
+  .project-card:focus-visible {
+    transform: translateY(-4px);
+  }
   .project-media {
     position: relative;
     width: 100%;
@@ -78,6 +129,11 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    transition: box-shadow var(--duration-fast) var(--ease-standard);
+  }
+  .project-card:hover .project-media,
+  .project-card:focus-visible .project-media {
+    box-shadow: 0 16px 32px -12px rgba(58,58,58,0.24), 0 2px 8px rgba(58,58,58,0.08);
   }
   .project-media::before {
     content: attr(data-label);
@@ -94,6 +150,17 @@
     gap: var(--space-2);
     flex-wrap: wrap;
     pointer-events: none;
+  }
+  .project-media-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--accent-a16);
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+  }
+  .project-card:hover .project-media-overlay,
+  .project-card:focus-visible .project-media-overlay {
+    opacity: 1;
   }
   .tag {
     font-size: var(--text-label);
@@ -140,8 +207,20 @@
   .avatar {
     width: 40px; height: 40px; flex: none;
     border-radius: 50%;
-    background: var(--ink-1-a08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-label);
+    font-weight: 500;
+    color: var(--white);
   }
+  /* Same saturation as brand blue (68%), different hues per person. Lightness
+     dropped from brand blue's 57% to 30% so white initials stay WCAG AA
+     compliant across every hue (57% failed contrast on brighter hues like green). */
+  .avatar-1 { background: hsl(15, 68%, 30%); }
+  .avatar-2 { background: hsl(100, 68%, 30%); }
+  .avatar-3 { background: hsl(190, 68%, 30%); }
+  .avatar-4 { background: hsl(320, 68%, 30%); }
   .person-name { font-size: var(--text-caption); font-weight: 400; color: var(--accent); }
   .person-role { font-size: var(--text-caption); color: var(--accent); }
 
@@ -152,18 +231,26 @@
     gap: var(--space-4);
     align-items: stretch;
   }
+  .community-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100%;
+    min-height: 100%;
+  }
   .community-media {
     border-radius: var(--radius-md);
     background: var(--ink-1-a08);
     width: 100%;
-    min-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex: 1;
+    min-height: 0;
+    object-fit: cover;
+    display: block;
   }
-  .community-media::before {
-    content: 'Community photo/video';
-    font-size: var(--text-label);
+  .community-caption {
+    margin: 0;
+    font-size: var(--text-caption);
     color: var(--text-muted);
   }
   .community-notes { display: flex; flex-direction: column; gap: var(--space-4); }
@@ -216,25 +303,27 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-text">
-    <p class="lead">Product designer &amp; strategist with an engineering background.</p>
-    <p class="sub">10+ years of experience turning messy, ambiguous enterprise problems into design and research work that identifies what is broken before designing a fix.</p>
-  </div>
-</section>
+<div class="hero-backdrop">
+  <section class="hero">
+    <div class="hero-text reveal">
+      <p class="lead">Product designer &amp; strategist with an engineering background.</p>
+      <p class="sub">10+ years of experience turning messy, ambiguous enterprise problems into design and research work that identifies what is broken before designing a fix.</p>
+    </div>
+  </section>
+</div>
 
 <div class="wrap">
   <section class="projects">
-    <h2 class="section-title">Case studies</h2>
     <div class="project-grid">
 
-      <a class="project-card" href="foundersbrew-case-study.html">
+      <a class="project-card reveal" href="foundersbrew-case-study.html">
         <div class="project-media" data-label="Case study image/video">
           <div class="project-tags">
             <span class="tag">0 &rarr; 1</span>
             <span class="tag">AI enabled SaaS</span>
             <span class="tag">Voice agent</span>
           </div>
+          <div class="project-media-overlay"></div>
         </div>
         <h3>From conversations to structured evidence for founders</h3>
         <p>How foundersBrew User interview agent helps solo founders taking the right build decisions</p>
@@ -243,13 +332,14 @@
         </span>
       </a>
 
-      <a class="project-card" href="scm-webui-case-study.html">
+      <a class="project-card reveal" href="scm-webui-case-study.html">
         <div class="project-media" data-label="Case study image/video">
           <div class="project-tags">
             <span class="tag">Enterprise product</span>
             <span class="tag">Cybersecurity</span>
             <span class="tag">Legacy to Modernisation</span>
           </div>
+          <div class="project-media-overlay"></div>
         </div>
         <h3>Streamlining Security Compliance: The SCM WebUI Redesign</h3>
         <p>How the product transitioned preserved control required by security experts while significantly enhancing operational efficiency and system clarity.</p>
@@ -258,13 +348,14 @@
         </span>
       </a>
 
-      <a class="project-card" href="bigfix-saas-onboarding-case-study.html">
+      <a class="project-card reveal" href="bigfix-saas-onboarding-case-study.html">
         <div class="project-media" data-label="Case study image/video">
           <div class="project-tags">
             <span class="tag">Enterprise SaaS</span>
             <span class="tag">0 &rarr; 1</span>
             <span class="tag">Onboarding</span>
           </div>
+          <div class="project-media-overlay"></div>
         </div>
         <h3>Defining and Designing the Onboarding Experience for BigFix SaaS</h3>
         <p>Creating the first guided setup experience for a new SaaS product within an established enterprise.</p>
@@ -273,13 +364,14 @@
         </span>
       </a>
 
-      <a class="project-card" href="bigfix-workspace-plus-case-study.html">
+      <a class="project-card reveal" href="bigfix-workspace-plus-case-study.html">
         <div class="project-media" data-label="Case study image/video">
           <div class="project-tags">
             <span class="tag">Enterprise SaaS</span>
             <span class="tag">Employee Experience</span>
             <span class="tag">Systems Design</span>
           </div>
+          <div class="project-media-overlay"></div>
         </div>
         <h3>HCL BigFix Workspace+</h3>
         <p>Turning a technical endpoint-management tool into an employee-facing workspace.</p>
@@ -292,13 +384,13 @@
   </section>
 
   <section class="testimonials">
-    <h2 class="section-title">What People I have worked with say</h2>
+    <h2 class="section-title reveal">What People I have worked with say</h2>
     <div class="testimonial-grid">
 
-      <div class="card">
+      <div class="card reveal">
         <p>I have been working with Sanchita for 5 years now and I had a chance to see her growing incredibly in terms of skill depth and breadth. She is extremely reliable and capable of leading initiatives aimed at improving the customer satisfaction and experience. She takes ownership and is also proactive, an extremely good team player</p>
         <div class="person">
-          <div class="avatar"></div>
+          <div class="avatar avatar-1" aria-hidden="true">CD</div>
           <div>
             <div class="person-name">Cristiana D'Amore</div>
             <div class="person-role">Senior UX Designer, HCL Software, Rome</div>
@@ -306,10 +398,10 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <p>Her ability to transform complex ideas into intuitive and engaging designs is truly remarkable. She was not only a strong contributor individually but also helped foster a positive and innovative team environment. Whether it was working on product interfaces, conducting user research, or driving cross-functional collaboration, Sanchita always excelled</p>
         <div class="person">
-          <div class="avatar"></div>
+          <div class="avatar avatar-2" aria-hidden="true">SS</div>
           <div>
             <div class="person-name">Shivi Sivasubramanian</div>
             <div class="person-role">Content Designer, HCL Softwares, India</div>
@@ -317,10 +409,10 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <p>Sanchita stands out in UX. While many rely on outdated guidelines, she listens, learns, and champions user research. She transforms vague ideas into clear, actionable experiences with skill and grace. She truly cares about user.</p>
         <div class="person">
-          <div class="avatar"></div>
+          <div class="avatar avatar-3" aria-hidden="true">LT</div>
           <div>
             <div class="person-name">Liz Thi</div>
             <div class="person-role">User Experience Lead, HCL Tech, Virginia, US</div>
@@ -328,10 +420,10 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <p>Since the very beginning, I have noticed her professionalism, skills, and care for the product she works on. She has repeatedly proven her incredible knowledge by solving complex problems with elegant and ingenious solutions. Her approach to solving problems is unique and this makes her an undeniable asset to the team.</p>
         <div class="person">
-          <div class="avatar"></div>
+          <div class="avatar avatar-4" aria-hidden="true">JM</div>
           <div>
             <div class="person-name">John Mark</div>
             <div class="person-role">Founder, FoundersBrew, Canada</div>
@@ -343,15 +435,18 @@
   </section>
 
   <section class="community">
-    <h2 class="section-title">Community &amp; mentorship</h2>
+    <h2 class="section-title reveal">Community &amp; mentorship</h2>
     <div class="community-grid">
-      <div class="community-media"></div>
+      <figure class="community-figure reveal">
+        <img class="community-media" src="images/community-devfest.jpg" alt="Group photo of DevFest attendees and speakers, including Sanchita, at a mentorship and community event" />
+        <figcaption class="community-caption">With final year students at IIT Gauhati and co-speakers</figcaption>
+      </figure>
       <div class="community-notes">
-        <div class="quote-card">
+        <div class="quote-card reveal">
           <p>"I just wanted to take a moment to thank you for being such an incredible mentor and teammate. You supported me, helped with tools, and made me feel included. Your constant encouragement made me a better designer and created a welcoming environment I will always be grateful for."</p>
           <div class="person-name">Drushti, HCL Softwares, India</div>
         </div>
-        <div class="quote-card">
+        <div class="quote-card reveal">
           <p>"As you embark on your next journey, I want to take a moment to thank you for being an extraordinary mentor and guide. Your support has been invaluable, and your perspectives in cross functional meetings have been a remarkable example. Thank you so much for everything."</p>
           <div class="person-name">Tushar, HCL Softwares, India</div>
         </div>
@@ -359,7 +454,7 @@
     </div>
   </section>
 
-  <footer>
+  <footer class="reveal">
     <div class="social-slot" aria-hidden="true"></div>
     <div class="social-slot" aria-hidden="true"></div>
     <div class="social-slot" aria-hidden="true"></div>
@@ -367,5 +462,8 @@
 </div>
 
 <script src="js/cursor-dot.js" defer></script>
+<script src="js/header-scroll.js" defer></script>
+<script src="js/scroll-reveal.js" defer></script>
+<script src="js/scroll-gradient.js" defer></script>
 </body>
 </html>
