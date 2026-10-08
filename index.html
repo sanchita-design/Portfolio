@@ -20,42 +20,13 @@
     margin-top: calc(-1 * var(--header-height));
     min-height: 48vh;
   }
-  .hero-backdrop::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: calc(1 - var(--scroll-progress, 0));
-    background-image:
-      radial-gradient(45% 50% at 62% 28%, var(--glow-warm) 0%, rgba(245,168,99,0.65) 18%, rgba(245,168,99,0.32) 38%, rgba(245,168,99,0.1) 55%, rgba(245,168,99,0) 72%),
-      radial-gradient(52% 58% at 78% 42%, var(--glow-pink) 0%, rgba(232,138,168,0.45) 22%, rgba(232,138,168,0.15) 42%, rgba(232,138,168,0) 66%),
-      radial-gradient(75% 70% at 15% 20%, var(--accent-a16) 0%, rgba(73,104,220,0.08) 32%, rgba(73,104,220,0) 66%),
-      radial-gradient(95% 85% at 50% 8%, rgba(214,225,250,0.9) 0%, rgba(214,225,250,0.4) 30%, rgba(214,225,250,0) 74%);
-    background-repeat: no-repeat;
-    animation: glowDrift 42s ease-in-out infinite alternate;
-    will-change: transform;
-    pointer-events: none;
-  }
-  .hero-backdrop::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 42%, var(--white) 100%);
-    pointer-events: none;
-  }
-  @keyframes glowDrift {
-    0%   { transform: translate(0%, 0%) scale(1); }
-    100% { transform: translate(3%, 4%) scale(1.08); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-backdrop::before { animation: none; }
-  }
 
   .hero {
     position: relative;
     z-index: 1;
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 140px var(--side-margin-desktop);
+    padding: 200px var(--side-margin-desktop) 180px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -71,12 +42,27 @@
   }
   .hero-text .lead {
     font-family: var(--font-serif);
-    font-size: 32px;
-    line-height: var(--leading-normal);
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    max-width: 22em;
+    margin: 0;
+    color: var(--ink-1);
+  }
+  .hero-text .lead mark {
+    font-weight: 300;
+    font-style: italic;
+    background: var(--accent-a08);
+    color: var(--accent);
+    padding: 0 0.12em;
+    margin: 0 -0.12em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
   .hero-text .sub {
     font-family: var(--font-sans);
-    margin-top: var(--space-3);
+    margin-top: var(--space-5);
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
     color: var(--ink-1);
@@ -84,11 +70,11 @@
 
   @media (max-width: 900px) {
     .hero-backdrop { min-height: calc(min(400px, 56vh) + 80px + var(--header-height)); }
-    .hero { padding: 110px var(--side-margin-tablet) var(--space-6); min-height: min(400px, 56vh); }
+    .hero { padding: 160px var(--side-margin-tablet) 120px; min-height: min(400px, 56vh); }
   }
   @media (max-width: 560px) {
     .hero-backdrop { min-height: calc(min(400px, 56vh) + 60px + var(--header-height)); }
-    .hero { padding: 140px var(--side-margin-mobile) var(--space-6); min-height: 0; }
+    .hero { padding: 180px var(--side-margin-mobile) 100px; min-height: 0; }
   }
 
   h2.section-title {
@@ -120,6 +106,7 @@
     transform: translateY(-4px);
   }
   .project-media {
+    border: 1px solid var(--border-subtle);
     position: relative;
     width: 100%;
     aspect-ratio: 16/10;
@@ -240,6 +227,7 @@
     min-height: 100%;
   }
   .community-media {
+    border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
     background: var(--ink-1-a08);
     width: 100%;
@@ -306,8 +294,8 @@
 <div class="hero-backdrop">
   <section class="hero">
     <div class="hero-text reveal">
-      <p class="lead">Product designer &amp; strategist with an engineering background.</p>
-      <p class="sub">10+ years of experience turning messy, ambiguous enterprise problems into design and research work that identifies what is broken before designing a fix.</p>
+      <h1 class="lead">10+ years of turning <mark>messy, ambiguous enterprise problems into design</mark> and research work that identifies what is broken before designing a fix.</h1>
+      <p class="sub">A product designer &amp; strategist who also happens to be an engineer.</p>
     </div>
   </section>
 </div>
@@ -464,6 +452,5 @@
 <script src="js/cursor-dot.js" defer></script>
 <script src="js/header-scroll.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
-<script src="js/scroll-gradient.js" defer></script>
 </body>
 </html>

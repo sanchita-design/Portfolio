@@ -7,6 +7,7 @@
   font-size: var(--text-caption);
   color: var(--text-muted);
   text-decoration: none;
+  margin-top: var(--space-4);
   margin-bottom: var(--space-4);
 }
 .back-link:hover { color: var(--accent); }
@@ -49,7 +50,7 @@ main {
   padding: 0 0 200px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: 112px;
 }
 
 section { display: flex; flex-direction: column; gap: 20px; }
@@ -87,7 +88,7 @@ p {
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);
   margin: 0;
-  color: var(--text-body);
+  color: var(--text-muted);
 }
 .lede { line-height: 1.7; }
 .callout { color: var(--accent); font-weight: 500; }
@@ -102,6 +103,7 @@ blockquote p { color: var(--accent); }
 
 /* media placeholders — swap the inner <img>/<video> in when real assets are ready */
 .media {
+  border: 1px solid var(--border-subtle);
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
@@ -128,6 +130,55 @@ blockquote p { color: var(--accent); }
   display: none;
 }
 .media.hero { aspect-ratio: 16/10; }
+
+/* unconstrained media: no cropping, no forced aspect-ratio — renders at its own proportions */
+.media-natural {
+  border: 1px solid var(--border-subtle);
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+/* trimmed media: shaves baked-in edges off a screen recording.
+   Set --w/--h to the video's pixel size and --t/--r/--b/--l to the pixels to cut from each side. */
+.media-trim {
+  border: 1px solid var(--border-subtle);
+  --w: 2598; --h: 1752; --t: 12; --r: 12; --b: 12; --l: 12;
+  --cw: calc(var(--w) - var(--l) - var(--r));
+  --ch: calc(var(--h) - var(--t) - var(--b));
+  position: relative;
+  width: 100%;
+  aspect-ratio: calc(var(--cw) / var(--ch));
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.media-trim video {
+  position: absolute;
+  left: calc(var(--l) / var(--cw) * -100%);
+  top: calc(var(--t) / var(--ch) * -100%);
+  width: calc(var(--w) / var(--cw) * 100%);
+  height: calc(var(--h) / var(--ch) * 100%);
+  display: block;
+}
+
+/* cropped media: fills a fixed frame, centered, zoomed in to cut surrounding chrome */
+.media-crop {
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2.07 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.media-crop video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
 .two-col {
   display: grid;
