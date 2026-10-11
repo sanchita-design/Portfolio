@@ -27,11 +27,13 @@ a:hover { color: var(--accent-hover); }
   right: 0;
   z-index: 50;
   background: transparent;
-  border-bottom: 1px solid var(--border-subtle);
-  transition: background-color var(--duration-base) var(--ease-standard);
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
 }
 .site-header.is-scrolled {
   background: var(--white);
+  border-bottom-color: var(--border-subtle);
 }
 .header-bar {
   display: flex;
@@ -42,7 +44,6 @@ a:hover { color: var(--accent-hover); }
   flex-wrap: wrap;
   gap: var(--space-3);
 }
-.brand { font-size: var(--text-h4); font-weight: 400; color: var(--text-heading); }
 .primary-nav { display: flex; gap: var(--space-5); }
 .primary-nav a {
   font-size: var(--text-base);
@@ -73,14 +74,38 @@ a:hover { color: var(--accent-hover); }
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-standard);
   will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
 }
+/* over a case study card the dot becomes a slightly larger "view" (eye) icon in the brand orange */
+.cursor-dot .cursor-eye {
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 180ms var(--ease-standard), transform 260ms var(--ease-standard);
+}
+.cursor-dot {
+  transition: opacity var(--duration-fast) var(--ease-standard),
+              background-color 220ms var(--ease-standard), color 220ms var(--ease-standard),
+              width 220ms var(--ease-standard), height 220ms var(--ease-standard), margin 220ms var(--ease-standard);
+}
+.cursor-dot.is-view {
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  background: rgba(215, 100, 47, 0.12);  /* same tint as the headline highlight */
+  color: #D7642F;
+}
+.cursor-dot.is-view .cursor-eye { opacity: 1; transform: none; }
 @media (pointer: coarse) {
   .cursor-dot { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cursor-dot { transition: opacity var(--duration-fast) var(--ease-standard); }
+  .cursor-dot, .cursor-dot .cursor-eye { transition: opacity var(--duration-fast) var(--ease-standard); }
 }
 
 .reveal {

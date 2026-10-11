@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sanchita Srivastava — Senior UX Designer</title>
+<meta name="description" content="Senior Product Designer with 10+ years of experience leading 0-to-1 initiatives and enterprise SaaS modernisations. The journey from web developer to founding designer." />
+
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="css/site.css">
+
+<style>
+  .about-layout { display: block; }
+  main.about {
+    min-width: 0;
+    padding: var(--space-6)
+      max(var(--side-margin-desktop), calc((100vw - var(--container-max)) / 2 + var(--side-margin-desktop)))
+      120px;
+    display: flex;
+    flex-direction: column;
+    --section-gap: 112px;
+    gap: var(--section-gap);
+  }
+  /* the intro and "My journey" sit close together: 20px between them instead of the full section gap */
+  .intro + .about-inner { margin-top: calc(20px - var(--section-gap)); }
+
+  /* the footer line runs the full width of the screen; the icons stay on the content grid */
+  footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-5) max(var(--side-margin-desktop), calc((100vw - var(--container-max)) / 2 + var(--side-margin-desktop)));
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  .social-link {
+    width: 48px; height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    transition: color var(--duration-fast) var(--ease-standard),
+                background-color var(--duration-fast) var(--ease-standard);
+  }
+  .social-link:hover { color: var(--ink-1); background: var(--ink-1-a08); }
+  .social-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* intro */
+  .intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 64px; align-items: start; }  /* text takes the space left of the circle */
+  .intro-text { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+  .intro p { margin: 0; font-size: var(--text-base); line-height: 1.7; color: var(--text-muted); }
+  .intro-photo { position: relative; margin: 0; width: 260px; aspect-ratio: 1 / 1; justify-self: end; align-self: start; border-radius: 50%; overflow: hidden; background: color-mix(in srgb, var(--ink-1) 6%, var(--white)); }
+  .intro-photo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* section titles */
+  .about h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-5);
+    color: var(--ink-1);
+  }
+
+  /* vertical stepper */
+  .stepper { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .step {
+    display: grid;
+    grid-template-columns: 150px 24px minmax(0, 1fr);
+    column-gap: var(--space-4);
+  }
+  .step-date {
+    padding-top: 2px;
+    font-size: var(--text-label);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .step-rail { display: flex; flex-direction: column; align-items: center; }
+  .step-dot {
+    width: 14px;
+    height: 14px;
+    margin-top: 2px;
+    border-radius: 50%;
+    flex: none;
+    box-sizing: border-box;
+    background: var(--white);
+    border: 2px solid var(--accent);
+  }
+  .step.is-current .step-dot {
+    background: #D7642F;
+    border-color: #D7642F;
+    box-shadow: 0 0 0 5px rgba(215, 100, 47, 0.16);
+  }
+  .step-line { flex: 1; width: 1px; background: var(--ink-1-a12); margin-top: var(--space-2); }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding-bottom: var(--space-7); display: flex; flex-direction: column; gap: var(--space-2); }
+  .step:last-child .step-body { padding-bottom: 0; }
+  .step-body h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--ink-1);
+  }
+  .step-org { margin: 0; font-size: var(--text-caption); color: var(--accent); }
+  .step-org .where { color: var(--text-muted); }
+  .step-list {
+    margin: var(--space-2) 0 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .step-list li { font-size: var(--text-caption); line-height: var(--leading-relaxed); color: var(--text-muted); }
+  .step-list li::marker { color: var(--ink-1-a60); }
+
+  /* skills, certificates, interests */
+  .skill-group + .skill-group { margin-top: var(--space-5); }
+  .skill-group h3 {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-label);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin: 0; padding: 0; }
+  .chips li {
+    font-size: var(--text-caption);
+    padding: var(--space-1) 14px;
+    border-radius: var(--radius-lg);
+    background: var(--accent-a08);
+    color: var(--accent-press);
+    line-height: 1.5;
+  }
+  .certs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4) var(--space-5); list-style: none; margin: 0; padding: 0; }
+  .certs strong { display: block; font-size: var(--text-base); font-weight: 500; color: var(--ink-1); }
+  .certs span { font-size: var(--text-caption); color: var(--text-muted); }
+  .interests { margin: 0; font-size: var(--text-base); line-height: 1.7; color: var(--text-muted); }
+
+  @media (max-width: 900px) {
+    main.about { padding: var(--space-6) var(--side-margin-tablet) var(--space-6); --section-gap: 80px; }
+    .intro { grid-template-columns: 1fr; row-gap: var(--space-5); }
+    .intro-photo { justify-self: start; width: 220px; }
+    .step { grid-template-columns: 24px minmax(0, 1fr); }
+    .step-date { grid-column: 2; grid-row: 1; padding-top: 0; margin-bottom: var(--space-1); }
+    .step-rail { grid-column: 1; grid-row: 1 / span 2; }
+    .step-body { grid-column: 2; grid-row: 2; }
+    .certs { grid-template-columns: 1fr; }
+    footer { justify-content: flex-start; padding-left: var(--side-margin-tablet); padding-right: var(--side-margin-tablet); }
+  }
+  @media (max-width: 560px) {
+    main.about { padding-left: var(--side-margin-mobile); padding-right: var(--side-margin-mobile); }
+    footer { padding-left: var(--side-margin-mobile); padding-right: var(--side-margin-mobile); }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <nav class="primary-nav">
+      <a href="index.html">Work</a>
+      <a href="sanchita.html" class="current" aria-current="page">Sanchita</a>
+      <a href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<div class="about-layout">
+  <main class="about">
+
+    <section class="intro about-inner reveal">
+      <div class="intro-text">
+        <h1 class="visually-hidden">Sanchita Srivastava, Senior UX Designer</h1>
+        <p>Senior Product Designer with 10+ years of experience leading 0-to-1 initiatives and enterprise SaaS modernizations. Skilled at turning complex data, AI systems, and regulated workflows into intuitive, high-trust user journeys.</p>
+        <p>I combine deep UX research practices with an AI-augmented design workflow to speed up discovery, build scalable systems, and bridge business strategy with technical delivery.</p>
+      </div>
+      <figure class="intro-photo"><img src="images/sanchita-kohima.jpg" alt="Sanchita smiling in a field of pink flowers with forested mountains behind"></figure>
+    </section>
+
+    <section class="about-inner reveal" aria-labelledby="journey-title">
+      <h2 id="journey-title">My journey</h2>
+      <ol class="stepper">
+
+        <li class="step is-current">
+          <div class="step-date">2026/01 – Present</div>
+          <div class="step-rail" aria-hidden="true"><span class="step-dot"></span><span class="step-line"></span></div>
+          <div class="step-body">
+            <h3>Founding Designer</h3>
+            <p class="step-org">FoundersBrew <span class="where">· Part-time</span></p>
+            <ul class="step-list">
+              <li>Led 0-to-1 discovery and product strategy by interviewing 9+ founders to challenge core assumptions, pivoting the product direction from a motivation tracker to a clarity-focused platform based on qualitative research</li>
+              <li>Designed the end-to-end experience for a voice-based research agent, mapping conversational flows and interaction patterns that translate dynamic voice inputs into structured, actionable insights across entry points.</li>
+              <li>Built the initial design system, brand identity, and interactive prototypes from scratch, using an AI-augmented design workflows to rapidly test and iterate concepts with 8+ founders.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="step is-current">
+          <div class="step-date">2025/07 – Present</div>
+          <div class="step-rail" aria-hidden="true"><span class="step-dot"></span><span class="step-line"></span></div>
+          <div class="step-body">
+            <h3>Freelance Consultant</h3>
+            <p class="step-org">Remote <span class="where">· Part-time</span></p>
+            <ul class="step-list">
+              <li>Provided UI and visual design services for high-performance computing and rendering farm operations, focused on creating intuitive interfaces for complex technical workflows. Simplified user flows and delivered UI designs for 7+ workflows.</li>
+              <li>Delivered Brand DNA concept and refreshed visual identity for a mental health organisation.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-date">2019/04 – 2025/04</div>
+          <div class="step-rail" aria-hidden="true"><span class="step-dot"></span><span class="step-line"></span></div>
+          <div class="step-body">
+            <h3>Sr. Designer</h3>
+            <p class="step-org">HCL Softwares, BigFix <span class="where">· Bengaluru, India</span></p>
+            <ul class="step-list">
+              <li>Partnered with product leadership during BigFix’s transition from on-premise to SaaS, delivered framework for onboarding and notification systems within 6 months of being onboarded on the SaaS venture, which was used across 8+ SaaS product modules.</li>
+              <li>Designed and streamlined end to end process flows for the enterprise compliance portfolio, delivering an improved operational efficiency by ~20% across 3+ major releases in a heavily constrained environment, tailored for our client.</li>
+              <li>Delivered 12+ end to end workflows across 4 verticals (Compliance, Self Service Application, Server Automations and SaaS) within BigFix</li>
+              <li>Laid the ground work for BigFix Digital Employee Experience (DeX), which went on to become an AI-powered workspace management platform.</li>
+              <li>Mentored and coached 5 junior designers, establishing research frameworks, prototyping standards, and collaborative handoff processes.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-date">2016/09 – 2019/03</div>
+          <div class="step-rail" aria-hidden="true"><span class="step-dot"></span><span class="step-line"></span></div>
+          <div class="step-body">
+            <h3>UX/UI Lead | UX Developer</h3>
+            <p class="step-org">10k info Inc <span class="where">· Bengaluru, India</span></p>
+            <ul class="step-list">
+              <li>Managed a team of 2 designers and 1 UI developer.</li>
+              <li>Designed end-to-end experiences for 3 enterprise applications.</li>
+              <li>Digitised manual workflows, reducing manual work by ~24% and minimising ambiguity.</li>
+              <li>Collaborated with PMs, developers, and QA teams for smooth design hand-offs.</li>
+              <li>Prototyped individual components and features impacting larger company applications.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-date">2016/04 – 2016/08</div>
+          <div class="step-rail" aria-hidden="true"><span class="step-dot"></span><span class="step-line"></span></div>
+          <div class="step-body">
+            <h3>Web Designer</h3>
+            <p class="step-org">Graphycurry <span class="where">· Bengaluru, India</span></p>
+            <ul class="step-list">
+              <li>Responsible for UI design and development of 4+ E-commerce platforms.</li>
+              <li>Designed promotional banners and flyers for social media using various design tools with attention to details.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-date">2014/07 – 2016/02</div>
+          <div class="step-rail" aria-hidden="true"><span class="step-dot"></span><span class="step-line"></span></div>
+          <div class="step-body">
+            <h3>Web Developer &amp; Designer</h3>
+            <p class="step-org">Cedcoss Technologies <span class="where">· Lucknow, India</span></p>
+            <ul class="step-list">
+              <li>Defined concepts and scripts for video development.</li>
+              <li>Designed and developed front-end for 20+ projects in E-commerce, Health care, Real estate, Ngo.</li>
+              <li>Mentored junior designers and new hires.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-date">2010/08 – 2014/06</div>
+          <div class="step-rail" aria-hidden="true"><span class="step-dot"></span><span class="step-line"></span></div>
+          <div class="step-body">
+            <h3>Bachelors of Technology, IT</h3>
+            <p class="step-org">Dr. APJ Abdul Kalam Technical University <span class="where">· Lucknow, India</span></p>
+          </div>
+        </li>
+
+      </ol>
+    </section>
+
+    <section class="about-inner reveal" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <div class="skill-group">
+        <h3>Research</h3>
+        <ul class="chips">
+          <li>User Research</li><li>User interview</li><li>Usability testing</li><li>Card sorting</li>
+          <li>Post-research analysis / Thematic Analysis</li><li>Personas, Disability personas</li>
+          <li>Accessibility and Inclusive design</li><li>Discount Usability</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Design</h3>
+        <ul class="chips">
+          <li>User-flows &amp; Journey Mapping</li><li>Information Architecture, Sitemaps</li>
+          <li>Wire-framing &amp; High-Fidelity prototyping</li><li>User Interface / Visual Design</li>
+          <li>Prototyping (Figma, HTML+CSS)</li><li>Experience design strategy</li>
+          <li>Storytelling &amp; Stakeholder Communication</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Tools</h3>
+        <ul class="chips">
+          <li>Figma / Figma MCP + Claude</li><li>Miro/Figjam/Mural</li><li>Jira</li>
+          <li>Notion/ Notion MCP + Claude for notes</li><li>Base44 (low-code app building)</li><li>UX Pilot</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="about-inner reveal" aria-labelledby="certs-title">
+      <h2 id="certs-title">Certificates</h2>
+      <ul class="certs">
+        <li><strong>Enterprise Design Thinking Practitioner</strong><span>IBM Corporation</span></li>
+        <li><strong>Human Computer Interaction</strong><span>The Interaction Design Foundation</span></li>
+        <li><strong>Design for Accessibility</strong><span>The Interaction Design Foundation</span></li>
+      </ul>
+    </section>
+
+    <section class="about-inner reveal" aria-labelledby="interests-title">
+      <h2 id="interests-title">Interests</h2>
+      <p class="interests">Reading, Writing, Painting, Moodboarding, Surface Design &amp; Illustration</p>
+    </section>
+
+  </main>
+
+</div>
+
+<footer>
+    <a class="social-link" href="https://www.linkedin.com/in/sanchitasrivastava/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+    <a class="social-link" href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer" aria-label="Medium"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 1 1-6.77-6.82A6.77 6.77 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42 3.38 2.88 3.38 6.42m2.94 0c0 3.17-.53 5.75-1.19 5.75s-1.19-2.58-1.19-5.75.53-5.75 1.19-5.75S23.9 8.83 23.9 12z"/></svg></a>
+    <a class="social-link" href="https://x.com/FoundersBrew_ca" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+</footer>
+
+<script src="js/cursor-dot.js" defer></script>
+<script src="js/header-scroll.js" defer></script>
+<script src="js/scroll-reveal.js" defer></script>
+</body>
+</html>
