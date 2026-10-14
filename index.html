@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/site.css">
 
 <style>
+  .carousel-track > .card { background: transparent; }
   .hero-backdrop {
     position: relative;
     overflow: hidden;
@@ -49,21 +50,41 @@
     margin: 0;
     color: var(--ink-1);
   }
-  /* on wide screens the headline is held to three lines: "...work" ends line two, "that identifies ... a fix." is line three */
-  .lead .br-wide { display: none; }
-  @media (min-width: 1000px) {
-    .lead .br-wide { display: inline; }
-  }
   .hero-text .lead mark {
     font-weight: 300;
     font-style: italic;
-    background: rgba(215, 100, 47, 0.12);
+    background: rgba(215, 100, 47, 0.05);  /* kept light so the large orange word stays above 3:1 on the grain */
     color: #D7642F;
     padding: 0 0.12em;
     margin: 0 -0.12em;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
   }
+  /* companies worked for: a small label, then the logos in grayscale (newest first), tucked under the sub-text */
+  .logo-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) 21px;
+    margin-top: 9px;  /* matches the spacing you set: logos sit tight under the sub-text */
+  }
+  .hero-text .logo-label {
+    margin: 0;
+    font-size: var(--text-caption);
+    line-height: 1.4;
+    color: var(--text-muted);
+  }
+  .logo-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) 21px;
+  }
+  .logo-row li { display: flex; align-items: center; }
+  .logo-row img { display: block; width: auto; filter: grayscale(1); }
   .typed-caret {
     display: inline-block;
     width: 2px;
@@ -80,6 +101,7 @@
   .hero-text .sub {
     font-family: var(--font-sans);
     margin-top: var(--space-5);
+    max-width: 56rem;  /* wide enough to hold the sub-text to three lines on desktop */
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
     color: var(--text-muted);
@@ -246,16 +268,15 @@
     background: var(--accent-a08);
     color: var(--accent-press);
   }
-  .project-card h3 { font-weight: 400; font-size: clamp(1.25rem, 1rem + 0.8vw, 1.5rem); line-height: 1.3; letter-spacing: -0.01em; margin: 0; color: var(--text-heading); }
-  .project-card p { font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-muted); margin: 0; }
+    .project-card h3 { font-weight: 400; font-size: 20px; line-height: 1.4; letter-spacing: -0.005em; margin: 0 0 var(--space-3); color: var(--text-heading); }
   .view-case-study {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     font-weight: 400;
     font-size: var(--text-base);
-    color: var(--accent);
-    margin-top: var(--space-2);
+    color: var(--accent-text);
+    margin-top: 4px;
   }
   /* on hover the label (and the arrow) turn orange, letter by letter */
   .vcs-label span, .view-case-study svg {
@@ -375,8 +396,8 @@
   .avatar-2 { background: hsl(100, 68%, 30%); }
   .avatar-3 { background: hsl(190, 68%, 30%); }
   .avatar-4 { background: hsl(320, 68%, 30%); }
-  .person-name { font-size: var(--text-caption); font-weight: 400; color: var(--accent); }
-  .person-role { font-size: var(--text-caption); color: var(--accent); }
+  .person-name { font-size: var(--text-caption); font-weight: 400; color: var(--accent-text); }
+  .person-role { font-size: var(--text-caption); color: var(--accent-text); }
 
   section.community { padding-bottom: 200px; }
   .community-grid {
@@ -403,6 +424,39 @@
     object-fit: cover;
     display: block;
   }
+  /* thin, playful arrow under the photo (swoop + curl) pointing up at one person; it redraws itself in a loop while on screen */
+  .community-arrow { display: none; position: relative; height: 104px; margin-bottom: -4px; }
+  .has-arrow .community-arrow { display: block; }
+  .community-arrow svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .community-arrow path {
+    stroke: #D7642F;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .community-arrow.is-playing .arrow-line { animation: arrowLine 7s cubic-bezier(0.45, 0.05, 0.25, 1) infinite; }
+  .community-arrow.is-playing .arrow-head { animation: arrowHead 7s ease-out infinite; }
+  /* draw (0-34%), hold, then rub out from the start (78-95%), pause, repeat */
+  @keyframes arrowLine {
+    0%   { stroke-dashoffset: 1; }
+    34%  { stroke-dashoffset: 0; }
+    78%  { stroke-dashoffset: 0; }
+    95%  { stroke-dashoffset: -1; }
+    100% { stroke-dashoffset: -1; }
+  }
+  @keyframes arrowHead {
+    0%, 33% { stroke-dashoffset: 1; opacity: 1; }
+    39%     { stroke-dashoffset: 0; opacity: 1; }
+    80%     { stroke-dashoffset: 0; opacity: 1; }
+    88%     { stroke-dashoffset: 0; opacity: 0; }
+    100%    { stroke-dashoffset: 1; opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .community-arrow path { stroke-dashoffset: 0; animation: none !important; }
+  }
+  .community-arrow.is-static path { stroke-dashoffset: 0; }
   .community-caption {
     margin: 0;
     font-size: var(--text-caption);
@@ -436,11 +490,11 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-md);
-    color: var(--text-muted);
+    color: var(--accent-text);
     transition: color var(--duration-fast) var(--ease-standard),
                 background-color var(--duration-fast) var(--ease-standard);
   }
-  .social-link:hover { color: var(--ink-1); background: var(--ink-1-a08); }
+  .social-link:hover { color: var(--accent-hover); background: var(--accent-a08); }
   .social-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   @media (max-width: 900px) {
@@ -474,10 +528,18 @@
 <div class="hero-backdrop">
   <section class="hero">
     <div class="hero-text reveal">
-      <h1 class="lead" aria-label="10+ years of turning messy, ambiguous enterprise problems into design and research work that identifies what is broken before solutioning a fix.">
-        <span aria-hidden="true">10+ years of turning <mark><span class="typed" data-words="messy|ambiguous|complex">messy, ambiguous</span></mark><br> enterprise problems into design and research work<br class="br-wide"> that identifies what is broken before solutioning a fix.</span>
+      <h1 class="lead" aria-label="I transform enterprise complexity and ambiguity into clarity for highly regulated workflows">
+        <span aria-hidden="true">I transform enterprise <mark><span class="typed" data-words="complexity|ambiguity">complexity and ambiguity</span></mark><br> into clarity for highly regulated workflows</span>
       </h1>
-      <p class="sub">A product designer &amp; strategist who also happens to be an engineer.</p>
+      <p class="sub">With 12 years of industry experience specializing in security and regulated tech, I translate dense data architecture and rigid compliance constraints into B2B products that are easy to use and built to grow. My background in development helps make informed design decisions grounded in how software works.</p>
+      <div class="logo-strip">
+        <p class="logo-label" id="logo-label">Previously worked with:</p>
+        <ul class="logo-row" aria-labelledby="logo-label">
+          <li><img src="images/logo-hcl-software.png" alt="HCLSoftware" style="height:10px"></li>
+          <li><img src="images/logo-10k-info.png" alt="10k Info" style="height:17px"></li>
+          <li><img src="images/logo-cedcoss.png" alt="CedCoss" style="height:17px"></li>
+        </ul>
+      </div>
     </div>
   </section>
 </div>
@@ -493,12 +555,11 @@
           </div>
         </div>
         <div class="project-body">
-        <h3>From conversations to structured evidence for founders</h3>
-        <p>How foundersBrew User interview agent helps solo founders taking the right build decisions</p>
+        <h3>From conversations to structured evidence for founders, and how it led to defining a bias detection framework.</h3>
         <div class="project-tags">
-            <span class="tag">0 &rarr; 1</span>
-            <span class="tag">AI enabled SaaS</span>
-            <span class="tag">Voice agent</span>
+            <span class="tag">0 &rarr; 1 AI system</span>
+            <span class="tag">Bias detection framework</span>
+            <span class="tag">HAX</span>
           </div>
         <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -511,12 +572,11 @@
           <div class="project-placeholder" data-label="Case study image/video"></div>
         </div>
         <div class="project-body">
-        <h3>Streamlining Security Compliance: The SCM WebUI Redesign</h3>
-        <p>How the product transitioned preserved control required by security experts while significantly enhancing operational efficiency and system clarity.</p>
+        <h3>How the redesign resulted in 66% reduction in checklist creation time and drop in support tickets for HCL BigFix&#39;s Security Compliance Manager</h3>
         <div class="project-tags">
-            <span class="tag">Enterprise product</span>
             <span class="tag">Cybersecurity</span>
-            <span class="tag">Legacy to Modernisation</span>
+            <span class="tag">End to end ownership</span>
+            <span class="tag">Legacy to modernisation</span>
           </div>
         <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -529,8 +589,7 @@
           <div class="project-placeholder" data-label="Case study image/video"></div>
         </div>
         <div class="project-body">
-        <h3>Defining and Designing the Onboarding Experience for BigFix SaaS</h3>
-        <p>Creating the first guided setup experience for a new SaaS product within an established enterprise.</p>
+        <h3>Designing for faster activation, time to first value and faster adoption of HCL BigFix&#39;s new SaaS venture.</h3>
         <div class="project-tags">
             <span class="tag">Enterprise SaaS</span>
             <span class="tag">0 &rarr; 1</span>
@@ -547,12 +606,11 @@
           <div class="project-placeholder" data-label="Case study image/video"></div>
         </div>
         <div class="project-body">
-        <h3>HCL BigFix Workspace+</h3>
-        <p>Turning a technical endpoint-management tool into an employee-facing workspace.</p>
+        <h3>Redesigning BigFix&#39;s self service application laid the foundation for the next gen of the product, while also resulting in ~ 45% reduction in task completion time for employees</h3>
         <div class="project-tags">
-            <span class="tag">Enterprise SaaS</span>
-            <span class="tag">Employee Experience</span>
-            <span class="tag">Systems Design</span>
+            <span class="tag">AI integration</span>
+            <span class="tag">End to end ownership</span>
+            <span class="tag">Digital employee experience</span>
           </div>
         <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -623,8 +681,14 @@
     <h2 class="section-title reveal">Community &amp; mentorship</h2>
     <div class="community-grid">
       <figure class="community-figure reveal">
+        <figcaption class="community-caption">With final year students at IIT Gauhati and fellow speakers</figcaption>
         <img class="community-media" src="images/community-devfest.jpg" alt="Group photo of DevFest attendees and speakers, including Sanchita, at a mentorship and community event" />
-        <figcaption class="community-caption">With final year students at IIT Gauhati and co-speakers</figcaption>
+        <div class="community-arrow" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+            <path class="arrow-line" pathLength="1" d=""/>
+            <path class="arrow-head" pathLength="1" d=""/>
+          </svg>
+        </div>
       </figure>
       <div class="community-notes">
         <div class="quote-card reveal">
@@ -642,7 +706,7 @@
 
 <footer class="reveal">
     <a class="social-link" href="https://www.linkedin.com/in/sanchitasrivastava/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
-    <a class="social-link" href="#" aria-label="Medium"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 1 1-6.77-6.82A6.77 6.77 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42 3.38 2.88 3.38 6.42m2.94 0c0 3.17-.53 5.75-1.19 5.75s-1.19-2.58-1.19-5.75.53-5.75 1.19-5.75S23.9 8.83 23.9 12z"/></svg></a>
+    <a class="social-link" href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer" aria-label="Medium"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 1 1-6.77-6.82A6.77 6.77 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42 3.38 2.88 3.38 6.42m2.94 0c0 3.17-.53 5.75-1.19 5.75s-1.19-2.58-1.19-5.75.53-5.75 1.19-5.75S23.9 8.83 23.9 12z"/></svg></a>
     <a class="social-link" href="https://x.com/FoundersBrew_ca" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
 </footer>
 
@@ -651,5 +715,6 @@
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/typewriter.js" defer></script>
 <script src="js/carousel.js" defer></script>
+<script src="js/photo-arrow.js" defer></script>
 </body>
 </html>
