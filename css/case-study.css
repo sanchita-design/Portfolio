@@ -65,7 +65,7 @@ section#overview { gap: var(--space-4); }
 }
 h1 {
   font-family: var(--font-serif);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(2rem, 3vw, 2.75rem);
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -73,19 +73,34 @@ h1 {
   color: var(--ink-1);
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: calc(1.5rem + 2px);
   font-weight: 500;
   margin: 0;
   color: var(--ink-1);
+}
+/* section titles in the serif; sub-titles (h3) and sub-sub-titles (h4) stay in the sans */
+main > section > h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 h3 {
   font-size: 1.1rem;
   font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--ink-1);
+}
+/* sub-sub heading: same look as the card titles (e.g. Reduced cognitive load) */
+h4 {
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.35;
   margin: 0;
   color: var(--ink-1);
 }
 p {
-  font-size: var(--text-caption);
+  font-size: var(--text-base);
   line-height: var(--leading-relaxed);
   margin: 0;
   color: var(--text-muted);
@@ -100,7 +115,7 @@ blockquote {
   padding: var(--space-3) var(--space-4);
   border-left: 3px solid var(--accent);
 }
-blockquote p { color: var(--accent-text); }
+blockquote p { color: var(--accent-text); font-size: calc(var(--text-base) - 2px); }
 
 /* media placeholders — swap the inner <img>/<video> in when real assets are ready */
 .media {
@@ -151,6 +166,26 @@ blockquote p { color: var(--accent-text); }
   .media-frame { padding: 20px; }
 }
 
+/* two screens side by side in one tinted frame */
+.media-frame-pair {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+/* each item takes width in proportion to its aspect ratio (--ar), so both end up the same height */
+.media-frame-pair > * {
+  flex: var(--ar, 1) 1 0;
+  min-width: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+@media (max-width: 720px) {
+  .media-frame-pair { flex-direction: column; }
+  .media-frame-pair > * { flex: none; }
+}
+
 /* simple data table: label-style header, hairline row dividers */
 .table-scroll { overflow-x: auto; }
 .rules-table {
@@ -171,7 +206,7 @@ blockquote p { color: var(--accent-text); }
 .rules-table td {
   padding: var(--space-3) var(--space-4) var(--space-3) 0;
   vertical-align: top;
-  font-size: var(--text-caption);
+  font-size: var(--text-base);
   line-height: var(--leading-relaxed);
   color: var(--text-muted);
   border-bottom: 1px solid var(--ink-1-a12);
@@ -251,7 +286,8 @@ blockquote p { color: var(--accent-text); }
   flex-direction: column;
   gap: 6px;
 }
-.list li { font-size: var(--text-caption); line-height: var(--leading-relaxed); color: var(--text-body); }
+.list li { font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-body); }
+.list-body li { color: var(--text-muted); }
 
 /* role / product meta */
 .meta-grid {
@@ -291,6 +327,9 @@ blockquote p { color: var(--accent-text); }
   font-weight: 300;
   color: var(--accent-text);
 }
+/* outcome card headings in blue (FoundersBrew, SCM) */
+#outcome .point h3,
+#outcomes .stat h3 { color: var(--accent-text); font-weight: 400; }
 .stat-label { font-size: var(--text-base); font-weight: 500; color: var(--ink-1); }
 .stat-detail { font-size: var(--text-caption); color: var(--text-muted); }
 
@@ -344,7 +383,7 @@ blockquote p { color: var(--accent-text); }
 .point-row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .point { display: flex; flex-direction: column; gap: var(--space-2); }
 .point h3 { font-size: var(--text-base); line-height: 1.35; }
-.point p { font-size: var(--text-caption); line-height: var(--leading-relaxed); }
+.point p { font-size: var(--text-base); line-height: var(--leading-relaxed); }
 
 /* option / principle / state cards */
 .card-grid {
@@ -367,7 +406,7 @@ blockquote p { color: var(--accent-text); }
   font-weight: 500;
   letter-spacing: 0.04em;
 }
-.option-card p { font-size: var(--text-caption); color: var(--text-body); }
+.option-card p { font-size: var(--text-base); color: var(--text-body); }
 
 /* plain highlight list */
 .plain-list {
@@ -376,7 +415,7 @@ blockquote p { color: var(--accent-text); }
   gap: var(--space-3);
   margin-top: var(--space-2);
 }
-.plain-list .item { font-size: var(--text-caption); line-height: var(--leading-relaxed); color: var(--text-body); }
+.plain-list .item { font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-body); }
 .plain-list .item strong { color: var(--ink-1); }
 
 /* takeaways / before-after change log */
@@ -415,3 +454,10 @@ blockquote p { color: var(--accent-text); }
   .meta-grid { grid-template-columns: 1fr; }
   .point-row, .point-row-2, .point-row-3 { grid-template-columns: 1fr; }
 }
+
+/* three-column classification: a short title and description per column, no cards or dividers */
+.classify { margin-top: var(--space-5); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); }
+.classify-head { display: flex; flex-direction: column; gap: var(--space-2); }
+.classify-head h3 { margin: 0 !important; font-size: var(--text-base); line-height: 1.35; }
+.classify-head p { margin: 0; }
+@media (max-width: 900px) { .classify { gap: var(--space-4); } }@media (max-width: 520px) { .classify { grid-template-columns: 1fr; gap: var(--space-5); } }

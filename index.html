@@ -4,8 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sanchita — Product designer &amp; strategist</title>
-<meta name="description" content="Product designer &amp; strategist with an engineering background — 10+ years modernising legacy workflows and shaping enterprise products people actually want to use." />
+<meta name="description" content="Product designer &amp; strategist with an engineering background — 12 years modernising legacy workflows and shaping enterprise products people actually want to use." />
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
@@ -14,6 +16,53 @@
 
 <style>
   .carousel-track > .card { background: transparent; }
+
+  /* very soft ambient gradient behind the whole page: big, low-contrast washes of colour close to the paper tone,
+     drifting slowly enough to feel alive without drawing the eye */
+  .ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .ambient span {
+    position: absolute;
+    width: 80vmax;
+    height: 80vmax;
+    border-radius: 50%;
+    will-change: transform;
+  }
+  .ambient .a1 {
+    top: -30vmax; left: -22vmax;
+    background: radial-gradient(closest-side, rgba(176, 214, 240, 0.34), rgba(176, 214, 240, 0));
+    animation: ambientA 30s ease-in-out infinite alternate;
+  }
+  .ambient .a2 {
+    top: 0; right: -30vmax;
+    background: radial-gradient(closest-side, rgba(170, 200, 245, 0.34), rgba(170, 200, 245, 0));
+    animation: ambientB 36s ease-in-out infinite alternate;
+  }
+  .ambient .a3 {
+    bottom: -34vmax; left: 8vmax;
+    background: radial-gradient(closest-side, rgba(196, 188, 240, 0.28), rgba(196, 188, 240, 0));
+    animation: ambientC 33s ease-in-out infinite alternate;
+  }
+  @keyframes ambientA {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40vmax, 26vmax) scale(1.38); }
+  }
+  @keyframes ambientB {
+    0%   { transform: translate(0, 0) scale(1.1); }
+    100% { transform: translate(-42vmax, 28vmax) scale(0.8); }
+  }
+  @keyframes ambientC {
+    0%   { transform: translate(0, 0) scale(0.95); }
+    100% { transform: translate(38vmax, -32vmax) scale(1.36); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ambient span { animation: none; }
+  }
   .hero-backdrop {
     position: relative;
     overflow: hidden;
@@ -40,6 +89,14 @@
     margin: 0;
     color: var(--text-heading);
   }
+  .hero-text .hello {
+    font-size: var(--text-label);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-1);
+  }
   .hero-text .lead {
     font-family: var(--font-serif);
     font-weight: 300;
@@ -53,8 +110,8 @@
   .hero-text .lead mark {
     font-weight: 300;
     font-style: italic;
-    background: rgba(215, 100, 47, 0.05);  /* kept light so the large orange word stays above 3:1 on the grain */
-    color: #D7642F;
+    background: rgba(73, 104, 220, 0.05);  /* kept light so the large blue word stays above 3:1 on the grain */
+    color: #4968DC;
     padding: 0 0.12em;
     margin: 0 -0.12em;
     -webkit-box-decoration-break: clone;
@@ -91,7 +148,7 @@
     height: 0.9em;
     margin-left: 2px;
     vertical-align: -0.1em;
-    background: #D7642F;
+    background: #4968DC;
     animation: caretBlink 1s steps(1) infinite;
   }
   @keyframes caretBlink { 50% { opacity: 0; } }
@@ -142,6 +199,8 @@
     cursor: pointer;
   }
   .project-body {
+    transform-origin: 0 50%;
+    transition: transform 800ms cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -155,9 +214,9 @@
     padding: 40px;
     /* grainy gradient frame around the placeholder: soft tinted blobs that reach all four edges.
        --tint is the brand colour as r,g,b; odd cards are orange, even cards blue. */
-    --tint: 215, 100, 47;
-    --tint-deep: 176, 70, 22;
-    --tint-pale: 226, 150, 108;
+    --tint: 226, 128, 78;
+    --tint-deep: 192, 95, 50;
+    --tint-pale: 234, 170, 132;
     background-color: color-mix(in srgb, rgb(var(--tint)) 68%, #fff);
     display: flex;
     align-items: center;
@@ -167,7 +226,7 @@
                 background-color 700ms ease,
                 padding 800ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .project-card:nth-child(even) .project-media { --tint: 73, 104, 220; --tint-deep: 38, 62, 170; --tint-pale: 118, 142, 232; }
+  .project-card:nth-child(odd) .project-media { --tint: 73, 104, 220; --tint-deep: 38, 62, 170; --tint-pale: 118, 142, 232; }
   /* gradient layer: bigger than the thumbnail, drifts and turns all the time, zooms and deepens on hover.
      Deep and pale shades of the brand colour alternate around the layer so the movement reads clearly in the narrow frame. */
   .project-media::before {
@@ -215,8 +274,10 @@
   .project-placeholder {
     position: relative;
     z-index: 2;
-    width: 100%;
-    height: 100%;
+    flex: 1 1 auto;
+    align-self: stretch;
+    min-width: 0;
+    min-height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,7 +296,16 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+  }
+  /* case study media keeps its own proportions: the white panel wraps it instead of cropping it */
+  .project-placeholder.has-media { flex: 0 0 auto; align-self: center; width: 100%; }
+  .project-placeholder.has-media img, .project-placeholder.has-media video {
+    position: static;
+    inset: auto;
+    display: block;
+    height: auto;
+    max-height: 100%;
   }
   /* film grain */
   .project-media::after {
@@ -252,6 +322,8 @@
   .project-card:focus-visible .project-media {
     box-shadow: 0 12px 24px -12px rgba(58,58,58,0.15), 0 2px 6px rgba(58,58,58,0.05);
   }
+  .project-card:hover .project-body,
+  .project-card:focus-visible .project-body { transform: scale(1.04); }
   .project-tags {
     display: flex;
     gap: var(--space-2);
@@ -301,6 +373,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .project-media, .project-media::before { transition: none; animation: none; }
+    .project-body { transition: none; }
+    .project-card:hover .project-body, .project-card:focus-visible .project-body { transform: none; }
     .project-card:hover .project-media::before,
     .project-card:focus-visible .project-media::before { scale: 1.45; rotate: 0deg; }
     .vcs-label span, .view-case-study svg { transition: none; }
@@ -433,30 +507,9 @@
     stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
+    visibility: hidden;  /* js/photo-arrow.js reveals it frame by frame */
   }
-  .community-arrow.is-playing .arrow-line { animation: arrowLine 7s cubic-bezier(0.45, 0.05, 0.25, 1) infinite; }
-  .community-arrow.is-playing .arrow-head { animation: arrowHead 7s ease-out infinite; }
-  /* draw (0-34%), hold, then rub out from the start (78-95%), pause, repeat */
-  @keyframes arrowLine {
-    0%   { stroke-dashoffset: 1; }
-    34%  { stroke-dashoffset: 0; }
-    78%  { stroke-dashoffset: 0; }
-    95%  { stroke-dashoffset: -1; }
-    100% { stroke-dashoffset: -1; }
-  }
-  @keyframes arrowHead {
-    0%, 33% { stroke-dashoffset: 1; opacity: 1; }
-    39%     { stroke-dashoffset: 0; opacity: 1; }
-    80%     { stroke-dashoffset: 0; opacity: 1; }
-    88%     { stroke-dashoffset: 0; opacity: 0; }
-    100%    { stroke-dashoffset: 1; opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .community-arrow path { stroke-dashoffset: 0; animation: none !important; }
-  }
-  .community-arrow.is-static path { stroke-dashoffset: 0; }
+  /* the draw / hold / rub-out loop is driven from js/photo-arrow.js so every pass is computed from the clock, not from animation restarts */
   .community-caption {
     margin: 0;
     font-size: var(--text-caption);
@@ -514,12 +567,13 @@
 </style>
 </head>
 <body>
+<div class="ambient" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
 
 <header class="site-header">
   <div class="wrap header-bar">
     <nav class="primary-nav">
       <a href="index.html" class="current">Work</a>
-      <a href="sanchita.html">Sanchita</a>
+      <a href="sanchita.html">About</a>
       <a href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer">Blog</a>
     </nav>
   </div>
@@ -528,16 +582,17 @@
 <div class="hero-backdrop">
   <section class="hero">
     <div class="hero-text reveal">
-      <h1 class="lead" aria-label="I transform enterprise complexity and ambiguity into clarity for highly regulated workflows">
-        <span aria-hidden="true">I transform enterprise <mark><span class="typed" data-words="complexity|ambiguity">complexity and ambiguity</span></mark><br> into clarity for highly regulated workflows</span>
+      <p class="hello">Hello, I am Sanchita &amp;</p>
+      <h1 class="lead" aria-label="I translate enterprise complexity and ambiguity into clarity for highly regulated workflows">
+        <span aria-hidden="true">I translate enterprise <mark><span class="typed" data-words="complexity|ambiguity">complexity and ambiguity</span></mark><br> into clarity for highly regulated workflows</span>
       </h1>
-      <p class="sub">With 12 years of industry experience specializing in security and regulated tech, I translate dense data architecture and rigid compliance constraints into B2B products that are easy to use and built to grow. My background in development helps make informed design decisions grounded in how software works.</p>
+      <p class="sub">12 years in security and regulated tech (8 in design, 4 in development). I turn dense data and rigid constraints into B2B products that are easy to use, including AI that users can understand and trust. My dev background keeps my design grounded in how software actually works.</p>
       <div class="logo-strip">
         <p class="logo-label" id="logo-label">Previously worked with:</p>
         <ul class="logo-row" aria-labelledby="logo-label">
-          <li><img src="images/logo-hcl-software.png" alt="HCLSoftware" style="height:10px"></li>
-          <li><img src="images/logo-10k-info.png" alt="10k Info" style="height:17px"></li>
-          <li><img src="images/logo-cedcoss.png" alt="CedCoss" style="height:17px"></li>
+          <li><img src="images/logo-hcl-software.png" alt="HCLSoftware" style="height:10px" loading="lazy" decoding="async"></li>
+          <li><img src="images/logo-10k-info.png" alt="10k Info" style="height:17px" loading="lazy" decoding="async"></li>
+          <li><img src="images/logo-cedcoss.png" alt="CedCoss" style="height:17px" loading="lazy" decoding="async"></li>
         </ul>
       </div>
     </div>
@@ -550,12 +605,12 @@
 
       <a class="project-card reveal" href="foundersbrew-case-study.html">
         <div class="project-media">
-          <div class="project-placeholder has-media" data-label="Case study image/video">
-            <video src="videos/founders-brew-hero.mov" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+          <div class="project-placeholder has-media">
+            <video src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
           </div>
         </div>
         <div class="project-body">
-        <h3>From conversations to structured evidence for founders, and how it led to defining a bias detection framework.</h3>
+        <h3>From conversations to structured evidence for founders that led to defining a bias detection framework for the FoundersBrew user discovery agent.</h3>
         <div class="project-tags">
             <span class="tag">0 &rarr; 1 AI system</span>
             <span class="tag">Bias detection framework</span>
@@ -569,10 +624,12 @@
 
       <a class="project-card reveal" href="scm-webui-case-study.html">
         <div class="project-media">
-          <div class="project-placeholder" data-label="Case study image/video"></div>
+          <div class="project-placeholder has-media">
+            <img src="images/bigfix-hero.png" alt="HCL BigFix Security Configuration Management web UI" loading="lazy" decoding="async">
+          </div>
         </div>
         <div class="project-body">
-        <h3>How the redesign resulted in 66% reduction in checklist creation time and drop in support tickets for HCL BigFix&#39;s Security Compliance Manager</h3>
+        <h3>Modernisation of HCL BigFix&#39;s SCM that cut checklist creation time by ~40%</h3>
         <div class="project-tags">
             <span class="tag">Cybersecurity</span>
             <span class="tag">End to end ownership</span>
@@ -583,6 +640,8 @@
         </span>
         </div>
       </a>
+
+      <!-- Hidden for now: the two BigFix case study cards below
 
       <a class="project-card reveal" href="bigfix-saas-onboarding-case-study.html">
         <div class="project-media">
@@ -617,6 +676,7 @@
         </span>
         </div>
       </a>
+      -->
 
     </div>
   </section>
@@ -682,7 +742,7 @@
     <div class="community-grid">
       <figure class="community-figure reveal">
         <figcaption class="community-caption">With final year students at IIT Gauhati and fellow speakers</figcaption>
-        <img class="community-media" src="images/community-devfest.jpg" alt="Group photo of DevFest attendees and speakers, including Sanchita, at a mentorship and community event" />
+        <img class="community-media" src="images/community-devfest.jpg" alt="Group photo of DevFest attendees and speakers, including Sanchita, at a mentorship and community event" loading="lazy" decoding="async" />
         <div class="community-arrow" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none">
             <path class="arrow-line" pathLength="1" d=""/>
@@ -716,5 +776,6 @@
 <script src="js/typewriter.js" defer></script>
 <script src="js/carousel.js" defer></script>
 <script src="js/photo-arrow.js" defer></script>
+<script src="js/lazy-video.js" defer></script>
 </body>
 </html>

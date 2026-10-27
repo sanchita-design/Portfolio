@@ -58,14 +58,55 @@
 
   function ready() { fig.classList.add('has-arrow'); layout(); }
   // The arrow redraws itself in a continuous loop, but only while the photo is on screen.
-  function play() { band.classList.add('is-playing'); }
-  function stop() { band.classList.remove('is-playing'); }
+  // Every frame is computed from the clock (position within the 7s cycle), so each pass is
+  // identical and nothing depends on animation restarts or on negative dash offsets.
+  var CYCLE = 7000;
+  var raf = 0, t0 = 0;
+
+  function bezier(x1, y1, x2, y2) {
+    function cx(t) { return 3 * x1 * t * (1 - t) * (1 - t) + 3 * x2 * t * t * (1 - t) + t * t * t; }
+    function cy(t) { return 3 * y1 * t * (1 - t) * (1 - t) + 3 * y2 * t * t * (1 - t) + t * t * t; }
+    return function (x) {
+      var lo = 0, hi = 1, t = x;
+      for (var i = 0; i < 24; i++) { t = (lo + hi) / 2; if (cx(t) < x) lo = t; else hi = t; }
+      return cy(t);
+    };
+  }
+  var easeLine = bezier(0.45, 0.05, 0.25, 1);
+  var easeHead = bezier(0, 0, 0.58, 1);
+  function seg(p, a, b) { return p <= a ? 0 : p >= b ? 1 : (p - a) / (b - a); }
+
+  // shows only the stretch [from, to] of a path (0-1 along its length); hides it when empty.
+  // One dash of that length, pushed along by 'from', with a gap far longer than the path
+  // so the pattern never repeats on the line.
+  function setSpan(el, from, to, opacity) {
+    if (to - from < 0.002 || opacity <= 0.001) { el.style.visibility = 'hidden'; return; }
+    el.style.visibility = 'visible';
+    el.style.strokeDasharray = (to - from) + ' 10';
+    el.style.strokeDashoffset = String(-from);
+    el.style.opacity = opacity;
+  }
+
+  function frame(now) {
+    var p = ((now - t0) % CYCLE) / CYCLE;
+    // line: draw 0-34%, hold, rub out from the start 78-95%, pause
+    var drawn = easeLine(seg(p, 0, 0.34));
+    var rubbed = easeLine(seg(p, 0.78, 0.95));
+    setSpan(line, rubbed, drawn, 1);
+    // arrowhead: pops in 33-39%, holds, fades 80-88%
+    var headIn = easeHead(seg(p, 0.33, 0.39));
+    var headFade = 1 - easeHead(seg(p, 0.80, 0.88));
+    setSpan(head, 0, headIn, headFade);
+    raf = requestAnimationFrame(frame);
+  }
+  function play() { if (raf) return; t0 = performance.now(); raf = requestAnimationFrame(frame); }
+  function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; }
 
   if (img.complete) ready(); else img.addEventListener('load', ready);
   window.addEventListener('resize', layout);
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) { band.classList.add('is-static'); return; }
+  if (reduce || !('IntersectionObserver' in window)) { line.style.visibility = head.style.visibility = 'visible'; return; }
   new IntersectionObserver(function (entries) {
     entries.forEach(function (e) { if (e.isIntersecting) play(); else stop(); });
   }, { threshold: 0.4 }).observe(fig);

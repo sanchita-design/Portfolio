@@ -6,6 +6,8 @@
 <title>FoundersBrew — Case study | Sanchita</title>
 <meta name="description" content="From conversations to structured evidence for founders — how FoundersBrew's adaptive interview agent turns founder conversations into evidence founders can act on." />
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
@@ -46,12 +48,6 @@
   .timeline-spacer .timeline-line { width: 1px; height: 100%; margin: 0 auto; }
   .timeline-step h3 { margin: 0; }
   .timeline-step p { margin: var(--space-2) 0 0; }
-
-  /* text accents on this page use the brand orange instead of the brand blue */
-  :root { --brand-orange: #D7642F; --brand-orange-text: #B14A1B; --brand-orange-deep: #A8481D; }  /* -text meets 4.5:1 on white and on the grey paper for body-size text */
-  main blockquote { border-left-color: var(--brand-orange); }
-  main blockquote p, main .callout { color: var(--brand-orange-text); }
-  main .person-name, main .person-name a { color: var(--brand-orange-text); }
 
   /* skim tip: a small label fixed to the bottom-left corner; the full tip shows on hover or focus */
   .skim-tip {
@@ -105,13 +101,6 @@
   }
   @media print { .skim-tip { display: none; } }
 
-  /* section titles in the serif; sub-titles (h3) stay in the sans */
-  main > section > h2 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-
   /* guideline rows: text on the left, screens on the right, no stepper */
   .guideline-list { display: flex; flex-direction: column; gap: var(--space-7); }
   .guideline-list-tight { gap: 40px; }  /* text rows: close together, but with room for their longer content */
@@ -155,7 +144,7 @@
   <div class="wrap header-bar">
     <nav class="primary-nav">
       <a href="index.html">Work</a>
-      <a href="sanchita.html">Sanchita</a>
+      <a href="sanchita.html">About</a>
       <a href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer">Blog</a>
     </nav>
   </div>
@@ -171,6 +160,7 @@
       <a class="rail-link" href="#solution">The solution</a>
       <a class="rail-link" href="#outcome">Outcome</a>
       <a class="rail-link" href="#directional-landscape">Understanding the landscape</a>
+      <a class="rail-link" href="#visual-design">Visual design direction</a>
       <a class="rail-link" href="#context">Human in the loop</a>
       <a class="rail-link" href="#agent-workflow">The agent workflow and bias detection</a>
       <a class="rail-link" href="#interview-experience">The interview experience</a>
@@ -182,16 +172,15 @@
       <section id="overview">
         <h1>From conversations to structured evidence for founders</h1>
         <p class="lede">FoundersBrew's AI agent helps early-stage founders move beyond validating their assumptions to gathering evidence from their target audience through agentic discovery interviews.</p>
-        <p class="lede">I took ownership of designing the founder and participant experiences, exploring how AI could support research while keeping people in control of important decisions. My work spanned product UX, Human-AI Experience (HAX), agent workflows and the design of a post-interview bias detection framework.</p>
 
         <div class="meta-grid">
           <div class="meta-item"><span class="meta-label">Domain</span><span class="meta-value">AI-Enabled SaaS / Founder Research</span></div>
           <div class="meta-item"><span class="meta-label">Product area</span><span class="meta-value">Adaptive User Interviews</span></div>
-          <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Bias detection framework, HAX and agent workflow</span></div>
+          <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Human Agent interaction, Founder onboarding, Hypotheses Validation</span></div>
         </div>
 
-        <div class="media-crop">
-          <video src="videos/founders-brew-hero.mov" autoplay muted loop playsinline></video>
+        <div class="media hero" style="aspect-ratio:1920/1008">
+          <video style="display:block" src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="metadata" autoplay muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
         </div>
       </section>
 
@@ -200,13 +189,12 @@
         <p class="lede">The journey from idea to MVP depends on gathering the right evidence to make informed product decisions. However, founders often enter discovery with assumptions about their ideas and unintentionally seek validation rather than genuine insights. Leading questions encourage responses in a particular direction, while feedback scattered across calls, messages, documents, and spreadsheets makes it difficult to identify meaningful patterns.</p>
         <p class="lede">As a result, founders risk mistaking encouragement for evidence and making build decisions based on weak signals, potentially leading them to build the wrong product.</p>
         <blockquote>
-          <p>The challenge is the lack of a structured system that guides founders through discovery with their target audience, helps them gather reliable evidence, identify meaningful patterns, and make informed decisions about what to build.</p>
+          <p>The challenge is the lack of a structured system that guides founders through discovery with their target audience and helps them gather reliable evidence.</p>
         </blockquote>
 
 
-        <img class="media-natural" src="images/foundersbrew-current-state-journey.png" alt="Current state founder journey and behaviour diagram">
+        <img class="media-natural" src="images/foundersbrew-current-state-journey.png" alt="Current state founder journey and behaviour diagram" loading="lazy" decoding="async">
 
-        <p class="callout">Biased information = biased decision</p>
       </section>
 
       <section id="solution">
@@ -224,9 +212,7 @@
               <p>Founders answer a few questions about their idea, target audience and the problem they are trying to solve. The system combines their inputs with secondary research to build context for discovery.</p>
             </div>
             <div class="media-frame">
-              <div class="media-trim">
-                <video src="videos/foundersbrew-questions-asked.mov" autoplay muted loop playsinline aria-label="Founder answering context questions"></video>
-              </div>
+              <img class="media-natural" src="images/foundersbrew-founder-context.png" alt="The first of four founder context questions: What are you thinking of building?" loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -244,7 +230,7 @@
               <p>The AI agent uses this context to conduct interviews, asking follow-up questions, listening, probing and clarifying based on what participants share.</p>
             </div>
             <div class="media-frame">
-              <img class="media-natural" src="images/foundersbrew-probe.png" alt="Agent probing a participant during an adaptive interview">
+              <img class="media-natural" src="images/foundersbrew-probe.png" alt="Agent probing a participant during an adaptive interview" loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -258,12 +244,10 @@
             </div>
             <div>
               <h3>Evidence</h3>
-              <p>The system synthesises signals and patterns that helps the founders take the next best action.</p>
+              <p>The system tells which hypotheses got validated and what was challenged.</p>
             </div>
             <div class="media-frame">
-              <div class="media-trim" style="--w:3840;--h:2076;--t:2;--r:0;--b:0;--l:0">
-                <video src="videos/foundersbrew-solution-product.mov" data-speed="0.8" autoplay muted loop playsinline aria-label="The FoundersBrew dashboard: the idea's Brew score, the gaps identified, the next best action and where the idea stands across market, users, opportunity, feasibility and MVP"></video>
-              </div>
+              <img class="media-natural" src="images/foundersbrew-evidence-screen.png" alt="The FoundersBrew evidence screen showing which hypotheses were validated and which were challenged" loading="lazy" decoding="async">
             </div>
           </div>
         </div>
@@ -271,7 +255,20 @@
 
       <section id="outcome">
         <h2>Outcome</h2>
-        <p class="lede">This led to the development of Bias Detection Framework version 1, a structured approach to identifying potential agent-induced bias in customer discovery interviews. The framework combines contextual LLM evaluation with deterministic validation to produce traceable, evidence-backed findings, helping founders understand where interview responses may have been influenced by the research agent.<br><br>Beyond supporting the reliability of user insights, these findings also establish a foundation for future agent improvement. As the framework is tested and refined, reviewed bias findings will be used to build evaluation datasets and inform future agent training, helping the research agent ask more neutral questions over time.</p>
+        <div class="point-row point-row-3">
+          <div class="point">
+            <h3>Established foundations for trustworthy AI</h3>
+            <p>Defined contextual bias criteria, edge cases and deterministic validation requirements with engineering.</p>
+          </div>
+          <div class="point">
+            <h3>Established a scalable UX foundation</h3>
+            <p>Designed a minimal, reusable interface and consistent interaction patterns for the first release post MVP.</p>
+          </div>
+          <div class="point">
+            <h3>Designed for user control and agency</h3>
+            <p>Iterated on interactions, design and product copy with feedback from 6 founders and early collaborators.</p>
+          </div>
+        </div>
         <h3 style="margin-top:var(--space-7)">Early product collaborators</h3>
         <div class="quote-card">
           <p>"I used the FoundersBrew discovery agent to better understand what products my target audience was looking for. It helped me challenge my assumptions and reduce uncertainty around key business decisions."</p>
@@ -282,37 +279,118 @@
       <section id="directional-landscape">
         <h2>Understanding the landscape</h2>
         <p class="lede">The first thing I did was to understand where the FoundersBrew interview agent would stand. I went onto understand who our competitors were, what other adaptive interview agents were available.</p>
-        <img class="media-natural" src="images/foundersbrew-directional-landscape.svg" alt="Directional landscape diagram">
+        <img class="media-natural" src="images/foundersbrew-directional-landscape.svg" alt="Directional landscape diagram" loading="lazy" decoding="async">
          <p class="lede">This not only provided direction but also helped me think how this agentic system should work</p>
 
-        <h3 style="margin-top:var(--space-7)">But will people talk to an agent?</h3>
-        <p class="lede">When the agent first came up my first instinct was to question if people will talk to the agent, and AI-led interviewing wasn't entirely new, competitors were already building compelling conversational research products. More recent research by Wuttke (2025) demonstrated the feasibility of LLM-led interviews, while Barari (2026) highlighted the potential for richer responses.</p>
+        <h3 style="margin-top:var(--space-7)">But will people willingly talk to an AI agent?</h3>
+        <p class="lede">When the idea of an AI interviewer first came up, my immediate question was whether people would actually feel comfortable having a conversation with one. AI-led interviewing wasn&#39;t entirely new. Competitors were already developing compelling conversational research products, but I wanted to understand whether there was evidence of genuine participant willingness, beyond the technology itself.</p>
+        <p class="lede">Research by Wuttke et al. (2025) demonstrated the feasibility of LLM-led interviews, while Barari et al. (2026) found that AI-assisted conversations could elicit more detailed and informative responses.</p>
+        <p class="lede">More importantly, Chopra and Haaland (2026) found that 90% of respondents expressed interest in an AI-led interview, compared with 89% for a traditional survey. In their separate AI-interview studies, over 90% of participants who started completed the interview, even though completing it wasn&#39;t required for payment.</p>
+        <p class="lede">This was reinforced by Gheyi et al. (2026), who analysed 66 completed AI-led interviews and found that 90.9% felt comfortable answering questions, while 89.4% said they would participate again.</p>
+        <p class="lede">There was also evidence supporting the importance of relevance. Groves, Presser and Dipko examined how interest in a research topic influences people&#39;s decisions to participate, supporting the rationale for approaching respondents with a subject that matters to them.</p>
+        <blockquote>
+          <p>Taken together, these findings gave us a credible foundation. AI could conduct meaningful interviews, participants showed willingness to engage, and topic relevance offered a reason to take part. Combined with competitors already demonstrating the product concept, the FoundersBrew team chose a <span style="color:var(--accent-text)">me-too approach</span>, bringing AI-led interviewing into the early-stage founder discovery workflow.</p>
+        </blockquote>
+      </section>
+
+      <section id="visual-design">
+        <h2>Visual design direction</h2>
+        <p class="lede">As FoundersBrew prepared for its accelerator applications in early 2027, I prioritised a lightweight, scalable UI that aligned with the product&#39;s early-stage goals and engineering constraints.</p>
+        <p class="lede">I used reusable components, consistent interaction patterns and progressive disclosure to create an intuitive experience while reducing implementation complexity and maintenance effort.</p>
+        <img class="media-natural" src="images/foundersbrew-visual-direction.png" alt="The visual direction for FoundersBrew: a lightweight UI built from reusable components" loading="lazy" decoding="async">
+        <blockquote>
+          <p>This was a deliberate design decision that allowed the team to iterate faster and focus engineering resources on validating the product&#39;s core strength which is delivering high-quality adaptive AI interviews.</p>
+        </blockquote>
       </section>
 
       <section id="context">
         <h2>Human in the loop</h2>
         <p class="lede">I designed the workflow around a human-in-the-loop approach, where AI handles research and analysis while founders retain control over key decisions. The challenge was deciding where the system should take responsibility and where founders needed to remain involved.</p>
         <p class="lede">This shaped three parts of the experience, how founders provide context, choose what gets tested, and control the evidence used in synthesis.</p>
-        <img class="media-natural" src="images/foundersbrew-context-workflow.png" alt="Agent context workflow diagram">
+        <img class="media-natural" src="images/foundersbrew-context-workflow.png" alt="Agent context workflow diagram" loading="lazy" decoding="async">
          <h3 style="margin-top:var(--space-7)">Helping founders provide the right context</h3>
-        <p class="lede">The process begins with founders describing their ideas, target audiences, and the problems they want to solve. Their responses provide the context for the system's research and recommendations. My first iteration was a chat like experience, however, when I tested an early prototype with founders, I found that the conversational format challenged their mental model rather than helping them structure their thoughts.</p>
-        <img class="media-natural" src="images/foundersbrew-chat-vs-questions.png" alt="Early chat-style prototype compared with the progressive questionnaire used in the final design">
-        
-        <h3 style="margin-top:var(--space-7)">Letting founders decide what gets tested</h3>
+        <p class="lede">The process begins with founders describing their ideas, target audiences, and the problems they want to solve. FoundersBrew's questionnaire is not a conventional onboarding form. It is the input layer for a research system. The four answers influence which market the system investigates, which users and conversations it looks for, which competitors and substitutes it identifies, which hypotheses it generates, and the context  supplied to the discovery agent.</p>
+        <p class="lede">That makes the objective different from simply maximizing form completion. The questionnaire should optimize for answers that are <span style="color:var(--accent-text)">specific, researchable, honest about uncertainty, and recognizably the founder&#39;s own thinking</span>.</p>
+        <img class="media-natural" src="images/foundersbrew-chat-vs-questions.png" alt="The initial founder questionnaire with direct questions, compared with the revised version that adds reflective prompts and a Need a little help guidance panel" loading="lazy" decoding="async">
+        <blockquote>
+          <p>Reduce the effort required to understand each question, while preserving the effort required to think about the answer.</p>
+        </blockquote>
+
+        <h3 style="margin-top:var(--space-7)">Why I added 'not sure yet' as a valid response</h3>
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <h3 style="font-weight:400">Reduced cognitive load</h3>
+              <p>I gave founders a way to move forward without having to formulate an answer they weren&#39;t ready to provide.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <h3 style="font-weight:400">Prevented forced assumptions</h3>
+              <p>I reduced the risk of founders inventing information simply to complete the questionnaire.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <h3 style="font-weight:400">Preserved research integrity</h3>
+              <p>I ensured the system could distinguish between assumptions founders had actually expressed and areas where they remained uncertain.</p>
+            </div>
+          </div>
+        </div>
+
+        <img class="media-natural" src="images/foundersbrew-not-sure-yet.png" alt="Question 4 of 4 of the founder questionnaire, with a Not sure yet option beside the Need a little help? guidance, annotated as a valid response" loading="lazy" decoding="async">
+
+
+        <h3 style="margin-top:var(--space-7)">Why I decided against integrating AI in the onboarding questionnaire?</h3>
+        <p class="lede">One thing very clear about FoundersBrew is that FoundersBrew should use AI to investigate the founder&#39;s thinking, not necessarily to generate that thinking for them. At this point Founders need to articulate their own assumptions before those assumptions are challenged. It&#39;s also the founder&#39;s first moment of structured reflection.</p>
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <h3 style="font-weight:400">More friction</h3>
+              <p>A simple questionnaire becomes an unpredictable conversation with additional questions before the founder gets any value.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <h3 style="font-weight:400">False precision</h3>
+              <p>AI might push founders to elaborate on assumptions they haven&#39;t verified, making guesses sound more concrete than they really are.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <h3 style="font-weight:400">Unnecessary complexity</h3>
+              <p>This would add cost, latency, and another experience to design and test without knowing whether it improves the research output.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:var(--space-7)">What happens when the founder fills the questionnaire but the Brew report (hypotheses generation) system fails?</h3>
+        <p class="lede">When an AI service fails, <span style="color:var(--accent-text)">the system automatically attempts to recover without interrupting the founder&#39;s experience</span>.</p>
+        <p class="lede">If the issue persists, the founder sees a clear error message confirming that their saved progress is preserved, along with an option to retry. After repeated failures, the system offers a direct way to contact FoundersBrew support without requiring the founder to re-enter their information.</p>
+        <div class="media-frame media-frame-pair">
+          <img style="--ar:1.691" src="images/foundersbrew-something-went-wrong.png" alt="Error message shown when hypotheses generation fails, confirming saved progress is preserved and offering a retry" loading="lazy" decoding="async">
+          <video style="--ar:1.589" src="videos/foundersbrew-hypotheses-error.mp4" poster="videos/foundersbrew-hypotheses-error.jpg" preload="none" data-lazy muted loop playsinline aria-label="The error experience when hypotheses could not be prepared, with retry and contact support options"></video>
+        </div>
+
+        <h3 style="margin-top:var(--space-7)">Letting founders decide what gets tested first</h3>
          <p>Once founders provide their context, FoundersBrew combines their inputs with secondary research to generate hypotheses, ranked by risk.
 
 While the system recommends which assumptions to test first, the final decision remains with the founder.</p>
-        <div class="media-frame">
-          <div class="media-trim" style="--w:2940;--h:1752;--t:2;--r:0;--b:4;--l:0">
-            <video src="videos/foundersbrew-setting-up-interview.mov" autoplay muted loop playsinline aria-label="Founder reviewing ranked hypotheses and choosing which to test first"></video>
-          </div>
+        <img class="media-natural" src="images/foundersbrew-slide-out.png" alt="First slide-out design: hypotheses listed with checkboxes under the headline Identify what needs to be true for this idea to work" loading="lazy" decoding="async">
+        <p>Initially, this felt like a straightforward way to give founders control. But as I considered how the adaptive agent would actually conduct interviews, I noticed a mismatch between the interaction and the system&#39;s behaviour.</p>
+        <blockquote>
+          <p>Founders didn&#39;t necessarily need to choose which hypotheses were included or excluded. They needed to influence where the agent should begin. So I shifted from a selection model to a prioritisation model.</p>
+        </blockquote>
+        <img class="media-natural" src="images/foundersbrew-slide-out-new.png" alt="Redesigned slide-out headed Choose what to investigate first, with the highest-risk hypotheses marked as Focus" loading="lazy" decoding="async">
+
+        <div class="media" style="aspect-ratio:1920/1160">
+          <video style="display:block" src="videos/foundersbrew-interview-setup.mp4" poster="videos/foundersbrew-interview-setup.jpg" preload="none" data-lazy muted loop playsinline aria-label="Setting up the interview: founders choosing which hypotheses to investigate first"></video>
         </div>
-        <p>I designed a slide-out panel where founders can review the hypotheses, understand how they were prioritized, and reorder, deselect, or add their own assumptions without losing their place in the workflow. Following Human-AI Experience (HAX) guidelines, this makes AI recommendations transparent while allowing founders to override them.</p>
 
         <h3 style="margin-top:var(--space-7)">Giving founders control over the evidence</h3>
-         <p>Agent led interviews can introduce bias through leading questions or inaccurate interpretations, affecting the reliability of the final synthesis. To address this, I designed an option for founders to exclude questionable interviews without deleting the original research.</p>
+         <p>Not all interviews are of the same quality, and the founder can decide if they want to remove a particular interview from the synthesis, if they spot a quality issue, or a target audience mismatch. So I designed an option for founders to exclude questionable interviews without deleting the original research.</p>
         <div class="media-frame">
-          <img class="media-natural" src="images/foundersbrew-discard.png" alt="Interview review screen with a tooltip explaining that removing the interview excludes its signals from every synthesis">
+          <img class="media-natural" src="images/foundersbrew-evidence-control.png" alt="Interview review screen with a tooltip explaining that removing the interview excludes its signals from every synthesis" loading="lazy" decoding="async">
         </div>
         <p>The interface explains how this decision impacts hypothesis statuses and other findings, while allowing interviews to be restored later. This ensures founders can intervene when evidence quality is in question rather than relying entirely on AI-generated conclusions.</p>
 
@@ -324,8 +402,8 @@ While the system recommends which assumptions to test first, the final decision 
         </blockquote>
 
         <p class="lede">This could reinforce the very confirmation bias FoundersBrew was designed to address. I needed to consider the difference between giving founders control over research quality and allowing them to selectively remove inconvenient evidence.</p>
-        <h3 style="margin-top:var(--space-7)">How might we prevent founders from selectively excluding interviews that challenge their assumptions, while still giving them control over the quality of their research evidence?</h3>
-        <p class="lede"><span style="color:var(--brand-orange-text)">This pushed me to look beyond conventional UX patterns and led me to behavioural design</span>. I came across research on accountability and decision-making, particularly how asking people to justify their choices can encourage more deliberate thinking. It made me reconsider something we often prioritise in UX, 'reducing friction'</p>
+        <h3 style="margin-top:var(--space-7);font-weight:400">...so how might we prevent founders from selectively excluding interviews that challenge their assumptions, while still giving them control over the quality of their research evidence?</h3>
+        <p class="lede">This pushed me to look beyond conventional UX patterns and led me to <span style="color:var(--accent-text)">behavioural design</span>. I came across research on accountability and decision-making, particularly how asking people to justify their choices can encourage more deliberate thinking. It made me reconsider something we often prioritise in UX, 'reducing friction'</p>
 
         <blockquote>
           <p>What if removing friction wasn't always the right thing to do?</p>
@@ -333,15 +411,11 @@ While the system recommends which assumptions to test first, the final decision 
 
 
         <p class="lede">In this case, making interview exclusion effortless could allow founders to dismiss uncomfortable evidence without reflecting on why they were doing so. I explored introducing a small amount of intentional friction at the point of exclusion.</p>
-        <img class="media-natural" src="images/foundersbrew-friction.png" alt="Intentional friction at the point of exclusion: ask for a reason, make the impact visible, and preserve accountability">
+        <img class="media-natural" src="images/foundersbrew-friction.png" alt="Intentional friction at the point of exclusion: ask for a reason, make the impact visible, and preserve accountability" loading="lazy" decoding="async">
 
         <p class="lede" style="margin-top:var(--space-4)">Founders would be asked to provide a reason for excluding an interview and understand how that decision could affect their findings. The original research would remain accessible, and exclusions could be reversed.</p>
+        <img class="media-natural" src="images/foundersbrew-design-decisions.png" alt="Three design decisions for excluding an interview: choose a reason, write a mandatory description, and confirm before the interview is excluded" loading="lazy" decoding="async">
 
-        <div class="media-frame">
-          <div class="media-trim" style="--w:2940;--h:1754;--t:2;--r:0;--b:0;--l:0">
-            <video src="videos/foundersbrew-excluded.mov" autoplay muted loop playsinline aria-label="Exclude interview from synthesis: a reminder that a finding that challenges your hypothesis is not by itself a reason to exclude, with a required reason and the impact on hypotheses"></video>
-          </div>
-        </div>
 
         <blockquote>
           <p>The intention was to create a moment where they could reconsider whether they were questioning the quality of the evidence or simply disagreeing with what it revealed.</p>
@@ -350,7 +424,7 @@ While the system recommends which assumptions to test first, the final decision 
         <h3 style="margin-top:var(--space-7)">Making exclusion decisions visible</h3>
         <p class="lede">Instead of simply marking the interview as excluded, I designed the interface to keep the reason and explanation visible alongside the decision, while providing an option to restore it. The behavioural reasoning was to make founders aware of their past decisions and encourage them to reconsider those choices when reviewing their research.</p>
 
-        <img class="media-natural" src="images/foundersbrew-accountability.png" alt="Additional moments of accountability: the interviews list showing an excluded interview, and the interview review panel with the reason and explanation kept visible and an option to add the interview back to synthesis">
+        <img class="media-natural" src="images/foundersbrew-accountability.png" alt="Additional moments of accountability: the interviews list showing an excluded interview, and the interview review panel with the reason and explanation kept visible and an option to add the interview back to synthesis" loading="lazy" decoding="async">
         
         <h3 style="margin-top:var(--space-7)">The outcome</h3>
         <p>Rather than adding human oversight as a final approval step, I embedded it throughout the research workflow. Founders provide the context, choose what to investigate, and decide which evidence to trust. The AI supports them through research, prioritization, interviews, and synthesis.</p>
@@ -362,257 +436,85 @@ While the system recommends which assumptions to test first, the final decision 
 
       <section id="agent-workflow">
         <h2>The agent workflow and bias detection</h2>
-        <p class="lede">In this work <span style="color:var(--brand-orange-text)">this is the piece that took me beyond UX</span> to really think about how the agent architecture should look like. I defined the parameters to check the bias and what deterministic logic to write.
-        The initial version did not have a bias check step, the idea was to create the agent with real time bias detection, and let the agent learn, <em>however real-time bias detection would have added system complexity, additional LLM calls, and potential latency, affecting the natural flow of the conversation before the core experience was validated.</em></p>
-        <div class="guideline-row guideline-row-stack">
-          <p>So I proposed a post-interview bias-checking layer that could evaluate the complete transcript against predefined guardrails.</p>
-          <img class="media-natural" src="images/foundersbrew-agentic-framework.png" alt="User research agentic framework showing how the agent workflow classifies responses and checks for bias">
-        </div>
-
-
-        <blockquote>
-          <p>The trade-off: Post-processing cannot prevent bias during an interview, but it can identify questionable evidence before it influences founder's decisions.</p>
-        </blockquote>
-
-        <h3 style="margin-top:var(--space-7)">Starting with uncertainty</h3>
         <p class="lede">To ensure that founders weren't making decisions based on misleading evidence it was important to get it the bias detection right, but where do you even begin when bias can take so many forms?</p>
+        <h3 style="margin-top:var(--space-7)">Starting with uncertainty</h3>
         <p class="lede">The first thing I needed to understand was which biases we could realistically detect. Trying to address every type of bias in the first version wasn't feasible. Bias detection would need to be introduced incrementally, with the system evolving and becoming more capable over time.</p>
         <p class="lede">After conducting secondary research, I narrowed the scope to four types of biases that the first version would focus on</p>
-        <img class="media-natural" src="images/foundersbrew-bias.png" alt="The four types of bias the first version focuses on: leading question bias, assumption bias, confirmation bias and response contamination">
+        <img class="media-natural" src="images/foundersbrew-bias.png" alt="The four types of bias the first version focuses on: leading question bias, assumption bias, confirmation bias and response contamination" loading="lazy" decoding="async">
 
         <blockquote>
           <p>The design decision: I prioritised the biases most directly connected to agent behaviour and insight reliability, rather than attempting comprehensive bias detection in the first release. The selection was guided by three factors: impact on research quality, detectability from interview transcripts, and implementation feasibility.</p>
         </blockquote>
 
-        <h3 style="margin-top:var(--space-7)">Approach 01: Deterministic logic first, AI second</h3>
-        <p class="lede">My initial approach was to build a rule-based detection system. Every interview transcript would first pass through deterministic logic, where predefined rules would flag potential biases and mark instances that needed further evaluation. AI would then step in to examine what the deterministic rules couldn't confidently determine. The reasoning was straightforward: let deterministic logic handle what could be explicitly defined, and use AI for everything else. This would also reduce the amount of processing the AI needed to perform.</p>
 
-        <img class="media-natural" src="images/foundersbrew-deterministic.png" alt="Diagram of deterministic and LLM layering to identify bias: transcripts pass through a deterministic logic layer, which either identifies bias directly or sends it for further evaluation by an LLM layer, and both feed all identified biases">
-
-        <h3 style="margin-top:var(--space-7)">The problem with this approach</h3>
-        <p class="lede">As I began thinking through how this would work with real conversations, I realised there was a fundamental flaw. How do you write exhaustive rules for something as nuanced as human conversation? The meaning of a statement depends on its context, how a question was asked, and what came before it. It wasn't realistic to anticipate every possible conversational scenario and translate it into deterministic rules.</p>
-
+        <h3 style="margin-top:var(--space-7)">Bridging UX research and engineering</h3>
+        <p class="lede">One challenge I encountered while designing the AI interviewer was that <span style="color:var(--accent-text)">bias isn&#39;t always obvious from a single question</span>. The same wording could be leading in one conversation and a legitimate follow-up in another.</p>
+        <p class="lede">I needed to communicate this nuance to engineering in a way that could inform the bias-detection framework. I translated these considerations into five test scenarios.</p>
+        <img class="media-natural" src="images/foundersbrew-types-of-challenge.png" alt="Five scenarios to challenge different aspects of bias detection: clearly biased exchanges, neutral follow-ups, ambiguous exchanges, context-dependent questions and multiple bias instances" loading="lazy" decoding="async">
+        <p class="lede">I defined what the system should consider before flagging an exchange as biased</p>
+        <ul class="list list-body">
+          <li>Who introduced the idea? Was it the participant or the agent?</li>
+          <li>Was an assumption introduced as a fact?</li>
+          <li>Did the question suggest a preferred answer?</li>
+          <li>Did the participant&#39;s subsequent response appear influenced by that framing?</li>
+          <li>Is there an equally plausible, non-biased interpretation?</li>
+        </ul>
         <blockquote>
-          <p>The more I explored this approach, the clearer it became that the rules themselves would become a limitation.</p>
+          <p>Key requirement: A question shouldn&#39;t be marked as biased solely because of its wording. The surrounding conversation matters.</p>
         </blockquote>
 
-        <h3 style="margin-top:var(--space-7)">Approach 02: AI-led bias detection with structured guardrails</h3>
-        <p class="lede">Moving away from deterministic logic meant relying more heavily on AI to interpret conversations. But this introduced a different set of questions. How much could I trust the LLM's judgement? How would it distinguish a genuinely biased question from a legitimate follow-up? And how could I prevent it from making unsupported claims? As I started researching LLM-based detection, I realised how easily this could become a much larger problem than anticipated. There were varying degrees of severity of bias, and numerous conversational edge cases to consider.</p>
-
-        <blockquote>
-          <p>I knew I needed to define the boundaries early, or I risked over-designing the system for Release 1.</p>
-        </blockquote>
-
-        <h3 style="margin-top:var(--space-7)">Finding the right balance</h3>
-        <p class="lede">The next challenge was understanding how to give AI enough flexibility to interpret human conversations without relying entirely on its judgement.</p>
-        <p class="lede">I explored three possible directions:</p>
-        <img class="media-natural" src="images/foundersbrew-bias-detection.png" alt="Three possible directions for using LLMs for bias detection: direct LLM classification, multi-agent evaluation, and LLM with structured guardrails">
-
-        <blockquote>
-          <p>I needed a system with the flexibility to understand nuance of conversations, and also have structure to make the findings traceable and consistent. LLM with structured guardrails gave me that combination.</p>
-        </blockquote>
-
-        <h3 style="margin-top:var(--space-7)">What should the model look for, what evidence should it provide, and when should a finding be considered strong enough to report?</h3>
-        <p class="lede">With the approach established, the next challenge was translating it into a framework that could evaluate conversations consistently. It was important because it would influence the system's next best action and which target audience evidence founders trusted. Incorrectly flagging a valid exchange could be just as problematic as missing bias.</p>
 
 
-        <div class="guideline-list guideline-list-stepper">
-          <div class="guideline-row stepper-row">
-            <div class="timeline-dot-col" aria-hidden="true">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line"></div>
-            </div>
-            <h3>Evaluating the conversation</h3>
-            <div class="guideline-body">
-              <p>My first consideration was whether to evaluate each agent question independently or in the context of the conversation. For example, a question that sounds leading in isolation might simply be clarifying something the participant had already mentioned.<br><br>I defined a set of contextual questions to guide the model:<br>What had the participant already established?<br>Did the agent introduce a new assumption, benefit or suggested answer?<br>Did the question steer the participant towards a particular response?<br>How did the participant respond to that framing?</p>
-              <blockquote>
-                <p>Evaluating the wider conversation required more interpretation, but reduced the risk of treating legitimate follow-up questions as biased.</p>
-              </blockquote>
-            </div>
+        <h3 style="margin-top:var(--space-7)">Translating research requirements into validation rules</h3>
+        <p class="lede">Defining what constitutes bias was only part of the challenge. I also needed to consider how the system could produce findings that founders could trust and verify. Working with engineering, I helped separate bias detection into two responsibilities.</p>
+        <div class="point-row point-row-2">
+          <div class="point">
+            <h4>Contextual evaluation</h4>
+            <p>The AI examines the surrounding conversation to determine whether an exchange may be biased. This includes understanding what the participant said previously, who introduced an idea and whether the agent&#39;s question could reasonably be interpreted as neutral.</p>
           </div>
-          <div class="guideline-row stepper-row">
-            <div class="timeline-dot-col" aria-hidden="true">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line"></div>
-            </div>
-            <h3>Making findings traceable</h3>
-            <div class="guideline-body">
-              <p>The next decision was about what the model should return.<br><br>A bias classification alone wouldn't be useful. Even an explanation could sound convincing without being supported by the transcript. I required each finding to include the bias category, the specific agent turn, an exact quote, relevant conversational context and an explanation connecting the evidence to the assessment.</p>
-              <blockquote>
-                <p>A stricter output structure added constraints, but made findings easier to inspect, challenge and trace back to the original conversation.</p>
-              </blockquote>
-            </div>
-          </div>
-          <div class="guideline-row stepper-row">
-            <div class="timeline-dot-col" aria-hidden="true">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line"></div>
-            </div>
-            <h3>But when should bias be flagged?</h3>
-            <div class="guideline-body">
-              <p>Another challenge was determining how the system should handle uncertainty. A model could flag every potentially questionable exchange, but that risked treating ambiguous interpretations as established bias. I favoured reporting strongly supported findings rather than maximising the number of detected issues.<br><br>I also avoided numerical confidence scores and severity levels. Without sufficient calibration, these could communicate a level of precision the system hadn't demonstrated.</p>
-              <blockquote>
-                <p>A conservative threshold could miss subtle instances of bias, but reduced the risk of incorrectly flagging valid research exchanges.</p>
-              </blockquote>
-            </div>
-          </div>
-          <div class="guideline-row stepper-row">
-            <div class="timeline-dot-col" aria-hidden="true">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line"></div>
-            </div>
-            <h3>Defining what validation checks</h3>
-            <div class="guideline-body">
-              <p>The deterministic validation layer was already part of the chosen approach. Now I needed to specify exactly what it should verify and what should happen when a finding failed a check.<br><br>I defined six checks covering valid bias categories, transcript references, exact quotations, required fields, assessment status and duplicate findings.</p>
-              <p>These are the six checks</p>
-              <div class="table-scroll">
-                <table class="rules-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Rule</th>
-                      <th scope="col">Deterministic check</th>
-                      <th scope="col">If it fails</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>01. Category validation</td>
-                      <td>Is the finding one of the four types of bias we look for?</td>
-                      <td>Reject</td>
-                    </tr>
-                    <tr>
-                      <td>02. Reference validation</td>
-                      <td>Does the finding point to a real question in the transcript, asked by the agent?</td>
-                      <td>Reject</td>
-                    </tr>
-                    <tr>
-                      <td>03. Evidence validation</td>
-                      <td>Does the quoted evidence match the transcript word for word?</td>
-                      <td>Request correction</td>
-                    </tr>
-                    <tr>
-                      <td>04. Format validation</td>
-                      <td>Is every required detail included, in the right format?</td>
-                      <td>Request correction</td>
-                    </tr>
-                    <tr>
-                      <td>05. Assessment validation</td>
-                      <td>Is the finding clearly marked as a detected bias?</td>
-                      <td>Exclude</td>
-                    </tr>
-                    <tr>
-                      <td>06. Duplicate validation</td>
-                      <td>Has the same bias already been reported for the same question in the transcript?</td>
-                      <td>Merge or remove duplicate</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <blockquote>
-                <p>These checks improved structural consistency and traceability.</p>
-              </blockquote>
-            </div>
-          </div>
-          <div class="guideline-row stepper-row">
-            <div class="timeline-dot-col" aria-hidden="true">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line"></div>
-            </div>
-            <h3>Bringing it together</h3>
-            <div class="guideline-body">
-              <p>These decisions shaped the framework around three principles</p>
-              <blockquote>
-                <p>Context, Evidence &amp; Evaluation</p>
-              </blockquote>
-              <p>The LLM interprets conversational behaviour, supports its findings with transcript evidence, and deterministic checks validate the output against defined requirements.</p>
-            </div>
+          <div class="point">
+            <h4>Deterministic validation</h4>
+            <p>Once the AI identifies potential bias, a separate set of rules checks whether the finding is correctly structured and supported by evidence from the transcript.</p>
           </div>
         </div>
-
-        <h3 style="margin-top:var(--space-7)">Testing the framework to check if it could distinguish genuinely biased questions from legitimate follow-ups, especially when the difference was subtle</h3>
-        <p class="lede">The framework now had defined rules for evaluating conversations, supporting findings with evidence and validating outputs. But having these guardrails in place didn't necessarily mean the model would interpret conversations correctly.</p>
-        <h3 style="margin-top:var(--space-7)">Designing the test scenarios</h3>
-        <p class="lede">I used the risks identified while defining the guardrails to decide what needed testing.<br><br>The framework was designed to evaluate conversational context, report strongly supported findings and validate the evidence behind them. But I still needed to understand how these decisions held up across different types of exchanges. I identified five scenarios to challenge different aspects of the framework:</p>
-        <img class="media-natural" src="images/foundersbrew-types-of-challenge.png" alt="Five scenarios to challenge different aspects of the framework: clearly biased exchanges, neutral follow-ups, ambiguous exchanges, context-dependent questions and multiple bias instances">
-        <p class="lede" style="margin-top:var(--space-4)">I wanted to compare the framework's assessments against the conversational evidence, paying particular attention to false positives and the reasoning behind each finding.<br><br>For each scenario, I evaluated the findings against three questions:<br><span style="color:var(--brand-orange-text)">Detection: Did the framework identify the expected bias without flagging legitimate exchanges?<br>Reasoning: Was the assessment justified by the surrounding conversation, or was the model relying on an assumption?<br>Evidence: Could each finding be traced back to the correct exchange and supported by the transcript?</span><br><br>This helped me distinguish between problems with the model's interpretation of bias and issues with evidence validation.</p>
-
-        <h3 style="margin-top:var(--space-7)">Setting up an initial test</h3>
-        <p class="lede">Before considering the framework reliable enough for real customer interviews, I wanted to understand how it behaved across different conversational scenarios. I built a lightweight testing tool using a prototyping platform, allowing me to submit interview transcripts, run them through the framework and inspect the resulting findings.</p>
-
-        <img class="media-natural" src="images/foundersbrew-bias-evaluation.png" alt="The Bias Evaluation Lab testing tool: a transcript is submitted, the Release 1 detection framework is run, and the result is matched against an answer key">
-
-        <blockquote>
-          <p>The goal was to identify weaknesses in the framework's reasoning, particularly where an incorrect bias flag could undermine valid customer evidence</p>
-        </blockquote>
-
-        <h3 style="margin-top:var(--space-7)">What the testing revealed</h3>
-        <p class="lede">I ran multiple customer discovery transcripts through the testing tool, using a mix of synthetic interviews and examples drawn from existing research sources (<a href="https://huggingface.co/datasets/Anthropic/AnthropicInterviewer/viewer/AnthropicInterviewer/workforce" target="_blank" rel="noopener noreferrer">Anthropic</a>, <a href="https://huggingface.co/datasets/Anthropic/AnthropicInterviewer/viewer/AnthropicInterviewer/workforce" target="_blank" rel="noopener noreferrer">GitHub</a>). I examined the findings to understand how the framework handled different types of questioning, particularly where the distinction between bias and legitimate follow-ups was less obvious.</p>
-        <img class="media-natural" src="images/foundersbrew-test-output.png" alt="Test output showing the model, prompt version, number of turns and findings, with each validated finding and the validation rules it passed">
-        <p class="lede">The initial testing revealed three things:<br><br><span style="color:var(--brand-orange-text)">Clear bias was easier to identify.</span> The framework recognised strongly leading questions and unsupported assumptions, with findings that could be traced back to the transcript.<br><br><span style="color:var(--brand-orange-text)">Neutral questioning was generally handled well.</span> In the neutral test scenario, the framework returned no bias findings rather than flagging issues unnecessarily.<br><br><span style="color:var(--brand-orange-text)">Ambiguity was the bigger challenge.</span> In some cases, the model flagged legitimate follow-up questions because they appeared leading in isolation, even though the participant had already introduced the idea.</p>
-
-        <blockquote>
-          <p>The key learning: A finding could pass every deterministic validation check and still be an incorrect interpretation of the conversation.</p>
-        </blockquote>
-
-        <p class="lede">This highlighted the need to strengthen how the framework evaluated competing interpretations before reporting bias.</p>
-
-        <h3 style="margin-top:var(--space-7)">Refining the framework</h3>
-        <p class="lede">The testing revealed that the framework needed more than contextual information to make a defensible assessment. In some cases, the model treated legitimate follow-up questions as bias, even when the participant had already introduced the idea being discussed.</p>
-
-        <blockquote>
-          <p>How could I make the framework challenge its own interpretation before deciding to report a finding?</p>
-        </blockquote>
-
-        <p class="lede">This led me to introduce an additional question into the contextual evaluation: “Was there an equally plausible, non-biased interpretation?” But simply generating an alternative explanation wasn't enough. The model also needed to weigh that explanation against the evidence supporting bias. I refined the decision criteria so that a finding should only be reported when the biased interpretation is more strongly supported than a reasonable non-biased explanation.</p>
-
-        <blockquote>
-          <p>The trade-off: This introduced a more conservative reporting threshold, potentially reducing unsupported findings while increasing the risk of missing subtle bias.</p>
-        </blockquote>
-
-        <h3 style="margin-top:var(--space-7)">Where the framework stands</h3>
-        <p class="lede">The outcome is a working prototype of a bias detection framework that combines LLM-based conversational evaluation with structured evidence requirements and deterministic validation. The initial testing demonstrated that the framework could identify clearly biased exchanges, leave a neutral interview unflagged and produce findings that could be traced back to the original transcript. It also exposed challenges in handling ambiguous and context-dependent questions, informing improvements to how the framework evaluates competing interpretations. Version 1 establishes a foundation for identifying and evaluating potential bias in customer discovery interviews, with further improvements planned for future releases.</p>
-
-        <h3 style="margin-top:var(--space-7)">Developer hand-off</h3>
-        <p class="lede">To make the framework easier to implement and build upon, I documented the decisions behind its design alongside the technical requirements. The hand-off covered the four bias categories, contextual evaluation criteria, expected output structure, deterministic validation rules and how the system should handle findings that fail validation. I also outlined the responsibilities of the LLM and validation layer, making clear which decisions required interpretation and which could be checked programmatically.</p>
+        <p class="lede">I collaborated with engineering to define six validation requirements and the expected behaviour when a check failed.</p>
+        <div class="table-scroll">
+          <table class="rules-table">
+            <thead><tr><th>Rule</th><th>Deterministic check</th><th>If it fails</th></tr></thead>
+            <tbody>
+            <tr><td>01. Category validation</td><td>Is the finding one of the four defined bias types?</td><td>Reject</td></tr>
+            <tr><td>02. Reference validation</td><td>Does the finding reference a real question asked by the agent?</td><td>Reject</td></tr>
+            <tr><td>03. Evidence validation</td><td>Does the quoted evidence match the transcript word for word?</td><td>Request correction</td></tr>
+            <tr><td>04. Format validation</td><td>Are all required details present in the correct format?</td><td>Request correction</td></tr>
+            <tr><td>05. Assessment validation</td><td>Is the finding explicitly assessed as bias rather than an uncertain interpretation?</td><td>Reject</td></tr>
+            <tr><td>06. Duplicate validation</td><td>Has the same issue already been reported for the same question?</td><td>Merge or remove duplicate</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="lede">My contribution was defining the research-quality criteria, test scenarios and expected validation behaviours, while engineering was responsible for implementing the detection and validation logic.</p>
 
         <h3 style="margin-top:var(--space-7)">How this shows up in the product and affects synthesis</h3>
         <p class="lede">I used my experience in UX research and did a desk research to define how to handle potentially compromised interview data. One rule for any research finding is that it should remain grounded in what participants independently said or did, rather than conclusions shaped by the interviewer's assumptions.</p>
+        <div class="media-frame">
+          <div class="media-trim" style="--w:1920;--h:1004;--t:4;--r:3;--b:3;--l:3">
+            <video src="videos/foundersbrew-bias.mp4" poster="videos/foundersbrew-bias.jpg" preload="none" data-lazy muted loop playsinline aria-label="What founders see today: the overview with validated hypotheses, the excluded interview and the hypotheses still unanswered"></video>
+          </div>
+        </div>
+
         <p class="lede">This influenced an important decision for FoundersBrew</p>
 
         <blockquote>
-          <p>Exchanges flagged for bias would be excluded from evidence synthesis, but remain visible to the founder.</p>
+          <p>Exchanges flagged for bias would be excluded from evidence synthesis, but remain visible to the founder, making it clear for the founder to understand why certain responses were not considered.</p>
         </blockquote>
-
-        <p class="lede">This created two distinct outcomes:</p>
-        <div class="point-row point-row-2">
-          <div class="point">
-            <h3>For the system</h3>
-            <p>Compromised evidence would not contribute to synthesis.</p>
-          </div>
-          <div class="point">
-            <h3>For the founder</h3>
-            <p>The bias would remain visible, making it easier to understand why certain responses were not considered.</p>
-          </div>
-        </div>
-
-        <h3 style="margin-top:var(--space-7)">What founders see today</h3>
-        <div class="media-frame">
-          <div class="media-trim" style="--w:2940;--h:1754;--t:8;--r:8;--b:8;--l:8">
-            <video src="videos/foundersbrew-founders-information.mov" autoplay muted loop playsinline aria-label="What founders see today: the information synthesized from the interviews"></video>
-          </div>
-        </div>
-
-        <h3 style="margin-top:var(--space-7)">Testing with founders also pointed out the TMI problem</h3>
-        <p class="lede">While reviewing how Bias is showing up in the system I also got feedback on how the overview page has a lot of information and how they only needed to know which of their assumptions were validated, what was challenged, and what behaviour was still left to test. They can then decide what to do next.</p>
-        <img class="media-natural" src="images/foundersbrew-tmi.png" alt="Two versions of the overview screen, with annotations on why the summary of findings and user archetypes were removed">
-
-        <p class="lede">Once the bias detection had structure, I started focusing on the participant's interview experience</p>
       </section>
 
       <section id="interview-experience">
         <h2>The interview experience</h2>
         <p class="lede">When I was designing the interview experience, I first wrote down how the experience feels like when I conduct a one-to-one user interview, and prioritised what should go in phase one and what can wait, based on what people expect from an agent.</p>
-        <img class="media-natural" src="images/foundersbrew-participant-experience.png" alt="Participant experience diagram">
+        <img class="media-natural" src="images/foundersbrew-participant-experience.png" alt="Participant experience diagram" loading="lazy" decoding="async">
+        <p class="lede">I developed the participant journey by referring findings from research on AI-moderated interviews &amp; conversational interaction and mapped the HAX guidelines to it.</p>
+        <img class="media-natural" src="images/foundersbrew-hax-mapping.png" alt="Participant journey mapped to HAX guidelines" loading="lazy" decoding="async">
+        <p class="lede">I with the engineering team created a fixed question prototype on ElevenLabs to test the interaction with the users and get their feedback. The ElevenLabs prototype had a fallback textbox, that was later incorporated in the design, because I observed users using the textbox to type in their answers when they were uncomfortable or it was inconvenient to speak.</p>
        <!-- <div class="two-col" style="margin-top:var(--space-5)">
           <div style="display:flex;flex-direction:column;gap:12px">
             <h3>Asks for a real event</h3>
@@ -624,31 +526,22 @@ While the system recommends which assumptions to test first, the final decision 
           </div>
         </div> -->
 
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:var(--space-5)">
-          <h3>Mapping the users journey with HAX</h3>
-          <p class="lede">While defining the interview experience I referred to the HAX guideline from Microsoft to define how the system should behave. This adaption is at a very beginning stage and will grow as the FoundersBrew agent becomes more capable.</p>
-          <img class="media-natural" src="images/foundersbrew-hax-mapping.png" alt="Participant journey mapped to HAX guidelines">
-        </div>
-
-        <h3 style="margin-top:var(--space-7)">How HAX translates in the product UI</h3>
+        <h3 style="margin-top:var(--space-7)">What changed after testing the prototype?</h3>
+        <img class="media-natural" src="images/foundersbrew-participant-experience-revised.png" alt="Revised participant experience" loading="lazy" decoding="async">
+        <p class="lede">I backed the findings with another secondary finding</p>
+        <img class="media-natural" src="images/foundersbrew-ai-led-interviews.png" alt="Research on AI-led interviews and human behaviour" loading="lazy" decoding="async">
+        <p class="lede">Revised joining experience for users getting interviewed</p>
+        <img class="media-natural" src="images/foundersbrew-prototype-improvements.png" alt="Improvements from the prototype to the new version of the joining experience" loading="lazy" decoding="async">
+        <img class="media-natural" src="images/foundersbrew-improved-control.png" alt="Improved participant control in the interview" loading="lazy" decoding="async">
+        <h3 style="margin-top:var(--space-7)">The textbox became more than an accessibility fallback</h3>
+        <img class="media-natural" src="images/foundersbrew-accessibility-fallback.png" alt="The text box in the interview experience as an accessibility fallback" loading="lazy" decoding="async">
+        <h3 style="margin-top:var(--space-7)">How does matching relevant social norms look like on the UI</h3>
         <div class="guideline-list">
-          <div class="guideline-row guideline-row-stack">
-            <div>
-              <p>HAX guideline: Make clear what the system can do</p>
-            </div>
-            <img class="media-natural" src="images/foundersbrew-hax-make-clear.png" alt="Screens showing how the interview agent makes clear what it can do">
-          </div>
           <div class="guideline-row guideline-row-stack">
             <div>
               <p>HAX guideline: Match relevant social norms</p>
             </div>
-            <img class="media-natural" src="images/foundersbrew-hax-social-norms.png" alt="Screens showing how the interview agent matches relevant social norms, with annotations">
-          </div>
-          <div class="guideline-row guideline-row-stack">
-            <div>
-              <p>HAX guideline: Supporting efficient dismissal and participant control</p>
-            </div>
-            <img class="media-natural" src="images/foundersbrew-hax-dismissal.png" alt="Screens showing how participants can dismiss or pause the interview agent">
+            <img class="media-natural" src="images/foundersbrew-hax-social-norms.png" alt="Screens showing how the interview agent matches relevant social norms, with annotations" loading="lazy" decoding="async">
           </div>
         </div>
       </section>
@@ -661,10 +554,24 @@ While the system recommends which assumptions to test first, the final decision 
 
       <section id="reflection">
         <h2>My takeaways</h2>
-        <p class="lede"><span style="color:var(--brand-orange-text)">Clarity comes through action.</span> When faced with uncertainty, breaking a complex problem into smaller, testable decisions helped me move forward rather than waiting for complete clarity.</p>
-        <p class="lede"><span style="color:var(--brand-orange-text)">Intentional friction can be good friction.</span> Not every interaction needs to be effortless. Sometimes encouraging people to pause, question an outcome and take responsibility for their decisions creates a more meaningful experience.</p>
-        <p class="lede"><span style="color:var(--brand-orange-text)">Combining LLMs with deterministic workflows creates a more accountable system.</span> LLMs can interpret conversational context, while deterministic checks make outputs more structured, traceable and easier to verify.</p>
-        <p class="lede"><span style="color:var(--brand-orange-text)">Trust comes from transparency, not certainty.</span> AI-generated findings shouldn't be trusted simply because they sound convincing. Making the underlying evidence visible and allowing people to question an assessment is just as important as producing the assessment itself.</p>
+        <div class="point-row point-row-2">
+          <div class="point">
+            <h3>Clarity comes through action.</h3>
+            <p>When faced with uncertainty, breaking a complex problem into smaller, testable decisions helped me move forward rather than waiting for complete clarity.</p>
+          </div>
+          <div class="point">
+            <h3>Intentional friction can be good friction.</h3>
+            <p>Not every interaction needs to be effortless. Sometimes encouraging people to pause, question an outcome and take responsibility for their decisions creates a more meaningful experience.</p>
+          </div>
+          <div class="point">
+            <h3>Combining LLMs with deterministic workflows creates a more accountable system.</h3>
+            <p>LLMs can interpret conversational context, while deterministic checks make outputs more structured, traceable and easier to verify.</p>
+          </div>
+          <div class="point">
+            <h3>Trust comes from transparency, not certainty.</h3>
+            <p>AI-generated findings shouldn't be trusted simply because they sound convincing. Making the underlying evidence visible and allowing people to question an assessment is just as important as producing the assessment itself.</p>
+          </div>
+        </div>
       </section>
 
     </main>
@@ -674,7 +581,7 @@ While the system recommends which assumptions to test first, the final decision 
 <script>
 (function () {
   var ids = ['overview', 'problem', 'solution', 'outcome',
-    'directional-landscape', 'context', 'agent-workflow', 'interview-experience',
+    'directional-landscape', 'visual-design', 'context', 'agent-workflow', 'interview-experience',
     'reflection'];
   var links = {};
   ids.forEach(function (id) {
@@ -707,7 +614,7 @@ While the system recommends which assumptions to test first, the final decision 
 
 <div class="skim-tip" id="skim-tip" tabindex="0" aria-describedby="skim-tip-text">
   Short on time?
-  <span class="skim-tip-body" id="skim-tip-text" role="tooltip">Skim the headings, orange text, and visuals to get the key takeaways from this case study.</span>
+  <span class="skim-tip-body" id="skim-tip-text" role="tooltip">Skim the headings, blue text, and visuals to get the key takeaways from this case study.</span>
 </div>
 <script>
 // Slows down any video marked with data-speed (e.g. 0.8 = 20% slower).
@@ -721,6 +628,7 @@ While the system recommends which assumptions to test first, the final decision 
   });
 })();
 </script>
+<script src="js/lazy-video.js" defer></script>
 <script src="js/cursor-dot.js" defer></script>
 <script src="js/header-scroll.js" defer></script>
 </body>
