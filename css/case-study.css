@@ -330,6 +330,8 @@ blockquote p { color: var(--accent-text); font-size: calc(var(--text-base) - 2px
 /* outcome card headings in blue (FoundersBrew, SCM) */
 #outcome .point h3,
 #outcomes .stat h3 { color: var(--accent-text); font-weight: 400; }
+#outcome .point p,
+#outcomes .stat p { font-size: calc(var(--text-base) - 2px); }
 .stat-label { font-size: var(--text-base); font-weight: 500; color: var(--ink-1); }
 .stat-detail { font-size: var(--text-caption); color: var(--text-muted); }
 
