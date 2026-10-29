@@ -286,7 +286,7 @@ blockquote p { color: var(--accent-text); font-size: calc(var(--text-base) - 2px
   flex-direction: column;
   gap: 6px;
 }
-.list li { font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-body); }
+.list li { font-size: var(--text-base); line-height: 1.7; color: var(--text-muted); }  /* same size, colour and line height as the paragraphs */
 .list-body li { color: var(--text-muted); }
 
 /* role / product meta */
@@ -328,10 +328,8 @@ blockquote p { color: var(--accent-text); font-size: calc(var(--text-base) - 2px
   color: var(--accent-text);
 }
 /* outcome card headings in blue (FoundersBrew, SCM) */
-#outcome .point h3,
+#outcome .point h3, #outcome .stat h3, #outcome .option-card h3,
 #outcomes .stat h3 { color: var(--accent-text); font-weight: 400; }
-#outcome .point p,
-#outcomes .stat p { font-size: calc(var(--text-base) - 2px); }
 .stat-label { font-size: var(--text-base); font-weight: 500; color: var(--ink-1); }
 .stat-detail { font-size: var(--text-caption); color: var(--text-muted); }
 
@@ -477,3 +475,36 @@ blockquote p { color: var(--accent-text); font-size: calc(var(--text-base) - 2px
 }
 .slider-dot[aria-current="true"] { width: 24px; background: var(--accent); }
 @media (prefers-reduced-motion: reduce) { .slider-track { transition: none; } }
+
+/* line icons: outlined only, one stroke width everywhere on the site */
+.icon { width: 24px; height: 24px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.classify-head .icon { color: var(--accent-text); margin-bottom: var(--space-1); }
+.classify-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }  /* three across at most, a fourth drops to a second line */
+@media (max-width: 900px) { .classify-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .classify-4 { grid-template-columns: 1fr; } }
+
+/* takeaway headings: regular weight */
+#reflection .point h3 { font-weight: 400; }
+
+/* multi-column cards (outcomes, takeaways, "why" rows, option cards): one very faint blue tint, no outline */
+.point, .classify-row, .stat, .option-card {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  border: 0;
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+.point p, .classify-head p, .stat p, .option-card p { font-size: calc(var(--text-base) - 2px); line-height: 1.5; }
+.classify-source { color: var(--accent-text); font-size: var(--text-caption) !important; margin-top: var(--space-2) !important; }
+.stat h3 { font-size: var(--text-base); line-height: 1.35; }
+.stat { gap: var(--space-2); }
+/* headings inside the tinted cards are regular weight */
+.point h3, .stat h3, .option-card h3, .classify-head h3 { font-weight: 400; }
+
+/* a sub-heading sits close to the card layout it introduces (the section gap is 20px, so pull the cards up to leave about 16px) */
+h3 + .classify, h4 + .classify,
+h3 + .point-row, h4 + .point-row,
+h3 + .card-grid, h4 + .card-grid,
+h3 + .stat-grid, h4 + .stat-grid { margin-top: -4px; }
+
+/* Urja problem section: more room above each group heading (Accessibility, Visual hierarchy) */
+#audit h4 { margin-top: var(--space-6); }

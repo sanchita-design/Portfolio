@@ -188,12 +188,6 @@
         <h3 style="margin-top:var(--space-7)">The app and the website felt like two different products</h3>
         <p class="lede">I started by comparing the app with Urja&#39;s own website. The website is built on deep navy, while the app used a neutral grey-black, and the app&#39;s backgrounds, greys and status colours had no clear rule behind them.</p>
         <img class="media-natural" src="images/urja-app-vs-website.png" alt="The Urja app and the Urja website side by side, with their different colour palettes" loading="lazy" decoding="async">
-        <h4>Accessibility</h4>
-        <ol class="list"><li><strong>Low-contrast greys on dark.</strong> Secondary text such as dates and file sizes sat close to the background colour, which makes it tiring to read over a long session.</li><li><strong>Status carried by wording alone.</strong> &ldquo;Ready for test render&rdquo; and &ldquo;Ready for render&rdquo; looked identical, with no colour, icon or shape to tell them apart.</li><li><strong>Glare from bright fills.</strong> A lime progress bar and a solid orange button on near-black are the brightest things on the page, so they pull the eye even when nothing needs attention.</li></ol>
-        <h4>Visual hierarchy</h4>
-        <ol class="list"><li><strong>Everything was bold.</strong> Headers and titles at heavy weight look even louder on a dark background, so nothing led.</li><li><strong>The riskiest action was always visible.</strong> A bin icon on every row made deleting as prominent as testing a render.</li><li><strong>Every job shared the same image icon,</strong> so a Blender file and a Maya file looked identical and the rows blurred together.</li></ol>
-        <h4>Clarity and detail</h4>
-        <ul class="list"><li>Sidebar labels were cut off, as in &ldquo;Dashbo...&rdquo; and &ldquo;Job Sum...&rdquo;.</li><li>File names were underlined like links, although it wasn&#39;t clear whether they opened anything.</li><li>Dates and times mixed formats within a single cell, for example &ldquo;1:30pm, 22.07.25&rdquo;.</li><li>Small copy slips, such as &ldquo;64 user currently active&rdquo;, added to the sense of an unfinished product.</li></ul>
         <blockquote><p>Taken together, the old screens showed everything at once and left the person to work out what mattered.</p></blockquote>
       </section>
 
@@ -218,14 +212,82 @@
 
       <section id="audit">
         <h2>I started with an audit of the current UI</h2>
-        <ul class="list"><li>Nothing acted as a single source of truth, so surfaces, borders and greys were picked screen by screen.</li><li>Two spare dark backgrounds (#17161F and #0E0B22) had been explored but never given a job.</li><li>Status colours came from outside the brand, with lime for progress, bright cyan for queued and hot pink for errors.</li><li>Orange was doing four jobs at once across primary buttons, active tabs, links and warnings, which meant nothing orange stood out.</li></ul>
         <img class="media-natural" src="images/urja-current-design-grid.png" alt="The current app design: surfaces, status colours and orange used across the old screens" loading="lazy" decoding="async">
+        <h4>Accessibility issues</h4>
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v16"/></svg>
+              <h3 style="font-weight:400">Low-contrast greys on dark</h3>
+              <p>Secondary text such as dates and file sizes sat close to the background colour, which makes it tiring to read over a long session.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6V4h14v2"/><path d="M12 4v16"/><path d="M9 20h6"/></svg>
+              <h3 style="font-weight:400">Status carried by wording alone</h3>
+              <p>&ldquo;Ready for test render&rdquo; and &ldquo;Ready for render&rdquo; looked identical, with no colour, icon or shape to tell them apart.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+              <h3 style="font-weight:400">Glare from bright fills</h3>
+              <p>A lime progress bar and a solid orange button on near-black are the brightest things on the page, so they pull the eye even when nothing needs attention.</p>
+            </div>
+          </div>
+        </div>
+        <h4>Visual hierarchy issues</h4>
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h6a3.5 3.5 0 0 1 0 7H7z"/><path d="M7 11h7a3.5 3.5 0 0 1 0 7H7z"/></svg>
+              <h3 style="font-weight:400">Everything was bold</h3>
+              <p>Headers and titles at heavy weight look even louder on a dark background, so nothing led.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/></svg>
+              <h3 style="font-weight:400">The riskiest action was always visible</h3>
+              <p>A bin icon on every row made deleting as prominent as testing a render.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H7a2 2 0 0 1-2-2z"/><path d="M5 18a2 2 0 0 1 2-2h12"/></svg>
+              <h3 style="font-weight:400">Nothing acted as a single source of truth</h3>
+              <p>So surfaces, borders and greys were picked screen by screen.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="12" height="12" rx="1"/><rect x="9" y="9" width="12" height="12" rx="1"/></svg>
+              <h3 style="font-weight:400">Two spare dark backgrounds</h3>
+              <p>(#17161F and #0E0B22) had been added but used in one screen.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a4 4 0 0 0 4-4c0-4.5-4-8-9-8z"/><circle cx="8" cy="11" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16" cy="11" r="1"/></svg>
+              <h3 style="font-weight:400">Status colours came from outside the brand</h3>
+              <p>With lime for progress, bright cyan for queued and hot pink for errors.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-7"/><path d="M12 13L5 6M12 13l7-7M12 13V4"/></svg>
+              <h3 style="font-weight:400">Orange was doing 4 jobs at once</h3>
+              <p>Across primary buttons, active tabs, links and warnings, which meant nothing orange stood out.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="goals">
         <h2>What I set out to do</h2>
         <p class="lede">I turned the audit into four goals and checked every screen against them.</p>
-        <div class="table-scroll"><table class="rules-table"><thead><tr><th>Goal</th><th>What it means in practice</th></tr></thead><tbody><tr><td>Match the brand</td><td>One navy-based palette shared with the website</td></tr><tr><td>Easy on the eyes</td><td>No pure white, no bright fills, calmer weights, 4.5:1 contrast for text</td></tr><tr><td>Show what matters</td><td>One loud thing per screen: the thing that needs the person</td></tr><tr><td>Mean one thing</td><td>Each colour and each button style has exactly one job</td></tr></tbody></table></div>
+        <div class="table-scroll"><table class="rules-table"><thead><tr><th>Goal</th><th>What this means</th></tr></thead><tbody><tr><td>Keep it consistent</td><td>Use the same navy colour palette as the website so everything feels connected.</td></tr><tr><td>Make it easier to read</td><td>Avoid pure white and bright colours, use softer font weights, and keep text contrast at 4.5:1 or higher.</td></tr><tr><td>Keep the focus clear</td><td>Make the most important action or information stand out on each screen.</td></tr><tr><td>Keep things predictable</td><td>Use each colour and button style consistently so people know what to expect.</td></tr></tbody></table></div>
       </section>
 
       <section id="approach">
@@ -233,25 +295,62 @@
         <p class="lede">Before drawing anything new, I learned the rules and wrote them down, starting with dark mode.</p>
         <h3 style="margin-top:var(--space-7)">Learning the rules of dark mode</h3>
         <p class="lede">A dark interface follows its own rules, and these are the ones I applied.</p>
-        <ul class="list"><li><strong>No pure white text.</strong> Maximum contrast shimmers on a dark background, so I dimmed body text to #E0E6E8, and to #BAC2CA on busy dashboards.</li><li><strong>Lighter headings instead of bolder ones.</strong> Light text on dark looks heavier than the same weight on white, which makes bold headings glow, so I moved headings to regular or medium.</li><li><strong>Depth from lighter surfaces instead of shadows,</strong> with each higher layer in a slightly lighter navy.</li><li><strong>Softer saturated colours.</strong> Bright colours vibrate on dark, so I desaturated every status colour.</li><li><strong>Two contrast bars.</strong> Text needs 4.5:1 and shapes such as progress bars need 3:1.</li></ul>
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14a8 8 0 1 1-10-10 6.5 6.5 0 0 0 10 10z"/></svg>
+              <h3 style="font-weight:400">No pure white text</h3>
+              <p>Maximum contrast shimmers on a dark background, so I dimmed body text to #E0E6E8, and to #BAC2CA on busy dashboards.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16M18 4v16M6 12h12"/></svg>
+              <h3 style="font-weight:400">Lighter headings instead of bolder ones</h3>
+              <p>Light text on dark looks heavier than the same weight on white, which makes bold headings glow, so I moved headings to regular or medium.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>
+              <h3 style="font-weight:400">Depth from lighter surfaces instead of shadows</h3>
+              <p>With each higher layer in a slightly lighter navy.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6 6 10.5a6 6 0 0 1-12 0C6 9 12 3 12 3z"/></svg>
+              <h3 style="font-weight:400">Softer saturated colours</h3>
+              <p>Bright colours vibrate on dark, so I desaturated every status colour.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/><circle cx="9" cy="8" r="2"/><circle cx="15" cy="16" r="2"/></svg>
+              <h3 style="font-weight:400">Two contrast bars</h3>
+              <p>Text needs 4.5:1 and shapes such as progress bars need 3:1.</p>
+            </div>
+          </div>
+        </div>
         <h3 style="margin-top:var(--space-7)">How other tools rank status colours</h3>
         <p class="lede">Monitoring and ops tools tend to follow an attention ladder, where the loudest colour goes to whatever needs a person and everything else stays calm. I applied the same idea to jobs, so failed is the loudest, rendering comes next, and complete, queued and paused sit in quiet grey.</p>
       </section>
 
       <section id="new-designs">
         <h2>The Job Summary table</h2>
-        <h3 style="margin-top:var(--space-7)">Jobs</h3>
         <h4>The previous design</h4>
         <p class="lede">5+ tabs but all were essentially the type of filters, Frame preview did not add value here, it just showed preview, the delete action under job table was always visible and prominent.</p>
         <img class="media-natural" src="images/urja-current-table.png" alt="The previous Jobs table with five tabs, a frame preview and an always-visible delete action" loading="lazy" decoding="async">
-        <h4>The redesigned table</h4>
-        <ul class="list"><li>Slices show progress at a glance, with a strip of small bars for done, rendering and waiting.</li><li>Each job shows its software through a Blender or Maya logo in place of the generic image icon.</li><li>Status has a shape, a colour and a word, so it no longer depends on wording alone.</li><li>Rows carry one visible action, with delete and the rest tucked into a &ldquo;&hellip;&rdquo; menu so the table isn&#39;t a wall of bins.</li><li>Filters by status include a &ldquo;Needs attention&rdquo; count whenever something fails.</li></ul>
+        <h4>Making the table easier to use</h4>
+        <p class="lede">I wanted users to be able to quickly check how their jobs were progressing, spot issues and find the actions they needed. So I made a few changes to the table.</p>
+        <ul class="list"><li><strong>Progress at a glance.</strong> Small bars show which slices are done, rendering or still waiting, making it easier to track each job.</li><li><strong>Recognisable software icons.</strong> Each job now shows a Blender or Maya logo so users can quickly identify which software was used.</li><li><strong>Clearer statuses.</strong> I used a combination of shape, colour and text to make each status easier to recognise.</li><li><strong>Less clutter.</strong> I kept the main action visible in each row and moved delete and other options into the &ldquo;&hellip;&rdquo; menu.</li><li><strong>Easier to spot issues.</strong> Users can filter jobs by status, while a &ldquo;Needs attention&rdquo; count helps them quickly find jobs that have failed.</li></ul>
         <div class="media-frame"><img class="media-natural" src="images/urja-jobs-statuses.png" alt="The new Jobs page showing the Uploading, Ready to test and Ready to render statuses" loading="lazy" decoding="async"></div>
-        <h3 style="margin-top:var(--space-7)">Job detail</h3>
+        <h3 style="margin-top:var(--space-7)">Job details page</h3>
         <p class="lede">In the previous design, there was no separate page for opening individual renders, this was handled in the streamer app, with this redesign this page was added in the UI</p>
         <div class="media-frame"><img class="media-natural" src="images/urja-job-detail.png" alt="The failed job screen with slices, log and the error card" loading="lazy" decoding="async"></div>
-        <p class="lede">The main outcome the users here are looking for are:</p>
-        <ul class="list"><li><strong>Upload missing file</strong> is the main action and sits inside the error card, in plain words.</li><li><strong>Retry</strong> is secondary, because it only works once the file is uploaded.</li><li><strong>Render without it</strong> and <strong>Open output folder</strong> are quiet text buttons.</li><li><strong>Cancel job</strong> lives in a &ldquo;&hellip;&rdquo; menu and turns red only when the menu is open.</li></ul>
+        <h4>Helping users take the next step</h4>
+        <p class="lede">When a file is missing, users need to understand what went wrong and how to get their job running again. I organised the actions based on what they would most likely need to do first.</p>
+        <ul class="list"><li><strong>Upload missing file</strong> is the main action, placed directly inside the error card so users know where to start.</li><li><strong>Retry</strong> is a secondary action since users need to upload the missing file before trying again.</li><li><strong>Render without it</strong> and <strong>Open output folder</strong> are shown as simple text buttons to keep them accessible without drawing too much attention.</li><li><strong>Cancel job</strong> sits inside the &ldquo;&hellip;&rdquo; menu, with red used only when the option is visible.</li></ul>
       </section>
 
       <section id="dashboards">
@@ -287,9 +386,15 @@
           </div></div></div>
           <div class="slider-dots"></div>
         </div>
-        <p class="lede">Admins see people and leases in one place. Each person&#39;s leases appear as small chips on their row, and each lease shows its usage with a quiet &ldquo;Almost out&rdquo; state and a clear &ldquo;Out, jobs paused&rdquo; state. Only two roles exist, Admin and User, which keeps the rules simple.</p>
         <h3 style="margin-top:var(--space-7)">User sign in &amp; sign up</h3>
-        <div class="media" style="aspect-ratio:16/7" data-label="User sign in and sign up screens"></div>
+        <div class="media-slider" role="region" aria-roledescription="carousel" aria-label="Sign in and sign up screens">
+          <div class="media-frame"><div class="slider-viewport"><div class="slider-track">
+            <img class="media-natural" src="images/urja-signup-1.png" alt="Sign-up step 1: create your account, with the Continue button and arrow" loading="lazy" decoding="async">
+            <img class="media-natural" src="images/urja-signup-2.png" alt="Sign-up step 1: create your account, with a plain Continue button" loading="lazy" decoding="async">
+            <img class="media-natural" src="images/urja-sign-in.png" alt="The sign in screen" loading="lazy" decoding="async">
+          </div></div></div>
+          <div class="slider-dots"></div>
+        </div>
       </section>
 
       <section id="reflection">

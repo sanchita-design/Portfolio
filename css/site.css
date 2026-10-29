@@ -82,20 +82,26 @@ a:hover { color: var(--accent-hover); }
   position: fixed;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 16px;
-  margin: -8px 0 0 -8px;
-  border-radius: 50%;
-  background: var(--accent);
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  display: grid;
+  grid-template-columns: 6px 6px;
+  grid-template-rows: 6px 6px;
+  gap: 2px;
+  background: transparent;
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
   will-change: transform;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   color: var(--white);
 }
+/* the pointer is a tight group of four small pixels: three in the brand blue and one in the brand orange */
+.cursor-dot .cursor-px { width: 6px; height: 6px; background: var(--accent); transition: opacity 160ms var(--ease-standard); }
+.cursor-dot .cursor-px:nth-child(4) { background: #D7642F; }
+.cursor-dot.is-view .cursor-px { display: none; }
 /* over a case study card the dot becomes a slightly larger "view" (eye) icon in the brand orange */
 .cursor-dot .cursor-eye {
   width: 18px;
@@ -113,6 +119,10 @@ a:hover { color: var(--accent-hover); }
   width: 28px;
   height: 28px;
   margin: -14px 0 0 -14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;  /* square, to match the pixel pointer */
   background: rgba(215, 100, 47, 0.12);  /* same tint as the headline highlight */
   color: #D7642F;
 }

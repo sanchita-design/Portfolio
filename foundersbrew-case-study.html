@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="css/case-study.css">
 
 <style>
+  /* timeline sub-text matches the card text size */
+  .timeline-step p { font-size: calc(var(--text-base) - 2px); line-height: 1.5; }
   /* solution timeline */
   .timeline { display: flex; flex-direction: column; margin-top: var(--space-5); }
   .timeline-step {
@@ -187,8 +189,7 @@
 
       <section id="problem">
         <h2>The problem</h2>
-        <p class="lede">The journey from idea to MVP depends on gathering the right evidence to make informed product decisions. However, founders often enter discovery with assumptions about their ideas and unintentionally seek validation rather than genuine insights. Leading questions encourage responses in a particular direction, while feedback scattered across calls, messages, documents, and spreadsheets makes it difficult to identify meaningful patterns.</p>
-        <p class="lede">As a result, founders risk mistaking encouragement for evidence and making build decisions based on weak signals, potentially leading them to build the wrong product.</p>
+        <p class="lede">Founders often enter discovery with assumptions about their ideas and unintentionally seek validation rather than genuine insights. Feedback is often scattered across calls, messages, documents, and spreadsheets, which makes it difficult to identify meaningful patterns. As a result, founders risk mistaking encouragement for evidence and making build decisions based on weak signals, potentially leading them to build the wrong product.</p>
         <blockquote>
           <p>The challenge is the lack of a structured system that guides founders through discovery with their target audience and helps them gather reliable evidence.</p>
         </blockquote>
@@ -258,16 +259,16 @@
         <h2>Outcome</h2>
         <div class="point-row point-row-3">
           <div class="point">
-            <h3>Established foundations for trustworthy AI</h3>
+            <h3>30+ interviews</h3>
+            <p>A total of 7 founders, who are FounderBrew&#39;s early product collaborators in the alpha release conducted a total of 38 interviews, which gave us valuable feedback for release 2.0</p>
+          </div>
+          <div class="point">
+            <h3>Bias detection rules defined</h3>
+            <p>I defined the bias types, edge cases and validation rules gave engineering clear, testable requirements to build from.</p>
+          </div>
+          <div class="point">
+            <h3>Foundations for trustworthy AI</h3>
             <p>Every finding can be traced back to the transcript, biased exchanges are caught before they reach the synthesis, and new checks can be added as the product grows.</p>
-          </div>
-          <div class="point">
-            <h3>Founders stayed in control, without hiding inconvenient evidence</h3>
-            <p>Founders could exclude interviews, but only by giving a reason, and the decision stayed visible and reversible. That protected the research from the confirmation bias the product exists to prevent.</p>
-          </div>
-          <div class="point">
-            <h3>Bias detection went from a vague idea to buildable rules</h3>
-            <p>The bias types, edge cases and validation rules gave engineering clear, testable requirements to build from.</p>
           </div>
         </div>
         <h3 style="margin-top:var(--space-7)">Early product collaborators</h3>
@@ -284,13 +285,10 @@
          <p class="lede">This not only provided direction but also helped me think how this agentic system should work</p>
 
         <h3 style="margin-top:var(--space-7)">But will people willingly talk to an AI agent?</h3>
-        <p class="lede">When the idea of an AI interviewer first came up, my immediate question was whether people would actually feel comfortable having a conversation with one. AI-led interviewing wasn&#39;t entirely new. Competitors were already developing compelling conversational research products, but I wanted to understand whether there was evidence of genuine participant willingness, beyond the technology itself.</p>
-        <p class="lede">Research by Wuttke et al. (2025) demonstrated the feasibility of LLM-led interviews, while Barari et al. (2026) found that AI-assisted conversations could elicit more detailed and informative responses.</p>
-        <p class="lede">More importantly, Chopra and Haaland (2026) found that 90% of respondents expressed interest in an AI-led interview, compared with 89% for a traditional survey. In their separate AI-interview studies, over 90% of participants who started completed the interview, even though completing it wasn&#39;t required for payment.</p>
-        <p class="lede">This was reinforced by Gheyi et al. (2026), who analysed 66 completed AI-led interviews and found that 90.9% felt comfortable answering questions, while 89.4% said they would participate again.</p>
-        <p class="lede">There was also evidence supporting the importance of relevance. Groves, Presser and Dipko examined how interest in a research topic influences people&#39;s decisions to participate, supporting the rationale for approaching respondents with a subject that matters to them.</p>
+        <p class="lede">I did a secondary research and explored findings, that showed credible information and AI-led interviewing wasn&#39;t entirely new. Competitors were already developing compelling conversational research products, but I wanted to understand whether there was evidence of genuine participant willingness, beyond the technology itself.</p>
+        <p class="lede">Our competitor Buildpad had already demonstrated the product concept and this was FoundersBrew <span style="color:var(--accent-text)">me-too</span> approach, bringing AI-led interviewing into the early-stage founder discovery workflow.</p>
         <blockquote>
-          <p>Taken together, these findings gave us a credible foundation. AI could conduct meaningful interviews, participants showed willingness to engage, and topic relevance offered a reason to take part. Combined with competitors already demonstrating the product concept, the FoundersBrew team chose a <span style="color:var(--accent-text)">me-too approach</span>, bringing AI-led interviewing into the early-stage founder discovery workflow.</p>
+          <p>I would have loved to run a behavioural experiment here to see how people respond to an AI-led interview. If someone received a link to an interview about a topic they were genuinely interested in, would they take part without any incentive or reward?</p>
         </blockquote>
       </section>
 
@@ -321,18 +319,21 @@
         <div class="classify">
           <div class="classify-row">
             <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17a8 8 0 0 1 16 0"/><path d="M12 17l4-5"/><path d="M4 17h16"/></svg>
               <h3 style="font-weight:400">Reduced cognitive load</h3>
               <p>I gave founders a way to move forward without having to formulate an answer they weren&#39;t ready to provide.</p>
             </div>
           </div>
           <div class="classify-row">
             <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M6.3 6.3l11.4 11.4"/></svg>
               <h3 style="font-weight:400">Prevented forced assumptions</h3>
               <p>I reduced the risk of founders inventing information simply to complete the questionnaire.</p>
             </div>
           </div>
           <div class="classify-row">
             <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
               <h3 style="font-weight:400">Preserved research integrity</h3>
               <p>I ensured the system could distinguish between assumptions founders had actually expressed and areas where they remained uncertain.</p>
             </div>
@@ -343,22 +344,24 @@
 
 
         <h3 style="margin-top:var(--space-7)">Why I decided against integrating AI in the onboarding questionnaire?</h3>
-        <p class="lede">One thing very clear about FoundersBrew is that FoundersBrew should use AI to investigate the founder&#39;s thinking, not necessarily to generate that thinking for them. At this point Founders need to articulate their own assumptions before those assumptions are challenged. It&#39;s also the founder&#39;s first moment of structured reflection.</p>
         <div class="classify">
           <div class="classify-row">
             <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h4v-4h4v-4h4V7h4"/></svg>
               <h3 style="font-weight:400">More friction</h3>
               <p>A simple questionnaire becomes an unpredictable conversation with additional questions before the founder gets any value.</p>
             </div>
           </div>
           <div class="classify-row">
             <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
               <h3 style="font-weight:400">False precision</h3>
               <p>AI might push founders to elaborate on assumptions they haven&#39;t verified, making guesses sound more concrete than they really are.</p>
             </div>
           </div>
           <div class="classify-row">
             <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 6h8M7 8l4 8M17 8l-4 8"/></svg>
               <h3 style="font-weight:400">Unnecessary complexity</h3>
               <p>This would add cost, latency, and another experience to design and test without knowing whether it improves the research output.</p>
             </div>
@@ -380,7 +383,7 @@
 
 While the system recommends which assumptions to test first, the final decision remains with the founder.</p>
         <img class="media-natural" src="images/foundersbrew-slide-out.png" alt="First slide-out design: hypotheses listed with checkboxes under the headline Identify what needs to be true for this idea to work" loading="lazy" decoding="async">
-        <p>Initially, this felt like a straightforward way to give founders control. But as I considered how the adaptive agent would actually conduct interviews, I noticed a mismatch between the interaction and the system&#39;s behaviour.</p>
+        <p style="margin-bottom:var(--space-4)">Initially, this felt like a straightforward way to give founders control. But as I considered how the adaptive agent would actually conduct interviews, I noticed a mismatch between the interaction and the system&#39;s behaviour.</p>
         <blockquote>
           <p>Founders didn&#39;t necessarily need to choose which hypotheses were included or excluded. They needed to influence where the agent should begin. So I shifted from a selection model to a prioritisation model.</p>
         </blockquote>
@@ -405,7 +408,7 @@ While the system recommends which assumptions to test first, the final decision 
         </blockquote>
 
         <p class="lede">This could reinforce the very confirmation bias FoundersBrew was designed to address. I needed to consider the difference between giving founders control over research quality and allowing them to selectively remove inconvenient evidence.</p>
-        <h3 style="margin-top:var(--space-7);font-weight:400">...so how might we prevent founders from selectively excluding interviews that challenge their assumptions, while still giving them control over the quality of their research evidence?</h3>
+        <h3 style="margin-top:var(--space-7);font-weight:400;font-family:var(--font-serif)">...so how might we prevent founders from selectively excluding interviews that challenge their assumptions, while still giving them control over the quality of their research evidence?</h3>
         <p class="lede">This pushed me to look beyond conventional UX patterns and led me to <span style="color:var(--accent-text)">behavioural design</span>. I came across research on accountability and decision-making, particularly how asking people to justify their choices can encourage more deliberate thinking. It made me reconsider something we often prioritise in UX, 'reducing friction'</p>
 
         <blockquote>
@@ -414,7 +417,29 @@ While the system recommends which assumptions to test first, the final decision 
 
 
         <p class="lede">In this case, making interview exclusion effortless could allow founders to dismiss uncomfortable evidence without reflecting on why they were doing so. I explored introducing a small amount of intentional friction at the point of exclusion.</p>
-        <img class="media-natural" src="images/foundersbrew-friction.png" alt="Intentional friction at the point of exclusion: ask for a reason, make the impact visible, and preserve accountability" loading="lazy" decoding="async">
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
+              <h3 style="font-weight:400">Ask for a reason</h3>
+              <p>Encourage founders to articulate why an interview should be excluded, rather than acting on impulse.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <h3 style="font-weight:400">Make the impact visible</h3>
+              <p>Show how excluding the interview could change synthesis findings and hypothesis statuses.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg>
+              <h3 style="font-weight:400">Preserve accountability</h3>
+              <p>Keep a record of excluded interviews and their reasons, with the ability to restore them later.</p>
+            </div>
+          </div>
+        </div>
 
         <p class="lede" style="margin-top:var(--space-4)">Founders would be asked to provide a reason for excluding an interview and understand how that decision could affect their findings. The original research would remain accessible, and exclusions could be reversed.</p>
         <img class="media-natural" src="images/foundersbrew-design-decisions.png" alt="Three design decisions for excluding an interview: choose a reason, write a mandatory description, and confirm before the interview is excluded" loading="lazy" decoding="async">
@@ -441,9 +466,37 @@ While the system recommends which assumptions to test first, the final decision 
         <h2>The agent workflow and bias detection</h2>
         <p class="lede">To ensure that founders weren't making decisions based on misleading evidence it was important to get it the bias detection right, but where do you even begin when bias can take so many forms?</p>
         <h3 style="margin-top:var(--space-7)">Starting with uncertainty</h3>
-        <p class="lede">The first thing I needed to understand was which biases we could realistically detect. Trying to address every type of bias in the first version wasn't feasible. Bias detection would need to be introduced incrementally, with the system evolving and becoming more capable over time.</p>
-        <p class="lede">After conducting secondary research, I narrowed the scope to four types of biases that the first version would focus on</p>
-        <img class="media-natural" src="images/foundersbrew-bias.png" alt="The four types of bias the first version focuses on: leading question bias, assumption bias, confirmation bias and response contamination" loading="lazy" decoding="async">
+        <p class="lede">The first thing I needed to understand was which biases we could realistically detect. Trying to address every type of bias in the first version wasn't feasible. Bias detection would need to be introduced incrementally, with the system evolving and becoming more capable over time. After conducting secondary research, I narrowed the scope to four types of biases that the first version would focus on</p>
+        <div class="classify classify-4">
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10.5h7M12.5 8l2.5 2.5-2.5 2.5"/></svg>
+              <h3 style="font-weight:400">Leading Question Bias</h3>
+              <p>Prevents suggestive questioning from going unnoticed.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7"/><path d="M12 17h.01"/></svg>
+              <h3 style="font-weight:400">Assumption Bias</h3>
+              <p>Flags unvalidated assumptions embedded in the agent&#39;s questions.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l4 4 8-9"/><path d="M12 16l1 1 8-9"/></svg>
+              <h3 style="font-weight:400">Confirmation Bias</h3>
+              <p>Identifies questioning or statements that disproportionately supports the founder&#39;s hypothesis.</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6 6 10.5a6 6 0 0 1-12 0C6 9 12 3 12 3z"/></svg>
+              <h3 style="font-weight:400">Response Contamination</h3>
+              <p>Detects instances where the agent may have shaped participant answers.</p>
+            </div>
+          </div>
+        </div>
 
         <blockquote>
           <p>The design decision: I prioritised the biases most directly connected to agent behaviour and insight reliability, rather than attempting comprehensive bias detection in the first release. The selection was guided by three factors: impact on research quality, detectability from interview transcripts, and implementation feasibility.</p>
@@ -451,9 +504,45 @@ While the system recommends which assumptions to test first, the final decision 
 
 
         <h3 style="margin-top:var(--space-7)">Bridging UX research and engineering</h3>
-        <p class="lede">One challenge I encountered while designing the AI interviewer was that <span style="color:var(--accent-text)">bias isn&#39;t always obvious from a single question</span>. The same wording could be leading in one conversation and a legitimate follow-up in another.</p>
-        <p class="lede">I needed to communicate this nuance to engineering in a way that could inform the bias-detection framework. I translated these considerations into five test scenarios.</p>
-        <img class="media-natural" src="images/foundersbrew-types-of-challenge.png" alt="Five scenarios to challenge different aspects of bias detection: clearly biased exchanges, neutral follow-ups, ambiguous exchanges, context-dependent questions and multiple bias instances" loading="lazy" decoding="async">
+        <p class="lede"><span style="color:var(--accent-text)">Bias isn&#39;t always obvious from a single question</span>. The same wording could be leading in one conversation and a legitimate follow-up in another.</p>
+        <p class="lede">I needed to communicate this nuance to engineering in a way that could inform the bias-detection framework. I translated these considerations into five scenarios.</p>
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg>
+              <h3 style="font-weight:400">Clearly biased exchanges</h3>
+              <p>Could it recognise questions with strong evidence of bias?</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14M5 15h14"/></svg>
+              <h3 style="font-weight:400">Neutral follow-ups</h3>
+              <p>Would it avoid flagging legitimate research questions?</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-8"/><path d="M12 12L6 6M12 12l6-6"/><path d="M6 6v3M6 6h3M18 6v3M18 6h-3"/></svg>
+              <h3 style="font-weight:400">Ambiguous exchanges</h3>
+              <p>How would it handle questions that could reasonably be interpreted in different ways?</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>
+              <h3 style="font-weight:400">Context-dependent questions</h3>
+              <p>Would its assessment change based on what the participant had already established?</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
+              <h3 style="font-weight:400">Multiple bias instances</h3>
+              <p>Could it identify separate issues without duplicating or misclassifying findings?</p>
+            </div>
+          </div>
+        </div>
         <p class="lede">I defined what the system should consider before flagging an exchange as biased</p>
         <ul class="list list-body">
           <li>Who introduced the idea? Was it the participant or the agent?</li>
@@ -468,6 +557,7 @@ While the system recommends which assumptions to test first, the final decision 
 
 
 
+        <!--
         <h3 style="margin-top:var(--space-7)">Translating research requirements into validation rules</h3>
         <p class="lede">Defining what constitutes bias was only part of the challenge. I also needed to consider how the system could produce findings that founders could trust and verify. Working with engineering, I helped separate bias detection into two responsibilities.</p>
         <div class="point-row point-row-2">
@@ -494,7 +584,8 @@ While the system recommends which assumptions to test first, the final decision 
             </tbody>
           </table>
         </div>
-        <p class="lede">My contribution was defining the research-quality criteria, test scenarios and expected validation behaviours, while engineering was responsible for implementing the detection and validation logic.</p>
+        -->
+        <blockquote><p>My contribution was defining the research-quality criteria and scenarios while engineering was responsible for implementing the detection and validation logic.</p></blockquote>
 
         <h3 style="margin-top:var(--space-7)">How this shows up in the product and affects synthesis</h3>
         <p class="lede">I used my experience in UX research and did a desk research to define how to handle potentially compromised interview data. One rule for any research finding is that it should remain grounded in what participants independently said or did, rather than conclusions shaped by the interviewer's assumptions.</p>
@@ -532,7 +623,40 @@ While the system recommends which assumptions to test first, the final decision 
         <h3 style="margin-top:var(--space-7)">What changed after testing the prototype?</h3>
         <img class="media-natural" src="images/foundersbrew-participant-experience-revised.png" alt="Revised participant experience" loading="lazy" decoding="async">
         <p class="lede">I backed the findings with another secondary finding</p>
-        <img class="media-natural" src="images/foundersbrew-ai-led-interviews.png" alt="Research on AI-led interviews and human behaviour" loading="lazy" decoding="async">
+        <div class="classify">
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+              <h3 style="font-weight:400">Conversational Comfort</h3>
+              <p>Only 3 of 10 participants felt the AI conversation was natural</p>
+              <p class="classify-source">NNG, 2026</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></svg>
+              <h3 style="font-weight:400">Feeling Heard</h3>
+              <p>Participants contributed 34% of the words with AI moderators, compared with 64% with human moderators.</p>
+              <p class="classify-source">MeasuringU study, 2026</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h9a6 6 0 0 1 0 12h-3"/></svg>
+              <h3 style="font-weight:400">Recovery and Control</h3>
+              <p>Offering options was the highest ranked of eight conversational repair strategies</p>
+              <p class="classify-source">IBM study, 2022</p>
+            </div>
+          </div>
+          <div class="classify-row">
+            <div class="classify-head">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              <h3 style="font-weight:400">Privacy and Reassurance</h3>
+              <p>Participants using AI-assisted transcript editing removed 41.2% of personally identifiable information.</p>
+              <p class="classify-source">Doi org, 2026</p>
+            </div>
+          </div>
+        </div>
         <p class="lede">Revised joining experience for users getting interviewed</p>
         <img class="media-natural" src="images/foundersbrew-prototype-improvements.png" alt="Improvements from the prototype to the new version of the joining experience" loading="lazy" decoding="async">
         <img class="media-natural" src="images/foundersbrew-improved-control.png" alt="Improved participant control in the interview" loading="lazy" decoding="async">

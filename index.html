@@ -17,52 +17,8 @@
 <style>
   .carousel-track > .card { background: transparent; }
 
-  /* very soft ambient gradient behind the whole page: big, low-contrast washes of colour close to the paper tone,
-     drifting slowly enough to feel alive without drawing the eye */
-  .ambient {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .ambient span {
-    position: absolute;
-    width: 80vmax;
-    height: 80vmax;
-    border-radius: 50%;
-    will-change: transform;
-  }
-  .ambient .a1 {
-    top: -30vmax; left: -22vmax;
-    background: radial-gradient(closest-side, rgba(176, 214, 240, 0.34), rgba(176, 214, 240, 0));
-    animation: ambientA 30s ease-in-out infinite alternate;
-  }
-  .ambient .a2 {
-    top: 0; right: -30vmax;
-    background: radial-gradient(closest-side, rgba(170, 200, 245, 0.34), rgba(170, 200, 245, 0));
-    animation: ambientB 36s ease-in-out infinite alternate;
-  }
-  .ambient .a3 {
-    bottom: -34vmax; left: 8vmax;
-    background: radial-gradient(closest-side, rgba(196, 188, 240, 0.28), rgba(196, 188, 240, 0));
-    animation: ambientC 33s ease-in-out infinite alternate;
-  }
-  @keyframes ambientA {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40vmax, 26vmax) scale(1.38); }
-  }
-  @keyframes ambientB {
-    0%   { transform: translate(0, 0) scale(1.1); }
-    100% { transform: translate(-42vmax, 28vmax) scale(0.8); }
-  }
-  @keyframes ambientC {
-    0%   { transform: translate(0, 0) scale(0.95); }
-    100% { transform: translate(38vmax, -32vmax) scale(1.36); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ambient span { animation: none; }
-  }
+  /* faint grid of small squares that slowly fades in and out, drawn by js/pixel-bg.js */
+  .pixel-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
   .hero-backdrop {
     position: relative;
     overflow: hidden;
@@ -539,6 +495,10 @@
   .quote-card p { font-style: italic; font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-body); margin: 0; }
   .quote-card .person-name { font-weight: 400; }
 
+  /* closing pixel sign under the footer: the message and four lines of small pixels, drawn by js/pixel-sign.js */
+  .pixel-sign { width: 100%; overflow: hidden; }
+  .pixel-sign-canvas { display: block; }
+
   /* the footer line runs the full width of the screen; the icons stay on the content grid */
   footer {
     border-top: 1px solid var(--border-subtle);
@@ -577,7 +537,7 @@
 </style>
 </head>
 <body>
-<div class="ambient" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<canvas class="pixel-bg" aria-hidden="true"></canvas>
 
 <header class="site-header">
   <div class="wrap header-bar">
@@ -625,6 +585,7 @@
             <span class="tag">0 &rarr; 1 AI system</span>
             <span class="tag">Bias detection framework</span>
             <span class="tag">HAX</span>
+            <span class="tag">Product thinking</span>
           </div>
         <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -644,6 +605,7 @@
             <span class="tag">Cybersecurity</span>
             <span class="tag">End to end ownership</span>
             <span class="tag">Legacy to modernisation</span>
+            <span class="tag">Product thinking</span>
           </div>
         <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -663,6 +625,7 @@
             <span class="tag">Design system</span>
             <span class="tag">Dark-mode accessibility</span>
             <span class="tag">End to end redesign</span>
+            <span class="tag">Visual design</span>
           </div>
         <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -799,7 +762,11 @@
     <a class="social-link" href="https://x.com/FoundersBrew_ca" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
 </footer>
 
+<div class="pixel-sign"><canvas class="pixel-sign-canvas" role="img" aria-label="Let&#39;s build something together"></canvas></div>
+
 <script src="js/cursor-dot.js" defer></script>
+<script src="js/pixel-bg.js" defer></script>
+<script src="js/pixel-sign.js" defer></script>
 <script src="js/header-scroll.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/typewriter.js" defer></script>

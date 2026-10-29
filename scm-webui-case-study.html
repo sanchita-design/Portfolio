@@ -15,8 +15,6 @@
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/case-study.css">
 <style>
-  /* outcomes: no card border; each outcome is a sub-heading (sans) over body-size text */
-  main .stat { border: 0; padding: 0; gap: var(--space-2); border-radius: 0; }
   /* a sub-heading straight after a section title doesn't need the extra space above it */
   main section > h2 + h3 { margin-top: 0 !important; }
 </style>
@@ -91,7 +89,7 @@
         <div class="stat-grid">
           <div class="stat">
             <h3>~40% reduction in checklist creation time</h3>
-            <p class="lede">During internal walkthroughs with users, I observed checklist creation time decrease from approximately 20 minutes in the previous workflow to under 12 minutes in the redesigned experience.</p>
+            <p class="lede">On client calls with Tech Advisors to users, I observed checklist creation time decrease from approximately 20 minutes in the previous workflow to under 12 minutes in the redesigned experience.</p>
           </div>
           <div class="stat">
             <h3>2 additional modules adopted the approach</h3>
@@ -216,26 +214,6 @@
           <img class="media-natural" src="images/scm-console.jpeg" alt="The older BigFix console UI for creating a custom checklist" loading="lazy" decoding="async">
         </div>
         <p class="lede">Custom checklists allow organisations to adapt security benchmarks to their own requirements. Users need to select relevant content, customise checks and parameter values, decide which devices the checklist applies to and eventually deploy it. The console supported these capabilities, but the journey was fragmented across different parts of the application. From the audit and workflow mapping, I could see an opportunity to connect the steps and make the decisions easier to follow.</p>
-        <div class="classify">
-          <div class="classify-row">
-            <div class="classify-head">
-              <h3>Translates security-policy requirements into configurations</h3>
-              <p>Scott works with the security team to translate security-policy requirements into configurations that can be monitored and enforced across endpoints.</p>
-            </div>
-          </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <h3>Does checklist management</h3>
-              <p>He needs to create custom checklists, modify parameters, add organisation-specific checks and keep the content updated when external benchmarks change.</p>
-            </div>
-          </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <h3>Could be a compliance manager or a Master Operator responsible only for checklist creation</h3>
-              <p>Scott represents someone with permission to create and manage checklists.</p>
-            </div>
-          </div>
-        </div>
         <h3 style="margin-top:var(--space-7)">Understanding where the effort came from</h3>
         <p class="lede">Creating a checklist involved moving between selecting source content, finding relevant checks, modifying parameters and reviewing what would eventually apply to different devices. Users needed to inspect a large amount of technical content while keeping track of decisions made across the workflow.</p>
         <h4>What if we can automate the process of checklist creation based on just a few criteria selections!</h4>
@@ -246,14 +224,10 @@
         <p class="lede">I also considered a conservative approach of keeping checklist management closer to the BigFix Console, but it did not address the cognitive load issue.</p>
         <p class="lede">A step by step approach reduces learning curve for new users without challenging the mental model of the old console users</p>
         <img class="media-natural" src="images/scm-step-by-step-guided.png" alt="Step by step guided approach: breaking checklist creation into clear, manageable steps" loading="lazy" decoding="async">
-        <blockquote>
-          <p>This was the shipped version for SCM create checklist flow.</p>
-        </blockquote>
-        <img class="media-natural" src="images/scm-final-workflow.png" alt="Final workflow: a clearly defined set of steps to create a checklist" loading="lazy" decoding="async">
         <h3 style="margin-top:var(--space-7)">Design trade-off</h3>
         <p class="lede"><span style="color:var(--accent-text)">I prioritised clarity and guidance over fewer clicks.</span> The guided flow introduced more screens and required users to move between steps, which initially raised concerns among experienced users.<br><br>During usability testing, new users found the guided approach easier to follow because each screen focused on a specific decision. Experienced users, however, felt that the process had simply moved from one page to multiple pages and questioned whether it would take longer.</p>
         <blockquote>
-          <p>The interesting finding was that more screens didn&rsquo;t mean more time. Testing the alpha release with proxy users we recorded that the checklist creation time dropped from approximately 20 minutes to under 12 minutes. Breaking the process into focused steps helped users move through decisions more efficiently, despite the additional navigation.</p>
+          <p>The interesting finding was that more screens didn&rsquo;t mean more time. Using the first version of the WebUI new users created checklist in under 12 minutes from previous approximately 20 minutes. This was observed on client calls with Tech Advisors to users. Breaking the process into focused steps helped users move through decisions more efficiently, despite the additional navigation.</p>
         </blockquote>
         <p class="lede">One thing that actually made the process faster for the users were the availability of the check detail within the same screen on clicking of the check-name and adding the parameters value right on the table. In the initial version parameterised check&rsquo;s value had to be added after checklist creation, with this flow they could do it right away.</p>
         <img class="media-natural" src="images/scm-parameterised-checks.png" alt="Parameterised checks: users can now edit parameters while creating the checklist itself" loading="lazy" decoding="async">
@@ -263,6 +237,8 @@
           <p>This led me to a key design decision structure the selection process around the sequence users were already following. I broke down the table into a step-by-step flow that followed their natural decision-making process, helping new users understand where to start while allowing experienced users to move through familiar steps efficiently.</p>
         </blockquote>
         <img class="media-natural" src="images/scm-table-to-steps.png" alt="From table to steps: how the platform and source selection screen was reorganised around the sequence users already followed" loading="lazy" decoding="async">
+        <h3 style="margin-top:var(--space-7)">This was the shipped version for SCM create checklist flow.</h3>
+        <img class="media-natural" src="images/scm-final-workflow.png" alt="Final workflow: a clearly defined set of steps to create a checklist" loading="lazy" decoding="async">
         <h3 style="margin-top:var(--space-7)">Making large amounts of content manageable</h3>
         <p class="lede">I used search, sorting and filtering to help users find relevant content. Clear check properties helped distinguish parameterisable checks from user-defined checks and made the content easier to inspect before changing it.<br><br>This was particularly useful for large checklists, where users needed to compare technical information and make several decisions before proceeding.</p>
       </section>
