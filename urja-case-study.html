@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Urja — Case study | Sanchita</title>
+<meta name="description" content="Redesigning Urja, a cloud render farm, into a calmer, clearer product for people who watch it all day: one navy design system, dark-mode accessibility and a clear failed-job screen." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/case-study.css">
+
+<style>
+  /* solution timeline */
+  .timeline { display: flex; flex-direction: column; margin-top: var(--space-5); }
+  .timeline-step {
+    display: grid;
+    grid-template-columns: 24px 180px minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+  .timeline-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .timeline-line {
+    width: 1px;
+    flex: 1;
+    background: var(--ink-1-a12);
+  }
+  .timeline-spacer {
+    display: grid;
+    grid-template-columns: 24px 180px minmax(0, 1fr);
+    height: var(--space-6);
+  }
+  .timeline-spacer .timeline-line { width: 1px; height: 100%; margin: 0 auto; }
+  .timeline-step h3 { margin: 0; }
+  .timeline-step p { margin: var(--space-2) 0 0; }
+
+  /* skim tip: a small label fixed to the bottom-left corner; the full tip shows on hover or focus */
+  .skim-tip {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 40;
+    padding: var(--space-2) var(--space-3);
+    background: var(--paper);
+    border-radius: var(--radius-md);
+    font-size: var(--text-caption);
+    line-height: 1.3;
+    color: var(--accent-text);
+    cursor: help;
+  }
+  .skim-tip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .skim-tip-body {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 8px);
+    width: 280px;
+    max-width: calc(100vw - 32px);
+    padding: var(--space-3) var(--space-4);
+    background: #EBF2FA;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 28px -12px rgba(58, 58, 58, 0.22);
+    font-size: var(--text-caption);
+    line-height: var(--leading-relaxed);
+    color: var(--ink-1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    transition: opacity var(--duration-fast) var(--ease-standard),
+                transform var(--duration-fast) var(--ease-standard),
+                visibility 0s linear var(--duration-fast);
+    pointer-events: none;
+  }
+  .skim-tip:hover .skim-tip-body,
+  .skim-tip:focus .skim-tip-body,
+  .skim-tip:focus-within .skim-tip-body {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+  @media (max-width: 900px) {
+    .skim-tip { left: 16px; bottom: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skim-tip-body { transition: none; transform: none; }
+  }
+  @media print { .skim-tip { display: none; } }
+
+  /* guideline rows: text on the left, screens on the right, no stepper */
+  .guideline-list { display: flex; flex-direction: column; gap: var(--space-7); }
+  .guideline-list-tight { gap: 40px; }  /* text rows: close together, but with room for their longer content */
+  /* vertical stepper on the guardrail rows: same dot and line as the solution timeline */
+  .guideline-list-stepper { gap: 0; }
+  .guideline-row.stepper-row {
+    grid-template-columns: 24px 220px minmax(0, 1fr);
+    align-items: stretch;
+  }
+  /* the gap between steps is padding inside the text column, so the line runs unbroken from one dot to the next */
+  .guideline-row.stepper-row > .guideline-body { padding-bottom: 44px; }
+  .guideline-row.stepper-row:last-child > .guideline-body { padding-bottom: 0; }
+  .guideline-row.stepper-row:last-child .timeline-line { display: none; }
+  .guideline-row.stepper-row > h3, .guideline-row.stepper-row > .guideline-body { align-self: start; }
+  .guideline-body { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+  .guideline-body blockquote { margin: 0; }
+  .guideline-row {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--space-5);
+    align-items: start;
+  }
+  .guideline-row p { margin: 0; }
+  .guideline-row-stack { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+
+  @media (max-width: 900px) {
+    .timeline-step, .timeline-spacer { grid-template-columns: 24px minmax(0, 1fr); }
+    .timeline-step > div:nth-child(2) { display: none; }
+  }
+  @media (max-width: 900px) {
+    .guideline-row { grid-template-columns: 1fr; gap: var(--space-3); }
+    .guideline-row.stepper-row { grid-template-columns: 24px minmax(0, 1fr); column-gap: var(--space-4); row-gap: var(--space-2); }
+    .guideline-row.stepper-row .timeline-dot-col { grid-column: 1; grid-row: 1 / span 2; }
+    .guideline-row.stepper-row > h3, .guideline-row.stepper-row > .guideline-body { grid-column: 2; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <a class="brand" href="index.html">Sanchita</a>
+    <nav class="primary-nav">
+      <a href="index.html">Work</a>
+      <a href="sanchita.html">About</a>
+      <a href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; All work</a>
+
+  <div class="content-grid">
+    <nav class="rail" aria-label="Case study sections">
+      <a class="rail-link" href="#overview">Overview</a>
+      <a class="rail-link" href="#problem">The problem</a>
+      <a class="rail-link" href="#outcome">Outcome</a>
+      <a class="rail-link" href="#solution">The solution</a>
+      <a class="rail-link" href="#audit">The audit</a>
+      <a class="rail-link" href="#goals">Goals</a>
+      <a class="rail-link" href="#approach">How I approached it</a>
+      <a class="rail-link" href="#new-designs">The Job Summary table</a>
+      <a class="rail-link" href="#dashboards">Admin &amp; User Dashboard</a>
+      <a class="rail-link" href="#billing">Billing and History</a>
+      <a class="rail-link" href="#other-screens">Other redesigned screens</a>
+      <a class="rail-link" href="#reflection">My key takeaways</a>
+    </nav>
+
+    <main>
+
+      <section id="overview">
+        <h1>Redesigning Urja into a calmer, clearer render farm for people who watch it all day</h1>
+        <p class="lede">Urja is a cloud render farm where studios send 3D scenes to be rendered, and artists often leave it open for hours while they wait. I redesigned it end to end as a solo designer, across more than 20 screens from sign-up to billing.</p>
+        <div class="meta-grid">
+          <div class="meta-item"><span class="meta-label">Product</span><span class="meta-value">Urja by Yotta, a cloud render farm for Blender and Maya studios</span></div>
+          <div class="meta-item"><span class="meta-label">Focus</span><span class="meta-value">Dark-mode accessibility, a design system, clear job status</span></div>
+        </div>
+        <div class="media-frame"><img class="media-natural" src="images/urja-hero.png" alt="The new Urja admin dashboard" loading="lazy" decoding="async"></div>
+      </section>
+
+      <section id="problem">
+        <h2>The problem</h2>
+        <p class="lede">The app clashed with Urja&#39;s own brand, strained the eyes in dark mode, and gave every element the same loud weight, so people had to hunt for what mattered. When a job failed, the screen offered five buttons of equal weight and left the person to guess which one fixed it.</p>
+        <h3 style="margin-top:var(--space-7)">The app and the website felt like two different products</h3>
+        <p class="lede">I started by comparing the app with Urja&#39;s own website. The website is built on deep navy, while the app used a neutral grey-black, and the app&#39;s backgrounds, greys and status colours had no clear rule behind them.</p>
+        <img class="media-natural" src="images/urja-app-vs-website.png" alt="The Urja app and the Urja website side by side, with their different colour palettes" loading="lazy" decoding="async">
+        <h4>Accessibility</h4>
+        <ol class="list"><li><strong>Low-contrast greys on dark.</strong> Secondary text such as dates and file sizes sat close to the background colour, which makes it tiring to read over a long session.</li><li><strong>Status carried by wording alone.</strong> &ldquo;Ready for test render&rdquo; and &ldquo;Ready for render&rdquo; looked identical, with no colour, icon or shape to tell them apart.</li><li><strong>Glare from bright fills.</strong> A lime progress bar and a solid orange button on near-black are the brightest things on the page, so they pull the eye even when nothing needs attention.</li></ol>
+        <h4>Visual hierarchy</h4>
+        <ol class="list"><li><strong>Everything was bold.</strong> Headers and titles at heavy weight look even louder on a dark background, so nothing led.</li><li><strong>The riskiest action was always visible.</strong> A bin icon on every row made deleting as prominent as testing a render.</li><li><strong>Every job shared the same image icon,</strong> so a Blender file and a Maya file looked identical and the rows blurred together.</li></ol>
+        <h4>Clarity and detail</h4>
+        <ul class="list"><li>Sidebar labels were cut off, as in &ldquo;Dashbo...&rdquo; and &ldquo;Job Sum...&rdquo;.</li><li>File names were underlined like links, although it wasn&#39;t clear whether they opened anything.</li><li>Dates and times mixed formats within a single cell, for example &ldquo;1:30pm, 22.07.25&rdquo;.</li><li>Small copy slips, such as &ldquo;64 user currently active&rdquo;, added to the sense of an unfinished product.</li></ul>
+        <blockquote><p>Taken together, the old screens showed everything at once and left the person to work out what mattered.</p></blockquote>
+      </section>
+
+      <section id="outcome">
+        <h2>Outcome</h2>
+        <p class="lede">The redesign brings the app and the website onto one navy palette, and it gives people a calm screen they can keep open all day.</p>
+        <div class="stat-grid">
+          <div class="stat"><h3>Easier on the eyes</h3><p class="lede">All readable text now sits at 4.5:1 contrast or more, and the brightest bars dropped from up to 8.9:1 to about 5:1.</p></div>
+          <div class="stat"><h3>Faster to act on a failure</h3><p class="lede">The failed job screen went from five equal buttons to one main action, one secondary action and quiet extras.</p></div>
+          <div class="stat"><h3>One meaning per colour</h3><p class="lede">Each colour and each button style has a single job across all 20+ screens.</p></div>
+          <div class="stat"><h3>A clear start for new studios</h3><p class="lede">A four-step guide with progress replaces an empty welcome screen.</p></div>
+        </div>
+      </section>
+
+      <section id="solution">
+        <h2>The solution</h2>
+        <p class="lede">I built a design system on the website&#39;s navy where colour means status, orange means action, and the one thing that needs the person is the one thing that stands out. It comes with a button hierarchy, a status ladder, and redesigned screens for jobs, job detail, submitting, dashboards, leases and billing.</p>
+        <h3 style="margin-top:var(--space-7)">Design system 2.0</h3>
+        <p class="lede">I turned the research into rules so that the same thing looks the same everywhere. I started from Urja&#39;s own tokens, kept what worked, and gave every colour exactly one job.</p>
+        <div class="media-frame"><img class="media-natural" src="images/urja-design-system.png" alt="Design system 2.0: surface colours, status chips and text colours" loading="lazy" decoding="async"></div>
+      </section>
+
+      <section id="audit">
+        <h2>I started with an audit of the current UI</h2>
+        <ul class="list"><li>Nothing acted as a single source of truth, so surfaces, borders and greys were picked screen by screen.</li><li>Two spare dark backgrounds (#17161F and #0E0B22) had been explored but never given a job.</li><li>Status colours came from outside the brand, with lime for progress, bright cyan for queued and hot pink for errors.</li><li>Orange was doing four jobs at once across primary buttons, active tabs, links and warnings, which meant nothing orange stood out.</li></ul>
+        <img class="media-natural" src="images/urja-current-design-grid.png" alt="The current app design: surfaces, status colours and orange used across the old screens" loading="lazy" decoding="async">
+      </section>
+
+      <section id="goals">
+        <h2>What I set out to do</h2>
+        <p class="lede">I turned the audit into four goals and checked every screen against them.</p>
+        <div class="table-scroll"><table class="rules-table"><thead><tr><th>Goal</th><th>What it means in practice</th></tr></thead><tbody><tr><td>Match the brand</td><td>One navy-based palette shared with the website</td></tr><tr><td>Easy on the eyes</td><td>No pure white, no bright fills, calmer weights, 4.5:1 contrast for text</td></tr><tr><td>Show what matters</td><td>One loud thing per screen: the thing that needs the person</td></tr><tr><td>Mean one thing</td><td>Each colour and each button style has exactly one job</td></tr></tbody></table></div>
+      </section>
+
+      <section id="approach">
+        <h2>How I approached it</h2>
+        <p class="lede">Before drawing anything new, I learned the rules and wrote them down, starting with dark mode.</p>
+        <h3 style="margin-top:var(--space-7)">Learning the rules of dark mode</h3>
+        <p class="lede">A dark interface follows its own rules, and these are the ones I applied.</p>
+        <ul class="list"><li><strong>No pure white text.</strong> Maximum contrast shimmers on a dark background, so I dimmed body text to #E0E6E8, and to #BAC2CA on busy dashboards.</li><li><strong>Lighter headings instead of bolder ones.</strong> Light text on dark looks heavier than the same weight on white, which makes bold headings glow, so I moved headings to regular or medium.</li><li><strong>Depth from lighter surfaces instead of shadows,</strong> with each higher layer in a slightly lighter navy.</li><li><strong>Softer saturated colours.</strong> Bright colours vibrate on dark, so I desaturated every status colour.</li><li><strong>Two contrast bars.</strong> Text needs 4.5:1 and shapes such as progress bars need 3:1.</li></ul>
+        <h3 style="margin-top:var(--space-7)">How other tools rank status colours</h3>
+        <p class="lede">Monitoring and ops tools tend to follow an attention ladder, where the loudest colour goes to whatever needs a person and everything else stays calm. I applied the same idea to jobs, so failed is the loudest, rendering comes next, and complete, queued and paused sit in quiet grey.</p>
+      </section>
+
+      <section id="new-designs">
+        <h2>The Job Summary table</h2>
+        <h3 style="margin-top:var(--space-7)">Jobs</h3>
+        <h4>The previous design</h4>
+        <p class="lede">5+ tabs but all were essentially the type of filters, Frame preview did not add value here, it just showed preview, the delete action under job table was always visible and prominent.</p>
+        <img class="media-natural" src="images/urja-current-table.png" alt="The previous Jobs table with five tabs, a frame preview and an always-visible delete action" loading="lazy" decoding="async">
+        <h4>The redesigned table</h4>
+        <ul class="list"><li>Slices show progress at a glance, with a strip of small bars for done, rendering and waiting.</li><li>Each job shows its software through a Blender or Maya logo in place of the generic image icon.</li><li>Status has a shape, a colour and a word, so it no longer depends on wording alone.</li><li>Rows carry one visible action, with delete and the rest tucked into a &ldquo;&hellip;&rdquo; menu so the table isn&#39;t a wall of bins.</li><li>Filters by status include a &ldquo;Needs attention&rdquo; count whenever something fails.</li></ul>
+        <div class="media-frame"><img class="media-natural" src="images/urja-jobs-statuses.png" alt="The new Jobs page showing the Uploading, Ready to test and Ready to render statuses" loading="lazy" decoding="async"></div>
+        <h3 style="margin-top:var(--space-7)">Job detail</h3>
+        <p class="lede">In the previous design, there was no separate page for opening individual renders, this was handled in the streamer app, with this redesign this page was added in the UI</p>
+        <div class="media-frame"><img class="media-natural" src="images/urja-job-detail.png" alt="The failed job screen with slices, log and the error card" loading="lazy" decoding="async"></div>
+        <p class="lede">The main outcome the users here are looking for are:</p>
+        <ul class="list"><li><strong>Upload missing file</strong> is the main action and sits inside the error card, in plain words.</li><li><strong>Retry</strong> is secondary, because it only works once the file is uploaded.</li><li><strong>Render without it</strong> and <strong>Open output folder</strong> are quiet text buttons.</li><li><strong>Cancel job</strong> lives in a &ldquo;&hellip;&rdquo; menu and turns red only when the menu is open.</li></ul>
+      </section>
+
+      <section id="dashboards">
+        <h2>Admin &amp; User Dashboard</h2>
+        <h4>Previous design</h4>
+        <img class="media-natural" src="images/urja-dashboard-before.png" alt="The previous admin dashboard with five equal KPI cards" loading="lazy" decoding="async">
+        <h4>New design for Admin dashboard</h4>
+        <div class="media-frame"><img class="media-natural" src="images/urja-hero.png" alt="The new Urja admin dashboard" loading="lazy" decoding="async"></div>
+        <p class="lede">The dashboard changed in five ways.</p>
+        <ul class="list"><li>Needs attention comes first, with the person, the error and the fix on separate lines.</li><li>Users, credits and storage sit in one calm row, with a bar wherever it helps.</li><li>The nodes grid stays visual. I kept the grid people liked and let it carry the GPU and CPU numbers along with their High and Critical tags.</li><li>Running and finished jobs appear as separate, short lists so they don&#39;t compete.</li></ul>
+        <h4>New design for User dashboard</h4>
+        <div class="media-frame"><img class="media-natural" src="images/urja-user-dashboard-new.png" alt="The new user dashboard with the credits card listing each lease" loading="lazy" decoding="async"></div>
+        <h3 style="margin-top:var(--space-7)">Building an onboarding was out of scope...</h3>
+        <p class="lede">...so I changed the first screen after login to onboarding screen</p>
+        <div class="media-frame"><img class="media-natural" src="images/urja-first-visit.png" alt="The first-visit dashboard with the How to get started guide" loading="lazy" decoding="async"></div>
+      </section>
+
+      <section id="billing">
+        <h2>Billing and History</h2>
+        <h4>Previous design</h4>
+        <img class="media-natural" src="images/urja-billing-before.png" alt="The previous billing screen" loading="lazy" decoding="async">
+        <h4>New Design for Billing and history</h4>
+        <div class="media-frame"><img class="media-natural" src="images/urja-billing.png" alt="Billing and credits, with the new plan cards" loading="lazy" decoding="async"></div>
+      </section>
+
+      <section id="other-screens">
+        <h2>Other redesigned screens</h2>
+        <h3 style="margin-top:var(--space-7)">Users and leases</h3>
+        <div class="media-slider" role="region" aria-roledescription="carousel" aria-label="Users and leases screens">
+          <div class="media-frame"><div class="slider-viewport"><div class="slider-track">
+            <img class="media-natural" src="images/urja-users-leases.png" alt="The Users page, with each person's leases shown as chips on their row" loading="lazy" decoding="async">
+            <img class="media-natural" src="images/urja-leases-admin.png" alt="The Leases page, with each lease's usage and its Almost out and Out states" loading="lazy" decoding="async">
+          </div></div></div>
+          <div class="slider-dots"></div>
+        </div>
+        <p class="lede">Admins see people and leases in one place. Each person&#39;s leases appear as small chips on their row, and each lease shows its usage with a quiet &ldquo;Almost out&rdquo; state and a clear &ldquo;Out, jobs paused&rdquo; state. Only two roles exist, Admin and User, which keeps the rules simple.</p>
+        <h3 style="margin-top:var(--space-7)">User sign in &amp; sign up</h3>
+        <div class="media" style="aspect-ratio:16/7" data-label="User sign in and sign up screens"></div>
+      </section>
+
+      <section id="reflection">
+        <h2>My key takeaways</h2>
+        <div class="point-row point-row-2">
+          <div class="point"><h3>Rules make small decisions fast.</h3><p>Writing the dark mode rules first made hundreds of colour choices quick and consistent.</p></div>
+          <div class="point"><h3>Hierarchy comes from a decision.</h3><p>The failed job screen improved once I chose the one main action, well before I touched any colours.</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ids = ['overview', 'problem', 'outcome', 'solution', 'audit', 'goals', 'approach', 'new-designs', 'dashboards', 'billing', 'other-screens', 'reflection'];
+  var links = {};
+  ids.forEach(function (id) {
+    links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
+  });
+  var active = null;
+  var headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 106;
+  var activeThreshold = headerHeight + 20;
+  function setActive(id) {
+    if (id === active) return;
+    if (active && links[active]) links[active].classList.remove('active');
+    if (links[id]) links[id].classList.add('active');
+    active = id;
+  }
+  function onScroll() {
+    var current = ids[0];
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      var rect = el && el.getBoundingClientRect();
+      if (rect && rect.height > 0 && rect.top <= activeThreshold) current = ids[i];
+    }
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    if (atBottom) current = ids[ids.length - 1];
+    setActive(current);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  requestAnimationFrame(function () { requestAnimationFrame(onScroll); });
+})();
+</script>
+
+<div class="skim-tip" id="skim-tip" tabindex="0" aria-describedby="skim-tip-text">
+  Short on time?
+  <span class="skim-tip-body" id="skim-tip-text" role="tooltip">Skim the headings, blue text, and visuals to get the key takeaways from this case study.</span>
+</div>
+<script src="js/lazy-video.js" defer></script>
+<script src="js/media-slider.js" defer></script>
+<script src="js/cursor-dot.js" defer></script>
+<script src="js/header-scroll.js" defer></script>
+</body>
+</html>

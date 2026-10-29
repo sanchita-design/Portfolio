@@ -307,6 +307,16 @@
     height: auto;
     max-height: 100%;
   }
+  /* cropped media: fills the white panel and trims from the bottom, so the gradient frame around it stays visible */
+  .project-placeholder.has-media.crop-bottom { flex: 1 1 auto; align-self: stretch; }
+  .project-placeholder.has-media.crop-bottom img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
   /* film grain */
   .project-media::after {
     content: "";
@@ -571,6 +581,7 @@
 
 <header class="site-header">
   <div class="wrap header-bar">
+    <a class="brand" href="index.html">Sanchita</a>
     <nav class="primary-nav">
       <a href="index.html" class="current">Work</a>
       <a href="sanchita.html">About</a>
@@ -582,11 +593,10 @@
 <div class="hero-backdrop">
   <section class="hero">
     <div class="hero-text reveal">
-      <p class="hello">Hello, I am Sanchita &amp;</p>
-      <h1 class="lead" aria-label="I translate enterprise complexity and ambiguity into clarity for highly regulated workflows">
-        <span aria-hidden="true">I translate enterprise <mark><span class="typed" data-words="complexity|ambiguity">complexity and ambiguity</span></mark><br> into clarity for highly regulated workflows</span>
+      <h1 class="lead" aria-label="I translate ambiguity and complexity into clarity for enterprises.">
+        <span aria-hidden="true">I translate <mark><span class="typed" data-words="ambiguity|complexity">ambiguity and complexity</span></mark><br> into clarity for enterprises.</span>
       </h1>
-      <p class="sub">12 years in security and regulated tech (8 in design, 4 in development). I turn dense data and rigid constraints into B2B products that are easy to use, including AI that users can understand and trust. My dev background keeps my design grounded in how software actually works.</p>
+      <p class="sub">Hi I am Sanchita, UI developer turned Designer. For the last 12 years in the industry I have worked with complex B2B products across Cybersecurity &amp; Fintech. I have spent 2026 working and learning design for AI systems for an early age startup.</p>
       <div class="logo-strip">
         <p class="logo-label" id="logo-label">Previously worked with:</p>
         <ul class="logo-row" aria-labelledby="logo-label">
@@ -634,6 +644,25 @@
             <span class="tag">Cybersecurity</span>
             <span class="tag">End to end ownership</span>
             <span class="tag">Legacy to modernisation</span>
+          </div>
+        <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        </div>
+      </a>
+
+      <a class="project-card reveal" href="urja-case-study.html">
+        <div class="project-media">
+          <div class="project-placeholder has-media crop-bottom">
+            <img src="images/urja-hero.png" alt="The new Urja admin dashboard" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="project-body">
+        <h3>Redesigning Urja into a calmer, clearer render farm for people who watch it all day</h3>
+        <div class="project-tags">
+            <span class="tag">Design system</span>
+            <span class="tag">Dark-mode accessibility</span>
+            <span class="tag">End to end redesign</span>
           </div>
         <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>

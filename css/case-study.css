@@ -463,3 +463,17 @@ blockquote p { color: var(--accent-text); font-size: calc(var(--text-base) - 2px
 .classify-head h3 { margin: 0 !important; font-size: var(--text-base); line-height: 1.35; }
 .classify-head p { margin: 0; }
 @media (max-width: 900px) { .classify { gap: var(--space-4); } }@media (max-width: 520px) { .classify { grid-template-columns: 1fr; gap: var(--space-5); } }
+
+/* image slider: slides sit inside one tinted frame, with dot controls underneath (same dots as the home page testimonials) */
+.media-slider .media-frame { display: block; }
+.slider-viewport { overflow: hidden; }
+.slider-track { display: flex; transition: transform 600ms var(--ease-standard); }
+.slider-track > img { flex: 0 0 100%; min-width: 0; }
+.slider-dots { display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-4); }
+.slider-dot {
+  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px;
+  background: var(--ink-1-a12); cursor: pointer;
+  transition: width var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard);
+}
+.slider-dot[aria-current="true"] { width: 24px; background: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .slider-track { transition: none; } }
