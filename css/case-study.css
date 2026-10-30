@@ -511,3 +511,8 @@ h3 + .stat-grid, h4 + .stat-grid { margin-top: -4px; }
 
 /* a sub-heading straight after a section title sits close to it, like body text does (overrides inline top margins) */
 main > section > h2 + h3, main > section > h2 + h4 { margin-top: 0 !important; }
+
+/* two screens one below the other on the blue frame, with a small blue arrow between them */
+.media-flow { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+.media-flow .media-natural { width: 100%; }
+.media-flow .flow-arrow { width: 28px; height: 28px; color: var(--accent-text); flex: none; }

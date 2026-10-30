@@ -39,14 +39,11 @@
       <a class="rail-link" href="#outcome">Outcomes</a>
       <a class="rail-link" href="#user-needs">What users needed</a>
       <a class="rail-link" href="#first-value">Defining first value</a>
-      <a class="rail-link" href="#journey-map">Mapping the journey</a>
-      <a class="rail-link" href="#build-vs-buy">Build versus buy</a>
+      <a class="rail-link" href="#strategy">Product strategy</a>
+      <a class="rail-link" href="#dual-strategy">The dual strategy</a>
       <a class="rail-link" href="#framework">First Things First</a>
       <a class="rail-link" href="#core-journey">Guidance around real tasks</a>
       <a class="rail-link" href="#guidance-system">Reusable guidance pattern</a>
-      <a class="rail-link" href="#experience-levels">Different users</a>
-      <a class="rail-link" href="#iteration">Iterating</a>
-      <a class="rail-link" href="#final-experience">The final experience</a>
       <a class="rail-link" href="#learnings">My takeaways</a>
     </nav>
 
@@ -72,7 +69,6 @@
       <section id="business-context">
         <h2>The business context</h2>
         <p class="lede">BigFix helps enterprise IT teams manage and secure endpoint environments. With BigFix SaaS, these capabilities were being delivered through a cloud-based experience, making it easier for organisations to get started.</p>
-        <img class="media-natural" src="images/bigfix-onboarding-apps.png" alt="The BigFix SaaS dashboard with its three applications, Deployment Manager, Device Explorer and Fixlet Explorer, in the side menu" loading="lazy" decoding="async">
         <p class="lede">Although the individual applications were designed to be usable on their own, new administrators still needed to understand how these capabilities worked together.</p>
         <p class="lede">For someone already familiar with BigFix, the relationship between the applications might be clear. For someone encountering the product for the first time, figuring out where to begin and what to do next could require considerable effort.</p>
       </section>
@@ -80,13 +76,10 @@
       <section id="problem">
         <h2>The challenge</h2>
         <h3 style="margin-top:var(--space-7)">A clear first action, but an unclear path to value</h3>
-        <p class="lede">The dashboard already gave new administrators a prominent option to add their first device. However, once they completed that action, the next steps were less obvious.</p>
-        <p class="lede">Users needed to discover how to find a relevant Fixlet, deploy it to a device, monitor the deployment and understand which application supported each part of the workflow.</p>
-        <p class="lede">This raised an interesting question.</p>
-        <blockquote><p>If the product was already designed to be intuitive, what additional value could onboarding provide?</p></blockquote>
-        <p class="lede">The research highlighted a gap between understanding how to operate an interface and knowing which actions would help users achieve their goals.</p>
+        <img class="media-natural" src="images/bigfix-onboarding-challenge.png" alt="The BigFix SaaS dashboard with annotations on its three applications and on the Add device action" loading="lazy" decoding="async">
+        <p class="lede">The dashboard already gave new administrators a prominent option to add their first device. However, once they completed that action, the next steps were less obvious. Users needed to discover how to find a relevant Fixlet, deploy it to a device, monitor the deployment and understand which application supported each part of the workflow. This raised an interesting question.</p>
+        <blockquote><p>If the product was already designed to be intuitive, what additional value could onboarding provide? The research highlighted a gap between understanding how to operate an interface and knowing which actions would help users achieve their goals.</p></blockquote>
         <p class="lede">Users were often overwhelmed by feature-heavy introductions, while existing help resources lacked clear entry points. Information was available, but users needed more direction on what mattered during their first session.</p>
-        <blockquote><p>I wanted the onboarding experience to help users focus on the first few meaningful actions that would bring them value from the product.</p></blockquote>
       </section>
 
       <section id="outcome">
@@ -97,76 +90,55 @@
           <div class="stat"><h3>A phased onboarding strategy</h3><p class="lede">The team&#39;s build-versus-buy evaluation resulted in a dual strategy, combining a lightweight, internally built onboarding experience for the initial release with a longer-term direction towards a third-party platform as onboarding needs expanded.</p></div>
           <div class="stat"><h3>A foundation for measuring activation</h3><p class="lede">Milestone completion, time to first device, time to first deployment, drop-off between tasks and feature adoption after onboarding were defined as the key signals.</p></div>
         </div>
-        <blockquote><p>My contribution was helping surface and evaluate the trade-offs around scalability, maintenance, engineering effort and long-term ownership through research and design exploration. Since this was a zero-to-one initiative, I also considered how onboarding effectiveness could be measured as the product developed. Support requests, repeated setup attempts and qualitative feedback could help identify where users needed more guidance or were encountering technical difficulties. Together, these measures would help the team understand how effectively onboarding supported activation and where the experience needed further improvement.</p></blockquote>
+        <blockquote><p>My contribution was helping surface and evaluate the trade-offs around scalability, maintenance, engineering effort and long-term ownership through research and design exploration.</p></blockquote>
+        <p class="lede">Since this was a zero-to-one initiative, I also considered how onboarding effectiveness could be measured as the product developed. Support requests, repeated setup attempts and qualitative feedback could help identify where users needed more guidance or were encountering technical difficulties. Together, these measures would help the team understand how effectively onboarding supported activation and where the experience needed further improvement.</p>
       </section>
 
       <section id="user-needs">
         <h2>Understanding what users needed from onboarding</h2>
-        <p class="lede">One of the important considerations was that BigFix SaaS would serve administrators with different levels of experience and responsibilities.</p>
-        <p class="lede">Some users would be completely new to BigFix and need guidance through the core workflows. Others might already understand endpoint management and simply need help locating familiar capabilities in the new SaaS interface.</p>
-        <p class="lede">A feature-by-feature walkthrough would introduce the interface, but the research suggested that users would benefit more from guidance connected to their responsibilities.</p>
-        <p class="lede">This led me to explore task-based onboarding, where users could learn the product while completing meaningful actions.</p>
-        <p class="lede">I also considered how this approach could support different user roles over time. Each role could have its own relevant milestones, while sharing a consistent interaction pattern across the product.</p>
-        <p class="lede">For the initial experience, I focused on the journey of a new administrator getting started with BigFix SaaS.</p>
+        <h4>Why I chose role-driven, task-based onboarding over a traditional product tour</h4>
+        <div class="point-row point-row-2">
+          <div class="point"><h3>Users felt overwhelmed by feature-heavy introductions</h3><p>Design decision: I used progressive disclosure, introducing features through contextual hotspots when they became relevant to the task users were completing.</p></div>
+          <div class="point"><h3>Users struggled to identify what to do first</h3><p>Design decision: I created the <em>First Things First</em> checklist, organising onboarding into meaningful milestones with visible progress and clear next steps.</p></div>
+          <div class="point"><h3>Different roles had different definitions of success</h3><p>Design decision: I chose a role-driven framework where onboarding milestones could be tailored to each role&#39;s responsibilities and desired outcomes. For the initial release, I focused on the new administrator&#39;s journey, with a structure that could accommodate other roles as the product evolved.</p></div>
+          <div class="point"><h3>Users had varying levels of product expertise</h3><p>Design decision: I made onboarding flexible, allowing users to follow the complete journey, revisit individual milestones or skip guidance based on their familiarity with the product.</p></div>
+          <div class="point"><h3>Help resources lacked clear entry points</h3><p>Design decision: I integrated contextual help, documentation and video resources into relevant steps, keeping deeper instructions accessible within the workflow.</p></div>
+        </div>
+        <h3 style="margin-top:var(--space-7)">What this meant for my approach</h3>
+        <blockquote><p>These findings led me towards role-driven, task-based onboarding, where a user&#39;s responsibilities determined which tasks were prioritised.</p></blockquote>
+        <p class="lede">For the initial release, I focused on helping a new administrator add their first device, deploy a Fixlet and confirm the result. This provided a clear path to first value while establishing a reusable framework that could support different roles and their respective goals as BigFix SaaS evolved.</p>
       </section>
 
       <section id="first-value">
         <h2>Defining what first value should look like</h2>
-        <p class="lede">Before designing the onboarding interface, I needed to understand what a new administrator should accomplish during their first session.</p>
-        <p class="lede">Adding a device was an important starting point, but the product&#39;s value became clearer when users could take an action on that device and see the result.</p>
         <p class="lede">I defined the initial activation goal around three connected actions.</p>
         <blockquote><p>Add a device &rarr; Deploy a Fixlet &rarr; Confirm that the deployment worked</p></blockquote>
         <p class="lede">This gave me a practical outcome to design towards and helped identify which capabilities users needed to discover first.</p>
         <p class="lede">I translated the activation journey into five milestones.</p>
-        <div class="step-list">
-          <div class="step"><span class="step-num">01</span><div><h3>Add a device</h3><p>Connect the first endpoint to BigFix SaaS.</p></div></div>
-          <div class="step"><span class="step-num">02</span><div><h3>Deploy a Fixlet</h3><p>Take an action on a relevant device.</p></div></div>
-          <div class="step"><span class="step-num">03</span><div><h3>View the deployment</h3><p>Understand where to monitor the result.</p></div></div>
-          <div class="step"><span class="step-num">04</span><div><h3>Explore Fixlet Explorer</h3><p>Become familiar with finding and reviewing Fixlets.</p></div></div>
-          <div class="step"><span class="step-num">05</span><div><h3>Explore Device Explorer</h3><p>Understand where to inspect managed devices.</p></div></div>
-        </div>
+        <img class="media-natural" src="images/bigfix-five-milestones.png" alt="Five activation milestones as a flow: add a device, deploy a Fixlet, view the deployment, explore Fixlet Explorer, explore Device Explorer" loading="lazy" decoding="async">
         <p class="lede">The first three milestones focused on completing a meaningful task, while the remaining two helped users become more familiar with the applications they would continue using.</p>
         <blockquote><p>Defining these milestones helped me focus the onboarding experience on what users needed to accomplish, while keeping the initial learning curve manageable.</p></blockquote>
       </section>
 
-      <section id="journey-map">
-        <h2>Mapping the journey across applications</h2>
-        <p class="lede">With the activation milestones defined, I started mapping how users would move through BigFix SaaS.</p>
-        <p class="lede">The journey involved several applications. Users would begin on the dashboard, complete the device setup process, move to Fixlet Explorer to select an action and then use Deployment Manager to review its progress.</p>
-        <div class="media" data-label="The activation journey mapped across the dashboard, Fixlet Explorer and Deployment Manager"></div>
-        <p class="lede">The application switcher, help resources and system feedback also played a role in supporting these transitions.</p>
-        <p class="lede">Mapping the workflow helped me identify where guidance would be most useful, which actions needed additional explanation and how progress could remain visible as users moved between applications.</p>
-        <p class="lede">It also highlighted a larger consideration. The onboarding experience would need to work across multiple applications, accommodate different levels of expertise and evolve as the product introduced new capabilities.</p>
-        <p class="lede">This brought another question into the design process.</p>
-        <blockquote><p>How could the team build an onboarding experience that supported the initial SaaS release and remained sustainable as the product grew?</p></blockquote>
+      <section id="strategy">
+        <h2>How researching onboarding led me to think about product strategy</h2>
+        <p class="lede">While researching onboarding approaches for BigFix SaaS, I explored how other B2B SaaS products helped users navigate complex workflows and how these experiences were built and maintained over time as product grows.</p>
+        <blockquote><p>During this research, a question came up that I hadn&#39;t initially considered. Should we build our onboarding experience in-house or use a third-party solution?</p></blockquote>
+        <img class="media-natural" src="images/bigfix-build-vs-buy.png" alt="Build versus buy" loading="lazy" decoding="async">
+        <p class="lede">I brought this question to my PM, which opened up a broader discussion about the long-term implications of both approaches. Building in-house would give the team greater control over the initial experience, but it would also require ongoing engineering effort as the product introduced new features, workflows and user roles. A third-party platform, on the other hand, could make onboarding easier to manage and scale, while bringing its own integration costs and dependencies.</p>
+        <blockquote><p>As I explored these trade-offs, I began to understand how decisions about onboarding could influence engineering ownership, roadmap priorities and long-term product scalability. This was my introduction to thinking about product strategy as a designer, and it helped me see how research could inform decisions about the direction of the product.</p></blockquote>
       </section>
 
-      <section id="build-vs-buy">
-        <h2>Thinking beyond the onboarding interface</h2>
-        <h3 style="margin-top:var(--space-7)">Exploring the build-versus-buy trade-off</h3>
-        <p class="lede">As I worked through the onboarding journey, it became clear that the interaction design was only one part of the challenge.</p>
-        <p class="lede">A guided onboarding experience would require ongoing updates as product workflows changed. New applications, features and user roles could introduce additional milestones, while even smaller interface changes might require existing guidance to be updated.</p>
-        <p class="lede">This made long-term ownership and maintenance important considerations.</p>
-        <p class="lede">I started researching how other SaaS products approached onboarding and explored the trade-offs between building a custom experience and using a third-party onboarding platform.</p>
-        <p class="lede">The research helped me frame a few questions that were important for the team to consider.</p>
-        <ul class="list"><li>How frequently would onboarding need to change as the product evolved?</li><li>How much engineering effort would be required to build and maintain custom guidance?</li><li>Could the same experience support different applications, user roles and future capabilities?</li><li>At what point would a dedicated onboarding platform become more sustainable?</li></ul>
-        <p class="lede">Building the experience internally would give the team greater control over the initial implementation and allow the guidance to stay closely connected to the product&#39;s workflows.</p>
-        <p class="lede">A third-party solution could provide more flexibility for managing onboarding content and supporting additional journeys as the product matured, although it would introduce its own costs and integration considerations.</p>
-        <p class="lede">I used these findings to bring longer-term scalability and ownership into the discussion alongside the immediate user experience.</p>
-        <h3 style="margin-top:var(--space-7)">The team adopted a dual strategy</h3>
-        <p class="lede">After evaluating the trade-offs, the team adopted a phased approach.</p>
-        <ul class="list"><li><strong>For the initial SaaS release, the team would build a lightweight, purpose-built onboarding experience.</strong> This would support the immediate activation journey while keeping the implementation focused on the tasks users needed to complete first.</li><li><strong>As the product grew, the longer-term direction was to move towards a third-party onboarding solution.</strong> This would allow the team to revisit the tooling decision once onboarding needs became clearer across additional features, roles and customer segments.</li></ul>
-        <p class="lede">This approach gave the team a way to balance the immediate release needs with future scalability. It also meant that the initial onboarding work could help establish which guidance patterns, behaviours and capabilities a future solution would need to support.</p>
-        <p class="lede">For me, this was an important part of the project. The research helped me contribute to conversations about engineering effort, roadmap priorities and long-term product ownership, while keeping the needs of new users central to the discussion. The design challenge was now clearer. I needed to create a useful onboarding experience for the initial release, with patterns that could also inform how onboarding evolved in the future.</p>
+      <section id="dual-strategy">
+        <h2>The dual strategy</h2>
+        <p class="lede">My findings contributed to the team&#39;s evaluation of both approaches, which eventually led to a dual strategy. For the initial SaaS release, the team chose to build a lightweight, purpose-built onboarding experience, with a longer-term direction towards adopting a third-party platform as the product grew. This balanced the need to deliver a focused experience for the first release with the flexibility to support more complex onboarding needs in the future.</p>
+        <blockquote><p>Seeing how my research contributed to this decision was an important learning moment. It encouraged me to think more carefully about the relationship between user needs, technical feasibility and business priorities, and how I could bring those considerations into my design process earlier.</p></blockquote>
       </section>
 
       <section id="framework">
         <h2>Introducing First Things First</h2>
-        <p class="lede">With the activation journey and implementation direction established, I explored a checklist-based approach that could make the first few tasks visible from the beginning.</p>
-        <p class="lede">I called it <strong>First Things First</strong>, reflecting the idea of helping administrators focus on the most useful actions during their initial experience.</p>
-        <p class="lede">The checklist introduced all five milestones and showed which tasks had been completed, which one was currently active and what remained.</p>
-        <p class="lede">It stayed accessible as users moved between applications, allowing them to return to the onboarding journey without losing track of their progress.</p>
-        <div class="media hero" data-label="The checklist across its stages, from introduction to completion"></div>
+        <p class="lede">I explored a checklist-based approach that could make the first few tasks visible from the beginning. I called it <strong>First Things First</strong>, reflecting the idea of helping administrators focus on the most useful actions during their initial experience. The checklist introduced all five milestones and showed which tasks had been completed, which one was currently active and what remained. It stayed accessible as users moved between applications, allowing them to return to the onboarding journey without losing track of their progress.</p>
+        <div class="media-frame"><img class="media-natural" src="images/bigfix-onboarding-checklist.png" alt="Deployment Manager after a deployment, with the First things first checklist, a guidance hotspot and the Fixlet deployed message" loading="lazy" decoding="async"></div>
         <p class="lede">I designed the checklist around different stages of completion, from the initial introduction through partially completed tasks to the final completed state.</p>
         <p class="lede">I also included direct access to relevant help resources and an option to skip the guided experience. This allowed new administrators to follow a structured journey while giving experienced users the flexibility to explore independently.</p>
         <p class="lede">The checklist provided the overall structure. The next challenge was deciding how much guidance users needed within each milestone.</p>
@@ -177,33 +149,38 @@
         <h3 style="margin-top:var(--space-7)">Helping users add their first device</h3>
         <p class="lede">Most BigFix capabilities depended on having at least one managed device, so I kept adding a device as the first milestone.</p>
         <p class="lede">The dashboard presented Add Device as the primary action, taking users into a setup flow where they could select the appropriate installer and follow the instructions required to connect their endpoint.</p>
-        <div class="media" data-label="The Add Device flow, with installer selection and setup instructions"></div>
+        <div class="media-frame"><div class="media-flow">
+          <img class="media-natural" src="images/bigfix-add-device-choose.png" alt="The Add Device panel, with a hotspot on choosing the agent installer" loading="lazy" decoding="async">
+          <svg class="icon flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>
+          <img class="media-natural" src="images/bigfix-add-device-download.png" alt="The Add Device panel after choosing an installer, with a hotspot on the download and links to a video and the user guide" loading="lazy" decoding="async">
+        </div></div>
         <p class="lede">Because the installation involved technical steps, I provided access to a video and user guide for users who needed additional support. I wanted the primary interface to remain focused on the current action, with more detailed instructions available when required.</p>
         <p class="lede">An important consideration was how the system would communicate completion. Downloading the installer was one step in the process, while the meaningful outcome occurred when the device successfully connected to the organisation.</p>
         <p class="lede">I designed the success state around that event, confirming that the device was available, updating the checklist and introducing the next milestone.</p>
-        <div class="media" data-label="Device-added confirmation beside the updated checklist"></div>
+        <div class="media-frame"><img class="media-natural" src="images/bigfix-device-added.png" alt="Device Explorer showing the first device, with the updated checklist and the 1st device added message" loading="lazy" decoding="async"></div>
         <blockquote><p>Connecting the system&#39;s success feedback to the onboarding checklist helped users understand what they had accomplished and where to go next.</p></blockquote>
         <h3 style="margin-top:var(--space-7)">Introducing applications when they became relevant</h3>
         <p class="lede">After adding their first device, users needed to move into another part of BigFix SaaS to continue.</p>
         <p class="lede">I used the application switcher to introduce the different applications progressively, connecting each one to the task users were trying to complete.</p>
-        <div class="media" data-label="Application switcher open with contextual guidance and the checklist visible"></div>
+        <div class="media-frame"><div class="media-flow">
+          <img class="media-natural" src="images/bigfix-fixlet-explorer-welcome.png" alt="Fixlet Explorer with a welcome hotspot linking to a video and the user guide, and the checklist in the corner" loading="lazy" decoding="async">
+          <svg class="icon flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>
+          <img class="media-natural" src="images/bigfix-filter-hotspot.png" alt="Fixlet Explorer with a hotspot on the filter control that says to click it to filter the data table" loading="lazy" decoding="async">
+          <svg class="icon flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>
+          <img class="media-natural" src="images/bigfix-select-fixlet.png" alt="Fixlet Explorer with a hotspot that says to select a Fixlet to deploy it" loading="lazy" decoding="async">
+          <svg class="icon flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>
+          <img class="media-natural" src="images/bigfix-deploy.png" alt="Fixlet Explorer with one Fixlet selected and a hotspot on Deploy that explains it opens the deployment configuration" loading="lazy" decoding="async">
+          <svg class="icon flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>
+          <img class="media-natural" src="images/bigfix-deploy-setup.png" alt="The Deploy panel, with a hotspot on choosing the target devices and when to start, and links to a video and the user guide" loading="lazy" decoding="async">
+        </div></div>
         <p class="lede">For example, when a user was ready to deploy their first Fixlet, the guidance introduced Fixlet Explorer and directed them towards the relevant workflow.</p>
         <p class="lede">This allowed users to build an understanding of the applications through their work. I kept the initial explanations focused on what users needed at that moment, allowing more advanced capabilities to become part of later exploration.</p>
         <h3 style="margin-top:var(--space-7)">Guiding users through their first Fixlet deployment</h3>
-        <p class="lede">Deploying a Fixlet was one of the most important milestones because it introduced a core BigFix workflow.</p>
-        <p class="lede">I designed the guidance to take users through opening Fixlet Explorer, selecting a relevant Fixlet, reviewing the devices it applied to and initiating a deployment.</p>
-        <p class="lede">Within Fixlet Explorer, contextual instructions introduced the table, relevant-device counts, filters and Fixlet details. These views contained considerable technical information, so I focused the guidance on the controls required to complete the first deployment.</p>
-        <div class="media" data-label="Fixlet Explorer with numbered guidance on the table, device counts, filters and details"></div>
-        <p class="lede">For example, using filters involved several interactions, from opening the filter panel and selecting a category to choosing a value and applying the selection. I broke these interactions into manageable steps, with each instruction appearing beside the relevant control.</p>
-        <p class="lede">The same approach carried into the Fixlet details view, where users could inspect the information required before taking action.</p>
-        <div class="media" data-label="Fixlet details view with guidance on the activity feed, relevant devices and properties"></div>
-        <blockquote><p>I wanted users to become familiar with the interface through the actions they were already trying to complete, with each step giving them enough context to move forward confidently.</p></blockquote>
-        <h3 style="margin-top:var(--space-7)">Helping users understand the result</h3>
-        <p class="lede">Once users initiated a deployment, they needed to understand where to see what happened.</p>
-        <p class="lede">I connected this milestone to Deployment Manager, introducing the deployment list, status indicators, deployment details and information about relevant devices. This helped users understand how to monitor the deployment and recognise its success or failure.</p>
-        <div class="media" data-label="Deployment Manager with the status and activity areas highlighted"></div>
-        <p class="lede">It also completed the initial activation goal I had defined earlier. Users could now connect adding a device, taking an action and monitoring the result into one meaningful workflow.</p>
-        <p class="lede">The success feedback and updated checklist made that progress visible, helping users continue towards the remaining exploration milestones.</p>
+        <div class="media-frame"><div class="media-flow">
+          <img class="media-natural" src="images/bigfix-onboarding-checklist.png" alt="Deployment Manager right after a Fixlet was deployed, with the Fixlet deployed message and the checklist" loading="lazy" decoding="async">
+          <svg class="icon flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>
+          <img class="media-natural" src="images/bigfix-deployment-details.png" alt="The details of the deployment in Deployment Manager" loading="lazy" decoding="async">
+        </div></div>
       </section>
 
       <section id="guidance-system">
@@ -211,40 +188,10 @@
         <p class="lede">As I worked through the individual milestones, I noticed that similar guidance interactions were needed across several applications.</p>
         <p class="lede">A navigation menu, a table filter and a deployment status required different explanations, but they could share the same interaction structure.</p>
         <p class="lede">I designed a reusable hotspot component that could be anchored to an element in the interface. Each hotspot included a short instruction, navigation controls for moving between steps and a final Got It action. Where more detailed explanation was needed, users could access supporting documentation.</p>
-        <div class="media" data-label="Enlarged anatomy of the hotspot component"></div>
+        <div class="media-frame"><img class="media-natural" src="images/bigfix-onboarding-patterns.png" alt="Onboarding patterns and rules: hotspot anatomy, checklist anatomy, checklist structure and single responsibility, and onboarding rules" loading="lazy" decoding="async"></div>
         <p class="lede">This gave me a consistent way to guide users through different interactions without introducing a separate component for every screen.</p>
         <p class="lede">I also considered how easily these patterns could be extended to future onboarding tasks. Since the team had chosen a lightweight initial implementation, keeping the interaction model consistent helped define a focused set of behaviours for the first release.</p>
         <blockquote><p>The reusable patterns created consistency for users while providing a clearer foundation for future onboarding journeys and tooling decisions.</p></blockquote>
-      </section>
-
-      <section id="experience-levels">
-        <h2>Making the experience flexible for different users</h2>
-        <p class="lede">One consideration throughout the project was that BigFix SaaS would serve administrators with different levels of familiarity.</p>
-        <p class="lede">Some would benefit from following the complete journey, while experienced administrators might already understand the underlying workflows and only need help navigating the new interface. I wanted the experience to support both.</p>
-        <p class="lede">New users could follow the checklist from beginning to end, while experienced users could open individual milestones, dismiss instructions or skip the tour.</p>
-        <p class="lede">This influenced how I structured each milestone. The guidance needed to make sense independently, allowing users to access help for a particular task without having to repeat earlier steps.</p>
-        <p class="lede">The decision balanced the need for direction with the flexibility expected by experienced enterprise users.</p>
-      </section>
-
-      <section id="iteration">
-        <h2>Iterating on the experience</h2>
-        <p class="lede">With the overall journey established, I moved into wireframes and prototypes to explore the interaction details.</p>
-        <p class="lede">I focused on whether the milestone sequence was clear, how the checklist would behave across applications, how much information users needed at each step and whether hotspots would interfere with the interface.</p>
-        <div class="media" data-label="Original wireframes arranged beside the refined screens"></div>
-        <p class="lede">One of the areas I refined was the amount of instruction presented at once. Longer explanations increased the reading required before users could take action, so I shortened the guidance to focus on the immediate task and moved deeper explanations into contextual help resources.</p>
-        <p class="lede">I also adjusted hotspot placement to keep instructions close to the relevant controls and avoid obscuring important content.</p>
-        <p class="lede">Another consideration was continuity. Since users would move between several applications during onboarding, I wanted their progress to remain visible throughout the experience. Keeping the checklist accessible and showing completed milestones helped reinforce that continuity.</p>
-        <p class="lede">These iterations gradually shaped an experience that gave users enough direction to move forward while keeping their attention on the actual product task.</p>
-      </section>
-
-      <section id="final-experience">
-        <h2>The final experience</h2>
-        <p class="lede">The resulting onboarding model connected five activation milestones through a persistent checklist and contextual guidance across BigFix SaaS.</p>
-        <div class="media hero" data-label="The final onboarding experience across the dashboard, checklist and guided tours"></div>
-        <p class="lede">New administrators could begin with a clear action on the dashboard, follow the First Things First journey and receive relevant instructions as they moved between applications.</p>
-        <p class="lede">Each milestone connected to a real product task, with feedback that helped users understand when they had successfully completed it.</p>
-        <p class="lede">Experienced users could choose how much guidance to follow, while supporting resources remained available when additional explanation was required.</p>
-        <p class="lede">The interaction patterns were also designed to be reusable, giving the initial onboarding experience a consistent structure that could support additional journeys as the product evolved.</p>
       </section>
 
       <section id="learnings">
@@ -262,7 +209,7 @@
 
 <script>
 (function () {
-  var ids = ['overview', 'business-context', 'problem', 'outcome', 'user-needs', 'first-value', 'journey-map', 'build-vs-buy', 'framework', 'core-journey', 'guidance-system', 'experience-levels', 'iteration', 'final-experience', 'learnings'];
+  var ids = ['overview', 'business-context', 'problem', 'outcome', 'user-needs', 'first-value', 'strategy', 'dual-strategy', 'framework', 'core-journey', 'guidance-system', 'learnings'];
   var links = {};
   ids.forEach(function (id) {
     links[id] = document.querySelector('.rail-link[href="#' + id + '"]');
