@@ -508,3 +508,6 @@ h3 + .stat-grid, h4 + .stat-grid { margin-top: -4px; }
 
 /* Urja problem section: more room above each group heading (Accessibility, Visual hierarchy) */
 #audit h4 { margin-top: var(--space-6); }
+
+/* a sub-heading straight after a section title sits close to it, like body text does (overrides inline top margins) */
+main > section > h2 + h3, main > section > h2 + h4 { margin-top: 0 !important; }
