@@ -5,7 +5,7 @@
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
 
-  var MESSAGE = "LET'S BUILD SOMETHING TOGETHER.";
+  var MESSAGE = 'THINK. DESIGN. CREATE.';
   var BLUE = '73,104,220', ORANGE = '226,128,78';
   var CELL = 7;                 // one quarter of the 28px squares in the page background
   var BAND_ROWS = 4;            // the four lines of small pixels along the bottom
@@ -27,7 +27,9 @@
     N: ['10001','11001','10101','10011','10001','10001','10001'],
     G: ['01110','10001','10000','10111','10001','10001','01111'],
     R: ['11110','10001','10001','11110','10100','10010','10001'],
-    "'": ['11000','11000','10000','00000','00000','00000','00000'],   // apostrophe
+    K: ['10001','10010','10100','11000','10100','10010','10001'],
+    C: ['01110','10001','10000','10000','10000','10001','01110'],
+    A: ['01110','10001','10001','11111','10001','10001','10001'],
     '.': ['00000','00000','00000','00000','00000','11000','11000']   // full stop: a small square
   };
 
@@ -42,7 +44,7 @@
     // one line if it fits at a comfortable size, otherwise two
     var lines = [MESSAGE], cell = CELL;
     var oneLineW = (MESSAGE.length * 6 - 3) * CELL;
-    if (oneLineW > w * 0.92) lines = ["LET'S BUILD", 'SOMETHING TOGETHER.'];
+    if (oneLineW > w * 0.92) lines = ['THINK. DESIGN.', 'CREATE.'];
     var longest = Math.max.apply(null, lines.map(function (l) { return l.length; }));
     cell = Math.max(2, Math.min(CELL, Math.floor((w * 0.92) / (longest * 6))));
 
