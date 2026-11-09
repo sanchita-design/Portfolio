@@ -166,7 +166,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 16/10;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     padding: 40px;
     /* grainy gradient frame around the placeholder: soft tinted blobs that reach all four edges.
        --tint is the brand colour as r,g,b; odd cards are orange, even cards blue. */
@@ -237,7 +237,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-sm);
+    border-radius: 0;
     background: var(--white);
     overflow: hidden;
   }
@@ -306,6 +306,7 @@
     background: var(--accent-a08);
     color: var(--accent-press);
   }
+    .project-card .project-sub { margin: calc(-1 * var(--space-2)) 0 var(--space-3); font-size: var(--text-base); line-height: 1.5; color: var(--text-muted); }
     .project-card h3 { font-weight: 400; font-size: 20px; line-height: 1.4; letter-spacing: -0.005em; margin: 0 0 var(--space-3); color: var(--text-heading); }
   .view-case-study {
     display: inline-flex;
@@ -534,6 +535,19 @@
     .project-card:hover .project-media,
     .project-card:focus-visible .project-media { padding: 14px; }
   }
+
+  /* ---- one tile below the other, picture on the left and text on the right, as in the original layout ---- */
+  .project-grid { display: block; }
+  .project-cols { display: flex; flex-direction: column; gap: 112px; }
+  .project-col { display: contents; }   /* the cards keep their order through the inline order values */
+  .project-media { box-shadow: 0 0 28px rgba(58,58,58,0.10), 0 4px 14px rgba(58,58,58,0.06); }   /* soft shadow all around each picture */
+  /* tile colours: grainy blue and orange (the gradient layer and film grain come from the base .project-media rules) */
+  .project-card.tile-orange .project-media { --tint: 226, 128, 78; --tint-deep: 192, 95, 50; --tint-pale: 234, 170, 132; }
+  .project-card.tile-blue .project-media { --tint: 73, 104, 220; --tint-deep: 38, 62, 170; --tint-pale: 118, 142, 232; }
+  .project-card h3 { font-size: 15px; }
+  @media (max-width: 900px) {
+    .project-cols { gap: var(--space-8); }
+  }
 </style>
 </head>
 <body>
@@ -573,84 +587,87 @@
   <section class="projects">
     <div class="project-grid">
 
-      <a class="project-card reveal" href="foundersbrew-case-study.html">
-        <div class="project-media">
-          <div class="project-placeholder has-media">
-            <video src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
-          </div>
-        </div>
-        <div class="project-body">
-        <h3>From conversations to structured evidence for founders that led to defining a bias detection framework for the FoundersBrew user discovery agent.</h3>
-        <div class="project-tags">
-            <span class="tag">0 &rarr; 1 AI system</span>
-            <span class="tag">Bias detection framework</span>
-            <span class="tag">HAX</span>
-            <span class="tag">Product thinking</span>
-          </div>
-        <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        </div>
-      </a>
+      <div class="project-cols">
+        <div class="project-col">
 
-      <a class="project-card reveal" href="scm-webui-case-study.html">
-        <div class="project-media">
-          <div class="project-placeholder has-media">
-            <img src="images/bigfix-hero.png" alt="HCL BigFix Security Configuration Management web UI" loading="lazy" decoding="async">
+        <a class="project-card tile-blue reveal" style="order:1" href="foundersbrew-case-study.html">
+          <div class="project-media">
+            <div class="project-placeholder has-media">
+              <video src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
+            </div>
           </div>
-        </div>
-        <div class="project-body">
-        <h3>Modernisation of HCL BigFix&#39;s SCM that cut checklist creation time by ~40%</h3>
-        <div class="project-tags">
-            <span class="tag">Cybersecurity</span>
-            <span class="tag">End to end ownership</span>
-            <span class="tag">Legacy to modernisation</span>
-            <span class="tag">Product thinking</span>
+          <div class="project-body">
+          <h3>How I designed FoundersBrew&rsquo;s AI interview agent to accelerate discovery, so the first user conversation happens in hours, not weeks</h3>
+          <div class="project-tags">
+              <span class="tag">AI SaaS</span>
+              <span class="tag">Product thinking</span>
+            </div>
+          <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
           </div>
-        <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        </div>
-      </a>
+        </a>
 
-      <a class="project-card reveal" href="urja-case-study.html">
-        <div class="project-media">
-          <div class="project-placeholder has-media crop-bottom">
-            <img src="images/urja-hero.png" alt="The new Urja admin dashboard" loading="lazy" decoding="async">
+        <a class="project-card tile-orange reveal" style="order:4" href="urja-case-study.html">
+          <div class="project-media">
+            <div class="project-placeholder has-media crop-bottom">
+              <img src="images/urja-hero.png" alt="The new Urja admin dashboard" loading="lazy" decoding="async">
+            </div>
           </div>
-        </div>
-        <div class="project-body">
-        <h3>Redesigning Urja into a calmer, clearer render farm for people who watch it all day</h3>
-        <div class="project-tags">
-            <span class="tag">Design system</span>
-            <span class="tag">Dark-mode accessibility</span>
-            <span class="tag">End to end redesign</span>
-            <span class="tag">Visual design</span>
+          <div class="project-body">
+          <h3>Redesigning Urja into a calmer, clearer render farm for people who watch it all day</h3>
+          <div class="project-tags">
+              <span class="tag">Media and Entertainment</span>
+              <span class="tag">Visual design</span>
+            </div>
+          <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
           </div>
-        <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        </div>
-      </a>
+        </a>
 
-      <a class="project-card reveal" href="bigfix-saas-onboarding-case-study.html">
-        <div class="project-media">
-          <div class="project-placeholder has-media">
-            <video src="videos/bigfix-onboarding-hero.mp4" poster="videos/bigfix-onboarding-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="BigFix SaaS onboarding walkthrough"></video>
-          </div>
         </div>
-        <div class="project-body">
-        <h3>Designing for faster activation, time to first value and faster adoption of HCL BigFix&#39;s new SaaS venture.</h3>
-        <div class="project-tags">
-            <span class="tag">Enterprise SaaS</span>
-            <span class="tag">0 &rarr; 1</span>
-            <span class="tag">Onboarding</span>
+        <div class="project-col">
+
+        <a class="project-card tile-orange reveal" style="order:2" href="scm-webui-case-study.html">
+          <div class="project-media">
+            <div class="project-placeholder has-media">
+              <img src="images/bigfix-hero.png" alt="HCL BigFix Security Configuration Management web UI" loading="lazy" decoding="async">
+            </div>
           </div>
-        <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
+          <div class="project-body">
+          <h3>Modernisation of HCL BigFix&#39;s SCM that cut checklist creation time by ~40% for compliance managers</h3>
+          <div class="project-tags">
+              <span class="tag">Cybersecurity - B2B</span>
+              <span class="tag">Product thinking</span>
+              <span class="tag">Multi user flow</span>
+            </div>
+          <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          </div>
+        </a>
+
+        <a class="project-card tile-blue reveal" style="order:3" href="bigfix-saas-onboarding-case-study.html">
+          <div class="project-media">
+            <div class="project-placeholder has-media">
+              <video src="videos/bigfix-onboarding-hero.mp4" poster="videos/bigfix-onboarding-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="BigFix SaaS onboarding walkthrough"></video>
+            </div>
+          </div>
+          <div class="project-body">
+          <h3>Designing onboarding for HCL BigFix&rsquo;s SaaS venture, and how it led me to influence product strategy.</h3>
+          <div class="project-tags">
+              <span class="tag">Cybersecurity SaaS</span>
+              <span class="tag">Product strategy</span>
+            </div>
+          <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          </div>
+        </a>
+
         </div>
-      </a>
+      </div>
 
       <!-- Hidden for now: the BigFix Workspace+ case study card below
 
