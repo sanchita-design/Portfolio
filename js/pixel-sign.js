@@ -7,6 +7,14 @@
 
   var MESSAGE = 'THINK. DESIGN. CREATE.';
   var BLUE = '73,104,220', ORANGE = '226,128,78';
+  // gradient taken from the reference image: bright indigo, soft lavender, deep navy
+  var TEXT_STOPS = [[91,82,232],[125,116,238],[42,34,168],[21,16,111]];
+  var BAND_STOPS = [[91,82,232],[201,189,248],[125,116,238],[42,34,168],[21,16,111]];
+  function grad(stops, t) {
+    t = Math.min(1, Math.max(0, t));
+    var f = t * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(f)), u = f - i, a = stops[i], b = stops[i + 1];
+    return Math.round(a[0] + (b[0] - a[0]) * u) + ',' + Math.round(a[1] + (b[1] - a[1]) * u) + ',' + Math.round(a[2] + (b[2] - a[2]) * u);
+  }
   var CELL = 7;                 // one quarter of the 28px squares in the page background
   var BAND_ROWS = 4;            // the four lines of small pixels along the bottom
   var FRAME_MS = 1000 / 30;
@@ -93,7 +101,8 @@
     px.forEach(function (p) {
       var a = still ? 1 : messageAlpha(p, t);
       if (a <= 0) return;
-      ctx.fillStyle = 'rgba(' + BLUE + ',' + a.toFixed(3) + ')';
+      // colour runs diagonally: indigo at the top left to deep navy at the bottom right
+      ctx.fillStyle = 'rgba(' + grad(TEXT_STOPS, (p.x / w) * 0.8 + (p.y / h) * 0.2) + ',' + a.toFixed(3) + ')';
       ctx.fillRect(p.x, p.y, p.s - (p.s > 3 ? 1 : 0), p.s - (p.s > 3 ? 1 : 0));
     });
     // band of tiny pixels
@@ -102,7 +111,7 @@
       var q = band[i];
       if (!q.on) continue;
       var f = still ? 0.5 : 0.5 + 0.5 * Math.sin(((now + q.phase) / q.period) * Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + (q.orange ? ORANGE : BLUE) + ',' + (0.1 + f * 0.32).toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(' + grad(BAND_STOPS, ((i % cols) / cols) * 0.85) + ',' + (0.12 + f * 0.4).toFixed(3) + ')';
       ctx.fillRect((i % cols) * CELL, top + Math.floor(i / cols) * CELL, CELL - 1, CELL - 1);
     }
   }

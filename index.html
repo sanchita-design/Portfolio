@@ -114,7 +114,6 @@
   .hero-text .sub {
     font-family: var(--font-sans);
     margin-top: var(--space-5);
-    max-width: 56rem;  /* wide enough to hold the sub-text to three lines on desktop */
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
     color: var(--text-muted);
@@ -180,11 +179,11 @@
     overflow: hidden;
     transition: box-shadow var(--duration-fast) var(--ease-standard),
                 background-color 700ms ease,
-                padding 800ms cubic-bezier(0.4, 0, 0.2, 1);
+                border-radius 400ms var(--ease-standard);
   }
   .project-card:nth-child(odd) .project-media { --tint: 73, 104, 220; --tint-deep: 38, 62, 170; --tint-pale: 118, 142, 232; }
-  /* gradient layer: bigger than the thumbnail, drifts and turns all the time, zooms and deepens on hover.
-     Deep and pale shades of the brand colour alternate around the layer so the movement reads clearly in the narrow frame. */
+  /* background of every tile: a static gradient layer, plus six soft colour blobs (the .wave spans) that drift across it.
+     Only transform is animated, which the browser can run on the graphics chip without repainting, so scrolling stays smooth. */
   .project-media::before {
     content: "";
     position: absolute;
@@ -195,37 +194,46 @@
       radial-gradient(34% 22% at 46% 28%, rgba(var(--tint), 1) 0%, rgba(var(--tint), 0) 100%),
       radial-gradient(34% 22% at 60% 74%, rgba(var(--tint), 1) 0%, rgba(var(--tint), 0) 100%),
       radial-gradient(24% 28% at 20% 62%, rgba(var(--tint-pale), 0.95) 0%, rgba(var(--tint-pale), 0) 100%),
-      radial-gradient(24% 28% at 80% 38%, rgba(var(--tint-pale), 0.95) 0%, rgba(var(--tint-pale), 0) 100%),
-      radial-gradient(28% 20% at 70% 26%, rgba(var(--tint-pale), 0.85) 0%, rgba(var(--tint-pale), 0) 100%),
-      radial-gradient(28% 20% at 34% 75%, rgba(var(--tint-pale), 0.85) 0%, rgba(var(--tint-pale), 0) 100%);
-    animation: thumbDrift 10s ease-in-out infinite alternate;
+      radial-gradient(24% 28% at 80% 38%, rgba(var(--tint-pale), 0.95) 0%, rgba(var(--tint-pale), 0) 100%);
     scale: 1.45;
-    rotate: 0deg;
     filter: brightness(0.92) saturate(1.12);
-    transition: scale 1100ms cubic-bezier(0.4, 0, 0.2, 1),
-                rotate 1100ms cubic-bezier(0.4, 0, 0.2, 1),
-                filter 700ms ease;
+    transition: scale 1100ms cubic-bezier(0.4, 0, 0.2, 1), filter 700ms ease;
   }
-  .project-card:nth-child(even) .project-media::before {
-    animation-duration: 13s;
-    animation-delay: -6s;
+  .wave {
+    position: absolute;
+    width: 62%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+    background: radial-gradient(circle, rgba(var(--c), 0.85) 0%, rgba(var(--c), 0) 68%);
   }
-  @keyframes thumbDrift {
-    0%   { transform: translate(-12%, -9%) rotate(-12deg); }
-    50%  { transform: translate(4%, 11%) rotate(2deg); }
-    100% { transform: translate(12%, -7%) rotate(12deg); }
-  }
+  .wave.w1 { --c: var(--tint-deep); left: -12%; top: 18%;  animation: waveA 17s ease-in-out infinite; }
+  .wave.w2 { --c: var(--tint);      left: 40%;  top: -22%; animation: waveB 21s ease-in-out infinite; }
+  .wave.w3 { --c: var(--tint-pale); left: 50%;  top: 40%;  animation: waveC 19s ease-in-out infinite; }
+  .wave.w4 { --c: var(--tint);      left: 4%;   top: 52%;  width: 50%; animation: waveB 25s ease-in-out -9s infinite; }
+  .wave.w5 { --c: var(--tint-pale); left: 22%;  top: -10%; width: 48%; animation: waveA 23s ease-in-out -6s infinite; }
+  .wave.w6 { --c: var(--tint-deep); left: 62%;  top: 6%;   width: 46%; animation: waveC 27s ease-in-out -12s infinite; }
+  @keyframes waveA { 0%, 100% { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(38%, -26%, 0); } 50% { transform: translate3d(74%, 8%, 0); } 75% { transform: translate3d(30%, 34%, 0); } }
+  @keyframes waveB { 0%, 100% { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(-34%, 30%, 0); } 50% { transform: translate3d(-70%, 4%, 0); } 75% { transform: translate3d(-26%, -28%, 0); } }
+  @keyframes waveC { 0%, 100% { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(-30%, -34%, 0); } 50% { transform: translate3d(10%, -62%, 0); } 75% { transform: translate3d(40%, -22%, 0); } }
   .project-card:hover .project-media,
   .project-card:focus-visible .project-media {
-    padding: 28px;  /* the inner container grows slightly to fill more of the frame */
     background-color: color-mix(in srgb, rgb(var(--tint)) 72%, #fff);
+    border-radius: 16px;
   }
   .project-card:hover .project-media::before,
   .project-card:focus-visible .project-media::before {
     scale: 1.7;
-    rotate: 3deg;
     filter: brightness(0.94) saturate(1.1);
   }
+  /* a tile whose video carries its own background: no coloured frame, the video fills the tile */
+  .project-card .project-media.no-frame, .project-card:hover .project-media.no-frame, .project-card:focus-visible .project-media.no-frame { padding: 0; background: none; }
+  .project-media.no-frame::before, .project-media.no-frame::after, .project-media.no-frame .wave { display: none; }
+  .project-media.no-frame .project-placeholder { background: none; }
+  /* a tile with a photo behind the video instead of the animated colour frame */
+  .project-card .project-media.photo-bg, .project-card:hover .project-media.photo-bg, .project-card:focus-visible .project-media.photo-bg { background: var(--photo) center / cover no-repeat; }
+  .project-media.photo-bg::before, .project-media.photo-bg::after, .project-media.photo-bg .wave { display: none; }
   /* the container that holds the actual case study image or video */
   .project-placeholder {
     position: relative;
@@ -260,6 +268,7 @@
     position: static;
     inset: auto;
     display: block;
+    vertical-align: top;
     height: auto;
     max-height: 100%;
   }
@@ -340,6 +349,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .project-media, .project-media::before { transition: none; animation: none; }
+    .wave { animation: none; }
     .project-body { transition: none; }
     .project-card:hover .project-body, .project-card:focus-visible .project-body { transform: none; }
     .project-card:hover .project-media::before,
@@ -532,8 +542,6 @@
   @media (max-width: 560px) {
     footer { justify-content: flex-start; padding-left: var(--side-margin-mobile); padding-right: var(--side-margin-mobile); }
     .project-media { padding: 20px; }  /* 40px would crowd the placeholder on a phone */
-    .project-card:hover .project-media,
-    .project-card:focus-visible .project-media { padding: 14px; }
   }
 
   /* ---- one tile below the other, picture on the left and text on the right, as in the original layout ---- */
@@ -544,7 +552,7 @@
   /* tile colours: grainy blue and orange (the gradient layer and film grain come from the base .project-media rules) */
   .project-card.tile-orange .project-media { --tint: 226, 128, 78; --tint-deep: 192, 95, 50; --tint-pale: 234, 170, 132; }
   .project-card.tile-blue .project-media { --tint: 73, 104, 220; --tint-deep: 38, 62, 170; --tint-pale: 118, 142, 232; }
-  .project-card h3 { font-size: 15px; }
+  .project-card h3 { font-size: 17px; }
   @media (max-width: 900px) {
     .project-cols { gap: var(--space-8); }
   }
@@ -591,9 +599,10 @@
         <div class="project-col">
 
         <a class="project-card tile-blue reveal" style="order:1" href="foundersbrew-case-study.html">
-          <div class="project-media">
+          <div class="project-media no-frame">
+            <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media">
-              <video src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
+              <video src="videos/foundersbrew-casestudy-tile.mp4" poster="videos/foundersbrew-casestudy-tile.jpg" preload="none" data-lazy muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
             </div>
           </div>
           <div class="project-body">
@@ -609,7 +618,8 @@
         </a>
 
         <a class="project-card tile-orange reveal" style="order:4" href="urja-case-study.html">
-          <div class="project-media">
+          <div class="project-media photo-bg" style="--photo:url('images/urja-tile-bg.jpg')">
+            <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media crop-bottom">
               <img src="images/urja-hero.png" alt="The new Urja admin dashboard" loading="lazy" decoding="async">
             </div>
@@ -630,9 +640,10 @@
         <div class="project-col">
 
         <a class="project-card tile-orange reveal" style="order:2" href="scm-webui-case-study.html">
-          <div class="project-media">
+          <div class="project-media no-frame">
+            <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media">
-              <img src="images/bigfix-hero.png" alt="HCL BigFix Security Configuration Management web UI" loading="lazy" decoding="async">
+              <video src="videos/scm-tile.mp4" poster="videos/scm-tile.jpg" preload="none" data-lazy muted loop playsinline aria-label="HCL BigFix Security Configuration Management web UI walkthrough"></video>
             </div>
           </div>
           <div class="project-body">
@@ -649,7 +660,8 @@
         </a>
 
         <a class="project-card tile-blue reveal" style="order:3" href="bigfix-saas-onboarding-case-study.html">
-          <div class="project-media">
+          <div class="project-media photo-bg" style="--photo:url('images/onboarding-tile-bg.jpg')">
+            <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media">
               <video src="videos/bigfix-onboarding-hero.mp4" poster="videos/bigfix-onboarding-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="BigFix SaaS onboarding walkthrough"></video>
             </div>
@@ -673,6 +685,7 @@
 
       <a class="project-card reveal" href="bigfix-workspace-plus-case-study.html">
         <div class="project-media">
+          <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
           <div class="project-placeholder" data-label="Case study image/video"></div>
         </div>
         <div class="project-body">
