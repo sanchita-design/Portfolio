@@ -162,7 +162,7 @@
       <a class="rail-link" href="#problem">The problem</a>
       <a class="rail-link" href="#solution">The solution</a>
       <a class="rail-link" href="#outcome">Outcome</a>
-      <a class="rail-link" href="#directional-landscape">Understanding the landscape</a>
+      <!-- <a class="rail-link" href="#directional-landscape">Understanding the landscape</a> -->
       <a class="rail-link" href="#visual-design">Visual design direction</a>
       <a class="rail-link" href="#context">Human in the loop</a>
       <a class="rail-link" href="#agent-workflow">The agent workflow and bias detection</a>
@@ -173,7 +173,7 @@
     <main>
 
       <section id="overview">
-        <h1>From conversations to structured evidence for founders</h1>
+        <h1>How I designed FoundersBrew&rsquo;s AI interview agent to accelerate discovery, so the first user conversation happens in hours, not weeks</h1>
         <p class="lede">FoundersBrew's AI agent helps early-stage founders move beyond validating their assumptions to gathering evidence from their target audience through agentic discovery interviews.</p>
 
         <div class="meta-grid">
@@ -182,8 +182,8 @@
           <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Human Agent interaction, Founder onboarding, Hypotheses Validation</span></div>
         </div>
 
-        <div class="media hero" style="aspect-ratio:1920/1008">
-          <video style="display:block" src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="metadata" autoplay muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
+        <div class="media hero" style="aspect-ratio:1920/1256;border:0">
+          <video style="display:block;transform:scale(1.005)" src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="metadata" autoplay muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
         </div>
       </section>
 
@@ -214,7 +214,7 @@
               <p>Founders answer a few questions about their idea, target audience and the problem they are trying to solve. The system combines their inputs with secondary research to build context for discovery.</p>
             </div>
             <div class="media-frame">
-              <img class="media-natural" src="images/foundersbrew-founder-context.png" alt="The first of four founder context questions: What are you thinking of building?" loading="lazy" decoding="async">
+              <img class="media-natural" src="images/foundersbrew-q1-your-idea.png" alt="The first of four founder context questions: Your idea" loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -232,7 +232,7 @@
               <p>The AI agent uses this context to conduct interviews, asking follow-up questions, listening, probing and clarifying based on what participants share.</p>
             </div>
             <div class="media-frame">
-              <img class="media-natural" src="images/foundersbrew-probe.png" alt="Agent probing a participant during an adaptive interview" loading="lazy" decoding="async">
+              <img class="media-natural" src="images/foundersbrew-adaptive-interview.png" alt="The revised participant interview: the agent adapting its follow-up questions during the conversation" loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -263,21 +263,24 @@
             <p>A total of 7 founders, who are FounderBrew&#39;s early product collaborators in the alpha release conducted a total of 38 interviews, which gave us valuable feedback for release 2.0</p>
           </div>
           <div class="point">
-            <h3>Bias detection rules defined</h3>
-            <p>I defined the bias types, edge cases and validation rules gave engineering clear, testable requirements to build from.</p>
+            <h3>85% (6 out of 7) first time success</h3>
+            <p>Founders were able set up and share interview link successfully on their first attempt, without any help.</p>
           </div>
           <div class="point">
-            <h3>Foundations for trustworthy AI</h3>
-            <p>Every finding can be traced back to the transcript, biased exchanges are caught before they reach the synthesis, and new checks can be added as the product grows.</p>
+            <h3>Bias detection with 70% accuracy</h3>
+            <p>The bias detection rules defined gave FoundersBrew 70% accuracy in the pilot testing.</p>
           </div>
         </div>
+        <!-- Hidden for now: Early product collaborators
         <h3 style="margin-top:var(--space-7)">Early product collaborators</h3>
         <div class="quote-card">
           <p>"I used the FoundersBrew discovery agent to better understand what products my target audience was looking for. It helped me challenge my assumptions and reduce uncertainty around key business decisions."</p>
           <div class="person-name"><a href="https://www.linkedin.com/in/christine-koneri/" target="_blank" rel="noopener noreferrer">Christine</a>, Founder, Bethel Masterpiece</div>
         </div>
+        -->
       </section>
 
+      <!-- Hidden for now: Understanding the landscape
       <section id="directional-landscape">
         <h2>Understanding the landscape</h2>
         <p class="lede">The first thing I did was to understand where the FoundersBrew interview agent would stand. I went onto understand who our competitors were, what other adaptive interview agents were available.</p>
@@ -291,6 +294,7 @@
           <p>I would have loved to run a behavioural experiment here to see how people respond to an AI-led interview. If someone received a link to an interview about a topic they were genuinely interested in, would they take part without any incentive or reward?</p>
         </blockquote>
       </section>
+      -->
 
       <section id="visual-design">
         <h2>Visual design direction</h2>
@@ -304,69 +308,51 @@
 
       <section id="context">
         <h2>Human in the loop</h2>
-        <p class="lede">I designed the workflow around a human-in-the-loop approach, where AI handles research and analysis while founders retain control over key decisions. The challenge was deciding where the system should take responsibility and where founders needed to remain involved.</p>
-        <p class="lede">This shaped three parts of the experience, how founders provide context, choose what gets tested, and control the evidence used in synthesis.</p>
+        <h3>Where should the founder have control and what should the AI do?</h3>
+        <p class="lede">The challenge was deciding where the system should take responsibility and where founders needed to remain involved. This shaped three parts of the experience, how founders provide context, choose what gets tested, and control the evidence used in synthesis.</p>
         <img class="media-natural" src="images/foundersbrew-context-workflow.png" alt="Agent context workflow diagram" loading="lazy" decoding="async">
-         <h3 style="margin-top:var(--space-7)">Helping founders provide the right context</h3>
-        <p class="lede">The process begins with founders describing their ideas, target audiences, and the problems they want to solve. FoundersBrew's questionnaire is not a conventional onboarding form. It is the input layer for a research system. The four answers influence which market the system investigates, which users and conversations it looks for, which competitors and substitutes it identifies, which hypotheses it generates, and the context  supplied to the discovery agent.</p>
-        <p class="lede">That makes the objective different from simply maximizing form completion. The questionnaire should optimize for answers that are <span style="color:var(--accent-text)">specific, researchable, honest about uncertainty, and recognizably the founder&#39;s own thinking</span>.</p>
-        <img class="media-natural" src="images/foundersbrew-chat-vs-questions.png" alt="The initial founder questionnaire with direct questions, compared with the revised version that adds reflective prompts and a Need a little help guidance panel" loading="lazy" decoding="async">
+         <h3 style="margin-top:var(--space-7)">It started with getting founders to question what they actually knew</h3>
+        <p class="lede">The process begins with founders describing their ideas, target audiences, and the problems they want to solve. FoundersBrew's questionnaire is not a conventional onboarding form. It is the input layer for a research system.</p>
+
+        <h3 style="margin-top:var(--space-7)">When completing the questionnaire became more important than the thinking behind it</h3>
+        <p class="lede">During early iterations, I observed founders focusing more on completing the four-question onboarding form, often using AI to make their answers sound more polished, rather than capturing their actual understanding. The responses appeared detailed, but they didn&#39;t always reflect what founders genuinely knew, believed, or were uncertain about.</p>
+        <blockquote>
+          <p><span style="color:var(--accent-text)">The objective was to gather specific, researchable answers grounded in the founder&#39;s own thinking, while making room for uncertainty.</span></p>
+        </blockquote>
+
+        <h4 style="margin-top:var(--space-5)">How could I help founders share what they knew, while making room for uncertainty?</h4>
+        <p class="lede">I wanted founders to capture their existing understanding, even when their thoughts were incomplete, without feeling pressured to provide polished answers. I initially added reflective prompts and a <span style="color:var(--accent-text)">&ldquo;Need a little help?&rdquo;</span> panel to make each question easier to understand. I also introduced <span style="color:var(--accent-text)">&ldquo;Not sure yet&rdquo;</span>, allowing founders to acknowledge gaps instead of inventing answers to move forward.</p>
+        <div class="media-frame media-flow">
+          <img class="media-natural" src="images/foundersbrew-questionnaire-initial.png" alt="The initial founder questionnaire: Describe your idea, with a single text box and no guidance" loading="lazy" decoding="async">
+          <svg class="icon flow-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M6 14l6 6 6-6"/></svg>
+          <img class="media-natural" src="images/foundersbrew-q2-audience-2.png" alt="The second of four founder context questions: Audience" loading="lazy" decoding="async">
+        </div>
+        <p class="lede">The initial version just had four direct questions, without much guidance. During the initial prototype testing we observed the need of better reflective questions to generate better responses from the founders filling the form.</p>
         <blockquote>
           <p>Reduce the effort required to understand each question, while preserving the effort required to think about the answer.</p>
         </blockquote>
 
-        <h3 style="margin-top:var(--space-7)">Why I added 'not sure yet' as a valid response</h3>
-        <div class="classify">
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17a8 8 0 0 1 16 0"/><path d="M12 17l4-5"/><path d="M4 17h16"/></svg>
-              <h3 style="font-weight:400">Reduced cognitive load</h3>
-              <p>I gave founders a way to move forward without having to formulate an answer they weren&#39;t ready to provide.</p>
-            </div>
+        <h4 style="margin-top:var(--space-5)">Why I kept conversational AI out of the initial release</h4>
+        <p class="lede">I considered using conversational AI to help founders articulate their ideas, but decided to defer it for three reasons.</p>
+        <div class="point-row point-row-3">
+          <div class="point">
+            <h3>Guardrails and research integrity</h3>
+            <p>An AI-led questionnaire would need carefully defined guardrails to avoid leading questions, reinforcing unverified assumptions, or influencing founders&#39; original thinking.</p>
           </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M6.3 6.3l11.4 11.4"/></svg>
-              <h3 style="font-weight:400">Prevented forced assumptions</h3>
-              <p>I reduced the risk of founders inventing information simply to complete the questionnaire.</p>
-            </div>
+          <div class="point">
+            <h3>Unpredictable experience</h3>
+            <p>Dynamic follow-up questions could increase onboarding time, introduce latency, and make the experience harder to control and validate.</p>
           </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-              <h3 style="font-weight:400">Preserved research integrity</h3>
-              <p>I ensured the system could distinguish between assumptions founders had actually expressed and areas where they remained uncertain.</p>
-            </div>
+          <div class="point">
+            <h3>Avoiding overbuilding</h3>
+            <p>Designing, engineering, and testing a conversational flow would add significant complexity before we had validated the core discovery experience.</p>
           </div>
         </div>
-
-        <img class="media-natural" src="images/foundersbrew-not-sure-yet.png" alt="Question 4 of 4 of the founder questionnaire, with a Not sure yet option beside the Need a little help? guidance, annotated as a valid response" loading="lazy" decoding="async">
-
-
-        <h3 style="margin-top:var(--space-7)">Why I decided against integrating AI in the onboarding questionnaire?</h3>
-        <div class="classify">
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h4v-4h4v-4h4V7h4"/></svg>
-              <h3 style="font-weight:400">More friction</h3>
-              <p>A simple questionnaire becomes an unpredictable conversation with additional questions before the founder gets any value.</p>
-            </div>
-          </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
-              <h3 style="font-weight:400">False precision</h3>
-              <p>AI might push founders to elaborate on assumptions they haven&#39;t verified, making guesses sound more concrete than they really are.</p>
-            </div>
-          </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 6h8M7 8l4 8M17 8l-4 8"/></svg>
-              <h3 style="font-weight:400">Unnecessary complexity</h3>
-              <p>This would add cost, latency, and another experience to design and test without knowing whether it improves the research output.</p>
-            </div>
-          </div>
-        </div>
+        <p class="lede">For the initial release, I prioritised a structured questionnaire that encouraged thoughtful inputs while keeping the experience predictable and lightweight. Conversational AI remained a potential future enhancement once the core research workflow was validated.</p>
+        <blockquote>
+          <p>I chose to keep the questionnaire structured, allowing founders to do the thinking themselves.</p>
+        </blockquote>
+        <p class="lede">With the initial context established, the next challenge was deciding how much influence founders should have over what the AI investigated.</p>
 
         <!-- Hidden for now: "What happens when the founder fills the questionnaire but the Brew report (hypotheses generation) system fails?"
         <h3 style="margin-top:var(--space-7)">What happens when the founder fills the questionnaire but the Brew report (hypotheses generation) system fails?</h3>
@@ -378,7 +364,7 @@
         </div>
         -->
 
-        <h3 style="margin-top:var(--space-7)">Letting founders decide what gets tested first</h3>
+        <h3 style="margin-top:var(--space-7)">But what happens when control creates the wrong expectations?</h3>
          <p>Once founders provide their context, FoundersBrew combines their inputs with secondary research to generate hypotheses, ranked by risk.
 
 While the system recommends which assumptions to test first, the final decision remains with the founder.</p>
@@ -393,19 +379,12 @@ While the system recommends which assumptions to test first, the final decision 
           <video style="display:block" src="videos/foundersbrew-interview-setup.mp4" poster="videos/foundersbrew-interview-setup.jpg" preload="none" data-lazy muted loop playsinline aria-label="Setting up the interview: founders choosing which hypotheses to investigate first"></video>
         </div>
 
-        <h3 style="margin-top:var(--space-7)">Giving founders control over the evidence</h3>
+        <h3 style="margin-top:var(--space-7)">Could giving founders control over the evidence introduce the very bias we were trying to prevent?</h3>
          <p>Not all interviews are of the same quality, and the founder can decide if they want to remove a particular interview from the synthesis, if they spot a quality issue, or a target audience mismatch. So I designed an option for founders to exclude questionable interviews without deleting the original research.</p>
         <div class="media-frame">
           <img class="media-natural" src="images/foundersbrew-evidence-control.png" alt="Interview review screen with a tooltip explaining that removing the interview excludes its signals from every synthesis" loading="lazy" decoding="async">
         </div>
-        <p>The interface explains how this decision impacts hypothesis statuses and other findings, while allowing interviews to be restored later. This ensures founders can intervene when evidence quality is in question rather than relying entirely on AI-generated conclusions.</p>
-
-        <h3 style="margin-top:var(--space-7)">But the human control can introduce another form of bias...</h3>
-        <p class="lede">While exploring human-in-the-loop patterns in AI-first products, I realised that giving users more control doesn't automatically make a system more trustworthy. Allowing founders to exclude interviews introduced an unintended risk.</p>
-
-        <blockquote>
-          <p>What if founders removed interviews simply because the findings challenged their assumptions?</p>
-        </blockquote>
+        <h4>What if founders removed interviews simply because the findings challenged their assumptions?</h4>
 
         <p class="lede">This could reinforce the very confirmation bias FoundersBrew was designed to address. I needed to consider the difference between giving founders control over research quality and allowing them to selectively remove inconvenient evidence.</p>
         <h3 style="margin-top:var(--space-7);font-weight:400;font-family:var(--font-serif)">...so how might we prevent founders from selectively excluding interviews that challenge their assumptions, while still giving them control over the quality of their research evidence?</h3>
@@ -605,7 +584,6 @@ While the system recommends which assumptions to test first, the final decision 
       <section id="interview-experience">
         <h2>The interview experience</h2>
         <p class="lede">When I was designing the interview experience, I first wrote down how the experience feels like when I conduct a one-to-one user interview, and prioritised what should go in phase one and what can wait, based on what people expect from an agent.</p>
-        <img class="media-natural" src="images/foundersbrew-participant-experience.png" alt="Participant experience diagram" loading="lazy" decoding="async">
         <p class="lede">I developed the participant journey by referring findings from research on AI-moderated interviews &amp; conversational interaction and mapped the HAX guidelines to it.</p>
         <img class="media-natural" src="images/foundersbrew-hax-mapping.png" alt="Participant journey mapped to HAX guidelines" loading="lazy" decoding="async">
         <p class="lede">I with the engineering team created a fixed question prototype on ElevenLabs to test the interaction with the users and get their feedback. The ElevenLabs prototype had a fallback textbox, that was later incorporated in the design, because I observed users using the textbox to type in their answers when they were uncomfortable or it was inconvenient to speak.</p>
@@ -622,41 +600,6 @@ While the system recommends which assumptions to test first, the final decision 
 
         <h3 style="margin-top:var(--space-7)">What changed after testing the prototype?</h3>
         <img class="media-natural" src="images/foundersbrew-participant-experience-revised.png" alt="Revised participant experience" loading="lazy" decoding="async">
-        <p class="lede">I backed the findings with another secondary finding</p>
-        <div class="classify">
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
-              <h3 style="font-weight:400">Conversational Comfort</h3>
-              <p>Only 3 of 10 participants felt the AI conversation was natural</p>
-              <p class="classify-source">NNG, 2026</p>
-            </div>
-          </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></svg>
-              <h3 style="font-weight:400">Feeling Heard</h3>
-              <p>Participants contributed 34% of the words with AI moderators, compared with 64% with human moderators.</p>
-              <p class="classify-source">MeasuringU study, 2026</p>
-            </div>
-          </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h9a6 6 0 0 1 0 12h-3"/></svg>
-              <h3 style="font-weight:400">Recovery and Control</h3>
-              <p>Offering options was the highest ranked of eight conversational repair strategies</p>
-              <p class="classify-source">IBM study, 2022</p>
-            </div>
-          </div>
-          <div class="classify-row">
-            <div class="classify-head">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
-              <h3 style="font-weight:400">Privacy and Reassurance</h3>
-              <p>Participants using AI-assisted transcript editing removed 41.2% of personally identifiable information.</p>
-              <p class="classify-source">Doi org, 2026</p>
-            </div>
-          </div>
-        </div>
         <p class="lede">Revised joining experience for users getting interviewed</p>
         <img class="media-natural" src="images/foundersbrew-prototype-improvements.png" alt="Improvements from the prototype to the new version of the joining experience" loading="lazy" decoding="async">
         <img class="media-natural" src="images/foundersbrew-improved-control.png" alt="Improved participant control in the interview" loading="lazy" decoding="async">
@@ -708,7 +651,7 @@ While the system recommends which assumptions to test first, the final decision 
 <script>
 (function () {
   var ids = ['overview', 'problem', 'solution', 'outcome',
-    'directional-landscape', 'visual-design', 'context', 'agent-workflow', 'interview-experience',
+    'visual-design', 'context', 'agent-workflow', 'interview-experience',
     'reflection'];
   var links = {};
   ids.forEach(function (id) {

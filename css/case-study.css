@@ -516,3 +516,6 @@ main > section > h2 + h3, main > section > h2 + h4 { margin-top: 0 !important; }
 .media-flow { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
 .media-flow .media-natural { width: 100%; }
 .media-flow .flow-arrow { width: 28px; height: 28px; color: var(--accent-text); flex: none; }
+
+/* the solution timeline: screens sit directly on the page, with no blue frame behind them */
+#solution .media-frame { background: none; padding: 0; }
