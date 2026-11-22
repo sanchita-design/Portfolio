@@ -1,13 +1,13 @@
 /* Shared across every page: reset, body defaults, links, page shell, fixed header/nav. */
 
-:root { --header-height: 75px; }
+:root { --header-height: 98px; }
 * { box-sizing: border-box; }
-/* warm light-grey paper with a fine, slightly coarser grain (average #FBF9F5).
-   --accent-text is the brand blue deepened ~5% so small blue text stays at 4.5:1 or better
-   even on the darker specks of the grain; the pure brand blue is still used for fills and borders. */
+/* pure white page (it used to be a warm off-white paper with a fine grain).
+   --accent-text is the brand blue deepened ~5% so small blue text stays at 4.5:1 or better;
+   the pure brand blue is still used for fills and borders. */
 :root {
   --accent-text: #4563D1;
-  --paper: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='.15 0 0 0 .94  .15 0 0 0 .94  .15 0 0 0 .94  0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 300px 300px repeat;
+  --paper: #FFFFFF;
 }
 body {
   margin: 0;
@@ -46,19 +46,31 @@ a:hover { color: var(--accent-hover); }
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-top: 46px;
+  padding-bottom: 32px;
   flex-wrap: wrap;
   gap: var(--space-3);
 }
+/* the logo: "Sanchita" in Source Serif 4 Italic drawn as outlines (the same wordmark as the React site).
+   On hover the accent colour sweeps across inside the letters, left to right. */
 .brand {
   justify-self: start;
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 300;
+  display: inline-block;
+  line-height: 0;
   text-decoration: none;
   color: var(--text-heading);
 }
+.brand:hover, .brand:focus-visible { color: var(--text-heading); }
+.brand svg { display: block; height: 17px; width: auto; }
+.brand .wordmark-sweep {
+  fill: var(--accent-text);
+  transform-box: fill-box;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 700ms ease-out;
+}
+.brand:hover .wordmark-sweep, .brand:focus-visible .wordmark-sweep { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .brand .wordmark-sweep { transition: none; } }
 .primary-nav { display: flex; gap: var(--space-5); grid-column: 2; }
 .primary-nav a {
   font-size: var(--text-base);

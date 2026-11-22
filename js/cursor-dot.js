@@ -10,7 +10,7 @@
 
   // Over a case study card the dot becomes a "view" (eye) icon.
   document.addEventListener('mouseover', function (e) {
-    dot.classList.toggle('is-view', !!(e.target.closest && e.target.closest('.project-card')));
+    // (the "view" eye over a case study card is switched off for now: dot.classList.toggle('is-view', ...))
   });
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

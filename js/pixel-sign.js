@@ -7,16 +7,16 @@
 
   var MESSAGE = 'THINK. DESIGN. CREATE.';
   var BLUE = '73,104,220', ORANGE = '226,128,78';
-  // gradient taken from the reference image: bright indigo, soft lavender, deep navy
-  var TEXT_STOPS = [[91,82,232],[125,116,238],[42,34,168],[21,16,111]];
-  var BAND_STOPS = [[91,82,232],[201,189,248],[125,116,238],[42,34,168],[21,16,111]];
+  // the brand blue (#4968DC) and a few lighter and deeper shades of it
+  var TEXT_STOPS = [[73,104,220],[92,122,230],[64,94,210],[52,80,196]];   // the brand blue, with only a slight shade across the line
+  var BAND_STOPS = [[73,104,220],[150,172,242],[92,122,230],[64,94,210],[52,80,196]];
   function grad(stops, t) {
     t = Math.min(1, Math.max(0, t));
     var f = t * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(f)), u = f - i, a = stops[i], b = stops[i + 1];
     return Math.round(a[0] + (b[0] - a[0]) * u) + ',' + Math.round(a[1] + (b[1] - a[1]) * u) + ',' + Math.round(a[2] + (b[2] - a[2]) * u);
   }
   var CELL = 7;                 // one quarter of the 28px squares in the page background
-  var BAND_ROWS = 4;            // the four lines of small pixels along the bottom
+  var BAND_ROWS = 16;           // lines of small pixels along the bottom: four under the message, and more running on behind the "Made with" line to the bottom of the page
   var FRAME_MS = 1000 / 30;
 
   // 5 x 7 pixel letters, one string per row
@@ -93,16 +93,35 @@
     return Math.min(1, Math.max(0, (t - inAt) / FADE));
   }
 
+  // A band of light that passes through the letters every few seconds, left to right on a slant, and brightens
+  // each pixel it touches towards white (the same glaze as on the logos and the tiles). `lift` is 0 to 1 for a
+  // pixel at (x, y): how much of the band is on it right now.
+  var GLAZE_EVERY = 7000, GLAZE_SWEEP = 1500;
+  function glazeAt(now) {                      // where the band is, in "x + 0.35y" units, or null while it rests
+    var t = (now % GLAZE_EVERY) / GLAZE_SWEEP;
+    return t > 1 ? null : -0.15 * w + t * 1.3 * w;
+  }
+  function lift(gp, x, y) {
+    if (gp === null) return 0;
+    var d = 1 - Math.abs(x + y * 0.35 - gp) / (0.12 * w);
+    return d <= 0 ? 0 : d * d * (3 - 2 * d);
+  }
+  function lighten(rgb, k) {                   // blend an 'r,g,b' string towards white by k
+    var c = rgb.split(',').map(Number);
+    return Math.round(c[0] + (255 - c[0]) * k) + ',' + Math.round(c[1] + (255 - c[1]) * k) + ',' + Math.round(c[2] + (255 - c[2]) * k);
+  }
+
   function draw(now, still) {
     ctx.clearRect(0, 0, w, h);
     // the message types out once, from the moment the sign first scrolls into view, and then stays
     var t = still || startedAt === null ? (still ? 1e9 : -1) : now - startedAt;
     // message: with reduced motion it is shown whole and stays put
+    var gp = still ? null : glazeAt(now);
     px.forEach(function (p) {
       var a = still ? 1 : messageAlpha(p, t);
       if (a <= 0) return;
       // colour runs diagonally: indigo at the top left to deep navy at the bottom right
-      ctx.fillStyle = 'rgba(' + grad(TEXT_STOPS, (p.x / w) * 0.8 + (p.y / h) * 0.2) + ',' + a.toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(' + lighten(grad(TEXT_STOPS, (p.x / w) * 0.8 + (p.y / h) * 0.2), 0.85 * lift(gp, p.x, p.y)) + ',' + a.toFixed(3) + ')';
       ctx.fillRect(p.x, p.y, p.s - (p.s > 3 ? 1 : 0), p.s - (p.s > 3 ? 1 : 0));
     });
     // band of tiny pixels

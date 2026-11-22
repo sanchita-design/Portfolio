@@ -12,7 +12,15 @@
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/typography.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/spacing.css">
 <link rel="stylesheet" href="_ds/portfolio-design-system-19f0ec8b-b73a-460d-b871-98cdf6302e2e/tokens/effects.css">
+<script>
+  /* page-load intro (see js/intro.js): hide what will be animated in, with a failsafe so nothing can stay hidden */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('intro');
+    setTimeout(function () { document.documentElement.classList.remove('intro'); }, 5000);
+  }
+</script>
 <link rel="stylesheet" href="css/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500&display=swap" rel="stylesheet">
 
 <style>
   .carousel-track > .card { background: transparent; }
@@ -220,7 +228,7 @@
   .project-card:hover .project-media,
   .project-card:focus-visible .project-media {
     background-color: color-mix(in srgb, rgb(var(--tint)) 72%, #fff);
-    border-radius: 16px;
+    border-radius: 8px;
   }
   .project-card:hover .project-media::before,
   .project-card:focus-visible .project-media::before {
@@ -507,12 +515,12 @@
   .quote-card .person-name { font-weight: 400; }
 
   /* closing pixel sign under the footer: the message and four lines of small pixels, drawn by js/pixel-sign.js */
-  .pixel-sign { width: 100%; overflow: hidden; }
+  .pixel-sign { position: relative; width: 100%; overflow: hidden; }
   .pixel-sign-canvas { display: block; }
 
   /* the footer line runs the full width of the screen; the icons stay on the content grid */
   footer {
-    border-top: 1px solid var(--border-subtle);
+    border-top: 0;
     padding: var(--space-5) max(var(--side-margin-desktop), calc((100vw - var(--container-max)) / 2 + var(--side-margin-desktop)));
     display: flex;
     justify-content: flex-end;
@@ -561,6 +569,222 @@
   @media (max-width: 900px) {
     .project-cols { gap: var(--space-8); }
   }
+  /* ---- the "12 years across design ... and engineering ..." line, with the tool logos ---- */
+  .hero-text { --metal-highlight: #8A8F99; --metal: #4A4D55; --metal-deep: #2F3035; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .hero-sub { font-size: 1.25rem; line-height: 1.5; max-width: none; }
+  /* the years on "design" and "engineering" */
+  .year-hint { display: inline-block; border-radius: 2px; transition: color 200ms ease; }
+  .year-hint:hover, .year-hint:focus-visible { color: var(--accent); outline: none; }
+  .year-hint:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  [data-cursor-tag] { cursor: none; }
+
+  /* the tool logos: a bordered tile that leans at rest; hover straightens it, zooms it, and brings the colour up */
+  .tool-row { white-space: nowrap; }
+  .tool { position: relative; display: inline-block; margin: 0 4px; vertical-align: middle; z-index: 0; }
+  .tool:hover, .tool:focus { z-index: 20; outline: none; }
+  .tool:focus-visible .tool-body { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tool-body {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; box-sizing: border-box;
+    border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--surface-card); box-shadow: inset 0 0 10px rgba(58,58,58,0.06);
+    transform: rotate(var(--tilt));
+    transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .tool:hover .tool-body, .tool:focus .tool-body { transform: rotate(0deg) scale(1.6); }
+  .tool-logo { position: relative; display: block; width: 24px; height: 24px; }
+  /* each logo is its shape cut out of a field of soft colour blobs that drift slowly, with a highlight and a band of light that glazes across now and then (the same effect as on the React site); the colours are set per tool on .tool as --c1, --c2, --c3 */
+  .tool-liquid {
+    position: absolute; inset: 0;
+    -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat;
+    background-image:
+      radial-gradient(circle at 50% 50%, var(--c1) 0%, transparent 52%),
+      radial-gradient(circle at 50% 50%, var(--c2) 0%, transparent 52%),
+      radial-gradient(circle at 50% 50%, var(--c3) 0%, transparent 52%),
+      linear-gradient(160deg, var(--c3), var(--c2));
+    background-size: 170% 170%, 170% 170%, 170% 170%, 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0% 0%, 100% 20%, 40% 100%, 0 0;
+    animation: liquid-drift 9s ease-in-out infinite;
+    animation-delay: var(--drift-delay, 0s);
+    filter: saturate(0.8);
+    transition: filter 300ms ease-out;
+  }
+  .tool-liquid::after {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.7) 50%, transparent 60%),
+      radial-gradient(ellipse 70% 55% at 30% 18%, rgba(255,255,255,0.38), transparent 70%);
+    background-size: 260% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 130% 0, 0 0;
+    animation: liquid-glaze 6s ease-in-out infinite;
+    animation-delay: var(--drift-delay, 0s);
+  }
+  .tool:hover .tool-liquid, .tool:focus .tool-liquid { filter: saturate(1) brightness(1.1); }
+  @keyframes liquid-drift {
+    0%, 100% { background-position: 0% 0%, 100% 20%, 40% 100%, 0 0; }
+    33% { background-position: 100% 80%, 0% 100%, 100% 0%, 0 0; }
+    66% { background-position: 30% 100%, 90% 0%, 0% 50%, 0 0; }
+  }
+  @keyframes liquid-glaze {
+    0%, 55% { background-position: 130% 0, 0 0; }
+    85%, 100% { background-position: -30% 0, 0 0; }
+  }
+
+  /* the Figma-style cursor tag, in the site's blue (see js/hero.js) */
+  .cursor-tag { position: fixed; z-index: 1000; pointer-events: none; opacity: 0; transition: opacity 150ms ease; }
+  .cursor-tag.is-on { opacity: 1; }
+  .cursor-tag.is-focus { transform: translateX(-50%); }
+  .cursor-tag.is-up .cursor-tag-label { top: -36px; }
+  .cursor-tag-arrow { position: absolute; top: -1.5px; left: -0.6px; width: 15px; height: 21px; fill: var(--accent); }
+  .cursor-tag-label {
+    position: absolute; top: 14px; left: 11px; white-space: nowrap;
+    padding: 4px 12px; border-radius: 999px;
+    background: var(--accent); color: var(--text-on-accent);
+    font-size: var(--text-label); font-weight: 500; line-height: 1.5;
+  }
+  .tag-active .cursor-dot { opacity: 0 !important; }
+  .hero-text .sub + .hero-sub { margin-top: var(--space-4); }
+  @media (prefers-reduced-motion: reduce) {
+    .year-hint, .tool-body, .tool-liquid, .cursor-tag { transition: none; }
+    .tool-liquid, .tool-liquid::after { animation: none; }
+    .tool:hover .tool-body, .tool:focus .tool-body { transform: rotate(var(--tilt)); }
+  }
+  /* ---- bolder hero text, and the case studies a little further down ---- */
+  .hero-text .lead { font-weight: 500; font-size: clamp(36px, 3.3vw, 44px); }   /* the headline: medium weight and large */
+  .hero-backdrop { min-height: 100svh; }   /* the case studies start below the first screen */
+  /* the hero text sits in the middle of the first screen */
+  .hero-backdrop { display: flex; align-items: center; }
+  .hero { width: 100%; margin: auto; padding-top: 80px; padding-bottom: 80px; min-height: 0; }
+  /* no square on the pointer: only the "view" eye shows over a case study card */
+  .cursor-dot .cursor-px { display: none; }
+  /* the weather note under the logo: live London weather and time, hangs below the header bar and hides once the header turns solid on scroll */
+  .brand-block { position: relative; justify-self: start; }
+  .weather-note { position: absolute; top: calc(100% + 34px); left: 0; display: flex; align-items: flex-start; gap: var(--space-3); white-space: nowrap; transition: opacity var(--duration-base, 200ms) ease; }
+  .site-header.is-scrolled .weather-note { opacity: 0; pointer-events: none; }
+  .weather-icon { width: 30px; height: 30px; flex: none; color: var(--accent); stroke-width: 0.8; }   /* a thin line icon, in the brand blue */
+  .weather-icon[data-state="sun"] { color: #F0B000; }   /* except the sun, which is yellow */
+  .weather-icon .rain-drops { stroke: var(--accent); }
+  .weather-line { margin: 0; font-size: var(--text-caption); font-weight: 500; color: var(--text-heading); }
+  .weather-swap { position: relative; display: block; height: 20px; margin-top: 2px; overflow: hidden; font-size: var(--text-caption); color: var(--text-muted); }
+  .weather-swap span { display: block; line-height: 20px; transition: transform 500ms ease-out; }
+  .weather-note.is-alt .weather-swap span { transform: translateY(-100%); }   /* the line under the weather slides to the other one, every 6.5 seconds (js/hero.js) */
+  @media (prefers-reduced-motion: reduce) { .weather-swap span { transition: none; } }
+  /* what people I have worked with say: two columns of quote cards (the React site's layout); cards of different heights stack without gaps */
+  /* the recommendations sit in the four quadrants of an x-y plane: no borders, two lines crossing in the middle,
+     drawn out from the centre when the section scrolls into view (see js/quote-grid.js) */
+  .quote-grid { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 0; }
+  .quote-grid::before, .quote-grid::after { content: ""; position: absolute; background: var(--border-subtle); transition: transform 1200ms cubic-bezier(0.22, 0.8, 0.28, 1); pointer-events: none; }
+  .quote-grid::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: scaleY(0); }      /* the y axis */
+  .quote-grid::after { top: 50%; left: 0; right: 0; height: 1px; transform: scaleX(0); transition-delay: 150ms; }   /* the x axis */
+  .quote-grid.is-drawn::before { transform: scaleY(1); }
+  .quote-grid.is-drawn::after { transform: scaleX(1); }
+  .quote-tile { display: flex; flex-direction: column; margin: 0; padding: 40px; border: 0; background: transparent; }
+  .quote-tile:nth-child(odd) { padding-left: 0; }          /* the left quadrants line up with the headline */
+  .quote-tile:nth-child(even) { padding-right: 0; }
+  .quote-tile:nth-child(-n+2) { padding-top: 0; }
+  .quote-tile:nth-child(n+3) { padding-bottom: 0; }
+  .quote-mark { display: block; }
+  .quote-draw { stroke: var(--ink-1); stroke-dasharray: 1.02; stroke-dashoffset: 0; transition: stroke 500ms ease; }
+  .quote-tile:hover .quote-draw { stroke: var(--accent); animation: quote-draw 1800ms ease-out; }
+  @keyframes quote-draw { from { stroke-dashoffset: 1.02; } to { stroke-dashoffset: 0; } }
+  .quote-tile blockquote { margin: 0; font-style: italic; font-size: var(--text-base); line-height: var(--leading-relaxed); font-weight: 400; color: var(--text-body); }   /* the same text style as the mentorship quote */
+  .quote-tile figcaption { margin-top: auto; padding-top: 24px; display: flex; align-items: center; gap: 12px; }
+  .quote-initials { display: flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border: 1px solid var(--border-subtle); border-radius: 50%; font-size: 0.875rem; font-weight: 500; color: var(--accent-text); }
+  .quote-name { display: block; font-size: var(--text-caption); font-weight: 400; color: var(--accent-text); text-decoration: none; }   /* the name is a link to their LinkedIn, in the brand blue */
+  .quote-name:hover, .quote-name:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+  .quote-role { display: block; margin-top: 2px; font-size: var(--text-caption); color: var(--text-muted); }
+  @media (max-width: 760px) {   /* one column on a narrow screen: no cross, thin lines between the quotes instead */
+    .quote-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    .quote-grid::before, .quote-grid::after { display: none; }
+    .quote-tile, .quote-tile:nth-child(n) { padding: 28px 0; }
+    .quote-tile + .quote-tile { border-top: 1px solid var(--border-subtle); }
+  }
+  @media (prefers-reduced-motion: reduce) { .quote-grid::before, .quote-grid::after { transition: none; } }
+  /* hovering "designing" in the hero: a design-tool overlay with rulers and guides (see js/ruler.js) */
+  .ruler-overlay { position: fixed; inset: 0; z-index: 900; pointer-events: none; visibility: hidden; }
+  .ruler-overlay.is-on { visibility: visible; }
+  .hero-accent { font-style: italic; color: inherit; font-weight: 400; padding-right: 0.14em; }   /* the first "designing": italic, in the same colour as the rest of the line */
+  .design-word { cursor: default; font-weight: inherit; }   /* the site resets every element to 400 */
+  /* floating skill tags, like Figma's multiplayer cursors, sent out by hovering the first "designing" (see js/skills.js) */
+  .fc-layer { position: fixed; inset: 0; z-index: 800; pointer-events: none; visibility: hidden; }
+  .fc-layer.is-on { visibility: visible; }
+  .fc { position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, opacity; }
+  .fc-arrow { position: absolute; top: -1.5px; left: -0.6px; width: 15px; height: 21px; fill: var(--a, var(--c)); }
+  .fc-label { position: absolute; top: 14px; left: 11px; white-space: nowrap; padding: 6px 14px; border-radius: 999px; background: var(--c); color: #34363b; font-size: 0.9rem; font-weight: 500; line-height: 1.3; }
+  /* ---- page-load intro: the headline sharpens in letter by letter, then the supporting line eases in; the header and the weather note are always there ---- */
+  html.intro .hero-sub, html.intro .hero-text .lead { opacity: 0; }
+  html.intro .hero-sub { transform: translateY(12px); }
+  .hero-sub { transition: opacity 700ms ease, transform 700ms ease; }
+  /* each letter starts blurred, faint, dropped a little and skewed, then rises, straightens and sharpens into place */
+  .intro-char { display: inline-block; opacity: 0; filter: blur(9px); transform: translateY(0.32em) skewX(-16deg); transform-origin: 0 100%; }
+  .intro-char.is-in { opacity: 1; filter: blur(0); transform: none; transition: opacity 800ms ease-out, filter 800ms ease-out, transform 900ms cubic-bezier(0.22, 0.8, 0.28, 1); }
+  .intro-word { display: inline-block; white-space: nowrap; }
+  .intro-line, .intro-word, .intro-char { font-weight: inherit; }   /* the site resets every element to 400, which would undo the headline's weight */
+  /* the AI word with three sparkles at its upper right: they open up once the page has settled (the words after them slide
+     across to make room), then a band of light passes through them (see js/intro.js) */
+  .hero-word, .ai-wrap { font-weight: inherit; }
+  .hero-word { position: relative; font-style: italic; padding-right: 0.1em; transition: color 200ms ease; }   /* "designer" is italic */
+  .hero-word:hover { color: var(--accent); }   /* the word turns blue while the pointer is on it or near it */
+  /* an invisible, larger area around "designer", "design" and "engineering": hovering just above, below, left or right of
+     the word counts as hovering the word */
+  .hero-word::after, .year-hint::after { content: ""; position: absolute; z-index: 1; top: -16px; bottom: -16px; left: -18px; right: -18px; }
+  .year-hint { position: relative; }
+  .ai-wrap { white-space: nowrap; }
+  .ai-sparkles { display: inline-block; width: 0; height: 0.62em; margin-left: 0; vertical-align: 0.42em; opacity: 0; overflow: visible; transition: width 700ms cubic-bezier(0.22, 0.8, 0.28, 1), margin-left 700ms cubic-bezier(0.22, 0.8, 0.28, 1), opacity 500ms ease; }
+  .ai-wrap.is-starred .ai-sparkles { width: 0.62em; margin-left: 0.06em; opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .ai-sparkles { transition: none; } }
+  /* tile details: the year above the title, then the role and the outcomes, each with a small line icon */
+  .project-year { margin: 0 0 var(--space-3); font-size: var(--text-caption); color: var(--text-muted); }
+  .project-outcomes { list-style: none; margin: var(--space-3) 0 var(--space-2); padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: var(--text-caption); line-height: 1.4; color: var(--text-muted); }
+  .project-outcomes li { display: flex; align-items: flex-start; gap: 10px; }
+  .project-outcomes svg { flex: none; margin-top: 1px; }
+  /* "Selected work" at the bottom left of the first screen: click it to glide down to the case studies */
+  .hero-foot { position: absolute; left: 0; right: 0; bottom: 32px; z-index: 5; margin: 0 auto; pointer-events: none; }
+  .selected-work { pointer-events: auto; display: inline-block; padding: 6px 0; font-family: var(--font-sans); font-size: clamp(1.25rem, 1rem + 0.8vw, 1.5rem); font-weight: 400; line-height: 1.3; letter-spacing: -0.01em; color: var(--text-heading);   /* the same type as the section headings below */ text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; opacity: 0; animation: selectedWorkIn 700ms ease 3.4s forwards; transition: color 200ms ease, background-size 300ms ease; }
+  .selected-work:hover, .selected-work:focus-visible { color: var(--accent-text); background-size: 100% 1px; }
+  .selected-work:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .selected-work:active, .selected-work.is-clicked { background-size: 0 1px; }   /* no underline once it has been clicked (until the pointer leaves) */
+  @keyframes selectedWorkIn { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .selected-work { animation: none; opacity: 1; } }
+  /* no film grain on the tiles */
+  .project-media::after { display: none; }
+  /* certificates: two columns, each a logo with the certificate's name and who issued it (copied from the React site) */
+  section.certificates { padding-bottom: 200px; }
+  .cert-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; }
+  .cert { display: flex; align-items: flex-start; gap: 16px; }
+  .cert-logo { width: 48px; height: 48px; flex: none; object-fit: contain; }
+  .cert-logo-round { border-radius: 50%; object-fit: cover; }   /* this logo is a round mark on a white square */
+  .cert-name { display: block; font-weight: 500; }
+  .cert-issuer { display: block; margin-top: 4px; font-size: var(--text-caption); color: var(--text-muted); }
+  @media (max-width: 640px) { .cert-list { grid-template-columns: 1fr; gap: 24px; } }
+  /* connect: how to reach Sanchita (copied from the React site) */
+  section.connect { padding-bottom: 160px; }
+  .connect-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 20px 48px; }   /* all three in one line on a laptop, wrapping on narrower screens */
+  .connect-row { display: flex; align-items: center; gap: 2px; }
+  .connect-link { display: inline-flex; align-items: center; gap: 12px; color: var(--text-body); text-decoration: none; transition: color 200ms ease; }
+  .connect-link:hover, .connect-link:focus-visible { color: var(--accent-text); }
+  .connect-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .connect-link img { width: 28px; height: 28px; flex: none; object-fit: contain; }
+  .connect-out { display: inline-flex; margin-left: -8px; color: var(--accent-text); }   /* sits close to the address it belongs to */
+  .connect-copy { display: inline-flex; padding: 4px; border: 0; background: none; color: var(--accent-text); cursor: pointer; border-radius: 4px; }
+  .connect-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 640px) { section.connect .connect-list { flex-direction: column; align-items: flex-start; } }
+  .connect-copy .icon-tick { display: none; }
+  .connect-copy.is-copied .icon-copy { display: none; }
+  .connect-copy.is-copied .icon-tick { display: inline; }
+  /* the line under the pixel sign: red filled icons for the love and the tea (an English teacup, with its saucer and steam) */
+  .made-with { position: absolute; left: 0; right: 0; bottom: 26px; margin: 0; padding: 0 var(--side-margin-desktop); text-align: center; font-size: var(--text-caption); color: var(--text-muted); pointer-events: none; }   /* sits over the moving pixels, which run on behind it to the bottom of the page */
+  .made-with .mw-tip { pointer-events: auto; }
+  .made-with-text { display: inline-block; padding: 4px 14px; background: #fff; }   /* a white strip exactly behind the line, so the pixels do not run through the words */
+  .mw-tip { display: inline-block; line-height: 0; border-radius: 4px; cursor: none; }   /* hovering shows the Figma-style cursor tag (js/hero.js) */
+  .mw-tip:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .mw-icon { width: 23px; height: 23px; vertical-align: -6px; margin: 0 3px; }
+  .mw-tip:nth-of-type(2) .mw-icon { width: 24px; height: 24px; vertical-align: -6px; margin: 0 3px; }   /* the cup's drawing fills less of its square, so it is drawn a little larger to look the same size as the heart */
+  @media (max-width: 900px) { .made-with { padding-left: var(--side-margin-tablet); padding-right: var(--side-margin-tablet); } }
+  /* less empty space between sections on a phone */
+  @media (max-width: 640px) { section.projects, section.testimonials, section.certificates, section.community, section.connect { padding-bottom: 96px; } }
 </style>
 </head>
 <body>
@@ -568,9 +792,18 @@
 
 <header class="site-header">
   <div class="wrap header-bar">
-    <a class="brand" href="index.html">Sanchita</a>
+    <div class="brand-block">
+      <a class="brand" href="index.html"><svg viewBox="0 0 148.48 32.24" role="img" aria-label="Sanchita"><defs><clipPath id="wordmark-clip"><path d="M1 29.44L1.76 23.76L4.04 23.76L4.56 29.36L2.64 27.96Q3.8 28.6 5.16 28.92Q6.52 29.24 7.92 29.24Q9.92 29.24 11.22 28.62Q12.52 28 13.16 26.9Q13.8 25.8 13.8 24.44Q13.8 23.52 13.52 22.68Q13.24 21.84 12.34 20.82Q11.44 19.8 9.64 18.44Q7.6 16.88 6.5 15.56Q5.4 14.24 4.96 13.02Q4.52 11.8 4.52 10.56Q4.52 8.44 5.64 6.78Q6.76 5.12 8.74 4.18Q10.72 3.24 13.24 3.24Q14.32 3.24 15.42 3.42Q16.52 3.6 17.64 3.98Q18.76 4.36 19.88 5.04L18.96 10.64L16.6 10.64L16.32 5.04L18.04 6.44Q16.56 5.68 15.58 5.46Q14.6 5.24 13.72 5.24Q11.76 5.24 10.38 5.74Q9 6.24 8.28 7.22Q7.56 8.2 7.56 9.68Q7.56 10.72 7.94 11.66Q8.32 12.6 9.2 13.52Q10.08 14.44 11.48 15.52Q13.76 17.28 14.94 18.64Q16.12 20 16.56 21.16Q17 22.32 17 23.56Q17 25.88 15.88 27.6Q14.76 29.32 12.76 30.28Q10.76 31.24 8.08 31.24Q6.88 31.24 5.56 31.02Q4.24 30.8 3.04 30.4Q1.84 30 1 29.44ZM25 31.16Q24.04 31.16 23.18 30.68Q22.32 30.2 21.76 29.16Q21.2 28.12 21.2 26.44Q21.2 24.36 21.98 22.2Q22.76 20.04 24.06 18.06Q25.36 16.08 26.98 14.52Q28.6 12.96 30.3 12.04Q32 11.12 33.56 11.12Q34.44 11.12 35.1 11.56Q35.76 12 36.3 12.74Q36.84 13.48 37.36 14.4L35.88 15.44Q35.12 14.8 34.16 14.28Q33.2 13.76 32.16 13.76Q31.52 13.76 30.78 14.04Q30.04 14.32 29.26 14.82Q28.48 15.32 27.76 16.08Q26.8 17.08 26.02 18.44Q25.24 19.8 24.78 21.42Q24.32 23.04 24.32 24.8Q24.32 26.64 24.98 27.52Q25.64 28.4 26.72 28.4Q27.56 28.4 28.54 27.9Q29.52 27.4 30.82 26.2Q32.12 25 33.84 22.96L34.32 23.84L34.2 23.84Q32.8 25.92 31.2 27.58Q29.6 29.24 28.02 30.2Q26.44 31.16 25 31.16ZM33.92 31.16Q33.12 31.16 32.48 30.6Q31.84 30.04 31.84 28.84Q31.84 28.24 31.88 27.74Q31.92 27.24 32.02 26.7Q32.12 26.16 32.24 25.52L32.28 25.32L34.96 12.92L35.24 12.68L37.68 10.72L38.4 11.08L35.2 25.24Q35.04 26 34.94 26.6Q34.84 27.2 34.84 27.52Q34.84 27.92 35.12 28.16Q35.4 28.4 35.8 28.4Q36.56 28.4 37.62 27.6Q38.68 26.8 39.72 25.52L40.68 26.28Q39.92 27.44 38.84 28.56Q37.76 29.68 36.52 30.42Q35.28 31.16 33.92 31.16ZM43.72 30.96L43.32 30.64L46.84 14.04L47.56 14.6L42.76 14.32L42.92 13.16L49.72 11.12L50.24 11.52L49.24 16.52L49.16 16.88L48 22.24Q47.56 24.32 47.18 26.42Q46.8 28.52 46.4 30.64L43.72 30.96ZM56.12 31.16Q55.2 31.16 54.66 30.68Q54.12 30.2 54.12 29.44Q54.12 28.76 54.3 28.1Q54.48 27.44 54.76 26.2L56.48 19.12Q56.72 18.08 56.92 17.16Q57.12 16.24 57.12 15.64Q57.12 14.6 56.76 14.2Q56.4 13.8 55.72 13.8Q54.96 13.8 53.9 14.22Q52.84 14.64 51.52 15.52Q50.2 16.4 48.6 17.72L48.56 16.24L48.8 16.24Q50.16 14.84 51.72 13.68Q53.28 12.52 54.86 11.82Q56.44 11.12 57.76 11.12Q59.04 11.12 59.68 11.8Q60.32 12.48 60.32 13.88Q60.32 14.84 60.1 15.82Q59.88 16.8 59.64 17.8L57.84 25.24Q57.64 26.08 57.5 26.66Q57.36 27.24 57.36 27.56Q57.36 27.96 57.56 28.18Q57.76 28.4 58.12 28.4Q58.88 28.4 59.94 27.64Q61 26.88 62.08 25.52L63.04 26.28Q62.28 27.44 61.18 28.58Q60.08 29.72 58.8 30.44Q57.52 31.16 56.12 31.16ZM70.92 31.16Q69.2 31.16 67.84 30.34Q66.48 29.52 65.72 27.84Q64.96 26.16 64.96 23.68Q64.96 21.16 65.84 18.88Q66.72 16.6 68.2 14.86Q69.68 13.12 71.52 12.12Q73.36 11.12 75.24 11.12Q76.48 11.12 77.36 11.5Q78.24 11.88 78.8 12.52Q79.36 13.16 79.56 14.04Q79.44 14.8 78.94 15.12Q78.44 15.44 77.88 15.44Q77.24 15.44 76.66 15.02Q76.08 14.6 75.52 14L73.72 11.92L76 11.92L76 12.36L75.4 12.36Q73.96 12.6 72.62 13.54Q71.28 14.48 70.22 15.98Q69.16 17.48 68.56 19.34Q67.96 21.2 67.96 23.24Q67.96 25.84 69.2 27.12Q70.44 28.4 72.4 28.4Q73.48 28.4 74.36 27.96Q75.24 27.52 75.98 26.84Q76.72 26.16 77.28 25.48L78.2 26.2Q77.6 27.24 76.78 28.14Q75.96 29.04 75 29.72Q74.04 30.4 73 30.78Q71.96 31.16 70.92 31.16ZM81.96 30.96L81.56 30.64L85.44 11.52Q85.88 9.44 86.26 7.4Q86.64 5.36 86.92 3.28L87.64 4.52L82.96 4.2L83.12 3.04L90.04 1.04L90.44 1.36L87.44 16.04L87.32 16.72L86.16 22.24Q85.88 23.64 85.62 25.04Q85.36 26.44 85.12 27.84Q84.88 29.24 84.64 30.64L81.96 30.96ZM94.2 31.16Q93.24 31.16 92.7 30.68Q92.16 30.2 92.16 29.44Q92.16 28.76 92.34 28.1Q92.52 27.44 92.8 26.2L94.52 19.12Q94.76 18.08 94.96 17.16Q95.16 16.24 95.16 15.64Q95.16 14.6 94.8 14.2Q94.44 13.8 93.76 13.8Q93 13.8 91.96 14.22Q90.92 14.64 89.58 15.52Q88.24 16.4 86.64 17.72L86.64 16.24L86.84 16.24Q88.2 14.84 89.76 13.68Q91.32 12.52 92.9 11.82Q94.48 11.12 95.8 11.12Q97.08 11.12 97.74 11.8Q98.4 12.48 98.4 13.88Q98.4 14.84 98.18 15.82Q97.96 16.8 97.72 17.8L95.92 25.24Q95.72 26.08 95.56 26.66Q95.4 27.24 95.4 27.56Q95.4 27.96 95.62 28.18Q95.84 28.4 96.2 28.4Q96.92 28.4 97.98 27.64Q99.04 26.88 100.12 25.52L101.08 26.28Q100.32 27.44 99.22 28.58Q98.12 29.72 96.84 30.44Q95.56 31.16 94.2 31.16ZM104.44 29.12Q104.44 28.68 104.52 28.06Q104.6 27.44 104.84 26.2L107.4 14.04L108.08 14.6L103.32 14.32L103.48 13.16L110.28 11.12L110.8 11.52L107.96 25.24Q107.8 26 107.7 26.6Q107.6 27.2 107.6 27.52Q107.6 27.92 107.88 28.16Q108.16 28.4 108.48 28.4Q109.2 28.4 110.16 27.68Q111.12 26.96 112.32 25.52L113.32 26.28Q112.44 27.48 111.42 28.6Q110.4 29.72 109.22 30.44Q108.04 31.16 106.6 31.16Q105.76 31.16 105.1 30.64Q104.44 30.12 104.44 29.12ZM110.68 5.6Q109.8 5.6 109.22 5.02Q108.64 4.44 108.64 3.44Q108.64 2.44 109.3 1.72Q109.96 1 110.84 1Q111.76 1 112.34 1.58Q112.92 2.16 112.92 3.12Q112.92 4.12 112.24 4.86Q111.56 5.6 110.68 5.6ZM115.64 13.52L115.96 12L121.36 11.52L121.36 11.64L128.12 11.64L127.68 13.8L121.16 13.6L121.08 13.52L115.64 13.52ZM118.84 31.16Q117.96 31.16 117.3 30.64Q116.64 30.12 116.64 29.12Q116.64 28.68 116.7 28.06Q116.76 27.44 117 26.2L119.96 12.44L122.12 6.28L124.16 6.28L120.16 25.16Q120 25.96 119.9 26.56Q119.8 27.16 119.8 27.48Q119.8 27.92 120.1 28.16Q120.4 28.4 120.76 28.4Q121.32 28.4 121.9 28.08Q122.48 27.76 123.16 27.12Q123.84 26.48 124.68 25.52L125.64 26.28Q124.84 27.48 123.76 28.6Q122.68 29.72 121.44 30.44Q120.2 31.16 118.84 31.16ZM131.8 31.16Q130.84 31.16 129.98 30.68Q129.12 30.2 128.56 29.16Q128 28.12 128 26.44Q128 24.36 128.78 22.2Q129.56 20.04 130.86 18.06Q132.16 16.08 133.78 14.52Q135.4 12.96 137.1 12.04Q138.8 11.12 140.36 11.12Q141.24 11.12 141.9 11.56Q142.56 12 143.1 12.74Q143.64 13.48 144.16 14.4L142.68 15.44Q141.92 14.8 140.96 14.28Q140 13.76 138.96 13.76Q138.32 13.76 137.58 14.04Q136.84 14.32 136.06 14.82Q135.28 15.32 134.56 16.08Q133.6 17.08 132.82 18.44Q132.04 19.8 131.58 21.42Q131.12 23.04 131.12 24.8Q131.12 26.64 131.78 27.52Q132.44 28.4 133.52 28.4Q134.36 28.4 135.34 27.9Q136.32 27.4 137.62 26.2Q138.92 25 140.64 22.96L141.12 23.84L141 23.84Q139.6 25.92 138 27.58Q136.4 29.24 134.82 30.2Q133.24 31.16 131.8 31.16ZM140.72 31.16Q139.92 31.16 139.28 30.6Q138.64 30.04 138.64 28.84Q138.64 28.24 138.68 27.74Q138.72 27.24 138.82 26.7Q138.92 26.16 139.04 25.52L139.08 25.32L141.76 12.92L142.04 12.68L144.48 10.72L145.2 11.08L142 25.24Q141.84 26 141.74 26.6Q141.64 27.2 141.64 27.52Q141.64 27.92 141.92 28.16Q142.2 28.4 142.6 28.4Q143.36 28.4 144.42 27.6Q145.48 26.8 146.52 25.52L147.48 26.28Q146.72 27.44 145.64 28.56Q144.56 29.68 143.32 30.42Q142.08 31.16 140.72 31.16Z"/></clipPath></defs><path d="M1 29.44L1.76 23.76L4.04 23.76L4.56 29.36L2.64 27.96Q3.8 28.6 5.16 28.92Q6.52 29.24 7.92 29.24Q9.92 29.24 11.22 28.62Q12.52 28 13.16 26.9Q13.8 25.8 13.8 24.44Q13.8 23.52 13.52 22.68Q13.24 21.84 12.34 20.82Q11.44 19.8 9.64 18.44Q7.6 16.88 6.5 15.56Q5.4 14.24 4.96 13.02Q4.52 11.8 4.52 10.56Q4.52 8.44 5.64 6.78Q6.76 5.12 8.74 4.18Q10.72 3.24 13.24 3.24Q14.32 3.24 15.42 3.42Q16.52 3.6 17.64 3.98Q18.76 4.36 19.88 5.04L18.96 10.64L16.6 10.64L16.32 5.04L18.04 6.44Q16.56 5.68 15.58 5.46Q14.6 5.24 13.72 5.24Q11.76 5.24 10.38 5.74Q9 6.24 8.28 7.22Q7.56 8.2 7.56 9.68Q7.56 10.72 7.94 11.66Q8.32 12.6 9.2 13.52Q10.08 14.44 11.48 15.52Q13.76 17.28 14.94 18.64Q16.12 20 16.56 21.16Q17 22.32 17 23.56Q17 25.88 15.88 27.6Q14.76 29.32 12.76 30.28Q10.76 31.24 8.08 31.24Q6.88 31.24 5.56 31.02Q4.24 30.8 3.04 30.4Q1.84 30 1 29.44ZM25 31.16Q24.04 31.16 23.18 30.68Q22.32 30.2 21.76 29.16Q21.2 28.12 21.2 26.44Q21.2 24.36 21.98 22.2Q22.76 20.04 24.06 18.06Q25.36 16.08 26.98 14.52Q28.6 12.96 30.3 12.04Q32 11.12 33.56 11.12Q34.44 11.12 35.1 11.56Q35.76 12 36.3 12.74Q36.84 13.48 37.36 14.4L35.88 15.44Q35.12 14.8 34.16 14.28Q33.2 13.76 32.16 13.76Q31.52 13.76 30.78 14.04Q30.04 14.32 29.26 14.82Q28.48 15.32 27.76 16.08Q26.8 17.08 26.02 18.44Q25.24 19.8 24.78 21.42Q24.32 23.04 24.32 24.8Q24.32 26.64 24.98 27.52Q25.64 28.4 26.72 28.4Q27.56 28.4 28.54 27.9Q29.52 27.4 30.82 26.2Q32.12 25 33.84 22.96L34.32 23.84L34.2 23.84Q32.8 25.92 31.2 27.58Q29.6 29.24 28.02 30.2Q26.44 31.16 25 31.16ZM33.92 31.16Q33.12 31.16 32.48 30.6Q31.84 30.04 31.84 28.84Q31.84 28.24 31.88 27.74Q31.92 27.24 32.02 26.7Q32.12 26.16 32.24 25.52L32.28 25.32L34.96 12.92L35.24 12.68L37.68 10.72L38.4 11.08L35.2 25.24Q35.04 26 34.94 26.6Q34.84 27.2 34.84 27.52Q34.84 27.92 35.12 28.16Q35.4 28.4 35.8 28.4Q36.56 28.4 37.62 27.6Q38.68 26.8 39.72 25.52L40.68 26.28Q39.92 27.44 38.84 28.56Q37.76 29.68 36.52 30.42Q35.28 31.16 33.92 31.16ZM43.72 30.96L43.32 30.64L46.84 14.04L47.56 14.6L42.76 14.32L42.92 13.16L49.72 11.12L50.24 11.52L49.24 16.52L49.16 16.88L48 22.24Q47.56 24.32 47.18 26.42Q46.8 28.52 46.4 30.64L43.72 30.96ZM56.12 31.16Q55.2 31.16 54.66 30.68Q54.12 30.2 54.12 29.44Q54.12 28.76 54.3 28.1Q54.48 27.44 54.76 26.2L56.48 19.12Q56.72 18.08 56.92 17.16Q57.12 16.24 57.12 15.64Q57.12 14.6 56.76 14.2Q56.4 13.8 55.72 13.8Q54.96 13.8 53.9 14.22Q52.84 14.64 51.52 15.52Q50.2 16.4 48.6 17.72L48.56 16.24L48.8 16.24Q50.16 14.84 51.72 13.68Q53.28 12.52 54.86 11.82Q56.44 11.12 57.76 11.12Q59.04 11.12 59.68 11.8Q60.32 12.48 60.32 13.88Q60.32 14.84 60.1 15.82Q59.88 16.8 59.64 17.8L57.84 25.24Q57.64 26.08 57.5 26.66Q57.36 27.24 57.36 27.56Q57.36 27.96 57.56 28.18Q57.76 28.4 58.12 28.4Q58.88 28.4 59.94 27.64Q61 26.88 62.08 25.52L63.04 26.28Q62.28 27.44 61.18 28.58Q60.08 29.72 58.8 30.44Q57.52 31.16 56.12 31.16ZM70.92 31.16Q69.2 31.16 67.84 30.34Q66.48 29.52 65.72 27.84Q64.96 26.16 64.96 23.68Q64.96 21.16 65.84 18.88Q66.72 16.6 68.2 14.86Q69.68 13.12 71.52 12.12Q73.36 11.12 75.24 11.12Q76.48 11.12 77.36 11.5Q78.24 11.88 78.8 12.52Q79.36 13.16 79.56 14.04Q79.44 14.8 78.94 15.12Q78.44 15.44 77.88 15.44Q77.24 15.44 76.66 15.02Q76.08 14.6 75.52 14L73.72 11.92L76 11.92L76 12.36L75.4 12.36Q73.96 12.6 72.62 13.54Q71.28 14.48 70.22 15.98Q69.16 17.48 68.56 19.34Q67.96 21.2 67.96 23.24Q67.96 25.84 69.2 27.12Q70.44 28.4 72.4 28.4Q73.48 28.4 74.36 27.96Q75.24 27.52 75.98 26.84Q76.72 26.16 77.28 25.48L78.2 26.2Q77.6 27.24 76.78 28.14Q75.96 29.04 75 29.72Q74.04 30.4 73 30.78Q71.96 31.16 70.92 31.16ZM81.96 30.96L81.56 30.64L85.44 11.52Q85.88 9.44 86.26 7.4Q86.64 5.36 86.92 3.28L87.64 4.52L82.96 4.2L83.12 3.04L90.04 1.04L90.44 1.36L87.44 16.04L87.32 16.72L86.16 22.24Q85.88 23.64 85.62 25.04Q85.36 26.44 85.12 27.84Q84.88 29.24 84.64 30.64L81.96 30.96ZM94.2 31.16Q93.24 31.16 92.7 30.68Q92.16 30.2 92.16 29.44Q92.16 28.76 92.34 28.1Q92.52 27.44 92.8 26.2L94.52 19.12Q94.76 18.08 94.96 17.16Q95.16 16.24 95.16 15.64Q95.16 14.6 94.8 14.2Q94.44 13.8 93.76 13.8Q93 13.8 91.96 14.22Q90.92 14.64 89.58 15.52Q88.24 16.4 86.64 17.72L86.64 16.24L86.84 16.24Q88.2 14.84 89.76 13.68Q91.32 12.52 92.9 11.82Q94.48 11.12 95.8 11.12Q97.08 11.12 97.74 11.8Q98.4 12.48 98.4 13.88Q98.4 14.84 98.18 15.82Q97.96 16.8 97.72 17.8L95.92 25.24Q95.72 26.08 95.56 26.66Q95.4 27.24 95.4 27.56Q95.4 27.96 95.62 28.18Q95.84 28.4 96.2 28.4Q96.92 28.4 97.98 27.64Q99.04 26.88 100.12 25.52L101.08 26.28Q100.32 27.44 99.22 28.58Q98.12 29.72 96.84 30.44Q95.56 31.16 94.2 31.16ZM104.44 29.12Q104.44 28.68 104.52 28.06Q104.6 27.44 104.84 26.2L107.4 14.04L108.08 14.6L103.32 14.32L103.48 13.16L110.28 11.12L110.8 11.52L107.96 25.24Q107.8 26 107.7 26.6Q107.6 27.2 107.6 27.52Q107.6 27.92 107.88 28.16Q108.16 28.4 108.48 28.4Q109.2 28.4 110.16 27.68Q111.12 26.96 112.32 25.52L113.32 26.28Q112.44 27.48 111.42 28.6Q110.4 29.72 109.22 30.44Q108.04 31.16 106.6 31.16Q105.76 31.16 105.1 30.64Q104.44 30.12 104.44 29.12ZM110.68 5.6Q109.8 5.6 109.22 5.02Q108.64 4.44 108.64 3.44Q108.64 2.44 109.3 1.72Q109.96 1 110.84 1Q111.76 1 112.34 1.58Q112.92 2.16 112.92 3.12Q112.92 4.12 112.24 4.86Q111.56 5.6 110.68 5.6ZM115.64 13.52L115.96 12L121.36 11.52L121.36 11.64L128.12 11.64L127.68 13.8L121.16 13.6L121.08 13.52L115.64 13.52ZM118.84 31.16Q117.96 31.16 117.3 30.64Q116.64 30.12 116.64 29.12Q116.64 28.68 116.7 28.06Q116.76 27.44 117 26.2L119.96 12.44L122.12 6.28L124.16 6.28L120.16 25.16Q120 25.96 119.9 26.56Q119.8 27.16 119.8 27.48Q119.8 27.92 120.1 28.16Q120.4 28.4 120.76 28.4Q121.32 28.4 121.9 28.08Q122.48 27.76 123.16 27.12Q123.84 26.48 124.68 25.52L125.64 26.28Q124.84 27.48 123.76 28.6Q122.68 29.72 121.44 30.44Q120.2 31.16 118.84 31.16ZM131.8 31.16Q130.84 31.16 129.98 30.68Q129.12 30.2 128.56 29.16Q128 28.12 128 26.44Q128 24.36 128.78 22.2Q129.56 20.04 130.86 18.06Q132.16 16.08 133.78 14.52Q135.4 12.96 137.1 12.04Q138.8 11.12 140.36 11.12Q141.24 11.12 141.9 11.56Q142.56 12 143.1 12.74Q143.64 13.48 144.16 14.4L142.68 15.44Q141.92 14.8 140.96 14.28Q140 13.76 138.96 13.76Q138.32 13.76 137.58 14.04Q136.84 14.32 136.06 14.82Q135.28 15.32 134.56 16.08Q133.6 17.08 132.82 18.44Q132.04 19.8 131.58 21.42Q131.12 23.04 131.12 24.8Q131.12 26.64 131.78 27.52Q132.44 28.4 133.52 28.4Q134.36 28.4 135.34 27.9Q136.32 27.4 137.62 26.2Q138.92 25 140.64 22.96L141.12 23.84L141 23.84Q139.6 25.92 138 27.58Q136.4 29.24 134.82 30.2Q133.24 31.16 131.8 31.16ZM140.72 31.16Q139.92 31.16 139.28 30.6Q138.64 30.04 138.64 28.84Q138.64 28.24 138.68 27.74Q138.72 27.24 138.82 26.7Q138.92 26.16 139.04 25.52L139.08 25.32L141.76 12.92L142.04 12.68L144.48 10.72L145.2 11.08L142 25.24Q141.84 26 141.74 26.6Q141.64 27.2 141.64 27.52Q141.64 27.92 141.92 28.16Q142.2 28.4 142.6 28.4Q143.36 28.4 144.42 27.6Q145.48 26.8 146.52 25.52L147.48 26.28Q146.72 27.44 145.64 28.56Q144.56 29.68 143.32 30.42Q142.08 31.16 140.72 31.16Z" fill="currentColor"/><g clip-path="url(#wordmark-clip)"><rect class="wordmark-sweep" width="148.48" height="32.24"/></g></svg></a>
+      <div class="weather-note" id="weather-note">
+      <svg class="weather-icon" data-state="rain" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.1 15A3.9 3.9 0 0 1 7.512 7.245A5.1 5.1 0 0 1 17.657 8.264A3.4 3.4 0 0 1 17 15Z"/><path class="rain-drops" d="M8.8 18.1l-1.2 2.9M12.3 18.1l-1.2 2.9M15.8 18.1l-1.2 2.9M19.3 18.1l-1.2 2.9"/></svg>
+      <div class="weather-body">
+      <p class="weather-line"><span class="weather-text">Drizzle over London</span>, <span class="weather-time"></span></p>
+      <span class="weather-swap"><span>Nice time to untangle a complex workflow.</span><span>Sipping on a hot cup of tea.</span></span>
+      </div>
+      </div>
+    </div>
     <nav class="primary-nav">
-      <a href="index.html" class="current">Work</a>
+      <a href="#work" class="current">Work</a>
       <a href="sanchita.html">About</a>
       <a href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer">Blog</a>
     </nav>
@@ -580,10 +813,14 @@
 <div class="hero-backdrop">
   <section class="hero">
     <div class="hero-text reveal">
+      <h1 class="lead">Product <span class="hero-word" data-skills>designer</span> focussed on building <span class="ai-wrap">AI<svg viewBox="0 0 100 100" class="ai-sparkles" aria-hidden="true"><defs><linearGradient id="ai-sparkle-metal" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" style="stop-color:var(--metal-highlight)"/><stop offset="0.27" style="stop-color:var(--metal)"/><stop offset="0.5" style="stop-color:var(--metal-deep)"/><stop offset="0.63" style="stop-color:var(--metal)"/><stop offset="0.8" style="stop-color:var(--metal-highlight)"/><stop offset="1" style="stop-color:var(--metal)"/></linearGradient><linearGradient id="ai-sparkle-glare" gradientUnits="userSpaceOnUse" x1="-60" y1="0" x2="-20" y2="40"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/><animateTransform id="ai-glare-anim" attributeName="gradientTransform" type="translate" from="0 0" to="200 0" dur="1000ms" begin="indefinite" fill="freeze"/></linearGradient></defs><path d="M37 26 Q37 60 71 60 Q37 60 37 94 Q37 60 3 60 Q37 60 37 26 Z" fill="url(#ai-sparkle-metal)"/><path d="M77 7 Q77 26 96 26 Q77 26 77 45 Q77 26 58 26 Q77 26 77 7 Z" fill="url(#ai-sparkle-metal)"/><path d="M80 65 Q80 78 93 78 Q80 78 80 91 Q80 78 67 78 Q80 78 80 65 Z" fill="url(#ai-sparkle-metal)"/><path d="M37 49 Q37 60 48 60 Q37 60 37 71 Q37 60 26 60 Q37 60 37 49 Z" style="fill:var(--metal-highlight)" opacity="0.9"/><path d="M37 26 Q37 60 71 60 Q37 60 37 94 Q37 60 3 60 Q37 60 37 26 Z" fill="url(#ai-sparkle-glare)"/><path d="M77 7 Q77 26 96 26 Q77 26 77 45 Q77 26 58 26 Q77 26 77 7 Z" fill="url(#ai-sparkle-glare)"/><path d="M80 65 Q80 78 93 78 Q80 78 80 91 Q80 78 67 78 Q80 78 80 65 Z" fill="url(#ai-sparkle-glare)"/></svg></span> led experience</h1>
+      <!-- Hidden for now: the previous headline
       <h1 class="lead" aria-label="I translate ambiguity and complexity into clarity for enterprises.">
         <span aria-hidden="true">I translate <mark><span class="typed" data-words="ambiguity|complexity">ambiguity and complexity</span></mark><br> into clarity for enterprises.</span>
       </h1>
-      <p class="sub">Hi I am Sanchita, a designer with engineering roots. For the last 12 years in the industry I have worked with complex B2B products across Cybersecurity &amp; Fintech. I have spent 2026 working and learning design for AI systems for an early age startup.</p>
+      -->
+      <p class="sub hero-sub">12 years across <span class="year-hint" tabindex="0" data-cursor-tag="8 years">design<span class="sr-only"> (8 years)</span></span> <span class="tool-row"><span class="tool" tabindex="0" data-cursor-tag="Figma" style="--tilt:-6deg;--c1:#a259ff;--c2:#1abcfe;--c3:#f24e8c;--drift-delay:-0.0s"><span class="tool-body"><span class="tool-logo"><span class="tool-liquid" style="--logo:url('data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjAwIDMwMCI+PHN0eWxlPi5zdDB7ZmlsbDojMGFjZjgzfS5zdDF7ZmlsbDojYTI1OWZmfS5zdDJ7ZmlsbDojZjI0ZTFlfS5zdDN7ZmlsbDojZmY3MjYyfS5zdDR7ZmlsbDojMWFiY2ZlfTwvc3R5bGU+PHBhdGggaWQ9InBhdGgwX2ZpbGwiIGNsYXNzPSJzdDAiIGQ9Ik01MCAzMDBjMjcuNiAwIDUwLTIyLjQgNTAtNTB2LTUwSDUwYy0yNy42IDAtNTAgMjIuNC01MCA1MHMyMi40IDUwIDUwIDUweiIvPjxwYXRoIGlkPSJwYXRoMV9maWxsIiBjbGFzcz0ic3QxIiBkPSJNMCAxNTBjMC0yNy42IDIyLjQtNTAgNTAtNTBoNTB2MTAwSDUwYy0yNy42IDAtNTAtMjIuNC01MC01MHoiLz48cGF0aCBpZD0icGF0aDFfZmlsbF8xXyIgY2xhc3M9InN0MiIgZD0iTTAgNTBDMCAyMi40IDIyLjQgMCA1MCAwaDUwdjEwMEg1MEMyMi40IDEwMCAwIDc3LjYgMCA1MHoiLz48cGF0aCBpZD0icGF0aDJfZmlsbCIgY2xhc3M9InN0MyIgZD0iTTEwMCAwaDUwYzI3LjYgMCA1MCAyMi40IDUwIDUwcy0yMi40IDUwLTUwIDUwaC01MFYweiIvPjxwYXRoIGlkPSJwYXRoM19maWxsIiBjbGFzcz0ic3Q0IiBkPSJNMjAwIDE1MGMwIDI3LjYtMjIuNCA1MC01MCA1MHMtNTAtMjIuNC01MC01MCAyMi40LTUwIDUwLTUwIDUwIDIyLjQgNTAgNTB6Ii8+PC9zdmc+')" aria-hidden="true"></span></span></span><span class="sr-only">Figma</span></span><span class="tool" tabindex="0" data-cursor-tag="Claude Design" style="--tilt:5deg;--c1:#d97757;--c2:#f2a47c;--c3:#b5543a;--drift-delay:-2.3s"><span class="tool-body"><span class="tool-logo"><span class="tool-liquid" style="--logo:url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjRDk3NzU3IiBkPSJtNC43MTQ0IDE1Ljk1NTUgNC43MTc0LTIuNjQ3MS4wNzktLjIzMDctLjA3OS0uMTI3NWgtLjIzMDdsLS43ODkzLS4wNDg2LTIuNjk1Ni0uMDcyOS0yLjMzNzUtLjA5NzEtMi4yNjQ2LS4xMjE0LS41NzA3LS4xMjE1LS41MzQzLS43MDQyLjA1NDYtLjM1MjIuNDc5Ny0uMzIxOC42ODYuMDYwOCAxLjUxNzkuMTAzMiAyLjI3NjcuMTU3OCAxLjY1MTQuMDk3MiAyLjQ0NjguMjU1aC4zODg2bC4wNTQ2LS4xNTc5LS4xMzM2LS4wOTcxLS4xMDMyLS4wOTcyTDYuOTczIDkuODM1NmwtMi41NS0xLjY4NzktMS4zMzU2LS45NzE0LS43MjI1LS40OTE4LS4zNjQzLS40NjE0LS4xNTc4LTEuMDA3OC42NTU3LS43MjI1Ljg4MDMuMDYwNy4yMjQ2LjA2MDcuODkyNS42ODYgMS45MDY0IDEuNDc1NCAyLjQ4OTMgMS44MzM2LjM2NDMuMzAzNS4xNDU3LS4xMDMyLjAxODItLjA3MjgtLjE2NC0uMjczMy0xLjM1MzktMi40NDY3LTEuNDQ1LTIuNDg5My0uNjQzNS0xLjAzMi0uMTctLjYxOTRjLS4wNjA3LS4yNTUtLjEwMzItLjQ2NzQtLjEwMzItLjcyODVMNi4yODcuMTMzNSA2LjY5OTcgMGwuOTk1Ny4xMzM2LjQxOS4zNjQyLjYxOTIgMS40MTQ3IDEuMDAxOCAyLjIyODIgMS41NTQzIDMuMDI5Ni40NTUzLjg5ODUuMjQyOS44MzE4LjA5MS4yNTVoLjE1Nzl2LS4xNDU3bC4xMjc1LTEuNzA2LjIzNjgtMi4wOTQ3LjIzMDctMi42OTU3LjA3ODktLjc1ODkuMzc2NC0uOTEwNy43NDY4LS40OTE4LjU4MjguMjc5My40Nzk3LjY4Ni0uMDY2OC40NDMzLS4yODUzIDEuODUxNy0uNTU4NiAyLjkwMjEtLjM2NDMgMS45NDI5aC4yMTI1bC4yNDI5LS4yNDI5Ljk4MzUtMS4zMDUzIDEuNjUxNC0yLjA2NDMuNzI4Ni0uODE5Ni44NS0uOTA0Ni41NDY0LS40MzExaDEuMDMyMWwuNzU5IDEuMTI5My0uMzQgMS4xNjU3LTEuMDYyNSAxLjM0NzgtLjg4MDQgMS4xNDE0LTEuMjYyOCAxLjctLjc4OTMgMS4zNi4wNzI5LjEwOTMuMTg4Mi0uMDE4MyAyLjg1MzUtLjYwNyAxLjU0MjEtLjI3OTQgMS44Mzk2LS4zMTU3LjgzMTguMzg4Ni4wOTEuMzk0Ni0uMzI3OC44MDc1LTEuOTY3LjQ4NTctMi4zMDcyLjQ2MTQtMy40MzY0LjgxMzYtLjA0MjUuMDMwNC4wNDg2LjA2MDcgMS41NDgyLjE0NTcuNjYxOC4wMzY0aDEuNjIxbDMuMDE3NS4yMjQ3Ljc4OTIuNTIyLjQ3MzYuNjM3Ni0uMDc5LjQ4NTctMS4yMTQyLjYxOTMtMS42MzkzLS4zODg2LTMuODI1LS45MTA3LTEuMzExMy0uMzI3OWgtLjE4MjJ2LjEwOTNsMS4wOTI5IDEuMDY4NiAyLjAwMzUgMS44MDkyIDIuNTA3NSAyLjMzMTQuMTI3NS41NzY4LS4zMjE4LjQ1NTQtLjM0LS4wNDg2LTIuMjAzOS0xLjY1NzUtLjg1LS43NDY4LTEuOTI0Ni0xLjYyMWgtLjEyNzV2LjE3bC40NDMyLjY0OTYgMi4zNDM2IDMuNTIxNC4xMjE0IDEuMDgwNy0uMTcuMzUyMS0uNjA3MS4yMTI1LS42Njc5LS4xMjE0LTEuMzcyMS0xLjkyNDZMMTQuMzggMTcuOTU5bC0xLjE0MTQtMS45NDI4LS4xMzk3LjA3OS0uNjc0IDcuMjU1Mi0uMzE1Ni4zNzAzLS43Mjg2LjI3OTMtLjYwNzEtLjQ2MTQtLjMyMTgtLjc0NjguMzIxOC0xLjQ3NTMuMzg4Ni0xLjkyNDYuMzE1Ny0xLjUzLjI4NTMtMS45MDA0LjE3LS42MzE0LS4wMTIxLS4wNDI1LS4xMzk3LjAxODItMS40MzI4IDEuOTY3Mi0yLjE3OTYgMi45NDQ2LTEuNzI0MyAxLjg0NTYtLjQxMjguMTY0LS43MTY0LS4zNzA0LjA2NjctLjY2MTguNDAwOC0uNTg4OSAyLjM4Ni0zLjAzNTcgMS40Mzg5LTEuODgyLjkyOS0xLjA4NjgtLjAwNjItLjE1NzloLS4wNTQ2bC02LjMzODUgNC4xMTY0LTEuMTI5My4xNDU3LS40ODU3LS40NTU0LjA2MDgtLjc0NjcuMjMwNy0uMjQyOSAxLjkwNjQtMS4zMTE0WiIvPjwvc3ZnPg==')" aria-hidden="true"></span></span></span><span class="sr-only">Claude Design</span></span><span class="tool" tabindex="0" data-cursor-tag="Miro" style="--tilt:-4deg;--c1:#ffd02f;--c2:#ffe680;--c3:#f2a900;--drift-delay:-4.6s"><span class="tool-body"><span class="tool-logo"><span class="tool-liquid" style="--logo:url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjRkZEMDJGIiBkPSJNMTcuMzkyIDBIMTMuOUwxNyA0LjgwOCAxMC40NDQgMEg2Ljk0OWwzLjEwMiA2LjNMMy40OTQgMEgwbDMuMDUgOC4xMzFMMCAyNGgzLjQ5NEwxMC4wNSA2Ljk4NSA2Ljk0OSAyNGgzLjQ5NEwxNyA1LjQ5NCAxMy44OTkgMjRoMy40OTNMMjQgMy42NzIgMTcuMzkyIDB6Ii8+PC9zdmc+')" aria-hidden="true"></span></span></span><span class="sr-only">Miro</span></span></span> and <span class="year-hint" tabindex="0" data-cursor-tag="4 years, started as one">engineering<span class="sr-only"> (4 years, started as one)</span></span> <span class="tool-row"><span class="tool" tabindex="0" data-cursor-tag="Claude Code" style="--tilt:-6deg;--c1:#d97757;--c2:#ff9d73;--c3:#a3472c;--drift-delay:-6.9s"><span class="tool-body"><span class="tool-logo"><span class="tool-liquid" style="--logo:url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjRDk3NzU3IiBkPSJNMjEgMTAuNWgzdjNoLTN2M2gtMS41djNIMTh2LTNoLTEuNXYzSDE1di0zSDl2M0g3LjV2LTNINnYzSDQuNXYtM0gzdi0zSDB2LTNoM3YtNmgxOFptLTE1IDBoMS41di0zSDZabTEwLjUgMEgxOHYtM2gtMS41eiIvPjwvc3ZnPg==')" aria-hidden="true"></span></span></span><span class="sr-only">Claude Code</span></span><span class="tool" tabindex="0" data-cursor-tag="VS Code" style="--tilt:5deg;--c1:#1a7fd4;--c2:#5cc8ff;--c3:#0a4f94;--drift-delay:-9.2s"><span class="tool-body"><span class="tool-logo"><span class="tool-liquid" style="--logo:url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjMDA3QUNDIiBkPSJNMjMuMTUgMi41ODdMMTguMjEuMjFhMS40OTQgMS40OTQgMCAwIDAtMS43MDUuMjlsLTkuNDYgOC42My00LjEyLTMuMTI4YS45OTkuOTk5IDAgMCAwLTEuMjc2LjA1N0wuMzI3IDcuMjYxQTEgMSAwIDAgMCAuMzI2IDguNzRMMy44OTkgMTIgLjMyNiAxNS4yNmExIDEgMCAwIDAgLjAwMSAxLjQ3OUwxLjY1IDE3Ljk0YS45OTkuOTk5IDAgMCAwIDEuMjc2LjA1N2w0LjEyLTMuMTI4IDkuNDYgOC42M2ExLjQ5MiAxLjQ5MiAwIDAgMCAxLjcwNC4yOWw0Ljk0Mi0yLjM3N0ExLjUgMS41IDAgMCAwIDI0IDIwLjA2VjMuOTM5YTEuNSAxLjUgMCAwIDAtLjg1LTEuMzUyem0tNS4xNDYgMTQuODYxTDEwLjgyNiAxMmw3LjE3OC01LjQ0OHYxMC44OTZ6Ii8+PC9zdmc+')" aria-hidden="true"></span></span></span><span class="sr-only">VS Code</span></span><span class="tool" tabindex="0" data-cursor-tag="GitHub" style="--tilt:-4deg;--c1:var(--metal-highlight);--c2:var(--metal);--c3:var(--metal-deep);--drift-delay:-11.5s"><span class="tool-body"><span class="tool-logo"><span class="tool-liquid" style="--logo:url('data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+R2l0SHViPC90aXRsZT48cGF0aCBkPSJNMTIgLjI5N2MtNi42MyAwLTEyIDUuMzczLTEyIDEyIDAgNS4zMDMgMy40MzggOS44IDguMjA1IDExLjM4NS42LjExMy44Mi0uMjU4LjgyLS41NzcgMC0uMjg1LS4wMS0xLjA0LS4wMTUtMi4wNC0zLjMzOC43MjQtNC4wNDItMS42MS00LjA0Mi0xLjYxQzQuNDIyIDE4LjA3IDMuNjMzIDE3LjcgMy42MzMgMTcuN2MtMS4wODctLjc0NC4wODQtLjcyOS4wODQtLjcyOSAxLjIwNS4wODQgMS44MzggMS4yMzYgMS44MzggMS4yMzYgMS4wNyAxLjgzNSAyLjgwOSAxLjMwNSAzLjQ5NS45OTguMTA4LS43NzYuNDE3LTEuMzA1Ljc2LTEuNjA1LTIuNjY1LS4zLTUuNDY2LTEuMzMyLTUuNDY2LTUuOTMgMC0xLjMxLjQ2NS0yLjM4IDEuMjM1LTMuMjItLjEzNS0uMzAzLS41NC0xLjUyMy4xMDUtMy4xNzYgMCAwIDEuMDA1LS4zMjIgMy4zIDEuMjMuOTYtLjI2NyAxLjk4LS4zOTkgMy0uNDA1IDEuMDIuMDA2IDIuMDQuMTM4IDMgLjQwNSAyLjI4LTEuNTUyIDMuMjg1LTEuMjMgMy4yODUtMS4yMy42NDUgMS42NTMuMjQgMi44NzMuMTIgMy4xNzYuNzY1Ljg0IDEuMjMgMS45MSAxLjIzIDMuMjIgMCA0LjYxLTIuODA1IDUuNjI1LTUuNDc1IDUuOTIuNDIuMzYuODEgMS4wOTYuODEgMi4yMiAwIDEuNjA2LS4wMTUgMi44OTYtLjAxNSAzLjI4NiAwIC4zMTUuMjEuNjkuODI1LjU3QzIwLjU2NSAyMi4wOTIgMjQgMTcuNTkyIDI0IDEyLjI5N2MwLTYuNjI3LTUuMzczLTEyLTEyLTEyIi8+PC9zdmc+')" aria-hidden="true"></span></span></span><span class="sr-only">GitHub</span></span><span class="tool" tabindex="0" data-cursor-tag="Base44" style="--tilt:6deg;--c1:#ff7a1a;--c2:#ffb44d;--c3:#d9480f;--drift-delay:-13.8s"><span class="tool-body"><span class="tool-logo"><span class="tool-liquid" style="--logo:url('data:image/png;base64,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')" aria-hidden="true"></span></span></span><span class="sr-only">Base44</span></span></span> for complex B2B and regulated tech product like cybersecurity and financial services.</p>
+      <!-- Hidden for now: Previously worked with
       <div class="logo-strip">
         <p class="logo-label" id="logo-label">Previously worked with:</p>
         <ul class="logo-row" aria-labelledby="logo-label">
@@ -592,18 +829,23 @@
           <li><img src="images/logo-cedcoss.png" alt="CedCoss" style="height:17px" loading="lazy" decoding="async"></li>
         </ul>
       </div>
+      -->
     </div>
   </section>
+  <div class="wrap hero-foot"><a class="selected-work" href="#work">Selected work</a></div>
+  <!-- Hidden for now: the down arrow
+  <a class="scroll-down" href="#work" aria-label="Scroll down to the case studies"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15"/><path d="M6 13.5l6 6 6-6"/></svg></a>
+  -->
 </div>
 
 <div class="wrap">
-  <section class="projects">
+  <section class="projects" id="work">
     <div class="project-grid">
 
       <div class="project-cols">
         <div class="project-col">
 
-        <a class="project-card tile-blue tile-bluepurple reveal" style="order:1" href="foundersbrew-case-study.html">
+        <a class="project-card tile-bluepurple reveal" style="order:1" href="foundersbrew-case-study.html">
           <div class="project-media" style="aspect-ratio:auto">
             <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media">
@@ -611,19 +853,22 @@
             </div>
           </div>
           <div class="project-body">
-          <h3>How I designed FoundersBrew&rsquo;s AI interview agent to accelerate discovery, so the first user conversation happens in hours, not weeks</h3>
+          <h3>Designing agent-led user interviews with transparency and control for founders and trust for participants</h3>
           <div class="project-tags">
               <span class="tag">AI SaaS</span>
               <span class="tag">Product thinking</span>
+              <span class="tag">Conversational UX</span>
             </div>
+          <ul class="project-outcomes"><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.4a3.9 3.9 0 1 0 0-7.8 3.9 3.9 0 0 0 0 7.8Z"/><path d="M4.6 20.4a7.4 7.4 0 0 1 14.8 0"/></svg>Independent designer</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M6.8 20.6v-6.2M12 20.6V5.4M17.2 20.6v-9.4"/></svg>~85% first time set up success, ~68% interview completion rates</li></ul>
+          <p class="project-year">2026</p>
           <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
           </div>
         </a>
 
-        <a class="project-card tile-orange reveal" style="order:4" href="urja-case-study.html">
-          <div class="project-media photo-bg" style="--photo:url('images/urja-tile-bg.jpg')">
+        <a class="project-card tile-blue reveal" style="order:4" href="urja-case-study.html">
+          <div class="project-media" style="--photo:url('images/urja-tile-bg.jpg')">
             <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media crop-bottom">
               <img src="images/urja-hero.png" alt="The new Urja admin dashboard" loading="lazy" decoding="async">
@@ -635,6 +880,8 @@
               <span class="tag">Media and Entertainment</span>
               <span class="tag">Visual design</span>
             </div>
+          <ul class="project-outcomes"><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.4a3.9 3.9 0 1 0 0-7.8 3.9 3.9 0 0 0 0 7.8Z"/><path d="M4.6 20.4a7.4 7.4 0 0 1 14.8 0"/></svg>Senior designer</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M6.8 20.6v-6.2M12 20.6V5.4M17.2 20.6v-9.4"/></svg>Design system guidelines, WCAG 2.0 Accessibility compliance, Faster error recovery</li></ul>
+          <p class="project-year">2025</p>
           <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -644,20 +891,22 @@
         </div>
         <div class="project-col">
 
-        <a class="project-card tile-orange reveal" style="order:2" href="scm-webui-case-study.html">
-          <div class="project-media photo-bg" style="--photo:url('images/urja-tile-bg.jpg')">
+        <a class="project-card tile-blue reveal" style="order:2" href="scm-webui-case-study.html">
+          <div class="project-media" style="--photo:url('images/urja-tile-bg.jpg')">
             <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media crop-bottom">
               <img src="images/scm-tile.png" alt="The Security Configuration Management dashboard in HCL BigFix, showing 86% compliance and a Needs attention list" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="project-body">
-          <h3>Modernisation of HCL BigFix&#39;s SCM that cut checklist creation time by ~40% for compliance managers</h3>
+          <h3>Modernising the HCL BigFix&#39;s Security Compliance Management that manages 1M+ devices across 2000+ organisations</h3>
           <div class="project-tags">
               <span class="tag">Cybersecurity - B2B</span>
               <span class="tag">Product thinking</span>
-              <span class="tag">Multi user flow</span>
+              <span class="tag">Multi-user workflow</span>
             </div>
+          <ul class="project-outcomes"><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.4a3.9 3.9 0 1 0 0-7.8 3.9 3.9 0 0 0 0 7.8Z"/><path d="M4.6 20.4a7.4 7.4 0 0 1 14.8 0"/></svg>Senior designer</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M6.8 20.6v-6.2M12 20.6V5.4M17.2 20.6v-9.4"/></svg>Cut checklist creation time by ~40% for compliance managers, 2 additional modules adopted the approach</li></ul>
+          <p class="project-year">2024 - 2025</p>
           <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -665,7 +914,7 @@
         </a>
 
         <a class="project-card tile-blue reveal" style="order:3" href="bigfix-saas-onboarding-case-study.html">
-          <div class="project-media photo-bg" style="--photo:url('images/onboarding-tile-bg.jpg')">
+          <div class="project-media" style="--photo:url('images/onboarding-tile-bg.jpg')">
             <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media">
               <video src="videos/bigfix-onboarding-hero.mp4" poster="videos/bigfix-onboarding-hero.jpg" preload="none" data-lazy muted loop playsinline aria-label="BigFix SaaS onboarding walkthrough"></video>
@@ -676,7 +925,10 @@
           <div class="project-tags">
               <span class="tag">Cybersecurity SaaS</span>
               <span class="tag">Product strategy</span>
+              <span class="tag">Systems thinking</span>
             </div>
+          <ul class="project-outcomes"><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.4a3.9 3.9 0 1 0 0-7.8 3.9 3.9 0 0 0 0 7.8Z"/><path d="M4.6 20.4a7.4 7.4 0 0 1 14.8 0"/></svg>Senior designer</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M6.8 20.6v-6.2M12 20.6V5.4M17.2 20.6v-9.4"/></svg>Reusable guidance patterns, A phased onboarding strategy</li></ul>
+          <p class="project-year">2025</p>
           <span class="view-case-study"><span class="vcs-label" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">i</span><span style="--i:2">e</span><span style="--i:3">w</span> <span style="--i:4">c</span><span style="--i:5">a</span><span style="--i:6">s</span><span style="--i:7">e</span> <span style="--i:8">s</span><span style="--i:9">t</span><span style="--i:10">u</span><span style="--i:11">d</span><span style="--i:12">y</span></span><span class="visually-hidden">View case study</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -712,58 +964,62 @@
 
   <section class="testimonials">
     <div class="testimonial-head reveal">
-      <h2 class="section-title">What People I have worked with say</h2>
+      <h2 class="section-title">What people I have worked with say</h2>
     </div>
-    <div class="carousel reveal" role="region" aria-roledescription="carousel" aria-label="Testimonials">
-      <div class="carousel-track" tabindex="0">
-
-      <div class="card">
-        <p>I have been working with Sanchita for 5 years now and I had a chance to see her growing incredibly in terms of skill depth and breadth. She is extremely reliable and capable of leading initiatives aimed at improving the customer satisfaction and experience. She takes ownership and is also proactive, an extremely good team player</p>
-        <div class="person">
-          <div class="avatar avatar-1" aria-hidden="true">CD</div>
-          <div>
-            <div class="person-name">Cristiana D'Amore</div>
-            <div class="person-role">Senior UX Designer, HCL Software, Rome</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <p>Her ability to transform complex ideas into intuitive and engaging designs is truly remarkable. She was not only a strong contributor individually but also helped foster a positive and innovative team environment. Whether it was working on product interfaces, conducting user research, or driving cross-functional collaboration, Sanchita always excelled</p>
-        <div class="person">
-          <div class="avatar avatar-2" aria-hidden="true">SS</div>
-          <div>
-            <div class="person-name">Shivi Sivasubramanian</div>
-            <div class="person-role">Content Designer, HCL Softwares, India</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <p>Sanchita stands out in UX. While many rely on outdated guidelines, she listens, learns, and champions user research. She transforms vague ideas into clear, actionable experiences with skill and grace. She truly cares about user.</p>
-        <div class="person">
-          <div class="avatar avatar-3" aria-hidden="true">LT</div>
-          <div>
-            <div class="person-name">Liz Thi</div>
-            <div class="person-role">User Experience Lead, HCL Tech, Virginia, US</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <p>Since the very beginning, I have noticed her professionalism, skills, and care for the product she works on. She has repeatedly proven her incredible knowledge by solving complex problems with elegant and ingenious solutions. Her approach to solving problems is unique and this makes her an undeniable asset to the team.</p>
-        <div class="person">
-          <div class="avatar avatar-4" aria-hidden="true">JM</div>
-          <div>
-            <div class="person-name">John Mark</div>
-            <div class="person-role">Founder, FoundersBrew, Canada</div>
-          </div>
-        </div>
-      </div>
-
-      </div>
-      <div class="carousel-dots" aria-hidden="true"></div>
+    <div class="quote-grid">
+      <figure class="quote-tile reveal">
+        <blockquote>"Sanchita stands out in UX. While many rely on outdated guidelines, she listens, learns, and champions user research."</blockquote>
+        <figcaption>
+          <span><a class="quote-name" href="https://www.linkedin.com/in/dearlizt/" target="_blank" rel="noopener noreferrer">Liz Thi</a><span class="quote-role">User Experience Lead, HCL Tech, Virginia, US</span></span>
+        </figcaption>
+      </figure>
+      <figure class="quote-tile reveal">
+        <blockquote>"She is extremely reliable and capable of leading initiatives aimed at improving the customer satisfaction and experience."</blockquote>
+        <figcaption>
+          <span><a class="quote-name" href="https://www.linkedin.com/in/cri-damore/" target="_blank" rel="noopener noreferrer">Cristiana D&#39;Amore</a><span class="quote-role">Senior UX Designer, HCL Softwares, Rome</span></span>
+        </figcaption>
+      </figure>
+      <figure class="quote-tile reveal">
+        <blockquote>"As a designer, Sanchita brings an exceptional blend of creativity, technical skill, and a user-centered approach to every project she undertakes."</blockquote>
+        <figcaption>
+          <span><a class="quote-name" href="https://www.linkedin.com/in/shivimanian/" target="_blank" rel="noopener noreferrer">Shivi Sivasubramanian</a><span class="quote-role">Content Designer, HCL Softwares, India</span></span>
+        </figcaption>
+      </figure>
+      <figure class="quote-tile reveal">
+        <blockquote>"Since the very beginning, I have noticed her professionalism, skills, and care for the product she works on. She has repeatedly proven her incredible knowledge by solving complex problems with elegant and ingenious solutions."</blockquote>
+        <figcaption>
+          <span><a class="quote-name" href="https://www.linkedin.com/in/reachjohnmark/" target="_blank" rel="noopener noreferrer">John Mark</a><span class="quote-role">Founder, FoundersBrew, Canada</span></span>
+        </figcaption>
+      </figure>
     </div>
+  </section>
+
+  <section class="certificates">
+    <div class="testimonial-head reveal">
+      <h2 class="section-title">Certificates</h2>
+    </div>
+    <ul class="cert-list">
+      <li class="cert reveal">
+        <img class="cert-logo" src="images/cert-ibm-practitioner.png" alt="IBM Corporation logo" loading="lazy" decoding="async">
+        <span><span class="cert-name">Enterprise Design Thinking Practitioner</span><span class="cert-issuer">IBM Corporation</span></span>
+      </li>
+      <li class="cert reveal">
+        <img class="cert-logo cert-logo-round" src="images/cert-idf.jpeg" alt="The Interaction Design Foundation logo" loading="lazy" decoding="async">
+        <span><span class="cert-name">Human Computer Interaction</span><span class="cert-issuer">The Interaction Design Foundation</span></span>
+      </li>
+      <li class="cert reveal">
+        <img class="cert-logo cert-logo-round" src="images/cert-idf.jpeg" alt="The Interaction Design Foundation logo" loading="lazy" decoding="async">
+        <span><span class="cert-name">Design for Accessibility</span><span class="cert-issuer">The Interaction Design Foundation</span></span>
+      </li>
+      <li class="cert reveal">
+        <img class="cert-logo" src="images/cert-oreilly.png" alt="O&#39;Reilly Media logo" loading="lazy" decoding="async">
+        <span><span class="cert-name">Master Card Sorting</span><span class="cert-issuer">O&#39;Reilly Media</span></span>
+      </li>
+      <li class="cert reveal">
+        <img class="cert-logo" src="images/cert-oreilly-ia.png" alt="O&#39;Reilly Media logo" loading="lazy" decoding="async">
+        <span><span class="cert-name">Info Architecture Essentials</span><span class="cert-issuer">O&#39;Reilly Media</span></span>
+      </li>
+    </ul>
   </section>
 
   <section class="community">
@@ -791,22 +1047,58 @@
       </div>
     </div>
   </section>
+
+  <section class="connect">
+    <div class="testimonial-head reveal">
+      <h2 class="section-title">Connect</h2>
+    </div>
+    <ul class="connect-list">
+      <li class="reveal">
+        <span class="connect-row">
+          <a class="connect-link" href="mailto:sanchita120212@gmail.com"><img src="images/logo-gmail.webp" alt="Email" loading="lazy" decoding="async">sanchita120212@gmail.com</a>
+          <button type="button" class="connect-copy" data-copy="sanchita120212@gmail.com" aria-label="Copy email address"><svg class="icon-copy" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.4 9.4h8.4a1.6 1.6 0 0 1 1.6 1.6v8.4a1.6 1.6 0 0 1-1.6 1.6H9.4a1.6 1.6 0 0 1-1.6-1.6V11a1.6 1.6 0 0 1 1.6-1.6Z M15.6 7.8V6.2a1.6 1.6 0 0 0-1.6-1.6H5.6A1.6 1.6 0 0 0 4 6.2v8.4a1.6 1.6 0 0 0 1.6 1.6h1.6"/></svg><svg class="icon-tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 12.6l4.6 4.6L19.4 7"/></svg></button>
+        </span>
+      </li>
+      <li class="reveal">
+        <span class="connect-row">
+          <a class="connect-link" href="https://www.linkedin.com/in/sanchitasrivastava/" target="_blank" rel="noopener noreferrer"><img src="images/logo-linkedin.png" alt="LinkedIn" loading="lazy" decoding="async">linkedin.com/in/sanchitasrivastava<span class="connect-out" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.4 13.6v5.2a1.6 1.6 0 0 1-1.6 1.6H5.2a1.6 1.6 0 0 1-1.6-1.6V7.2a1.6 1.6 0 0 1 1.6-1.6h5.2 M14.2 3.6h6.2v6.2 M20.4 3.6 10.8 13.2"/></svg></span></a>
+        </span>
+      </li>
+      <li class="reveal">
+        <span class="connect-row">
+          <a class="connect-link" href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer"><img src="images/logo-medium.png" alt="Medium" loading="lazy" decoding="async">medium.com/@sanchita.sri<span class="connect-out" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.4 13.6v5.2a1.6 1.6 0 0 1-1.6 1.6H5.2a1.6 1.6 0 0 1-1.6-1.6V7.2a1.6 1.6 0 0 1 1.6-1.6h5.2 M14.2 3.6h6.2v6.2 M20.4 3.6 10.8 13.2"/></svg></span></a>
+        </span>
+      </li>
+    </ul>
+  </section>
 </div>
 
+<!-- Hidden for now: the footer's LinkedIn, Medium and X icons
 <footer class="reveal">
     <a class="social-link" href="https://www.linkedin.com/in/sanchitasrivastava/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
     <a class="social-link" href="https://medium.com/@sanchita.sri" target="_blank" rel="noopener noreferrer" aria-label="Medium"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 1 1-6.77-6.82A6.77 6.77 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42 3.38 2.88 3.38 6.42m2.94 0c0 3.17-.53 5.75-1.19 5.75s-1.19-2.58-1.19-5.75.53-5.75 1.19-5.75S23.9 8.83 23.9 12z"/></svg></a>
     <a class="social-link" href="https://x.com/FoundersBrew_ca" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
 </footer>
+-->
 
-<div class="pixel-sign"><canvas class="pixel-sign-canvas" role="img" aria-label="Think. Design. Create."></canvas></div>
+<div class="pixel-sign"><canvas class="pixel-sign-canvas" role="img" aria-label="Think. Design. Create."></canvas>
+<p class="made-with"><span class="made-with-text">Made with <span class="mw-tip" tabindex="0" data-cursor-tag="love"><svg class="mw-icon" viewBox="0 0 24 24" role="img" aria-label="love"><path fill="#E5383B" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span> and lot of <span class="mw-tip" tabindex="0" data-cursor-tag="tea and scones"><svg class="mw-icon" viewBox="0 0 24 24" role="img" aria-label="tea"><ellipse cx="11.5" cy="20" rx="9.5" ry="2.1" fill="#B5651D"/><path fill="#B5651D" d="M3.6 10h15.8l-1 5.2a5.2 5.2 0 0 1-5.1 4.2H9.7a5.2 5.2 0 0 1-5.1-4.2z"/><path d="M19 11.2h.9a2.6 2.6 0 0 1 0 5.2h-1.5" fill="none" stroke="#B5651D" stroke-width="1.7" stroke-linecap="round"/><path d="M8 7.6c-1-1 1-1.8 0-3M11.5 7.6c-1-1 1-1.8 0-3M15 7.6c-1-1 1-1.8 0-3" fill="none" stroke="#B5651D" stroke-width="1.2" stroke-linecap="round"/></svg></span> by Sanchita</span></p>
+</div>
 
-<script src="js/cursor-dot.js" defer></script>
+<!-- Hidden for now: the pointer square (js/cursor-dot.js) -->
+<!-- <script src="js/cursor-dot.js" defer></script> -->
 <script src="js/pixel-bg.js" defer></script>
 <script src="js/pixel-sign.js" defer></script>
 <script src="js/header-scroll.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/typewriter.js" defer></script>
+<script src="js/hero.js" defer></script>
+<script src="js/intro.js" defer></script>
+<script src="js/ruler.js" defer></script>
+<script src="js/smooth-scroll.js" defer></script>
+<script src="js/quote-grid.js" defer></script>
+<script src="js/connect.js" defer></script>
+<script src="js/skills.js" defer></script>
 <script src="js/carousel.js" defer></script>
 <script src="js/photo-arrow.js" defer></script>
 <script src="js/lazy-video.js" defer></script>

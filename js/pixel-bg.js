@@ -5,6 +5,7 @@
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
 
+  var SQUARES = false;      // false: the grid only, still, with none of the fading squares
   var CELL = 28;            // size of one square, in CSS pixels
   var DENSITY = 0.045;      // share of the grid that is lit at any moment
   var PEAK = 0.11;          // brightest a square gets (opacity), kept very faint
@@ -80,6 +81,12 @@
   function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; }
 
   size();
+  if (!SQUARES) {
+    // just the grid, drawn once and again when the window is resized
+    draw(0);
+    window.addEventListener('resize', function () { size(); draw(0); });
+    return;
+  }
   if (reduce) {
     // static: a few squares held at full strength, no movement
     var now = performance.now();
