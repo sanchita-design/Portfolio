@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- a blue square like the case study tile backgrounds: the brand blue, with soft lighter and deeper patches of it -->
+  <defs>
+    <radialGradient id="d1" cx="22%" cy="40%" r="42%"><stop offset="0" stop-color="#263EAA" stop-opacity="0.95"/><stop offset="1" stop-color="#263EAA" stop-opacity="0"/></radialGradient>
+    <radialGradient id="d2" cx="82%" cy="64%" r="42%"><stop offset="0" stop-color="#263EAA" stop-opacity="0.9"/><stop offset="1" stop-color="#263EAA" stop-opacity="0"/></radialGradient>
+    <radialGradient id="m1" cx="48%" cy="26%" r="40%"><stop offset="0" stop-color="#4968DC"/><stop offset="1" stop-color="#4968DC" stop-opacity="0"/></radialGradient>
+    <radialGradient id="p1" cx="78%" cy="30%" r="36%"><stop offset="0" stop-color="#768EE8" stop-opacity="0.95"/><stop offset="1" stop-color="#768EE8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="p2" cx="24%" cy="74%" r="36%"><stop offset="0" stop-color="#768EE8" stop-opacity="0.95"/><stop offset="1" stop-color="#768EE8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="64" height="64" fill="#5470DE"/>
+  <rect width="64" height="64" fill="url(#m1)"/>
+  <rect width="64" height="64" fill="url(#d1)"/>
+  <rect width="64" height="64" fill="url(#d2)"/>
+  <rect width="64" height="64" fill="url(#p1)"/>
+  <rect width="64" height="64" fill="url(#p2)"/>
+</svg>

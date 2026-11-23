@@ -87,12 +87,7 @@
   .timeline-stacked .media-frame { background: none; padding: 0; margin-top: var(--space-4); }
   /* a plain blue panel behind the screenshots that have no frame of their own
      (the pictures with a frame baked in are left as they are) */
-  .timeline-stacked .media-frame.media-frame-bg { background: #EBF2FA; padding: 40px; }
-  #solution .media-frame { background: #EBF2FA; padding: 20px; }
-  @media (max-width: 560px) {
-    .timeline-stacked .media-frame.media-frame-bg { padding: 20px; }
-    #solution .media-frame { padding: 12px; }
-  }
+  .timeline-stacked .media-frame.media-frame-bg, #solution .media-frame, .media-frame.media-panel { background: var(--media-bg); padding: var(--media-pad); }
 
   /* skim tip: a small label fixed to the bottom-left corner; the full tip shows on hover or focus */
   .skim-tip {
@@ -116,7 +111,7 @@
     width: 280px;
     max-width: calc(100vw - 32px);
     padding: var(--space-3) var(--space-4);
-    background: #EBF2FA;
+    background: var(--media-bg);
     border-radius: var(--radius-md);
     box-shadow: 0 10px 28px -12px rgba(58, 58, 58, 0.22);
     font-size: var(--text-caption);
@@ -185,6 +180,9 @@
     .guideline-row.stepper-row > h3, .guideline-row.stepper-row > .guideline-body { grid-column: 2; }
   }
 </style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 
@@ -230,8 +228,8 @@
           <div class="meta-item"><span class="meta-label">Scope</span><span class="meta-value">Human Agent interaction, Founder onboarding, Hypotheses Validation</span></div>
         </div>
 
-        <div class="media hero" style="aspect-ratio:1920/1256;border:0">
-          <video style="display:block;transform:scale(1.005)" src="videos/founders-brew-hero.mp4" poster="videos/founders-brew-hero.jpg" preload="metadata" autoplay muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
+        <div class="media hero" style="aspect-ratio:1958/1288;border:0">
+          <video style="display:block;transform:scale(1.005)" src="videos/foundersbrew-hero-interview.mp4" poster="videos/foundersbrew-hero-interview.jpg" preload="metadata" autoplay muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
         </div>
       </section>
 
@@ -243,7 +241,7 @@
         </blockquote>
 
 
-        <img class="media-natural" src="images/foundersbrew-current-state-journey.png" alt="Current state founder journey and behaviour diagram" loading="lazy" decoding="async">
+        <img class="media-natural media-baked" src="images/foundersbrew-current-state-journey.png" alt="Current state founder journey and behaviour diagram" loading="lazy" decoding="async">
 
       </section>
 
@@ -350,7 +348,7 @@
         <h2>Visual design direction</h2>
         <p class="lede">As FoundersBrew prepared for its accelerator applications in early 2027, I prioritised a lightweight, scalable UI that aligned with the product&#39;s early-stage goals and engineering constraints.</p>
         <p class="lede">I used reusable components, consistent interaction patterns and progressive disclosure to create an intuitive experience while reducing implementation complexity and maintenance effort.</p>
-        <img class="media-natural" src="images/foundersbrew-visual-direction.png" alt="The visual direction for FoundersBrew: a lightweight UI built from reusable components" loading="lazy" decoding="async">
+        <img class="media-natural media-baked" src="images/foundersbrew-visual-direction.png" alt="The visual direction for FoundersBrew: a lightweight UI built from reusable components" loading="lazy" decoding="async">
         <blockquote>
           <p>This was a deliberate design decision that allowed the team to iterate faster and focus engineering resources on validating the product&#39;s core strength which is delivering high-quality adaptive AI interviews.</p>
         </blockquote>
@@ -830,7 +828,29 @@ While the system recommends which assumptions to test first, the final decision 
         </div> -->
 
         <h3 style="margin-top:var(--space-7)">What changed after testing the prototype?</h3>
-        <img class="media-natural" src="images/foundersbrew-participant-experience-revised.png" alt="Revised participant experience" loading="lazy" decoding="async">
+        <div class="point-row point-row-2">
+          <div class="point">
+            <h3>Repeat and rephrase questions</h3>
+            <p>Some participants found the AI agent’s questions unclear, which highlighted the need for an option to repeat or rephrase questions so they could respond with greater confidence.</p>
+          </div>
+          <div class="point">
+            <h3>Clear interview exit</h3>
+            <p>I identified the need for a clear exit option, allowing participants to leave the interview at any point and feel more in control of their experience.</p>
+          </div>
+          <div class="point">
+            <h3>Text fallback support</h3>
+            <p>Occasional latency made some participants feel the AI agent wasn't listening, leading them to use the text box instead. This reinforced the importance of having text input as an alternative to voice.</p>
+          </div>
+          <div class="point">
+            <h3>Privacy and transcript control</h3>
+            <p>One participant raised concerns about privacy and asked whether they could review or edit their transcript, highlighting the need to give users greater control over their responses and data.</p>
+          </div>
+          <div class="point">
+            <h3>Participant safety and comfort</h3>
+            <p>During a follow-up conversation, one participant shared concerns based on a previous experience and asked what would happen if they felt unsafe or uncomfortable during an interview. This feedback helped us rethink how the prototype could better support participant safety, comfort, and control.</p>
+          </div>
+        </div>
+        <img class="media-natural media-baked" src="images/foundersbrew-participant-experience-revised.png" alt="Revised participant experience" loading="lazy" decoding="async">
         <h3 style="margin-top:var(--space-7)">I also found different questions require different rhythms</h3>
         <p class="lede">Based on the testing the prototype with users and combining it with qualitative research methods from The Mom Test and Contextual Inquiry, focusing on how different questions affect memory retrieval and speech patterns <span style="color:var(--accent-text)">I defined the agent&rsquo;s listening patience, response timing, and follow-up behavior.</span></p>
         <div class="media-frame">
@@ -881,6 +901,63 @@ While the system recommends which assumptions to test first, the final decision 
         <h3 style="margin-top:var(--space-7)">Building trust through clear expectations</h3>
         <img class="media-natural" src="images/foundersbrew-prototype-improvements.png" alt="Improvements from the prototype to the new version of the joining experience" loading="lazy" decoding="async">
         <img class="media-natural" src="images/foundersbrew-improved-control.png" alt="Improved participant control in the interview" loading="lazy" decoding="async">
+        <h3 style="margin-top:var(--space-7)">Designing for safety and exit during an interview</h3>
+        <img class="media-natural" src="images/foundersbrew-safety-exit-report.png" alt="The Report a problem dialog, where participants say what happened, with an option to end the interview now" loading="lazy" decoding="async">
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);margin:-12px 0 var(--space-4)">
+          <p style="margin:0"><span style="color:var(--accent-text)">What:</span> The interview pauses while participants select from five reasons to describe what went wrong.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Why:</span> Selecting a reason reduces the effort of explaining a problem when feeling upset, while helping the team understand the issue.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Trade-off:</span> Fixed reasons may not cover every situation, so I included a "Something else" option to accommodate other concerns.</p>
+        </div>
+        <h4 style="margin-top:var(--space-5)">Safety and offensive content</h4>
+        <div class="media-frame media-panel" style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <img class="media-natural" src="images/foundersbrew-safety-exit-1.png" alt="The Report a problem dialog with &quot;I do not feel safe&quot; selected, showing the supportive message and an End the interview now button" loading="lazy" decoding="async">
+          <img class="media-natural" src="images/foundersbrew-safety-exit-2.png" alt="The Report a problem dialog with &quot;The AI said something upsetting or offensive&quot; selected, showing the same supportive message and End the interview now button" loading="lazy" decoding="async">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);margin:-12px 0 var(--space-4)">
+          <p style="margin:0"><span style="color:var(--accent-text)">What:</span> Selecting "I do not feel safe" or "The AI said something upsetting or offensive" displays a supportive message with an "End the interview now" button.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Why:</span> These situations may make participants uncomfortable continuing, so I wanted to give them a clear way to leave without completing the report.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Trade-off:</span> The additional message makes the dialog slightly longer, but it provides an immediate exit when participants may need it most.</p>
+        </div>
+        <h4 style="margin-top:var(--space-5)">The details box behaviour</h4>
+        <div class="media-frame media-panel" style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <img class="media-natural" src="images/foundersbrew-safety-exit-3.png" alt="The Report a problem dialog with &quot;I was asked for personal details I did not want to share&quot; selected and the details box marked optional" loading="lazy" decoding="async">
+          <img class="media-natural" src="images/foundersbrew-safety-exit-4.png" alt="The Report a problem dialog with &quot;Something is not working&quot; selected, the details box required and the Report issue button disabled" loading="lazy" decoding="async">
+          <img class="media-natural" src="images/foundersbrew-safety-exit-5.png" alt="The Report a problem dialog with &quot;Something else&quot; selected, the details box required and the Report issue button disabled" loading="lazy" decoding="async">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);margin:-12px 0 var(--space-4)">
+          <p style="margin:0"><span style="color:var(--accent-text)">What:</span> The details box is optional for the first three reasons but required for "Something is not working" and "Something else."</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Why:</span> The first three reasons provide enough context on their own, reducing the need for participants to explain upsetting experiences. The remaining two require more information to help the team identify the problem.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Trade-off:</span> Requiring details adds effort for some participants, but it helps ensure the reports contain enough information to address the issue.</p>
+        </div>
+        <h4 style="margin-top:var(--space-5)">The confirmation dialog</h4>
+        <div class="media-frame media-panel">
+          <img class="media-natural" src="images/foundersbrew-safety-exit-6.png" alt="The Thank you for telling us message with Continue interview and End interview buttons" loading="lazy" decoding="async">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);margin:-12px 0 var(--space-4)">
+          <p style="margin:0"><span style="color:var(--accent-text)">What:</span> After submitting a report, participants see a "Thank you for telling us" message with options to continue or end the interview.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Why:</span> This allows participants to decide how they want to proceed, giving them control over their experience after reporting a concern.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Trade-off:</span> The confirmation adds an extra step, but it gives participants a clear opportunity to make their own decision.</p>
+        </div>
+        <h4 style="margin-top:var(--space-5)">The end screen</h4>
+        <div class="media-frame media-panel">
+          <img class="media-natural" src="images/foundersbrew-safety-exit-7.png" alt="The end screen: the interview has ended, the report has been sent, and an email address for data removal requests" loading="lazy" decoding="async">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);margin:-12px 0 var(--space-4)">
+          <p style="margin:0"><span style="color:var(--accent-text)">What:</span> The end screen acknowledges the experience, confirms that the report was submitted, and provides an email address for data removal requests or further questions.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Why:</span> This reassures participants that their concerns have been received and gives them a way to reach a real person for additional support.</p>
+          <p style="margin:0"><span style="color:var(--accent-text)">Trade-off:</span> Data requests are handled through email rather than an in-product feature. I chose this approach for the first version because the limited number of interviews makes manual handling manageable, with the possibility of adding a dedicated feature later.</p>
+        </div>
+        <p>There was a <span style="color:var(--accent-text)">trade-off</span> between gathering useful feedback to improve the experience and reducing the effort required from participants during moments of distress.</p>
+        <div class="point-row point-row-2">
+          <div class="point">
+            <h3>Additional steps during distress</h3>
+            <p>Reporting a problem requires participants to go through a few steps, which could feel overwhelming when they are upset. To reduce this, I added an "End the interview now" option for the two most serious concerns and allowed participants to close the dialog at any time.</p>
+          </div>
+          <div class="point">
+            <h3>Limited question-level context</h3>
+            <p>The report captures the overall situation rather than a specific question. This trade-off was accepted because most concerns relate to the broader conversation rather than a single question.</p>
+          </div>
+        </div>
         <h3 style="margin-top:var(--space-7)">The textbox became more than an accessibility fallback</h3>
         <img class="media-natural" src="images/foundersbrew-accessibility-fallback.png" alt="The text box in the interview experience as an accessibility fallback" loading="lazy" decoding="async">
         <h3 style="margin-top:var(--space-7)">How does matching relevant social norms look like on the UI</h3>

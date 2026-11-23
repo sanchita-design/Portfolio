@@ -156,14 +156,15 @@ blockquote p { color: var(--accent-text); font-size: calc(var(--text-base) - 2px
   border-radius: var(--radius-md);
 }
 
-/* tinted panel around a screenshot or recording */
+/* tinted panel around a screenshot, recording or table: one blue, one padding, everywhere */
+:root { --media-bg: #EBF2FA; --media-pad: 40px; }
 .media-frame {
-  background: #EBF2FA;
-  padding: 40px;
+  background: var(--media-bg);
+  padding: var(--media-pad);
   border-radius: var(--radius-md);
 }
 @media (max-width: 560px) {
-  .media-frame { padding: 20px; }
+  :root { --media-pad: 20px; }
 }
 
 /* two screens side by side in one tinted frame */
@@ -519,3 +520,6 @@ main > section > h2 + h3, main > section > h2 + h4 { margin-top: 0 !important; }
 
 /* the solution timeline: screens sit directly on the page, with no blue frame behind them */
 #solution .media-frame { background: none; padding: 0; }
+
+/* screenshots that carry their own semi-transparent blue panel: sit them on the shared blue so the tone matches */
+img.media-baked { background: var(--media-bg); }
