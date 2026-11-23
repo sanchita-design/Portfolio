@@ -90,6 +90,32 @@ a:hover { color: var(--accent-hover); }
   .wrap { padding-left: var(--side-margin-mobile); padding-right: var(--side-margin-mobile); }
 }
 
+/* AI guide: a lined robot icon at the right end of the header */
+.ai-guide {
+  grid-column: 3;
+  justify-self: end;
+  position: relative;
+  display: inline-flex;
+  line-height: 0;
+  color: var(--text-body);
+  cursor: default;
+  border-radius: var(--radius-md);
+}
+.ai-guide svg { width: 30px; height: 30px; stroke-width: 0.8; }   /* the same thin line and size as the weather icon */
+.ai-guide:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 4px; }
+/* the Figma-style cursor tag for the AI guide icon (see js/ai-guide.js) */
+.ai-tag { position: fixed; z-index: 1000; pointer-events: none; opacity: 0; transition: opacity 150ms ease; }
+.ai-tag.is-on { opacity: 1; }
+.ai-tag-arrow { position: absolute; top: -1.5px; left: -0.6px; width: 15px; height: 21px; fill: var(--accent); }
+.ai-tag-label {
+  position: absolute; top: 14px; left: 11px; white-space: nowrap;
+  padding: 4px 12px; border-radius: 999px;
+  background: var(--accent); color: var(--text-on-accent);
+  font-size: var(--text-label); font-weight: 500; line-height: 1.5;
+}
+.ai-tag.is-flip .ai-tag-label { left: auto; right: -4px; }
+@media (prefers-reduced-motion: reduce) { .ai-tag { transition: none; } }
+
 .cursor-dot {
   position: fixed;
   top: 0;
