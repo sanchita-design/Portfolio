@@ -475,7 +475,8 @@
   }
   .community-media {
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
+    border-radius: 0;   /* square, and rounded only on hover (see below) */
+    transition: border-radius 400ms var(--ease-standard);
     background: var(--ink-1-a08);
     width: 100%;
     flex: 1;
@@ -514,8 +515,17 @@
   .quote-card p { font-style: italic; font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--text-body); margin: 0; }
   .quote-card .person-name { font-weight: 400; }
 
+  /* the closing statement above the pixel sign: set like the hero headline */
+  section.closing { padding-bottom: 96px; }
+  .closing-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-7); align-items: start; }
+  .closing-lead { font-family: var(--font-serif); font-weight: 500; font-size: clamp(26px, 2.4vw, 33px); line-height: 1.45; letter-spacing: -0.01em; margin: 0; color: var(--ink-1); }
+  .closing-photo { display: block; width: 100%; height: auto; max-width: 380px; justify-self: end; border: 1px solid var(--border-subtle); border-radius: 0; background: var(--ink-1-a08); transition: border-radius 400ms var(--ease-standard); }
+  .community-media:hover, .closing-photo:hover { border-radius: 8px; }   /* photos are square, and round off on hover like the case study tiles */
+  @media (max-width: 900px) { .closing-grid { grid-template-columns: 1fr; gap: var(--space-5); } .closing-photo { justify-self: start; max-width: 320px; } }
+  .closing-reading { margin: var(--space-4) 0 0; font-size: var(--text-base); color: var(--text-muted); }
+  @media (max-width: 640px) { section.closing { padding-bottom: 64px; } }
   /* closing pixel sign under the footer: the message and four lines of small pixels, drawn by js/pixel-sign.js */
-  .pixel-sign { position: relative; width: 100%; overflow: hidden; }
+  .pixel-sign { position: relative; width: 100%; overflow: hidden; min-height: 88px; }   /* room for the "Made with" line now that the moving pixels are off */
   .pixel-sign-canvas { display: block; }
 
   /* the footer line runs the full width of the screen; the icons stay on the content grid */
@@ -554,7 +564,7 @@
 
   /* ---- one tile below the other, picture on the left and text on the right, as in the original layout ---- */
   .project-grid { display: block; }
-  .project-cols { display: flex; flex-direction: column; gap: 112px; }
+  .project-cols { display: flex; flex-direction: column; gap: 176px; }
   .project-col { display: contents; }   /* the cards keep their order through the inline order values */
   .project-media { box-shadow: 0 0 28px rgba(58,58,58,0.10), 0 4px 14px rgba(58,58,58,0.06); }   /* soft shadow all around each picture */
   /* tile colours: grainy blue and orange (the gradient layer and film grain come from the base .project-media rules) */
@@ -567,7 +577,7 @@
   .project-card.tile-blue.tile-bluepurple .wave.w6 { --c: 120, 72, 214; }
   .project-card h3 { font-size: 17px; }
   @media (max-width: 900px) {
-    .project-cols { gap: var(--space-8); }
+    .project-cols { gap: 136px; }
   }
   /* ---- the "12 years across design ... and engineering ..." line, with the tool logos ---- */
   .hero-text { --metal-highlight: #8A8F99; --metal: #4A4D55; --metal-deep: #2F3035; }
@@ -853,7 +863,7 @@
           <div class="project-media" style="aspect-ratio:auto">
             <span class="wave w1" aria-hidden="true"></span><span class="wave w2" aria-hidden="true"></span><span class="wave w3" aria-hidden="true"></span><span class="wave w4" aria-hidden="true"></span><span class="wave w5" aria-hidden="true"></span><span class="wave w6" aria-hidden="true"></span>
             <div class="project-placeholder has-media">
-              <video style="transform:scale(1.005)" src="videos/foundersbrew-casestudy-tile.mp4" poster="videos/foundersbrew-casestudy-tile.jpg" preload="none" data-lazy muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
+              <video style="transform:scale(1.005)" src="videos/foundersbrew-hero-interview.mp4" poster="videos/foundersbrew-hero-interview.jpg" preload="none" data-lazy muted loop playsinline aria-label="FoundersBrew product walkthrough"></video>
             </div>
           </div>
           <div class="project-body">
@@ -1085,14 +1095,21 @@
 </footer>
 -->
 
-<div class="pixel-sign"><canvas class="pixel-sign-canvas" role="img" aria-label="Think. Design. Create."></canvas>
+<section class="closing"><div class="wrap closing-grid">
+  <div class="closing-text"><p class="closing-lead">When I read, I picture the whole scene. When I design, I do the same. I watch closely, I think it through, and I check it with real people.</p><p class="closing-reading">Currently reading A Farewell to Arms by Ernest Hemingway</p></div>
+  <img class="closing-photo" src="images/currently-reading.jpg" alt="An open copy of A Farewell to Arms with a hand-drawn blue bookmark between the pages" loading="lazy" decoding="async" width="1221" height="1500">
+</div></section>
+
+<div class="pixel-sign"><!-- Hidden for now: the moving pixels (js/pixel-sign.js) <canvas class="pixel-sign-canvas" role="img" aria-label="Small moving pixels"></canvas> -->
 <p class="made-with"><span class="made-with-text">Made with <span class="mw-tip" tabindex="0" data-cursor-tag="love"><svg class="mw-icon" viewBox="0 0 24 24" role="img" aria-label="love"><path fill="#E5383B" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span> and lot of <span class="mw-tip" tabindex="0" data-cursor-tag="tea and scones"><svg class="mw-icon" viewBox="0 0 24 24" role="img" aria-label="tea"><ellipse cx="11.5" cy="20" rx="9.5" ry="2.1" fill="#B5651D"/><path fill="#B5651D" d="M3.6 10h15.8l-1 5.2a5.2 5.2 0 0 1-5.1 4.2H9.7a5.2 5.2 0 0 1-5.1-4.2z"/><path d="M19 11.2h.9a2.6 2.6 0 0 1 0 5.2h-1.5" fill="none" stroke="#B5651D" stroke-width="1.7" stroke-linecap="round"/><path d="M8 7.6c-1-1 1-1.8 0-3M11.5 7.6c-1-1 1-1.8 0-3M15 7.6c-1-1 1-1.8 0-3" fill="none" stroke="#B5651D" stroke-width="1.2" stroke-linecap="round"/></svg></span> by Sanchita</span></p>
 </div>
 
 <!-- Hidden for now: the pointer square (js/cursor-dot.js) -->
 <!-- <script src="js/cursor-dot.js" defer></script> -->
 <script src="js/pixel-bg.js" defer></script>
+<!-- Hidden for now: the moving pixels
 <script src="js/pixel-sign.js" defer></script>
+-->
 <script src="js/header-scroll.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/typewriter.js" defer></script>

@@ -34,7 +34,7 @@
     // the photo is shown with object-fit: cover, centred
     var scale = Math.max(w / NATURAL_W, h / NATURAL_H);
     var offsetX = (NATURAL_W * scale - w) / 2;
-    var tx = Math.min(w - 24, Math.max(170, TARGET_X * scale - offsetX));
+    var tx = Math.min(w - 24, Math.max(90, TARGET_X * scale - offsetX));
     var bh = band.clientHeight;
 
     // fit the shape: far-left start, tip exactly under the person, 9px below the photo

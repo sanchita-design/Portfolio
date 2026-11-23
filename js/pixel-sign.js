@@ -5,7 +5,7 @@
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
 
-  var MESSAGE = 'THINK. DESIGN. CREATE.';
+  var MESSAGE = '';   // the words now sit above as normal text; only the moving pixels are left here
   var BLUE = '73,104,220', ORANGE = '226,128,78';
   // the brand blue (#4968DC) and a few lighter and deeper shades of it
   var TEXT_STOPS = [[73,104,220],[92,122,230],[64,94,210],[52,80,196]];   // the brand blue, with only a slight shade across the line
@@ -50,14 +50,15 @@
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     w = canvas.parentNode.clientWidth;
     // one line if it fits at a comfortable size, otherwise two
-    var lines = [MESSAGE], cell = CELL;
+    var lines = MESSAGE ? [MESSAGE] : [], cell = CELL;
     var oneLineW = (MESSAGE.length * 6 - 3) * CELL;
     if (oneLineW > w * 0.92) lines = ['THINK. DESIGN.', 'CREATE.'];
-    var longest = Math.max.apply(null, lines.map(function (l) { return l.length; }));
+    var longest = Math.max.apply(null, lines.map(function (l) { return l.length; }).concat([1]));
     cell = Math.max(2, Math.min(CELL, Math.floor((w * 0.92) / (longest * 6))));
 
     var lineH = 7 * cell, gap = 3 * cell, pad = 8 * cell;
-    var textH = lines.length * lineH + (lines.length - 1) * gap;
+    var textH = lines.length ? lines.length * lineH + (lines.length - 1) * gap : 0;
+    if (!lines.length) pad = 2 * cell;
     h = pad + textH + pad + BAND_ROWS * CELL;
     canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
     canvas.style.width = w + 'px'; canvas.style.height = h + 'px';

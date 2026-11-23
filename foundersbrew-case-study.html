@@ -171,7 +171,13 @@
     /* the line between steps stays one row, so it still runs right up to the next circle on a narrow screen */
     .timeline-spacer { grid-template-rows: 1fr; }
     .timeline-spacer > div:nth-child(n+2) { display: none; }
-    .timeline-step > div:nth-child(2) { display: none; }
+    /* on a narrow screen each step reads: circle beside the title and text, with the screen underneath them */
+    .timeline-step { row-gap: var(--space-4); }
+    .timeline-step .timeline-dot-col { grid-column: 1; grid-row: 1 / span 2; }
+    .timeline-step > div:nth-child(2) { display: block; grid-column: 2; grid-row: 1; }
+    .timeline-step > .media-frame { grid-column: 2; grid-row: 2; }
+    .timeline-step h3 { line-height: 24px; }
+    .timeline-step .timeline-dot { margin-top: 4px; }
   }
   @media (max-width: 900px) {
     .guideline-row { grid-template-columns: 1fr; gap: var(--space-3); }
